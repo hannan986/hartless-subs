@@ -62,8 +62,13 @@ a{text-decoration:none;color:inherit;}
 .hero::before{
   content:'🥖';font-size:30rem;opacity:.04;
   position:absolute;right:-5rem;bottom:-5rem;line-height:1;
+  pointer-events:none; /* stops emoji from blocking clicks */
+  z-index:0;
 }
-.hero-overlay{text-align:center;color:#fff;padding:2rem;}
+.hero-overlay{
+  text-align:center;color:#fff;padding:2rem;
+  position:relative;z-index:2;
+}
 .hero-overlay h1{
   font-family:'Oswald',sans-serif;
   font-size:clamp(2.5rem,6vw,5rem);
@@ -72,7 +77,10 @@ a{text-decoration:none;color:inherit;}
   margin-bottom:.5rem;
 }
 .hero-overlay p{font-size:1.3rem;opacity:.85;margin-bottom:2rem;}
-.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.hero-btns{
+  display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;
+  position:relative;z-index:3;
+}
 
 /* ===== VIDEO PLAYER SECTION ===== */
 .video-section{
@@ -105,6 +113,9 @@ a{text-decoration:none;color:inherit;}
   display:inline-block;padding:.8rem 2rem;
   font-family:'Oswald',sans-serif;font-size:1rem;letter-spacing:1px;
   border-radius:4px;cursor:pointer;transition:all .2s;border:2px solid transparent;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:rgba(255,255,255,.2);
+  user-select:none;
 }
 .btn-primary{background:var(--gold);color:#1a0a00;}
 .btn-primary:hover{background:#b8860b;transform:translateY(-2px);}
