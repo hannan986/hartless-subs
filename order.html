@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Order Online – Hartle's Subs</title>
+<link rel="stylesheet" href="style.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">🥖 Hartle's Subs</a>
+    <input type="checkbox" id="menu-toggle" class="menu-toggle"/>
+    <label for="menu-toggle" class="hamburger">&#9776;</label>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="order.html" class="active">Order Online</a>
+      <a href="contact.html">Contact Us</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-hero">
+  <h1>Order Online</h1>
+  <p>Pick-up or Delivery – your choice!</p>
+</div>
+
+<main class="order-page">
+
+  <div class="order-options">
+    <div class="order-card" onclick="showForm('pickup')">
+      <div class="order-icon">🏪</div>
+      <h3>Pick-Up</h3>
+      <p>Order ahead and pick up at your nearest location. Ready in 15–20 mins!</p>
+      <button class="btn btn-primary">Order Pick-Up</button>
+    </div>
+    <div class="order-card" onclick="showForm('delivery')">
+      <div class="order-icon">🛵</div>
+      <h3>Delivery</h3>
+      <p>We deliver right to your door! Available within a 5-mile radius.</p>
+      <button class="btn btn-primary">Order Delivery</button>
+    </div>
+  </div>
+
+  <!-- ORDER FORM -->
+  <div id="order-form-section" class="order-form-section" style="display:none;">
+    <h2 id="form-title">Your Order</h2>
+
+    <div class="form-group">
+      <label>Your Name</label>
+      <input type="text" placeholder="John Smith" id="cust-name"/>
+    </div>
+    <div class="form-group">
+      <label>Phone Number</label>
+      <input type="tel" placeholder="301-555-0000" id="cust-phone"/>
+    </div>
+    <div id="delivery-address" style="display:none;">
+      <div class="form-group">
+        <label>Delivery Address</label>
+        <input type="text" placeholder="123 Main St, Hagerstown MD"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Location</label>
+      <select id="location-select">
+        <option>Potomac Street – 635 S. Potomac St.</option>
+        <option>Marshall Street – 1301 Marshall St.</option>
+      </select>
+    </div>
+
+    <h3 style="margin-top:2rem;">Build Your Order</h3>
+    <div class="order-menu-grid" id="order-items">
+      <!-- Dynamically populated -->
+    </div>
+
+    <div class="cart-summary" id="cart-summary">
+      <h3>🛒 Your Cart</h3>
+      <ul id="cart-list"><li class="empty-cart">No items yet. Add something above!</li></ul>
+      <div class="cart-total">Total: <strong id="cart-total">$0.00</strong></div>
+    </div>
+
+    <div class="form-group">
+      <label>Special Instructions</label>
+      <textarea placeholder="Allergies, extra sauce, no onions..."></textarea>
+    </div>
+
+    <button class="btn btn-primary btn-full" onclick="submitOrder()">📨 Place Order</button>
+    <p class="order-note">We'll call you to confirm within a few minutes!</p>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <p>&copy; 2024 Hartle's Subs. All rights reserved.</p>
+</footer>
+
+<script>
+const menuItems = [
+  {name:"Regular Cold Cut", price:9.60, cat:"Cold Subs"},
+  {name:"Italian Cold Cut", price:10.50, cat:"Cold Subs"},
+  {name:"Turkey W/ Cheese", price:10.20, cat:"Cold Subs"},
+  {name:"BLT", price:10.05, cat:"Cold Subs"},
+  {name:"Steak & Cheese", price:10.50, cat:"Hot Subs"},
+  {name:"Cheeseburger", price:10.50, cat:"Hot Subs"},
+  {name:"Grilled Chicken", price:12.30, cat:"Hot Subs"},
+  {name:"Fried Chicken", price:12.30, cat:"Hot Subs"},
+  {name:"Pastrami", price:10.50, cat:"Hot Subs"},
+  {name:"French Fries", price:5.40, cat:"Sides"},
+  {name:"Onion Rings", price:7.40, cat:"Sides"},
+  {name:"Cheese Sticks", price:8.05, cat:"Sides"},
+  {name:"Funnel Cake Fries", price:5.75, cat:"Desserts"},
+  {name:"Lemon Pie", price:5.25, cat:"Desserts"},
+];
+
+let cart = {};
+let orderType = 'pickup';
+
+function showForm(type) {
+  orderType = type;
+  document.getElementById('order-form-section').style.display = 'block';
+  document.getElementById('form-title').textContent = type === 'delivery' ? '🛵 Delivery Order' : '🏪 Pick-Up Order';
+  document.getElementById('delivery-address').style.display = type === 'delivery' ? 'block' : 'none';
+  document.getElementById('order-form-section').scrollIntoView({behavior:'smooth'});
+  renderOrderItems();
+}
+
+function renderOrderItems() {
+  const grid = document.getElementById('order-items');
+  const cats = [...new Set(menuItems.map(i => i.cat))];
+  grid.innerHTML = cats.map(cat => `
+    <div class="order-cat">
+      <h4>${cat}</h4>
+      ${menuItems.filter(i=>i.cat===cat).map(item=>`
+        <div class="order-row">
+          <span>${item.name}</span>
+          <span class="item-price">$${item.price.toFixed(2)}</span>
+          <div class="qty-ctrl">
+            <button onclick="changeQty('${item.name}',${item.price},-1)">−</button>
+            <span id="qty-${item.name.replace(/\s+/g,'_')}">${cart[item.name]?.qty||0}</span>
+            <button onclick="changeQty('${item.name}',${item.price},1)">+</button>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `).join('');
+}
+
+function changeQty(name, price, delta) {
+  if(!cart[name]) cart[name]={qty:0,price};
+  cart[name].qty = Math.max(0, cart[name].qty + delta);
+  if(cart[name].qty===0) delete cart[name];
+  renderOrderItems();
+  updateCart();
+}
+
+function updateCart() {
+  const list = document.getElementById('cart-list');
+  const entries = Object.entries(cart);
+  if(entries.length===0){
+    list.innerHTML='<li class="empty-cart">No items yet. Add something above!</li>';
+    document.getElementById('cart-total').textContent='$0.00';
+    return;
+  }
+  list.innerHTML = entries.map(([n,v])=>`<li>${v.qty}× ${n} — $${(v.qty*v.price).toFixed(2)}</li>`).join('');
+  const total = entries.reduce((s,[,v])=>s+v.qty*v.price,0);
+  document.getElementById('cart-total').textContent = '$'+total.toFixed(2);
+}
+
+function submitOrder() {
+  const name = document.getElementById('cust-name').value.trim();
+  const phone = document.getElementById('cust-phone').value.trim();
+  if(!name||!phone){alert('Please enter your name and phone number.');return;}
+  if(Object.keys(cart).length===0){alert('Please add at least one item to your order.');return;}
+  alert(`✅ Order placed! We'll call ${phone} to confirm shortly. Thank you, ${name}!`);
+  cart={};
+  updateCart();
+}
+</script>
+</body>
+</html>
