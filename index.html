@@ -18,7 +18,7 @@
     <nav class="nav-links">
       <a href="index.html" class="active">Home</a>
       <a href="menu.html">Menu</a>
-      <a href="tel:3017395473">📞 Call to Order</a>
+      <a href="#" onclick="showCallPopup();return false;">📞 Call to Order</a>
       <a href="contact.html">Contact Us</a>
     </nav>
   </div>
@@ -31,10 +31,47 @@
     <p>Fresh. Handmade. Delicious.</p>
     <div class="hero-btns">
       <a href="menu.html" class="btn btn-primary">Our Menu</a>
-      <a href="tel:3017395473" class="btn btn-outline">📞 Call to Order</a>
+      <button onclick="showCallPopup()" class="btn btn-outline">📞 Call to Order</button>
     </div>
   </div>
 </section>
+
+<!-- CALL POPUP MODAL -->
+<div id="callModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9999;display:none;align-items:center;justify-content:center;">
+  <div style="background:#fff;border-radius:16px;padding:2.5rem 2rem;max-width:420px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.3);position:relative;">
+    <button onclick="hideCallPopup()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.5rem;cursor:pointer;color:#999;">✕</button>
+    <div style="font-size:3rem;margin-bottom:.5rem;">🥖</div>
+    <h2 style="font-family:'Oswald',sans-serif;color:#c0392b;font-size:1.8rem;margin-bottom:.3rem;">Call to Order</h2>
+    <p style="color:#777;font-size:.95rem;margin-bottom:1.5rem;">Browse our menu, then give us a call and we'll have your order ready!</p>
+    <div style="background:#fdf6ec;border:2px solid #d4a017;border-radius:12px;padding:1.2rem;margin-bottom:1rem;">
+      <p style="font-family:'Oswald',sans-serif;font-size:.85rem;color:#999;letter-spacing:1px;text-transform:uppercase;margin-bottom:.3rem;">📍 Potomac Street</p>
+      <a href="tel:3204201083" style="font-family:'Oswald',sans-serif;font-size:2rem;font-weight:700;color:#c0392b;text-decoration:none;display:block;">320.420.1083</a>
+      <p style="font-size:.8rem;color:#aaa;margin-top:.2rem;">Mon–Sat 10am–8pm &nbsp;|&nbsp; Sun 11am–7pm</p>
+    </div>
+    <div style="background:#fdf6ec;border:2px solid #d4a017;border-radius:12px;padding:1.2rem;margin-bottom:1.5rem;">
+      <p style="font-family:'Oswald',sans-serif;font-size:.85rem;color:#999;letter-spacing:1px;text-transform:uppercase;margin-bottom:.3rem;">📍 Marshall Street</p>
+      <a href="tel:3017395483" style="font-family:'Oswald',sans-serif;font-size:2rem;font-weight:700;color:#c0392b;text-decoration:none;display:block;">301.739.5483</a>
+      <p style="font-size:.8rem;color:#aaa;margin-top:.2rem;">Mon–Sat 10am–8pm &nbsp;|&nbsp; Sun 11am–7pm</p>
+    </div>
+    <a href="menu.html" style="display:inline-block;background:#c0392b;color:#fff;padding:.7rem 1.8rem;border-radius:6px;font-family:'Oswald',sans-serif;font-size:1rem;letter-spacing:.5px;text-decoration:none;">View Menu First 🍽️</a>
+  </div>
+</div>
+
+<script>
+function showCallPopup(){
+  const m = document.getElementById('callModal');
+  m.style.display='flex';
+  document.body.style.overflow='hidden';
+}
+function hideCallPopup(){
+  const m = document.getElementById('callModal');
+  m.style.display='none';
+  document.body.style.overflow='';
+}
+document.getElementById('callModal').addEventListener('click', function(e){
+  if(e.target===this) hideCallPopup();
+});
+</script>
 
 <!-- VIDEO PLAYER SECTION -->
 <section class="video-section">
