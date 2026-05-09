@@ -3,351 +3,334 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Menu – Hartle's Subs</title>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"/>
-<style>
-/* ===== RESET ===== */
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Open Sans',sans-serif;background:#e8e5e0;color:#111;}
-a{text-decoration:none;color:inherit;}
-
-/* ===== NAVBAR ===== */
-.navbar{
-  background:#c0392b;position:sticky;top:0;z-index:100;
-  box-shadow:0 2px 8px rgba(0,0,0,.3);
-}
-.nav-inner{
-  max-width:1100px;margin:0 auto;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:.9rem 1.5rem;
-}
-.logo{
-  font-family:'Oswald',sans-serif;font-size:1.5rem;
-  font-weight:700;color:#fff;letter-spacing:1px;
-}
-.nav-links{display:flex;gap:1.8rem;}
-.nav-links a{
-  color:rgba(255,255,255,.85);font-family:'Oswald',sans-serif;
-  font-size:1rem;letter-spacing:.5px;padding:.3rem 0;
-  border-bottom:2px solid transparent;transition:all .2s;
-}
-.nav-links a:hover,.nav-links a.active{color:#fff;border-bottom-color:#d4a017;}
-.nav-links a.nav-order{background:rgba(255,255,255,.18);padding:.3rem .9rem;border-radius:4px;border-bottom:none;}
-.nav-links a.nav-order:hover,.nav-links a.nav-order.active{background:rgba(255,255,255,.3);border-bottom:none;color:#fff;}
-.menu-toggle{display:none;}
-.hamburger{display:none;font-size:1.6rem;color:#fff;cursor:pointer;}
-@media(max-width:680px){
-  .hamburger{display:block;}
-  .nav-links{
-    display:none;flex-direction:column;
-    position:absolute;top:60px;left:0;right:0;
-    background:#96281b;padding:1rem 1.5rem;gap:1rem;
-  }
-  .menu-toggle:checked~.nav-links{display:flex;}
-}
-
-/* ===== PAGE WRAPPER ===== */
-  .menu-wrap{
-  max-width:1400px;
-  width:100%;
-  margin:0 auto;
-  padding:3rem 3rem 5rem;
-  background:#e8e5e0;
-}
-
-/* ===== PAGE TITLE ===== */
-.menu-wrap h1{
-  font-family:'Georgia',serif;
-  font-size:2.6rem;font-weight:700;color:#111;
-  border-bottom:3px solid #2e6b2e;
-  padding-bottom:.5rem;margin-bottom:2rem;
-}
-
-/* ===== CALL BANNER ===== */
-.call-banner{
-  background:#fdf6ec;border:2px solid #d4a017;border-radius:10px;
-  padding:1.2rem 1.5rem;margin-bottom:2.5rem;
-  display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:1rem;
-}
-.call-banner .cb-text p:first-child{
-  font-family:'Oswald',sans-serif;font-size:1.2rem;color:#c0392b;
-}
-.call-banner .cb-text p.sub{font-size:.85rem;color:#888;margin-top:.2rem;}
-.call-btns{display:flex;gap:.8rem;flex-wrap:wrap;}
-.btn-call{
-  display:inline-block;padding:.65rem 1.2rem;
-  background:#c0392b;color:#fff;border-radius:4px;
-  font-family:'Oswald',sans-serif;font-size:.9rem;letter-spacing:.5px;
-  transition:background .2s;
-}
-.btn-call:hover{background:#96281b;}
-
-/* ===== PHOTO STRIP ===== */
-.menu-photos{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  gap:10px;margin-bottom:2.5rem;
-}
-.menu-photo{aspect-ratio:4/3;border-radius:8px;overflow:hidden;}
-.menu-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s;}
-.menu-photo:hover img{transform:scale(1.06);}
-@media(max-width:600px){.menu-photos{grid-template-columns:repeat(2,1fr);}}
-
-/* ===== CATEGORY SECTION ===== */
-.cat-section{margin-bottom:2.5rem;}
-
-.cat-title{
-  font-family:'Georgia',serif;
-  font-size:1.5rem;font-weight:700;color:#c0392b;
-  text-align:center;
-  padding:.7rem 1rem;
-  border-top:2px solid #2e6b2e;
-  border-bottom:2px solid #2e6b2e;
-  background:#fff;
-  margin-bottom:0;
-}
-
-.cat-note{
-  text-align:center;font-size:.88rem;color:#666;
-  font-style:italic;padding:.5rem 0 .8rem;
-  background:#fff;
-}
-
-/* ===== 3-COLUMN ITEMS GRID ===== */
-.items-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-}
-@media(max-width:620px){.items-grid{grid-template-columns:repeat(2,1fr);}}
-@media(max-width:380px){.items-grid{grid-template-columns:1fr;}}
-
-.menu-card{
-  background:#fff;
-  border-radius:6px;
-  border:1px solid #ddd;
-  padding:1.4rem 1rem;
-  text-align:center;
-  display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  gap:.5rem;
-  box-shadow:0 1px 4px rgba(0,0,0,.06);
-}
-
-.menu-card .iname{
-  font-family:'Open Sans',sans-serif;
-  font-size:.97rem;font-weight:700;color:#111;
-}
-.menu-card .iprice{
-  font-family:'Open Sans',sans-serif;
-  font-size:.92rem;font-weight:700;color:#333;
-}
-
-/* Full-width extra note */
-.item-extra{
-  background:#fdf6ec;
-  border:1px solid #ddd;border-top:none;
-  font-size:.83rem;color:#888;font-style:italic;
-  padding:.55rem 1rem;text-align:center;
-}
-
-/* ===== FOOTER ===== */
-.footer{
-  background:#1a0a00;color:rgba(255,255,255,.5);
-  text-align:center;padding:1.5rem;font-size:.9rem;
-}
-</style>
+<title>Menu — Hartle's Subs, Hagerstown MD</title>
+<meta name="description" content="Full menu for Hartle's Subs in Hagerstown MD. Cold Subs, Hot Subs, Flying Saucers, Sandwiches, Wraps, Salads, Snacks & Sides, and Desserts."/>
+<link rel="stylesheet" href="style.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet"/>
 </head>
 <body>
 
-<!-- NAVBAR -->
+<!-- ===== NAVBAR ===== -->
 <header class="navbar">
   <div class="nav-inner">
-    <a href="index.html" class="logo">🥖 Hartle's Subs</a>
+    <a href="index.html" class="nav-logo">
+      <img src="https://hartlessubs.com/wp-content/uploads/2026/03/Hartles-logo.png" class="nav-logo-img" alt="Hartle's Subs" onerror="this.style.display='none'"/>
+      <div class="nav-logo-name">Hartle's Subs<small>Hagerstown, MD</small></div>
+    </a>
     <input type="checkbox" id="menu-toggle" class="menu-toggle"/>
     <label for="menu-toggle" class="hamburger">&#9776;</label>
     <nav class="nav-links">
       <a href="index.html">Home</a>
       <a href="menu.html" class="active">Menu</a>
-      <a href="#" onclick="showCallPopup();return false;">📞 Call to Order</a>
-      <a href="contact.html">Contact Us</a>
-      <a href="order.html" class="nav-order">🛒 Order Online</a>
+      <a href="contact.html">Locations</a>
+      <a href="#" onclick="showCallPopup();return false;">Call to Order</a>
+      <a href="order.html" class="nav-order">Order Now</a>
     </nav>
   </div>
 </header>
 
-<main class="menu-wrap">
-  <h1>Menu</h1>
+<!-- ===== PAGE HERO ===== -->
+<div class="page-hero">
+  <div class="page-hero-texture"></div>
+  <div class="page-hero-content">
+    <span class="page-eyebrow">Hagerstown's Best Subs</span>
+    <h1>Our Menu</h1>
+    <p>Fresh ingredients, handmade to order — your way, every time.</p>
+  </div>
+</div>
 
-  <!-- CALL BANNER -->
-  <div class="call-banner">
-    <div class="cb-text">
+<!-- ===== STICKY CATEGORY TABS ===== -->
+<div class="menu-cat-tabs-bar">
+  <div class="menu-cat-tabs-inner">
+    <button class="menu-tab active" onclick="scrollToSec('cold-subs',this)">Cold Subs</button>
+    <button class="menu-tab" onclick="scrollToSec('hot-subs',this)">Hot Subs</button>
+    <button class="menu-tab" onclick="scrollToSec('sandwiches',this)">Sandwiches</button>
+    <button class="menu-tab" onclick="scrollToSec('flying-saucers',this)">Flying Saucers</button>
+    <button class="menu-tab" onclick="scrollToSec('wraps-salads',this)">Wraps &amp; Salads</button>
+    <button class="menu-tab" onclick="scrollToSec('snacks-sides',this)">Snacks &amp; Sides</button>
+    <button class="menu-tab" onclick="scrollToSec('desserts',this)">Desserts</button>
+  </div>
+</div>
+
+<!-- ===== CALL BANNER ===== -->
+<div class="menu-call-bar">
+  <div class="menu-call-inner">
+    <div class="menu-call-text">
       <p>Ready to order? Give us a call!</p>
-      <p class="sub">Browse the menu below, then call your nearest location.</p>
+      <p class="sub">Browse below, then call your nearest location to order ahead.</p>
     </div>
-    <div class="call-btns">
-      <a href="#" onclick="showCallPopup();return false;" class="btn-call">📞 Potomac St — 320.420.1083</a>
-      <a href="#" onclick="showCallPopup();return false;" class="btn-call">📞 Marshall St — 301.739.5483</a>
-    </div>
-  </div>
-
-  <!-- PHOTO STRIP – using your own images -->
-  <div class="menu-photos">
-    <div class="menu-photo"><img src="images/menu/sandwich.png" alt="Sandwich"/></div>
-    <div class="menu-photo"><img src="images/menu/sandwich_2.png" alt="Sandwich 2"/></div>
-    <div class="menu-photo"><img src="images/menu/phily_cheasteak_image.png" alt="Philly Cheesesteak"/></div>
-    <div class="menu-photo"><img src="images/menu/bread_salad.png" alt="Bread Salad"/></div>
-  </div>
-
-  <!-- ── COLD SUBS ── -->
-  <div class="cat-section">
-    <div class="cat-title">Cold Subs</div>
-    <div class="items-grid">
-      <div class="menu-card"><span class="iname">Regular Cold Cut</span><span class="iprice">Whole – $15.55 / Half – $9.60</span></div>
-      <div class="menu-card"><span class="iname">Italian Cold Cut</span><span class="iprice">Whole – $17.05 / Half – $10.50</span></div>
-      <div class="menu-card"><span class="iname">Ham W/ Cheese</span><span class="iprice">Whole – $15.55 / Half – $9.60</span></div>
-      <div class="menu-card"><span class="iname">Turkey W/ Cheese</span><span class="iprice">Whole – $16.85 / Half – $10.20</span></div>
-      <div class="menu-card"><span class="iname">Roast Beef W/ Cheese</span><span class="iprice">Whole – $16.05 / Half – $9.90</span></div>
-      <div class="menu-card"><span class="iname">Combo (Cold Cut W/ Ham)</span><span class="iprice">Whole – $16.70 / Half – $10.05</span></div>
-      <div class="menu-card"><span class="iname">Club</span><span class="iprice">Whole – $16.90 / Half – $10.25</span></div>
-      <div class="menu-card"><span class="iname">BLT</span><span class="iprice">Whole – $16.30 / Half – $10.05</span></div>
-      <div class="menu-card"><span class="iname">Chicken or Tuna Salad</span><span class="iprice">Whole – $16.25 / Half – $10.05</span></div>
-      <div class="menu-card"><span class="iname">Egg Salad</span><span class="iprice">Whole – $15.55 / Half – $9.60</span></div>
-      <div class="menu-card"><span class="iname">Veggie or Cheese</span><span class="iprice">Whole – $15.55 / Half – $9.60</span></div>
-    </div>
-    <div class="item-extra">Served with your choice of dipping sauce</div>
-  </div>
-
-  <!-- ── HOT SUBS ── -->
-  <div class="cat-section">
-    <div class="cat-title">Hot Subs</div>
-    <div class="items-grid">
-      <div class="menu-card"><span class="iname">Steak &amp; Cheese</span><span class="iprice">Whole – $17.05 / Half – $10.50</span></div>
-      <div class="menu-card"><span class="iname">Cheeseburger</span><span class="iprice">Whole – $17.05 / Half – $10.50</span></div>
-      <div class="menu-card"><span class="iname">Grilled Chicken</span><span class="iprice">Whole – $16.45 / Half – $12.30</span></div>
-      <div class="menu-card"><span class="iname">Fried Chicken</span><span class="iprice">Whole – $16.45 / Half – $12.30</span></div>
-      <div class="menu-card"><span class="iname">Meatball W/ Cheese</span><span class="iprice">Whole – $15.55 / Half – $9.60</span></div>
-      <div class="menu-card"><span class="iname">Steamer W/ Cheese</span><span class="iprice">Whole – $15.55 / Half – $9.60</span></div>
-      <div class="menu-card"><span class="iname">Pastrami</span><span class="iprice">Whole – $17.05 / Half – $10.50</span></div>
-    </div>
-    <div class="item-extra">Add Bacon – 99¢ per Half &nbsp;|&nbsp; Add Swiss, Pepper Jack or Provolone – 45¢ per Half</div>
-  </div>
-
-  <!-- ── SANDWICHES ── -->
-  <div class="cat-section">
-    <div class="cat-title">Sandwiches</div>
-    <p class="cat-note">White, Wheat, Marble Rye</p>
-    <div class="items-grid">
-      <div class="menu-card"><span class="iname">Hot Dog</span><span class="iprice">$4.00</span></div>
-      <div class="menu-card"><span class="iname">Steamer</span><span class="iprice">$6.65</span></div>
-      <div class="menu-card"><span class="iname">Turkey W/ Cheese</span><span class="iprice">$7.65</span></div>
-      <div class="menu-card"><span class="iname">Cold Cut</span><span class="iprice">$7.45</span></div>
-      <div class="menu-card"><span class="iname">Roast Beef W/ Cheese</span><span class="iprice">$7.80</span></div>
-      <div class="menu-card"><span class="iname">Chicken or Tuna Salad</span><span class="iprice">$7.80</span></div>
-      <div class="menu-card"><span class="iname">Steamer Dogs</span><span class="iprice">$6.75</span></div>
-      <div class="menu-card"><span class="iname">BLT</span><span class="iprice">$7.85</span></div>
-      <div class="menu-card"><span class="iname">Egg Salad</span><span class="iprice">$7.35</span></div>
-      <div class="menu-card"><span class="iname">Club</span><span class="iprice">$8.65</span></div>
-      <div class="menu-card"><span class="iname">Peanut Butter &amp; Jelly</span><span class="iprice">$3.75</span></div>
-      <div class="menu-card"><span class="iname">Pastrami</span><span class="iprice">$8.65</span></div>
-      <div class="menu-card"><span class="iname">Reuben</span><span class="iprice">$8.65</span></div>
-    </div>
-  </div>
-
-  <!-- ── FLYING SAUCERS ── -->
-  <div class="cat-section">
-    <div class="cat-title">Flying Saucers</div>
-    <p class="cat-note">5 in. sesame seed roll</p>
-    <div class="items-grid">
-      <div class="menu-card"><span class="iname">Beef, Ham, Turkey</span><span class="iprice">$9.50</span></div>
-      <div class="menu-card"><span class="iname">Chicken or Tuna Salad</span><span class="iprice">$9.50</span></div>
-      <div class="menu-card"><span class="iname">Cold Cut or Veggie</span><span class="iprice">$8.90</span></div>
-      <div class="menu-card"><span class="iname">Grilled or Fried Chicken</span><span class="iprice">$9.50</span></div>
-      <div class="menu-card"><span class="iname">Cheeseburger or Steak</span><span class="iprice">$9.50</span></div>
-    </div>
-  </div>
-
-  <!-- ── WRAPS & SALADS ── -->
-  <div class="cat-section">
-    <div class="cat-title">Wraps &amp; Salads</div>
-    <div class="items-grid">
-      <div class="menu-card"><span class="iname">Garden Salad</span><span class="iprice">$8.65</span></div>
-      <div class="menu-card"><span class="iname">Chef Salad</span><span class="iprice">$9.75</span></div>
-      <div class="menu-card"><span class="iname">Turkey or Ham</span><span class="iprice">$9.15</span></div>
-      <div class="menu-card"><span class="iname">Club</span><span class="iprice">$9.15</span></div>
-      <div class="menu-card"><span class="iname">Steak &amp; Cheese</span><span class="iprice">$9.45</span></div>
-      <div class="menu-card"><span class="iname">Grilled or Fried Chicken</span><span class="iprice">$9.25</span></div>
-      <div class="menu-card"><span class="iname">Chicken or Tuna Salad</span><span class="iprice">$9.25</span></div>
-    </div>
-  </div>
-
-  <!-- ── SNACKS & SIDES ── -->
-  <div class="cat-section">
-    <div class="cat-title">Snacks &amp; Sides</div>
-    <div class="items-grid">
-      <div class="menu-card"><span class="iname">French Fries</span><span class="iprice">$5.40</span></div>
-      <div class="menu-card"><span class="iname">Cheese Sticks</span><span class="iprice">$8.05</span></div>
-      <div class="menu-card"><span class="iname">Chicken Fingers</span><span class="iprice">$7.45</span></div>
-      <div class="menu-card"><span class="iname">Onion Rings</span><span class="iprice">$7.40</span></div>
-      <div class="menu-card"><span class="iname">Macaroni Salad</span><span class="iprice">$4.70</span></div>
-      <div class="menu-card"><span class="iname">Deviled Eggs</span><span class="iprice">$3.65</span></div>
-      <div class="menu-card"><span class="iname">Beet Eggs</span><span class="iprice">$4.15</span></div>
-      <div class="menu-card"><span class="iname">Fried Pickles</span><span class="iprice">$6.45</span></div>
-      <div class="menu-card"><span class="iname">Homemade Chili</span><span class="iprice">$5.70</span></div>
-      <div class="menu-card"><span class="iname">Soup Of The Day</span><span class="iprice">$5.70</span></div>
-    </div>
-  </div>
-
-  <!-- ── DESSERTS ── -->
-  <div class="cat-section">
-    <div class="cat-title">Desserts</div>
-    <div class="items-grid">
-      <div class="menu-card"><span class="iname">Funnel Cake Fries</span><span class="iprice">$5.75</span></div>
-      <div class="menu-card"><span class="iname">Lemon Pie</span><span class="iprice">$5.25</span></div>
-      <div class="menu-card"><span class="iname">Coconut Cream Pie</span><span class="iprice">$5.25</span></div>
-    </div>
-  </div>
-
-</main>
-
-<!-- CALL POPUP MODAL -->
-<div id="callModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9999;align-items:center;justify-content:center;">
-  <div style="background:#fff;border-radius:16px;padding:2.5rem 2rem;max-width:420px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.3);position:relative;">
-    <button onclick="hideCallPopup()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.5rem;cursor:pointer;color:#999;">✕</button>
-    <div style="font-size:3rem;margin-bottom:.5rem;">🥖</div>
-    <h2 style="font-family:'Oswald',sans-serif;color:#c0392b;font-size:1.8rem;margin-bottom:.3rem;">Call to Order</h2>
-    <p style="color:#777;font-size:.95rem;margin-bottom:1.5rem;">Browse our menu, then give us a call and we'll have your order ready!</p>
-    <div style="background:#fdf6ec;border:2px solid #d4a017;border-radius:12px;padding:1.2rem;margin-bottom:1rem;">
-      <p style="font-family:'Oswald',sans-serif;font-size:.85rem;color:#999;letter-spacing:1px;text-transform:uppercase;margin-bottom:.3rem;">📍 Potomac Street</p>
-      <a href="tel:3204201083" style="font-family:'Oswald',sans-serif;font-size:2rem;font-weight:700;color:#c0392b;text-decoration:none;display:block;">320.420.1083</a>
-      <p style="font-size:.8rem;color:#aaa;margin-top:.2rem;">Mon–Sat 10am–8pm &nbsp;|&nbsp; Sun 11am–7pm</p>
-    </div>
-    <div style="background:#fdf6ec;border:2px solid #d4a017;border-radius:12px;padding:1.2rem;margin-bottom:1.5rem;">
-      <p style="font-family:'Oswald',sans-serif;font-size:.85rem;color:#999;letter-spacing:1px;text-transform:uppercase;margin-bottom:.3rem;">📍 Marshall Street</p>
-      <a href="tel:3017395483" style="font-family:'Oswald',sans-serif;font-size:2rem;font-weight:700;color:#c0392b;text-decoration:none;display:block;">301.739.5483</a>
-      <p style="font-size:.8rem;color:#aaa;margin-top:.2rem;">Mon–Sat 10am–8pm &nbsp;|&nbsp; Sun 11am–7pm</p>
+    <div class="menu-call-btns">
+      <a href="tel:3017395473" class="menu-call-btn">📞 Potomac St — 301.739.5473</a>
+      <a href="tel:3017395483" class="menu-call-btn">📞 Marshall St — 301.739.5483</a>
     </div>
   </div>
 </div>
 
+<!-- ===== MENU CONTENT ===== -->
+<div class="menu-page-bg">
+<div class="menu-content">
+
+  <!-- PHOTO STRIP -->
+  <div class="menu-photo-strip">
+    <div class="mps-item"><img src="images/menu/sandwich.png" alt="Cold Cut Sub"/></div>
+    <div class="mps-item"><img src="images/menu/sandwich_2.png" alt="Sub Sandwich"/></div>
+    <div class="mps-item"><img src="images/menu/phily_cheasteak_image.png" alt="Philly Cheesesteak"/></div>
+    <div class="mps-item"><img src="images/menu/phily_cheasktake_2.png" alt="Cheesesteak 2"/></div>
+    <div class="mps-item"><img src="images/menu/bread_salad.png" alt="Bread Salad"/></div>
+  </div>
+
+  <!-- ===== COLD SUBS ===== -->
+  <div class="menu-section" id="cold-subs">
+    <div class="menu-sec-hdr">
+      <h2>Cold Subs</h2>
+      <span>Choice of toppings &amp; dressings included</span>
+    </div>
+    <div class="menu-items-grid">
+      <div class="menu-item-card"><div class="menu-item-name">Regular Cold Cut</div><div class="menu-item-price">Half $9.60 &nbsp;/&nbsp; Whole $15.55</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Italian Cold Cut</div><div class="menu-item-price">Half $10.50 &nbsp;/&nbsp; Whole $17.05</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Ham w/ Cheese</div><div class="menu-item-price">Half $9.60 &nbsp;/&nbsp; Whole $15.55</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Turkey w/ Cheese</div><div class="menu-item-price">Half $10.20 &nbsp;/&nbsp; Whole $16.85</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Roast Beef w/ Cheese</div><div class="menu-item-price">Half $9.90 &nbsp;/&nbsp; Whole $16.05</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Combo (Cold Cut w/ Ham)</div><div class="menu-item-price">Half $10.05 &nbsp;/&nbsp; Whole $16.70</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Club</div><div class="menu-item-price">Half $10.25 &nbsp;/&nbsp; Whole $16.90</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">BLT</div><div class="menu-item-price">Half $10.05 &nbsp;/&nbsp; Whole $16.30</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Chicken or Tuna Salad</div><div class="menu-item-price">Half $10.05 &nbsp;/&nbsp; Whole $16.25</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Egg Salad</div><div class="menu-item-price">Half $9.60 &nbsp;/&nbsp; Whole $15.55</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Veggie or Cheese</div><div class="menu-item-price">Half $9.60 &nbsp;/&nbsp; Whole $15.55</div></div>
+    </div>
+    <div class="menu-sec-note">Add Bacon +$0.99 per Half &nbsp;|&nbsp; Add Swiss, Pepper Jack or Provolone +$0.45 per Half</div>
+  </div>
+
+  <!-- ===== HOT SUBS ===== -->
+  <div class="menu-section" id="hot-subs">
+    <div class="menu-sec-hdr">
+      <h2>Hot Subs</h2>
+      <span>Freshly grilled, served on a toasted roll</span>
+    </div>
+    <div class="menu-items-grid">
+      <div class="menu-item-card"><div class="menu-item-name">Steak &amp; Cheese</div><div class="menu-item-price">Half $10.50 &nbsp;/&nbsp; Whole $17.05</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Cheeseburger</div><div class="menu-item-price">Half $10.50 &nbsp;/&nbsp; Whole $17.05</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Grilled Chicken</div><div class="menu-item-price">Half $12.30 &nbsp;/&nbsp; Whole $16.45</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Fried Chicken</div><div class="menu-item-price">Half $12.30 &nbsp;/&nbsp; Whole $16.45</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Meatball w/ Cheese</div><div class="menu-item-price">Half $9.60 &nbsp;/&nbsp; Whole $15.55</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Steamer w/ Cheese</div><div class="menu-item-price">Half $9.60 &nbsp;/&nbsp; Whole $15.55</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Pastrami</div><div class="menu-item-price">Half $10.50 &nbsp;/&nbsp; Whole $17.05</div></div>
+    </div>
+    <div class="menu-sec-note">Add Bacon +$0.99 per Half &nbsp;|&nbsp; Add Swiss, Pepper Jack or Provolone +$0.45 per Half</div>
+  </div>
+
+  <!-- ===== SANDWICHES ===== -->
+  <div class="menu-section" id="sandwiches">
+    <div class="menu-sec-hdr">
+      <h2>Sandwiches</h2>
+      <span>Choice of White, Wheat, or Marble Rye</span>
+    </div>
+    <div class="menu-items-grid">
+      <div class="menu-item-card"><div class="menu-item-name">Hot Dog</div><div class="menu-item-price">$4.00</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Steamer</div><div class="menu-item-price">$6.65</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Turkey w/ Cheese</div><div class="menu-item-price">$7.65</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Cold Cut</div><div class="menu-item-price">$7.45</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Roast Beef w/ Cheese</div><div class="menu-item-price">$7.80</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Chicken or Tuna Salad</div><div class="menu-item-price">$7.80</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Steamer Dogs</div><div class="menu-item-price">$6.75</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">BLT</div><div class="menu-item-price">$7.85</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Egg Salad</div><div class="menu-item-price">$7.35</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Club</div><div class="menu-item-price">$8.65</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Peanut Butter &amp; Jelly</div><div class="menu-item-price">$3.75</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Pastrami</div><div class="menu-item-price">$8.65</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Reuben</div><div class="menu-item-price">$8.65</div></div>
+    </div>
+  </div>
+
+  <!-- ===== FLYING SAUCERS ===== -->
+  <div class="menu-section" id="flying-saucers">
+    <div class="menu-sec-hdr">
+      <h2>Flying Saucers</h2>
+      <span>5 in. sesame seed roll</span>
+    </div>
+    <div class="menu-items-grid">
+      <div class="menu-item-card"><div class="menu-item-name">Beef, Ham or Turkey</div><div class="menu-item-price">$9.50</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Chicken or Tuna Salad</div><div class="menu-item-price">$9.50</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Cold Cut or Veggie</div><div class="menu-item-price">$8.90</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Grilled or Fried Chicken</div><div class="menu-item-price">$9.50</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Cheeseburger or Steak</div><div class="menu-item-price">$9.50</div></div>
+    </div>
+  </div>
+
+  <!-- ===== WRAPS & SALADS ===== -->
+  <div class="menu-section" id="wraps-salads">
+    <div class="menu-sec-hdr">
+      <h2>Wraps &amp; Salads</h2>
+      <span>Served with choice of dressing</span>
+    </div>
+    <div class="menu-items-grid">
+      <div class="menu-item-card"><div class="menu-item-name">Garden Salad</div><div class="menu-item-price">$8.65</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Chef Salad</div><div class="menu-item-price">$9.75</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Turkey or Ham Wrap</div><div class="menu-item-price">$9.15</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Club Wrap</div><div class="menu-item-price">$9.15</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Steak &amp; Cheese Wrap</div><div class="menu-item-price">$9.45</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Grilled or Fried Chicken Wrap</div><div class="menu-item-price">$9.25</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Chicken or Tuna Salad Wrap</div><div class="menu-item-price">$9.25</div></div>
+    </div>
+  </div>
+
+  <!-- ===== SNACKS & SIDES ===== -->
+  <div class="menu-section" id="snacks-sides">
+    <div class="menu-sec-hdr">
+      <h2>Snacks &amp; Sides</h2>
+    </div>
+    <div class="menu-items-grid">
+      <div class="menu-item-card"><div class="menu-item-name">French Fries</div><div class="menu-item-price">$5.40</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Cheese Sticks</div><div class="menu-item-price">$8.05</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Chicken Fingers</div><div class="menu-item-price">$7.45</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Onion Rings</div><div class="menu-item-price">$7.40</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Macaroni Salad</div><div class="menu-item-price">$4.70</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Deviled Eggs</div><div class="menu-item-price">$3.65</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Beet Eggs</div><div class="menu-item-price">$4.15</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Fried Pickles</div><div class="menu-item-price">$6.45</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Homemade Chili</div><div class="menu-item-price">$5.70</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Soup of the Day</div><div class="menu-item-price">$5.70</div></div>
+    </div>
+  </div>
+
+  <!-- ===== DESSERTS ===== -->
+  <div class="menu-section" id="desserts">
+    <div class="menu-sec-hdr">
+      <h2>Desserts</h2>
+      <span>Homemade daily</span>
+    </div>
+    <div class="menu-items-grid">
+      <div class="menu-item-card"><div class="menu-item-name">Funnel Cake Fries</div><div class="menu-item-price">$5.75</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Lemon Pie</div><div class="menu-item-price">$5.25</div></div>
+      <div class="menu-item-card"><div class="menu-item-name">Coconut Cream Pie</div><div class="menu-item-price">$5.25</div></div>
+    </div>
+  </div>
+
+  <!-- ORDER CTA -->
+  <div style="text-align:center;padding:2rem 0 1rem;">
+    <p style="font-size:.95rem;color:var(--gray);margin-bottom:1rem;">Ready to order? Place your order online or give us a call!</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="order.html" class="btn btn-red btn-lg">Order Online</a>
+      <button onclick="showCallPopup()" class="btn btn-outline-white btn-lg" style="color:var(--red);border-color:var(--red);">Call to Order</button>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-body">
+    <div>
+      <div class="ftr-logo">Hartle's <span>Subs</span></div>
+      <p class="ftr-desc">Hagerstown's home for handmade subs since 1985. Fresh ingredients, made-to-order, your way every time.</p>
+      <div class="ftr-socials">
+        <a href="#" title="Facebook">📘</a>
+        <a href="#" title="Instagram">📸</a>
+      </div>
+    </div>
+    <div>
+      <div class="ftr-col-title">Quick Links</div>
+      <ul class="ftr-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="order.html">Order Online</a></li>
+        <li><a href="contact.html">Locations</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="ftr-col-title">Our Locations</div>
+      <div class="ftr-loc">
+        <strong>Potomac Street</strong>
+        <p>635 S. Potomac St<br/>Hagerstown, MD 21740<br/><a href="tel:3017395473">301.739.5473</a></p>
+      </div>
+      <div class="ftr-loc">
+        <strong>Marshall Street</strong>
+        <p>1301 Marshall St<br/>Hagerstown, MD 21740<br/><a href="tel:3017395483">301.739.5483</a></p>
+      </div>
+    </div>
+    <div>
+      <div class="ftr-col-title">Hours</div>
+      <div class="ftr-hrs">
+        <div class="ftr-hrs-row"><span>Mon – Sat</span><span>10am – 8pm</span></div>
+        <div class="ftr-hrs-row"><span>Sunday</span><span>11am – 7pm</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bar">
+    <div class="footer-bar-inner">
+      <span>&copy; 2024 Hartle's Subs. All rights reserved.</span>
+      <span>Hagerstown, Maryland</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== CALL MODAL ===== -->
+<div id="callModal">
+  <div class="call-card">
+    <button class="call-close" onclick="hideCallPopup()">✕</button>
+    <div class="call-icon">🥖</div>
+    <div class="call-title">Call to Order</div>
+    <p class="call-sub">Browse our menu, then give us a call and we'll have your order ready in about 20–30 minutes!</p>
+    <div class="call-loc">
+      <div class="call-loc-name">📍 Potomac Street</div>
+      <a href="tel:3017395473" class="call-loc-phone">301.739.5473</a>
+      <div class="call-loc-hrs">Mon–Sat 10am–8pm &nbsp;|&nbsp; Sun 11am–7pm</div>
+    </div>
+    <div class="call-loc">
+      <div class="call-loc-name">📍 Marshall Street</div>
+      <a href="tel:3017395483" class="call-loc-phone">301.739.5483</a>
+      <div class="call-loc-hrs">Mon–Sat 10am–8pm &nbsp;|&nbsp; Sun 11am–7pm</div>
+    </div>
+    <a href="menu.html" class="call-view-menu">View Full Menu 🍽️</a>
+  </div>
+</div>
+
 <script>
-function showCallPopup(){
-  const m = document.getElementById('callModal');
-  m.style.display='flex';
-  document.body.style.overflow='hidden';
+function showCallPopup() {
+  document.getElementById('callModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
 }
-function hideCallPopup(){
-  const m = document.getElementById('callModal');
-  m.style.display='none';
-  document.body.style.overflow='';
+function hideCallPopup() {
+  document.getElementById('callModal').classList.remove('open');
+  document.body.style.overflow = '';
 }
-document.getElementById('callModal').addEventListener('click',function(e){
-  if(e.target===this) hideCallPopup();
+document.getElementById('callModal').addEventListener('click', function(e) {
+  if (e.target === this) hideCallPopup();
+});
+
+function scrollToSec(id, btn) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  var offset = 145;
+  var top = el.getBoundingClientRect().top + window.scrollY - offset;
+  window.scrollTo({ top: top, behavior: 'smooth' });
+  document.querySelectorAll('.menu-tab').forEach(function(t) { t.classList.remove('active'); });
+  btn.classList.add('active');
+}
+
+// Intersection observer for active tab sync
+window.addEventListener('DOMContentLoaded', function() {
+  if (!window.IntersectionObserver) return;
+  var secIds = ['cold-subs','hot-subs','sandwiches','flying-saucers','wraps-salads','snacks-sides','desserts'];
+  var tabs = document.querySelectorAll('.menu-tab');
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        var idx = secIds.indexOf(entry.target.id);
+        if (idx !== -1) {
+          tabs.forEach(function(t) { t.classList.remove('active'); });
+          tabs[idx].classList.add('active');
+          tabs[idx].scrollIntoView({ block: 'nearest', inline: 'center' });
+        }
+      }
+    });
+  }, { rootMargin: '-140px 0px -50% 0px' });
+  secIds.forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
 });
 </script>
-
-<footer class="footer">
-  <p>&copy; 2024 Hartle's Subs. All rights reserved.</p>
-</footer>
 </body>
 </html>

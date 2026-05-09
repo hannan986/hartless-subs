@@ -3,77 +3,192 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Contact – Hartle's Subs</title>
+<title>Locations — Hartle's Subs, Hagerstown MD</title>
+<meta name="description" content="Two Hartle's Subs locations in Hagerstown, MD. Potomac Street and Marshall Street. View hours, phone numbers, and directions."/>
 <link rel="stylesheet" href="style.css"/>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+/* ===== CONTACT PAGE EXTRA STYLES ===== */
+.hours-table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+.hours-table tr { border-bottom: 1px solid var(--border); }
+.hours-table tr:last-child { border-bottom: none; }
+.hours-table td { padding: .55rem 0; color: var(--dark); }
+.hours-table td:first-child { color: var(--mid); width: 55%; }
+.hours-table td:last-child { font-weight: 600; color: var(--dark); text-align: right; }
+.hours-table tr.today td { color: var(--red); font-weight: 700; }
+.hours-table tr.today td:first-child { color: var(--red); }
+
+.contact-order-cta {
+  background: var(--red);
+  border-radius: var(--r12);
+  padding: 2.5rem 2rem;
+  text-align: center;
+  margin-top: 3rem;
+  color: var(--white);
+}
+.contact-order-cta h3 {
+  font-family: var(--ff-h);
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: .5rem;
+}
+.contact-order-cta p {
+  font-size: .95rem;
+  opacity: .85;
+  margin-bottom: 1.5rem;
+}
+.cta-btn-row {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+</style>
 </head>
 <body>
 
+<!-- ===== NAVBAR ===== -->
 <header class="navbar">
   <div class="nav-inner">
-    <a href="index.html" class="logo">🥖 Hartle's Subs</a>
+    <a href="index.html" class="nav-logo">
+      <img src="https://hartlessubs.com/wp-content/uploads/2026/03/Hartles-logo.png" class="nav-logo-img" alt="Hartle's Subs" onerror="this.style.display='none'"/>
+      <div class="nav-logo-name">Hartle's Subs<small>Hagerstown, MD</small></div>
+    </a>
     <input type="checkbox" id="menu-toggle" class="menu-toggle"/>
     <label for="menu-toggle" class="hamburger">&#9776;</label>
     <nav class="nav-links">
       <a href="index.html">Home</a>
       <a href="menu.html">Menu</a>
-      <a href="#" onclick="showCallPopup();return false;">📞 Call to Order</a>
-      <a href="contact.html" class="active">Contact Us</a>
-      <a href="order.html" class="nav-order">🛒 Order Online</a>
+      <a href="contact.html" class="active">Locations</a>
+      <a href="#" onclick="showCallPopup();return false;">Call to Order</a>
+      <a href="order.html" class="nav-order">Order Now</a>
     </nav>
   </div>
 </header>
 
+<!-- ===== PAGE HERO ===== -->
 <div class="page-hero">
-  <h1>Contact Us</h1>
+  <div class="page-hero-texture"></div>
+  <div class="page-hero-content">
+    <span class="page-eyebrow">Two Locations in Hagerstown, MD</span>
+    <h1>Find Us</h1>
+    <p>Visit us in person — dine in, take out, or call ahead for pickup.</p>
+  </div>
 </div>
 
-<main class="contact-page">
-
+<!-- ===== LOCATIONS ===== -->
+<div class="contact-wrap">
   <div class="locations-grid">
 
     <!-- LOCATION 1 -->
-    <div class="location-card">
-      <h2>📍 Potomac Street</h2>
-      <div class="loc-detail"><strong>Address</strong><p>635 S. Potomac St.<br/>Hagerstown, MD 21740</p></div>
-      <div class="loc-detail"><strong>Phone</strong><p><a href="tel:3017395473">301.739.5473</a></p></div>
-      <div class="loc-detail"><strong>Hours</strong>
-        <p>Mon–Sat: 10:00am – 8:00pm<br/>Sun: 11:00am – 7:00pm</p>
+    <div class="loc-card">
+      <div class="loc-card-hdr">
+        <h2>Potomac Street</h2>
+        <p>635 S. Potomac St, Hagerstown, MD 21740</p>
       </div>
-      <div class="loc-detail"><strong>Follow Us</strong>
-        <div class="social-row">
-          <a href="#" class="social-btn fb">📘 Facebook</a>
-          <a href="#" class="social-btn ta">⭐ TripAdvisor</a>
+      <div class="loc-body">
+
+        <div class="loc-row">
+          <div class="loc-row-icon">📍</div>
+          <div>
+            <span class="loc-row-label">Address</span>
+            <p class="loc-row-val">635 S. Potomac Street<br/>Hagerstown, MD 21740</p>
+          </div>
         </div>
+
+        <div class="loc-row">
+          <div class="loc-row-icon">📞</div>
+          <div>
+            <span class="loc-row-label">Phone</span>
+            <p class="loc-row-val"><a href="tel:3017395473">301.739.5473</a></p>
+          </div>
+        </div>
+
+        <div class="loc-row">
+          <div class="loc-row-icon">🕐</div>
+          <div style="flex:1;">
+            <span class="loc-row-label">Hours</span>
+            <table class="hours-table">
+              <tr><td>Monday – Saturday</td><td>10:00am – 8:00pm</td></tr>
+              <tr><td>Sunday</td><td>11:00am – 7:00pm</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="loc-row">
+          <div class="loc-row-icon">📲</div>
+          <div>
+            <span class="loc-row-label">Follow &amp; Order</span>
+            <div class="loc-soc-row">
+              <a href="#" class="loc-soc-btn fb">📘 Facebook</a>
+              <a href="#" class="loc-soc-btn ta">⭐ TripAdvisor</a>
+            </div>
+          </div>
+        </div>
+
       </div>
-      <!-- Google Map Embed – Replace src with your actual embed URL from Google Maps -->
-      <div class="map-container">
+      <div class="loc-map">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3076.5!2d-77.7200!3d39.6417!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c9e3000000001%3A0x0!2s635+S+Potomac+St%2C+Hagerstown%2C+MD+21740!5e0!3m2!1sen!2sus!4v1"
-          width="100%" height="220" style="border:0;" allowfullscreen="" loading="lazy"
+          width="100%" height="240" style="border:0;" allowfullscreen="" loading="lazy"
           referrerpolicy="no-referrer-when-downgrade">
         </iframe>
       </div>
     </div>
 
     <!-- LOCATION 2 -->
-    <div class="location-card">
-      <h2>📍 Marshall Street</h2>
-      <div class="loc-detail"><strong>Address</strong><p>1301 Marshall Street<br/>Hagerstown, MD 21740</p></div>
-      <div class="loc-detail"><strong>Phone</strong><p><a href="tel:3017395483">301.739.5483</a></p></div>
-      <div class="loc-detail"><strong>Hours</strong>
-        <p>Mon–Sat: 10:00am – 8:00pm<br/>Sun: 11:00am – 7:00pm</p>
+    <div class="loc-card">
+      <div class="loc-card-hdr">
+        <h2>Marshall Street</h2>
+        <p>1301 Marshall St, Hagerstown, MD 21740</p>
       </div>
-      <div class="loc-detail"><strong>Follow Us</strong>
-        <div class="social-row">
-          <a href="#" class="social-btn fb">📘 Facebook</a>
-          <a href="#" class="social-btn ta">⭐ TripAdvisor</a>
+      <div class="loc-body">
+
+        <div class="loc-row">
+          <div class="loc-row-icon">📍</div>
+          <div>
+            <span class="loc-row-label">Address</span>
+            <p class="loc-row-val">1301 Marshall Street<br/>Hagerstown, MD 21740</p>
+          </div>
         </div>
+
+        <div class="loc-row">
+          <div class="loc-row-icon">📞</div>
+          <div>
+            <span class="loc-row-label">Phone</span>
+            <p class="loc-row-val"><a href="tel:3017395483">301.739.5483</a></p>
+          </div>
+        </div>
+
+        <div class="loc-row">
+          <div class="loc-row-icon">🕐</div>
+          <div style="flex:1;">
+            <span class="loc-row-label">Hours</span>
+            <table class="hours-table">
+              <tr><td>Monday – Saturday</td><td>10:00am – 8:00pm</td></tr>
+              <tr><td>Sunday</td><td>11:00am – 7:00pm</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="loc-row">
+          <div class="loc-row-icon">📲</div>
+          <div>
+            <span class="loc-row-label">Follow &amp; Order</span>
+            <div class="loc-soc-row">
+              <a href="#" class="loc-soc-btn fb">📘 Facebook</a>
+              <a href="#" class="loc-soc-btn ta">⭐ TripAdvisor</a>
+            </div>
+          </div>
+        </div>
+
       </div>
-      <div class="map-container">
+      <div class="loc-map">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3076.5!2d-77.7100!3d39.6500!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c9e3000000002%3A0x0!2s1301+Marshall+St%2C+Hagerstown%2C+MD+21740!5e0!3m2!1sen!2sus!4v1"
-          width="100%" height="220" style="border:0;" allowfullscreen="" loading="lazy"
+          width="100%" height="240" style="border:0;" allowfullscreen="" loading="lazy"
           referrerpolicy="no-referrer-when-downgrade">
         </iframe>
       </div>
@@ -81,48 +196,98 @@
 
   </div>
 
-</main>
+  <!-- ORDER CTA -->
+  <div class="contact-order-cta">
+    <h3>Ready to Order?</h3>
+    <p>Place your order online for pickup, or give us a call and we'll have it ready when you arrive.</p>
+    <div class="cta-btn-row">
+      <a href="order.html" class="btn btn-white btn-lg">Order Online</a>
+      <button onclick="showCallPopup()" class="btn btn-outline-white btn-lg">Call to Order</button>
+    </div>
+  </div>
 
+</div>
+
+<!-- ===== FOOTER ===== -->
 <footer class="footer">
-  <p>&copy; 2024 Hartle's Subs. All rights reserved.</p>
+  <div class="footer-body">
+    <div>
+      <div class="ftr-logo">Hartle's <span>Subs</span></div>
+      <p class="ftr-desc">Hagerstown's home for handmade subs since 1985. Fresh ingredients, made-to-order, your way every time.</p>
+      <div class="ftr-socials">
+        <a href="#" title="Facebook">📘</a>
+        <a href="#" title="Instagram">📸</a>
+      </div>
+    </div>
+    <div>
+      <div class="ftr-col-title">Quick Links</div>
+      <ul class="ftr-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="order.html">Order Online</a></li>
+        <li><a href="contact.html">Locations</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="ftr-col-title">Our Locations</div>
+      <div class="ftr-loc">
+        <strong>Potomac Street</strong>
+        <p>635 S. Potomac St<br/>Hagerstown, MD 21740<br/><a href="tel:3017395473">301.739.5473</a></p>
+      </div>
+      <div class="ftr-loc">
+        <strong>Marshall Street</strong>
+        <p>1301 Marshall St<br/>Hagerstown, MD 21740<br/><a href="tel:3017395483">301.739.5483</a></p>
+      </div>
+    </div>
+    <div>
+      <div class="ftr-col-title">Hours</div>
+      <div class="ftr-hrs">
+        <div class="ftr-hrs-row"><span>Mon – Sat</span><span>10am – 8pm</span></div>
+        <div class="ftr-hrs-row"><span>Sunday</span><span>11am – 7pm</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bar">
+    <div class="footer-bar-inner">
+      <span>&copy; 2024 Hartle's Subs. All rights reserved.</span>
+      <span>Hagerstown, Maryland</span>
+    </div>
+  </div>
 </footer>
 
-<!-- CALL POPUP MODAL -->
-<div id="callModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9999;align-items:center;justify-content:center;">
-  <div style="background:#fff;border-radius:16px;padding:2.5rem 2rem;max-width:420px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.3);position:relative;">
-    <button onclick="hideCallPopup()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.5rem;cursor:pointer;color:#999;">✕</button>
-    <div style="font-size:3rem;margin-bottom:.5rem;">🥖</div>
-    <h2 style="font-family:'Oswald',sans-serif;color:#c0392b;font-size:1.8rem;margin-bottom:.3rem;">Call to Order</h2>
-    <p style="color:#777;font-size:.95rem;margin-bottom:1.5rem;">Browse our menu, then give us a call and we'll have your order ready!</p>
-    <div style="background:#fdf6ec;border:2px solid #d4a017;border-radius:12px;padding:1.2rem;margin-bottom:1rem;">
-      <p style="font-family:'Oswald',sans-serif;font-size:.85rem;color:#999;letter-spacing:1px;text-transform:uppercase;margin-bottom:.3rem;">📍 Potomac Street</p>
-      <a href="tel:3204201083" style="font-family:'Oswald',sans-serif;font-size:2rem;font-weight:700;color:#c0392b;text-decoration:none;display:block;">320.420.1083</a>
-      <p style="font-size:.8rem;color:#aaa;margin-top:.2rem;">Mon–Sat 10am–8pm &nbsp;|&nbsp; Sun 11am–7pm</p>
+<!-- ===== CALL MODAL ===== -->
+<div id="callModal">
+  <div class="call-card">
+    <button class="call-close" onclick="hideCallPopup()">✕</button>
+    <div class="call-icon">🥖</div>
+    <div class="call-title">Call to Order</div>
+    <p class="call-sub">Browse our menu, then give us a call and we'll have your order ready in about 20–30 minutes!</p>
+    <div class="call-loc">
+      <div class="call-loc-name">📍 Potomac Street</div>
+      <a href="tel:3017395473" class="call-loc-phone">301.739.5473</a>
+      <div class="call-loc-hrs">Mon–Sat 10am–8pm &nbsp;|&nbsp; Sun 11am–7pm</div>
     </div>
-    <div style="background:#fdf6ec;border:2px solid #d4a017;border-radius:12px;padding:1.2rem;margin-bottom:1.5rem;">
-      <p style="font-family:'Oswald',sans-serif;font-size:.85rem;color:#999;letter-spacing:1px;text-transform:uppercase;margin-bottom:.3rem;">📍 Marshall Street</p>
-      <a href="tel:3017395483" style="font-family:'Oswald',sans-serif;font-size:2rem;font-weight:700;color:#c0392b;text-decoration:none;display:block;">301.739.5483</a>
-      <p style="font-size:.8rem;color:#aaa;margin-top:.2rem;">Mon–Sat 10am–8pm &nbsp;|&nbsp; Sun 11am–7pm</p>
+    <div class="call-loc">
+      <div class="call-loc-name">📍 Marshall Street</div>
+      <a href="tel:3017395483" class="call-loc-phone">301.739.5483</a>
+      <div class="call-loc-hrs">Mon–Sat 10am–8pm &nbsp;|&nbsp; Sun 11am–7pm</div>
     </div>
-    <a href="menu.html" style="display:inline-block;background:#c0392b;color:#fff;padding:.7rem 1.8rem;border-radius:6px;font-family:'Oswald',sans-serif;font-size:1rem;letter-spacing:.5px;text-decoration:none;">View Menu First 🍽️</a>
+    <a href="menu.html" class="call-view-menu">View Full Menu 🍽️</a>
   </div>
 </div>
 
 <script>
-function showCallPopup(){
-  const m = document.getElementById('callModal');
-  m.style.display='flex';
-  document.body.style.overflow='hidden';
+function showCallPopup() {
+  document.getElementById('callModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
 }
-function hideCallPopup(){
-  const m = document.getElementById('callModal');
-  m.style.display='none';
-  document.body.style.overflow='';
+function hideCallPopup() {
+  document.getElementById('callModal').classList.remove('open');
+  document.body.style.overflow = '';
 }
-document.getElementById('callModal').addEventListener('click', function(e){
-  if(e.target===this) hideCallPopup();
+document.getElementById('callModal').addEventListener('click', function(e) {
+  if (e.target === this) hideCallPopup();
 });
 </script>
-
 </body>
 </html>
