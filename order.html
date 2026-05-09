@@ -4,11 +4,173 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Order Online – Hartle's Subs</title>
-<link rel="stylesheet" href="style.css"/>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Open Sans',sans-serif;background:#e8e5e0;color:#111;}
+a{text-decoration:none;color:inherit;}
+
+/* NAVBAR */
+.navbar{background:#c0392b;position:sticky;top:0;z-index:200;box-shadow:0 2px 8px rgba(0,0,0,.3);}
+.nav-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:.9rem 2.5rem;}
+.logo{font-family:'Oswald',sans-serif;font-size:1.5rem;font-weight:700;color:#fff;letter-spacing:1px;}
+.nav-links{display:flex;gap:1.8rem;align-items:center;}
+.nav-links a{color:rgba(255,255,255,.85);font-family:'Oswald',sans-serif;font-size:1rem;letter-spacing:.5px;padding:.3rem 0;border-bottom:2px solid transparent;transition:all .2s;}
+.nav-links a:hover,.nav-links a.active{color:#fff;border-bottom-color:#d4a017;}
+.nav-links a.nav-order{background:rgba(255,255,255,.18);padding:.3rem .9rem;border-radius:4px;border-bottom:none;}
+.nav-links a.nav-order:hover,.nav-links a.nav-order.active{background:rgba(255,255,255,.32);border-bottom:none;color:#fff;}
+.menu-toggle{display:none;}
+.hamburger{display:none;font-size:1.6rem;color:#fff;cursor:pointer;user-select:none;}
+@media(max-width:720px){
+  .hamburger{display:block;}
+  .nav-links{display:none;flex-direction:column;position:absolute;top:58px;left:0;right:0;background:#96281b;padding:1rem 1.5rem;gap:1rem;z-index:199;}
+  .menu-toggle:checked~.nav-links{display:flex;}
+}
+
+/* HERO */
+.order-hero{background:linear-gradient(135deg,#7b1c14 0%,#c0392b 55%,#d44e3f 100%);padding:3rem 1.5rem;text-align:center;color:#fff;}
+.order-hero h1{font-family:'Oswald',sans-serif;font-size:clamp(2rem,5vw,3rem);letter-spacing:1px;margin-bottom:.4rem;}
+.order-hero p{font-size:1.05rem;opacity:.9;margin-bottom:1.2rem;}
+.hero-info{display:inline-flex;gap:1.5rem;background:rgba(0,0,0,.22);border-radius:8px;padding:.7rem 1.4rem;font-size:.87rem;flex-wrap:wrap;justify-content:center;}
+.hero-info span{white-space:nowrap;}
+
+/* TABS */
+.tab-bar{background:#fff;border-bottom:3px solid #c0392b;position:sticky;top:58px;z-index:150;}
+.tab-inner{max-width:1400px;margin:0 auto;display:flex;padding:0 2.5rem;}
+.tab-btn{font-family:'Oswald',sans-serif;font-size:1rem;letter-spacing:.5px;padding:.8rem 1.4rem;cursor:pointer;background:none;border:none;color:#888;border-bottom:3px solid transparent;margin-bottom:-3px;transition:all .2s;}
+.tab-btn:hover{color:#c0392b;}
+.tab-btn.active{color:#c0392b;border-bottom-color:#c0392b;}
+
+/* ORDER LAYOUT */
+.order-layout{max-width:1400px;margin:0 auto;padding:1.5rem 2.5rem;display:flex;gap:1.5rem;align-items:flex-start;}
+.menu-col{flex:1;min-width:0;}
+.cart-sidebar{width:308px;flex-shrink:0;position:sticky;top:120px;}
+
+/* CATEGORY QUICK NAV */
+.cat-nav{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.4rem;padding:.65rem;background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);}
+.cat-nav a{font-family:'Oswald',sans-serif;font-size:.8rem;padding:.25rem .65rem;border-radius:20px;background:#f0ede8;color:#555;transition:all .2s;letter-spacing:.3px;}
+.cat-nav a:hover{background:#c0392b;color:#fff;}
+
+/* CATEGORY SECTIONS */
+.cat-section{margin-bottom:1.6rem;scroll-margin-top:125px;}
+.cat-header{font-family:'Georgia',serif;font-size:1.28rem;font-weight:700;color:#c0392b;padding:.55rem 1rem;border-top:2px solid #2e6b2e;border-bottom:2px solid #2e6b2e;background:#fff;text-align:center;}
+.cat-note-text{text-align:center;font-size:.8rem;color:#666;font-style:italic;padding:.3rem;background:#fff;}
+.items-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:9px;margin-top:2px;}
+
+/* ORDER ITEM CARD */
+.oc{background:#fff;border-radius:6px;border:1px solid #e0ddd8;padding:.85rem .75rem;display:flex;flex-direction:column;gap:.45rem;box-shadow:0 1px 3px rgba(0,0,0,.05);transition:box-shadow .2s;}
+.oc:hover{box-shadow:0 3px 10px rgba(0,0,0,.1);}
+.oc-name{font-weight:700;font-size:.88rem;color:#111;line-height:1.35;}
+.oc-price{font-size:.8rem;color:#777;}
+.oc-btns{display:flex;gap:.3rem;margin-top:auto;flex-wrap:wrap;}
+.btn-add{font-family:'Oswald',sans-serif;font-size:.78rem;padding:.35rem .6rem;background:#c0392b;color:#fff;border:none;border-radius:4px;cursor:pointer;letter-spacing:.3px;transition:background .15s;white-space:nowrap;flex:1;}
+.btn-add:hover{background:#96281b;}
+.btn-add.sz-half{background:#d35400;}
+.btn-add.sz-half:hover{background:#b04500;}
+
+/* CART BOX */
+.cart-box{background:#fff;border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,.12);overflow:hidden;}
+.cart-hdr{background:#c0392b;color:#fff;padding:.85rem 1rem;font-family:'Oswald',sans-serif;font-size:1.05rem;letter-spacing:.5px;display:flex;justify-content:space-between;align-items:center;}
+.cart-badge-pill{background:rgba(255,255,255,.25);border-radius:10px;padding:.08rem .55rem;font-size:.78rem;}
+.cart-body{padding:.85rem .9rem;}
+.cf{margin-bottom:.75rem;}
+.cf label{display:block;font-family:'Oswald',sans-serif;font-size:.72rem;color:#aaa;letter-spacing:.8px;text-transform:uppercase;margin-bottom:.22rem;}
+.cf select,.cf input[type=text],.cf textarea{width:100%;padding:.48rem .65rem;border:1.5px solid #ddd;border-radius:5px;font-family:'Open Sans',sans-serif;font-size:.86rem;color:#111;outline:none;transition:border .2s;background:#fff;}
+.cf select:focus,.cf input[type=text]:focus,.cf textarea:focus{border-color:#c0392b;}
+.cf textarea{resize:vertical;min-height:52px;}
+
+/* ORDER TYPE TOGGLE */
+.ot-row{display:flex;gap:.45rem;}
+.ot-row input[type=radio]{display:none;}
+.ot-row label{flex:1;display:flex;align-items:center;justify-content:center;gap:.25rem;padding:.42rem;border:1.5px solid #ddd;border-radius:5px;cursor:pointer;font-family:'Oswald',sans-serif;font-size:.86rem;letter-spacing:.3px;transition:all .2s;}
+.ot-row input[type=radio]:checked+label{background:#c0392b;color:#fff;border-color:#c0392b;}
+
+/* DIVIDER */
+.cdiv{border:none;border-top:1px solid #eee;margin:.6rem 0;}
+
+/* CART ITEMS */
+.cart-items-wrap{max-height:255px;overflow-y:auto;}
+.cart-empty{text-align:center;color:#ccc;font-size:.83rem;padding:1rem .5rem;line-height:1.7;}
+.ci{display:flex;align-items:center;gap:.35rem;padding:.38rem 0;border-bottom:1px solid #f0ede8;}
+.ci-name{flex:1;font-size:.8rem;color:#333;line-height:1.35;}
+.ci-price{font-size:.8rem;font-weight:700;color:#111;white-space:nowrap;}
+.ci-qty{display:flex;align-items:center;gap:.22rem;}
+.qb{width:19px;height:19px;border:1.5px solid #ddd;background:#fff;border-radius:3px;cursor:pointer;font-size:.82rem;display:flex;align-items:center;justify-content:center;transition:all .15s;padding:0;line-height:1;}
+.qb:hover{border-color:#c0392b;color:#c0392b;}
+.qn{font-size:.8rem;min-width:13px;text-align:center;}
+
+/* TOTAL */
+.total-row{display:flex;justify-content:space-between;align-items:center;padding:.42rem 0;font-family:'Oswald',sans-serif;}
+.tl{color:#888;font-size:.92rem;}
+.ta{font-size:1.2rem;color:#111;}
+
+/* PLACE ORDER */
+.btn-place{width:100%;padding:.78rem;background:#c0392b;color:#fff;border:none;border-radius:6px;font-family:'Oswald',sans-serif;font-size:1.02rem;letter-spacing:.5px;cursor:pointer;transition:background .2s;margin-top:.4rem;}
+.btn-place:hover{background:#96281b;}
+.pay-note{text-align:center;font-size:.7rem;color:#bbb;margin-top:.38rem;}
+
+/* DEALS TAB */
+#tab-deals{display:none;}
+.deals-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.1rem;}
+.deal-card{background:#fff;border-radius:10px;padding:1.3rem;box-shadow:0 2px 8px rgba(0,0,0,.08);border-left:4px solid #c0392b;}
+.deal-card h3{font-family:'Oswald',sans-serif;font-size:1.12rem;color:#c0392b;margin-bottom:.35rem;}
+.deal-card p{font-size:.84rem;color:#555;line-height:1.55;}
+.deal-badge{display:inline-block;background:#fdf6ec;border:1px solid #d4a017;color:#a07800;font-size:.7rem;font-family:'Oswald',sans-serif;padding:.16rem .52rem;border-radius:12px;margin-top:.55rem;letter-spacing:.3px;}
+
+/* CONFIRM MODAL */
+.mo{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9000;align-items:center;justify-content:center;padding:1rem;}
+.mb{background:#fff;border-radius:16px;padding:1.8rem;max-width:450px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.3);position:relative;max-height:92vh;overflow-y:auto;}
+.mc{position:absolute;top:.9rem;right:.9rem;background:none;border:none;font-size:1.3rem;cursor:pointer;color:#bbb;line-height:1;}
+.mc:hover{color:#333;}
+.mi{font-size:2.4rem;text-align:center;margin-bottom:.35rem;}
+.mt{font-family:'Oswald',sans-serif;font-size:1.45rem;color:#c0392b;text-align:center;margin-bottom:.22rem;}
+.ms{color:#999;font-size:.86rem;text-align:center;margin-bottom:1rem;}
+.cs{background:#f9f7f5;border-radius:8px;padding:.85rem;margin-bottom:.65rem;}
+.cs h4{font-family:'Oswald',sans-serif;font-size:.7rem;color:#bbb;letter-spacing:1px;text-transform:uppercase;margin-bottom:.45rem;}
+.cs p{font-size:.85rem;color:#444;margin:.18rem 0;line-height:1.5;}
+.conf-items{list-style:none;font-size:.84rem;color:#444;line-height:1.95;}
+.conf-total-amt{font-family:'Oswald',sans-serif;font-size:1.35rem;color:#111;}
+.modal-btns{display:flex;gap:.65rem;margin-top:1rem;}
+.btn-confirm{flex:1;padding:.72rem;background:#c0392b;color:#fff;border:none;border-radius:6px;font-family:'Oswald',sans-serif;font-size:.92rem;cursor:pointer;transition:background .2s;}
+.btn-confirm:hover{background:#96281b;}
+.btn-edit{flex:1;padding:.72rem;background:#f0ede8;color:#555;border:none;border-radius:6px;font-family:'Oswald',sans-serif;font-size:.92rem;cursor:pointer;}
+.btn-edit:hover{background:#e0ddd8;}
+
+/* SUCCESS MODAL */
+.succ-icon{font-size:3.5rem;text-align:center;margin-bottom:.35rem;}
+.succ-title{font-family:'Oswald',sans-serif;font-size:1.75rem;color:#2e6b2e;text-align:center;}
+.loc-info-box{background:#fdf6ec;border:2px solid #d4a017;border-radius:10px;padding:1rem;margin:1rem 0;text-align:center;}
+.lib-name{font-family:'Oswald',sans-serif;font-size:.78rem;color:#bbb;letter-spacing:1px;text-transform:uppercase;margin-bottom:.2rem;}
+.lib-phone{font-family:'Oswald',sans-serif;font-size:1.55rem;font-weight:700;color:#c0392b;display:block;text-decoration:none;}
+.lib-hours{font-size:.78rem;color:#bbb;margin-top:.2rem;}
+
+/* MOBILE CART FAB */
+.cart-fab{display:none;position:fixed;bottom:1.2rem;right:1.2rem;background:#c0392b;color:#fff;border:none;border-radius:50px;padding:.62rem 1.05rem;font-family:'Oswald',sans-serif;font-size:.9rem;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.3);z-index:500;align-items:center;gap:.4rem;}
+.fab-cnt{background:rgba(255,255,255,.25);border-radius:10px;padding:.04rem .38rem;font-size:.75rem;}
+
+/* FOOTER */
+.footer{background:#1a0a00;color:rgba(255,255,255,.5);text-align:center;padding:1.5rem;font-size:.9rem;margin-top:2rem;}
+
+/* RESPONSIVE */
+@media(max-width:1000px){
+  .order-layout,.tab-inner,.nav-inner{padding-left:1.5rem;padding-right:1.5rem;}
+}
+@media(max-width:860px){
+  .order-layout{flex-direction:column;}
+  .cart-sidebar{width:100%;position:static;}
+  .cart-fab{display:flex;}
+}
+@media(max-width:480px){
+  .order-hero h1{font-size:1.75rem;}
+  .items-grid{grid-template-columns:1fr 1fr;}
+  .hero-info{font-size:.76rem;gap:.7rem;padding:.55rem .9rem;}
+  .tab-inner{padding-left:.75rem;}
+}
+</style>
 </head>
 <body>
 
+<!-- NAVBAR -->
 <header class="navbar">
   <div class="nav-inner">
     <a href="index.html" class="logo">🥖 Hartle's Subs</a>
@@ -17,167 +179,514 @@
     <nav class="nav-links">
       <a href="index.html">Home</a>
       <a href="menu.html">Menu</a>
-      <a href="order.html" class="active">Order Online</a>
+      <a href="#" onclick="showCallPopup();return false;">📞 Call to Order</a>
       <a href="contact.html">Contact Us</a>
+      <a href="order.html" class="nav-order active">🛒 Order Online</a>
     </nav>
   </div>
 </header>
 
-<div class="page-hero">
+<!-- HERO -->
+<section class="order-hero">
   <h1>Order Online</h1>
-  <p>Pick-up or Delivery – your choice!</p>
+  <p>Fresh. Handmade. Ready for You — Pay When You Arrive.</p>
+  <div class="hero-info">
+    <span>📍 Potomac St — 320.420.1083</span>
+    <span>📍 Marshall St — 301.739.5483</span>
+    <span>🕐 Mon–Sat 10am–8pm &nbsp;|&nbsp; Sun 11am–7pm</span>
+  </div>
+</section>
+
+<!-- TABS -->
+<div class="tab-bar">
+  <div class="tab-inner">
+    <button class="tab-btn active" onclick="showTab('menu',this)">Menu</button>
+    <button class="tab-btn" onclick="showTab('deals',this)">Deals &amp; Offers</button>
+  </div>
 </div>
 
-<main class="order-page">
+<!-- ORDER LAYOUT -->
+<div class="order-layout">
 
-  <div class="order-options">
-    <div class="order-card" onclick="showForm('pickup')">
-      <div class="order-icon">🏪</div>
-      <h3>Pick-Up</h3>
-      <p>Order ahead and pick up at your nearest location. Ready in 15–20 mins!</p>
-      <button class="btn btn-primary">Order Pick-Up</button>
-    </div>
-    <div class="order-card" onclick="showForm('delivery')">
-      <div class="order-icon">🛵</div>
-      <h3>Delivery</h3>
-      <p>We deliver right to your door! Available within a 5-mile radius.</p>
-      <button class="btn btn-primary">Order Delivery</button>
-    </div>
-  </div>
+  <!-- MENU COLUMN -->
+  <div class="menu-col">
+    <nav class="cat-nav" aria-label="Jump to category">
+      <a href="#sec-cold">Cold Subs</a>
+      <a href="#sec-hot">Hot Subs</a>
+      <a href="#sec-sandwiches">Sandwiches</a>
+      <a href="#sec-saucers">Flying Saucers</a>
+      <a href="#sec-wraps">Wraps &amp; Salads</a>
+      <a href="#sec-sides">Snacks &amp; Sides</a>
+      <a href="#sec-desserts">Desserts</a>
+    </nav>
 
-  <!-- ORDER FORM -->
-  <div id="order-form-section" class="order-form-section" style="display:none;">
-    <h2 id="form-title">Your Order</h2>
+    <div id="tab-menu">
+      <div id="menu-sections"></div>
+    </div>
 
-    <div class="form-group">
-      <label>Your Name</label>
-      <input type="text" placeholder="John Smith" id="cust-name"/>
-    </div>
-    <div class="form-group">
-      <label>Phone Number</label>
-      <input type="tel" placeholder="301-555-0000" id="cust-phone"/>
-    </div>
-    <div id="delivery-address" style="display:none;">
-      <div class="form-group">
-        <label>Delivery Address</label>
-        <input type="text" placeholder="123 Main St, Hagerstown MD"/>
+    <div id="tab-deals">
+      <div class="deals-grid">
+        <div class="deal-card">
+          <h3>Sub + Side Combo</h3>
+          <p>Pair any sub with a side for a great meal. Ask our team about current combo pricing!</p>
+          <span class="deal-badge">Ask In Store</span>
+        </div>
+        <div class="deal-card">
+          <h3>Family Pack</h3>
+          <p>4 whole subs + 2 sides — perfect for game day or family lunch.</p>
+          <span class="deal-badge">Coming Soon</span>
+        </div>
+        <div class="deal-card">
+          <h3>Daily Special</h3>
+          <p>We rotate chef specials every day. Call ahead to ask what today's featured item is!</p>
+          <span class="deal-badge">Call for Details</span>
+        </div>
+        <div class="deal-card">
+          <h3>Loyalty Rewards</h3>
+          <p>Become a regular and earn rewards! Ask about our punch card program.</p>
+          <span class="deal-badge">Coming Soon</span>
+        </div>
+        <div class="deal-card">
+          <h3>Student Discount</h3>
+          <p>Show your student ID for a special discount on any sub. Great for lunch runs!</p>
+          <span class="deal-badge">Ask In Store</span>
+        </div>
+        <div class="deal-card">
+          <h3>Catering Orders</h3>
+          <p>Planning an event or team lunch? We cater! Call us to discuss large orders.</p>
+          <span class="deal-badge">Call to Arrange</span>
+        </div>
       </div>
     </div>
-    <div class="form-group">
-      <label>Location</label>
-      <select id="location-select">
-        <option>Potomac Street – 635 S. Potomac St.</option>
-        <option>Marshall Street – 1301 Marshall St.</option>
-      </select>
-    </div>
-
-    <h3 style="margin-top:2rem;">Build Your Order</h3>
-    <div class="order-menu-grid" id="order-items">
-      <!-- Dynamically populated -->
-    </div>
-
-    <div class="cart-summary" id="cart-summary">
-      <h3>🛒 Your Cart</h3>
-      <ul id="cart-list"><li class="empty-cart">No items yet. Add something above!</li></ul>
-      <div class="cart-total">Total: <strong id="cart-total">$0.00</strong></div>
-    </div>
-
-    <div class="form-group">
-      <label>Special Instructions</label>
-      <textarea placeholder="Allergies, extra sauce, no onions..."></textarea>
-    </div>
-
-    <button class="btn btn-primary btn-full" onclick="submitOrder()">📨 Place Order</button>
-    <p class="order-note">We'll call you to confirm within a few minutes!</p>
   </div>
 
-</main>
+  <!-- CART SIDEBAR -->
+  <aside class="cart-sidebar" id="cart-sidebar">
+    <div class="cart-box">
+      <div class="cart-hdr">
+        <span>🛒 Your Order</span>
+        <span class="cart-badge-pill" id="cart-badge">0 items</span>
+      </div>
+      <div class="cart-body">
+
+        <div class="cf">
+          <label for="location-select">📍 Location</label>
+          <select id="location-select">
+            <option value="">Select a location…</option>
+            <option value="Potomac St (320.420.1083)">Potomac St — 320.420.1083</option>
+            <option value="Marshall St (301.739.5483)">Marshall St — 301.739.5483</option>
+          </select>
+        </div>
+
+        <div class="cf">
+          <label for="customer-name">👤 Your Name</label>
+          <input type="text" id="customer-name" placeholder="Enter your name"/>
+        </div>
+
+        <div class="cf">
+          <label>Order Type</label>
+          <div class="ot-row">
+            <input type="radio" id="ot-pickup" name="order-type" value="Pickup" checked/>
+            <label for="ot-pickup">🚗 Pickup</label>
+            <input type="radio" id="ot-dine" name="order-type" value="Dine In"/>
+            <label for="ot-dine">🍽️ Dine In</label>
+          </div>
+        </div>
+
+        <hr class="cdiv"/>
+
+        <div class="cart-items-wrap" id="cart-items">
+          <p class="cart-empty">Your cart is empty.<br/>Add items from the menu!</p>
+        </div>
+
+        <hr class="cdiv"/>
+
+        <div class="cf">
+          <label for="special-instructions">📝 Special Instructions</label>
+          <textarea id="special-instructions" placeholder="Allergy notes, extra sauce, no onions…"></textarea>
+        </div>
+
+        <div class="total-row">
+          <span class="tl">Total</span>
+          <span class="ta" id="cart-total">$0.00</span>
+        </div>
+
+        <button class="btn-place" onclick="placeOrder()">Place Order — Pay in Store</button>
+        <p class="pay-note">No payment required now. Pay when you arrive.</p>
+
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<!-- MOBILE CART FAB -->
+<button class="cart-fab" id="cart-fab" onclick="scrollToCart()">
+  🛒 View Cart <span class="fab-cnt" id="fab-badge">0</span>
+</button>
+
+<!-- CONFIRMATION MODAL -->
+<div class="mo" id="confirmModal">
+  <div class="mb">
+    <button class="mc" onclick="closeModal('confirmModal')">&#x2715;</button>
+    <div class="mi">&#x1F4CB;</div>
+    <div class="mt">Confirm Your Order</div>
+    <div class="ms">Please review before submitting.</div>
+
+    <div class="cs">
+      <h4>Order Details</h4>
+      <p><strong>Name:</strong> <span id="conf-name"></span></p>
+      <p><strong>Location:</strong> <span id="conf-location"></span></p>
+      <p><strong>Order Type:</strong> <span id="conf-type"></span></p>
+      <p id="conf-notes-row"><strong>Notes:</strong> <span id="conf-notes"></span></p>
+    </div>
+
+    <div class="cs">
+      <h4>Items</h4>
+      <ul class="conf-items" id="conf-items"></ul>
+    </div>
+
+    <div class="cs" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0;">
+      <h4 style="margin:0;">Total</h4>
+      <span class="conf-total-amt" id="conf-total">$0.00</span>
+    </div>
+
+    <p style="text-align:center;font-size:.75rem;color:#bbb;margin-top:.6rem;">Payment is collected in store. No charge now.</p>
+
+    <div class="modal-btns">
+      <button class="btn-edit" onclick="closeModal('confirmModal')">&#8592; Edit Order</button>
+      <button class="btn-confirm" onclick="finalizeOrder()">Confirm Order &#x2713;</button>
+    </div>
+  </div>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div class="mo" id="successModal">
+  <div class="mb" style="text-align:center;">
+    <div class="succ-icon">&#x2705;</div>
+    <div class="succ-title">Order Placed!</div>
+    <p style="color:#666;font-size:.9rem;margin:.7rem 0 .4rem;">Thank you! Your order has been received. Just come on in — we'll have it ready shortly.</p>
+    <div class="loc-info-box">
+      <p class="lib-name" id="succ-loc-name">Potomac Street</p>
+      <a class="lib-phone" id="succ-loc-phone" href="tel:3204201083">320.420.1083</a>
+      <p class="lib-hours">Mon–Sat 10am–8pm &nbsp;|&nbsp; Sun 11am–7pm</p>
+    </div>
+    <button class="btn-confirm" onclick="closeModal('successModal')" style="width:100%;margin-top:.3rem;">Start a New Order</button>
+  </div>
+</div>
+
+<!-- CALL POPUP MODAL -->
+<div id="callModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9999;align-items:center;justify-content:center;">
+  <div style="background:#fff;border-radius:16px;padding:2.5rem 2rem;max-width:420px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.3);position:relative;">
+    <button onclick="hideCallPopup()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.5rem;cursor:pointer;color:#999;">&#x2715;</button>
+    <div style="font-size:3rem;margin-bottom:.5rem;">&#x1F956;</div>
+    <h2 style="font-family:'Oswald',sans-serif;color:#c0392b;font-size:1.8rem;margin-bottom:.3rem;">Call to Order</h2>
+    <p style="color:#777;font-size:.95rem;margin-bottom:1.5rem;">Browse our menu, then give us a call and we'll have your order ready!</p>
+    <div style="background:#fdf6ec;border:2px solid #d4a017;border-radius:12px;padding:1.2rem;margin-bottom:1rem;">
+      <p style="font-family:'Oswald',sans-serif;font-size:.85rem;color:#999;letter-spacing:1px;text-transform:uppercase;margin-bottom:.3rem;">&#x1F4CD; Potomac Street</p>
+      <a href="tel:3204201083" style="font-family:'Oswald',sans-serif;font-size:2rem;font-weight:700;color:#c0392b;text-decoration:none;display:block;">320.420.1083</a>
+      <p style="font-size:.8rem;color:#aaa;margin-top:.2rem;">Mon&#x2013;Sat 10am&#x2013;8pm &nbsp;|&nbsp; Sun 11am&#x2013;7pm</p>
+    </div>
+    <div style="background:#fdf6ec;border:2px solid #d4a017;border-radius:12px;padding:1.2rem;margin-bottom:1.5rem;">
+      <p style="font-family:'Oswald',sans-serif;font-size:.85rem;color:#999;letter-spacing:1px;text-transform:uppercase;margin-bottom:.3rem;">&#x1F4CD; Marshall Street</p>
+      <a href="tel:3017395483" style="font-family:'Oswald',sans-serif;font-size:2rem;font-weight:700;color:#c0392b;text-decoration:none;display:block;">301.739.5483</a>
+      <p style="font-size:.8rem;color:#aaa;margin-top:.2rem;">Mon&#x2013;Sat 10am&#x2013;8pm &nbsp;|&nbsp; Sun 11am&#x2013;7pm</p>
+    </div>
+    <a href="menu.html" style="display:inline-block;background:#c0392b;color:#fff;padding:.7rem 1.8rem;border-radius:6px;font-family:'Oswald',sans-serif;font-size:1rem;letter-spacing:.5px;text-decoration:none;">View Menu First</a>
+  </div>
+</div>
 
 <footer class="footer">
   <p>&copy; 2024 Hartle's Subs. All rights reserved.</p>
 </footer>
 
 <script>
-const menuItems = [
-  {name:"Regular Cold Cut", price:9.60, cat:"Cold Subs"},
-  {name:"Italian Cold Cut", price:10.50, cat:"Cold Subs"},
-  {name:"Turkey W/ Cheese", price:10.20, cat:"Cold Subs"},
-  {name:"BLT", price:10.05, cat:"Cold Subs"},
-  {name:"Steak & Cheese", price:10.50, cat:"Hot Subs"},
-  {name:"Cheeseburger", price:10.50, cat:"Hot Subs"},
-  {name:"Grilled Chicken", price:12.30, cat:"Hot Subs"},
-  {name:"Fried Chicken", price:12.30, cat:"Hot Subs"},
-  {name:"Pastrami", price:10.50, cat:"Hot Subs"},
-  {name:"French Fries", price:5.40, cat:"Sides"},
-  {name:"Onion Rings", price:7.40, cat:"Sides"},
-  {name:"Cheese Sticks", price:8.05, cat:"Sides"},
-  {name:"Funnel Cake Fries", price:5.75, cat:"Desserts"},
-  {name:"Lemon Pie", price:5.25, cat:"Desserts"},
+var MENU_DATA = [
+  {name:'Regular Cold Cut',      cat:'cold', sz:true,  whole:15.55, half:9.60},
+  {name:'Italian Cold Cut',      cat:'cold', sz:true,  whole:17.05, half:10.50},
+  {name:'Ham w/ Cheese',         cat:'cold', sz:true,  whole:15.55, half:9.60},
+  {name:'Turkey w/ Cheese',      cat:'cold', sz:true,  whole:16.85, half:10.20},
+  {name:'Roast Beef w/ Cheese',  cat:'cold', sz:true,  whole:16.05, half:9.90},
+  {name:'Combo Cold Cut w/ Ham', cat:'cold', sz:true,  whole:16.70, half:10.05},
+  {name:'Club',                  cat:'cold', sz:true,  whole:16.90, half:10.25},
+  {name:'BLT',                   cat:'cold', sz:true,  whole:16.30, half:10.05},
+  {name:'Chicken or Tuna Salad', cat:'cold', sz:true,  whole:16.25, half:10.05},
+  {name:'Egg Salad',             cat:'cold', sz:true,  whole:15.55, half:9.60},
+  {name:'Veggie or Cheese',      cat:'cold', sz:true,  whole:15.55, half:9.60},
+  {name:'Steak & Cheese',        cat:'hot',  sz:true,  whole:17.05, half:10.50},
+  {name:'Cheeseburger',          cat:'hot',  sz:true,  whole:17.05, half:10.50},
+  {name:'Grilled Chicken',       cat:'hot',  sz:true,  whole:16.45, half:12.30},
+  {name:'Fried Chicken',         cat:'hot',  sz:true,  whole:16.45, half:12.30},
+  {name:'Meatball w/ Cheese',    cat:'hot',  sz:true,  whole:15.55, half:9.60},
+  {name:'Steamer w/ Cheese',     cat:'hot',  sz:true,  whole:15.55, half:9.60},
+  {name:'Pastrami',              cat:'hot',  sz:true,  whole:17.05, half:10.50},
+  {name:'Hot Dog',               cat:'sandwiches', sz:false, price:4.00},
+  {name:'Steamer',               cat:'sandwiches', sz:false, price:6.65},
+  {name:'Turkey w/ Cheese',      cat:'sandwiches', sz:false, price:7.65},
+  {name:'Cold Cut',              cat:'sandwiches', sz:false, price:7.45},
+  {name:'Roast Beef w/ Cheese',  cat:'sandwiches', sz:false, price:7.80},
+  {name:'Chicken or Tuna Salad', cat:'sandwiches', sz:false, price:7.80},
+  {name:'Steamer Dogs',          cat:'sandwiches', sz:false, price:6.75},
+  {name:'BLT',                   cat:'sandwiches', sz:false, price:7.85},
+  {name:'Egg Salad',             cat:'sandwiches', sz:false, price:7.35},
+  {name:'Club',                  cat:'sandwiches', sz:false, price:8.65},
+  {name:'PB&J',                  cat:'sandwiches', sz:false, price:3.75},
+  {name:'Pastrami',              cat:'sandwiches', sz:false, price:8.65},
+  {name:'Reuben',                cat:'sandwiches', sz:false, price:8.65},
+  {name:'Beef, Ham or Turkey',      cat:'saucers', sz:false, price:9.50},
+  {name:'Chicken or Tuna Salad',    cat:'saucers', sz:false, price:9.50},
+  {name:'Cold Cut or Veggie',       cat:'saucers', sz:false, price:8.90},
+  {name:'Grilled or Fried Chicken', cat:'saucers', sz:false, price:9.50},
+  {name:'Cheeseburger or Steak',    cat:'saucers', sz:false, price:9.50},
+  {name:'Garden Salad',             cat:'wraps', sz:false, price:8.65},
+  {name:'Chef Salad',               cat:'wraps', sz:false, price:9.75},
+  {name:'Turkey or Ham',            cat:'wraps', sz:false, price:9.15},
+  {name:'Club',                     cat:'wraps', sz:false, price:9.15},
+  {name:'Steak & Cheese',           cat:'wraps', sz:false, price:9.45},
+  {name:'Grilled or Fried Chicken', cat:'wraps', sz:false, price:9.25},
+  {name:'Chicken or Tuna Salad',    cat:'wraps', sz:false, price:9.25},
+  {name:'French Fries',    cat:'sides', sz:false, price:5.40},
+  {name:'Cheese Sticks',   cat:'sides', sz:false, price:8.05},
+  {name:'Chicken Fingers', cat:'sides', sz:false, price:7.45},
+  {name:'Onion Rings',     cat:'sides', sz:false, price:7.40},
+  {name:'Macaroni Salad',  cat:'sides', sz:false, price:4.70},
+  {name:'Deviled Eggs',    cat:'sides', sz:false, price:3.65},
+  {name:'Beet Eggs',       cat:'sides', sz:false, price:4.15},
+  {name:'Fried Pickles',   cat:'sides', sz:false, price:6.45},
+  {name:'Homemade Chili',  cat:'sides', sz:false, price:5.70},
+  {name:'Soup of the Day', cat:'sides', sz:false, price:5.70},
+  {name:'Funnel Cake Fries', cat:'desserts', sz:false, price:5.75},
+  {name:'Lemon Pie',         cat:'desserts', sz:false, price:5.25},
+  {name:'Coconut Cream Pie', cat:'desserts', sz:false, price:5.25}
 ];
 
-let cart = {};
-let orderType = 'pickup';
+var CATS = [
+  {id:'cold',       label:'Cold Subs',          note:'Whole &amp; Half sizes — choose your size below'},
+  {id:'hot',        label:'Hot Subs',            note:'Whole &amp; Half sizes — choose your size below'},
+  {id:'sandwiches', label:'Sandwiches',          note:'White, Wheat or Marble Rye'},
+  {id:'saucers',    label:'Flying Saucers',      note:'5 in. sesame seed roll'},
+  {id:'wraps',      label:'Wraps &amp; Salads',  note:''},
+  {id:'sides',      label:'Snacks &amp; Sides',  note:''},
+  {id:'desserts',   label:'Desserts',            note:''}
+];
 
-function showForm(type) {
-  orderType = type;
-  document.getElementById('order-form-section').style.display = 'block';
-  document.getElementById('form-title').textContent = type === 'delivery' ? '🛵 Delivery Order' : '🏪 Pick-Up Order';
-  document.getElementById('delivery-address').style.display = type === 'delivery' ? 'block' : 'none';
-  document.getElementById('order-form-section').scrollIntoView({behavior:'smooth'});
-  renderOrderItems();
+var cartArr = [];
+var cartCid = 0;
+
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
-function renderOrderItems() {
-  const grid = document.getElementById('order-items');
-  const cats = [...new Set(menuItems.map(i => i.cat))];
-  grid.innerHTML = cats.map(cat => `
-    <div class="order-cat">
-      <h4>${cat}</h4>
-      ${menuItems.filter(i=>i.cat===cat).map(item=>`
-        <div class="order-row">
-          <span>${item.name}</span>
-          <span class="item-price">$${item.price.toFixed(2)}</span>
-          <div class="qty-ctrl">
-            <button onclick="changeQty('${item.name}',${item.price},-1)">−</button>
-            <span id="qty-${item.name.replace(/\s+/g,'_')}">${cart[item.name]?.qty||0}</span>
-            <button onclick="changeQty('${item.name}',${item.price},1)">+</button>
-          </div>
-        </div>
-      `).join('')}
-    </div>
-  `).join('');
+function addItem(btn) {
+  var id    = parseInt(btn.getAttribute('data-id'));
+  var size  = btn.getAttribute('data-size') || '';
+  var item  = MENU_DATA[id];
+  var price = item.sz ? (size === 'Whole' ? item.whole : item.half) : item.price;
+  var found = null;
+  for (var i = 0; i < cartArr.length; i++) {
+    if (cartArr[i].itemId === id && cartArr[i].size === size) { found = cartArr[i]; break; }
+  }
+  if (found) { found.qty++; }
+  else { cartArr.push({cid: cartCid++, itemId: id, name: item.name, size: size, price: price, qty: 1}); }
+  renderCart();
+  flashBtn(btn);
 }
 
-function changeQty(name, price, delta) {
-  if(!cart[name]) cart[name]={qty:0,price};
-  cart[name].qty = Math.max(0, cart[name].qty + delta);
-  if(cart[name].qty===0) delete cart[name];
-  renderOrderItems();
-  updateCart();
+function flashBtn(btn) {
+  var orig = btn.textContent;
+  btn.textContent = 'Added!';
+  btn.style.background = '#2e7d32';
+  setTimeout(function() { btn.textContent = orig; btn.style.background = ''; }, 800);
 }
 
-function updateCart() {
-  const list = document.getElementById('cart-list');
-  const entries = Object.entries(cart);
-  if(entries.length===0){
-    list.innerHTML='<li class="empty-cart">No items yet. Add something above!</li>';
-    document.getElementById('cart-total').textContent='$0.00';
+function updateQty(id, delta) {
+  for (var i = 0; i < cartArr.length; i++) {
+    if (cartArr[i].cid === id) {
+      cartArr[i].qty += delta;
+      if (cartArr[i].qty <= 0) cartArr.splice(i, 1);
+      break;
+    }
+  }
+  renderCart();
+}
+
+function renderCart() {
+  var wrap  = document.getElementById('cart-items');
+  var total = document.getElementById('cart-total');
+  var badge = document.getElementById('cart-badge');
+  var fab   = document.getElementById('fab-badge');
+
+  var qty = 0;
+  for (var i = 0; i < cartArr.length; i++) qty += cartArr[i].qty;
+  badge.textContent = qty + (qty === 1 ? ' item' : ' items');
+  fab.textContent   = qty;
+
+  if (!cartArr.length) {
+    wrap.innerHTML = '<p class="cart-empty">Your cart is empty.<br/>Add items from the menu!</p>';
+    total.textContent = '$0.00';
     return;
   }
-  list.innerHTML = entries.map(([n,v])=>`<li>${v.qty}× ${n} — $${(v.qty*v.price).toFixed(2)}</li>`).join('');
-  const total = entries.reduce((s,[,v])=>s+v.qty*v.price,0);
-  document.getElementById('cart-total').textContent = '$'+total.toFixed(2);
+
+  var sum = 0, html = '';
+  for (var j = 0; j < cartArr.length; j++) {
+    var it  = cartArr[j];
+    var sub = it.price * it.qty;
+    sum += sub;
+    var label = esc(it.size ? it.name + ' (' + it.size + ')' : it.name);
+    html += '<div class="ci">' +
+      '<span class="ci-name">' + label + '</span>' +
+      '<span class="ci-price">$' + sub.toFixed(2) + '</span>' +
+      '<div class="ci-qty">' +
+        '<button class="qb" onclick="updateQty(' + it.cid + ',-1)">&#8722;</button>' +
+        '<span class="qn">' + it.qty + '</span>' +
+        '<button class="qb" onclick="updateQty(' + it.cid + ',1)">+</button>' +
+      '</div></div>';
+  }
+  wrap.innerHTML = html;
+  total.textContent = '$' + sum.toFixed(2);
 }
 
-function submitOrder() {
-  const name = document.getElementById('cust-name').value.trim();
-  const phone = document.getElementById('cust-phone').value.trim();
-  if(!name||!phone){alert('Please enter your name and phone number.');return;}
-  if(Object.keys(cart).length===0){alert('Please add at least one item to your order.');return;}
-  alert(`✅ Order placed! We'll call ${phone} to confirm shortly. Thank you, ${name}!`);
-  cart={};
-  updateCart();
+function buildMenu() {
+  var container = document.getElementById('menu-sections');
+  var html = '';
+  for (var c = 0; c < CATS.length; c++) {
+    var cat   = CATS[c];
+    var items = [];
+    for (var m = 0; m < MENU_DATA.length; m++) {
+      if (MENU_DATA[m].cat === cat.id) items.push({idx: m, data: MENU_DATA[m]});
+    }
+    html += '<div class="cat-section" id="sec-' + cat.id + '">';
+    html += '<div class="cat-header">' + cat.label + '</div>';
+    if (cat.note) html += '<div class="cat-note-text">' + cat.note + '</div>';
+    html += '<div class="items-grid">';
+    for (var k = 0; k < items.length; k++) {
+      var it = items[k].data;
+      var idx = items[k].idx;
+      html += '<div class="oc">';
+      html += '<span class="oc-name">' + esc(it.name) + '</span>';
+      if (it.sz) {
+        html += '<span class="oc-price">Whole $' + it.whole.toFixed(2) + ' &nbsp;&middot;&nbsp; Half $' + it.half.toFixed(2) + '</span>';
+        html += '<div class="oc-btns">' +
+          '<button class="btn-add" data-id="' + idx + '" data-size="Whole" onclick="addItem(this)">Whole $' + it.whole.toFixed(2) + '</button>' +
+          '<button class="btn-add sz-half" data-id="' + idx + '" data-size="Half" onclick="addItem(this)">Half $' + it.half.toFixed(2) + '</button>' +
+          '</div>';
+      } else {
+        html += '<span class="oc-price">$' + it.price.toFixed(2) + '</span>';
+        html += '<div class="oc-btns"><button class="btn-add" data-id="' + idx + '" data-size="" onclick="addItem(this)">Add $' + it.price.toFixed(2) + '</button></div>';
+      }
+      html += '</div>';
+    }
+    html += '</div></div>';
+  }
+  container.innerHTML = html;
 }
+
+function showTab(name, btn) {
+  document.getElementById('tab-menu').style.display  = name === 'menu'  ? '' : 'none';
+  document.getElementById('tab-deals').style.display = name === 'deals' ? '' : 'none';
+  var btns = document.querySelectorAll('.tab-btn');
+  for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+  if (btn) btn.classList.add('active');
+}
+
+function placeOrder() {
+  var name     = document.getElementById('customer-name').value.trim();
+  var location = document.getElementById('location-select').value;
+  var typeEl   = document.querySelector('input[name="order-type"]:checked');
+  var type     = typeEl ? typeEl.value : 'Pickup';
+  var notes    = document.getElementById('special-instructions').value.trim();
+
+  if (!name) {
+    alert('Please enter your name.');
+    document.getElementById('customer-name').focus();
+    return;
+  }
+  if (!location) {
+    alert('Please select a location.');
+    document.getElementById('location-select').focus();
+    return;
+  }
+  if (!cartArr.length) {
+    alert('Your cart is empty. Please add some items first!');
+    return;
+  }
+
+  document.getElementById('conf-name').textContent     = name;
+  document.getElementById('conf-location').textContent = location;
+  document.getElementById('conf-type').textContent     = type;
+
+  var notesRow = document.getElementById('conf-notes-row');
+  if (notes) {
+    document.getElementById('conf-notes').textContent = notes;
+    notesRow.style.display = '';
+  } else {
+    notesRow.style.display = 'none';
+  }
+
+  var sum = 0, itemsHtml = '';
+  for (var i = 0; i < cartArr.length; i++) {
+    var it  = cartArr[i];
+    var sub = it.price * it.qty;
+    sum += sub;
+    var label = esc(it.size ? it.name + ' (' + it.size + ')' : it.name);
+    itemsHtml += '<li>' + it.qty + '&times; ' + label + ' &nbsp;&mdash;&nbsp; $' + sub.toFixed(2) + '</li>';
+  }
+  document.getElementById('conf-items').innerHTML = itemsHtml;
+  document.getElementById('conf-total').textContent = '$' + sum.toFixed(2);
+
+  openModal('confirmModal');
+}
+
+function finalizeOrder() {
+  var location = document.getElementById('location-select').value;
+  closeModal('confirmModal');
+
+  var isPotomac = location.indexOf('Potomac') !== -1;
+  document.getElementById('succ-loc-name').textContent = isPotomac ? 'Potomac Street' : 'Marshall Street';
+  var ph = document.getElementById('succ-loc-phone');
+  if (isPotomac) { ph.textContent = '320.420.1083'; ph.href = 'tel:3204201083'; }
+  else           { ph.textContent = '301.739.5483'; ph.href = 'tel:3017395483'; }
+
+  cartArr = []; cartCid = 0;
+  renderCart();
+  document.getElementById('customer-name').value       = '';
+  document.getElementById('special-instructions').value = '';
+  document.getElementById('location-select').value      = '';
+  openModal('successModal');
+}
+
+function openModal(id) {
+  document.getElementById(id).style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(id) {
+  document.getElementById(id).style.display = 'none';
+  var open = document.querySelectorAll('.mo');
+  var anyOpen = false;
+  for (var i = 0; i < open.length; i++) {
+    if (open[i].style.display === 'flex') { anyOpen = true; break; }
+  }
+  if (!anyOpen) document.body.style.overflow = '';
+}
+
+document.getElementById('confirmModal').addEventListener('click', function(e) { if (e.target === this) closeModal('confirmModal'); });
+document.getElementById('successModal').addEventListener('click', function(e) { if (e.target === this) closeModal('successModal'); });
+
+function showCallPopup() {
+  document.getElementById('callModal').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function hideCallPopup() {
+  document.getElementById('callModal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+document.getElementById('callModal').addEventListener('click', function(e) { if (e.target === this) hideCallPopup(); });
+
+function scrollToCart() {
+  document.getElementById('cart-sidebar').scrollIntoView({behavior: 'smooth', block: 'start'});
+}
+
+buildMenu();
 </script>
 </body>
 </html>

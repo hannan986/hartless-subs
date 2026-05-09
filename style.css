@@ -39,6 +39,8 @@ a{text-decoration:none;color:inherit;}
 .nav-links a:hover,.nav-links a.active{
   color:#fff;border-bottom-color:var(--gold);
 }
+.nav-links a.nav-order{background:rgba(255,255,255,.18);padding:.3rem .9rem;border-radius:4px;border-bottom:none;}
+.nav-links a.nav-order:hover,.nav-links a.nav-order.active{background:rgba(255,255,255,.3);border-bottom:none;color:#fff;}
 /* Hamburger */
 .menu-toggle{display:none;}
 .hamburger{display:none;font-size:1.6rem;color:#fff;cursor:pointer;}
