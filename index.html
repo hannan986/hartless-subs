@@ -73,13 +73,13 @@
 .hero-eyebrow {
   font-family: var(--ff-h);
   font-size: .7rem; letter-spacing: 5px; text-transform: uppercase;
-  color: var(--gold);
+  color: rgba(255,255,255,.9);
   display: inline-block;
-  border: 1px solid rgba(212,160,23,.3);
+  border: 1px solid rgba(255,255,255,.25);
   padding: .35rem 1rem; border-radius: 20px;
   margin-bottom: 1.4rem;
   backdrop-filter: blur(4px);
-  background: rgba(212,160,23,.07);
+  background: rgba(255,255,255,.08);
 }
 .hero-headline {
   font-family: var(--ff-h);
@@ -90,7 +90,7 @@
   text-shadow: 0 4px 40px rgba(0,0,0,.7);
   margin-bottom: .6rem;
 }
-.hero-headline .line2 { color: var(--gold); display: block; font-size: clamp(2rem,5vw,4rem); letter-spacing: 8px; }
+.hero-headline .line2 { color: var(--red); display: block; font-size: clamp(2rem,5vw,4rem); letter-spacing: 8px; }
 .hero-tagline {
   font-size: clamp(1rem, 2vw, 1.25rem);
   opacity: .78; margin-bottom: 2.5rem; letter-spacing: .5px;
@@ -127,7 +127,7 @@
 .promo-ticker {
   background: var(--red);
   overflow: hidden; padding: .65rem 0;
-  border-top: 2px solid #96281b; border-bottom: 2px solid #96281b;
+  border-top: 2px solid #C20025; border-bottom: 2px solid #C20025;
 }
 .ticker-inner {
   display: flex; gap: 4rem; align-items: center;
@@ -141,7 +141,7 @@
   display: flex; align-items: center; gap: .8rem;
   flex-shrink: 0;
 }
-.ticker-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+.ticker-dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,.5); flex-shrink: 0; }
 @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
 /* ─── BRAND STRIP ─────────────────────────────────────────────── */
@@ -163,12 +163,12 @@
 .brand-pillar:hover { background: rgba(255,255,255,.03); }
 .bp-icon-wrap {
   width: 52px; height: 52px; border-radius: 12px;
-  background: rgba(192,57,43,.2); border: 1px solid rgba(192,57,43,.3);
+  background: rgba(228,0,43,.2); border: 1px solid rgba(228,0,43,.3);
   display: flex; align-items: center; justify-content: center;
   font-size: 1.6rem; flex-shrink: 0;
   transition: background .3s;
 }
-.brand-pillar:hover .bp-icon-wrap { background: rgba(192,57,43,.35); }
+.brand-pillar:hover .bp-icon-wrap { background: rgba(228,0,43,.35); }
 .bp-text h3 {
   font-family: var(--ff-h);
   font-size: 1rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
@@ -224,7 +224,7 @@
 .feat-card-body { padding: 1.4rem 1.6rem 1.8rem; flex: 1; display: flex; flex-direction: column; gap: .35rem; }
 .feat-tag {
   font-family: var(--ff-h); font-size: .63rem; letter-spacing: 2px;
-  text-transform: uppercase; color: var(--gold);
+  text-transform: uppercase; color: var(--red);
 }
 .feat-name {
   font-family: var(--ff-h); font-size: 1.35rem; font-weight: 700;
@@ -278,7 +278,7 @@
   font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
   color: var(--white); line-height: 1; margin-bottom: 1rem;
 }
-.sig-headline em { color: var(--gold); font-style: normal; }
+.sig-headline em { color: var(--white); font-style: normal; text-decoration: underline; text-decoration-color: rgba(255,255,255,.4); }
 .sig-body {
   font-size: 1.1rem; color: rgba(255,255,255,.78); line-height: 1.8;
   max-width: 650px; margin: 0 auto 2.5rem;
@@ -319,7 +319,7 @@
   background: var(--red); transform: scaleX(0); transition: transform .35s;
 }
 .ow-card:hover::before { transform: scaleX(1); }
-.ow-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,.13); border-color: rgba(192,57,43,.2); }
+.ow-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,.13); border-color: rgba(228,0,43,.2); }
 .ow-icon {
   width: 72px; height: 72px; border-radius: 50%;
   background: #fdecea; display: flex; align-items: center; justify-content: center;
@@ -374,7 +374,7 @@
   border-radius: var(--r6); padding: 1rem 1.2rem;
   transition: background .3s;
 }
-.prom-item:hover { background: rgba(192,57,43,.15); border-color: rgba(192,57,43,.25); }
+.prom-item:hover { background: rgba(228,0,43,.15); border-color: rgba(228,0,43,.25); }
 .prom-check {
   width: 24px; height: 24px; border-radius: 50%;
   background: var(--red); color: var(--white);
@@ -515,7 +515,7 @@
   font-family: var(--ff-h); font-size: 1.9rem; font-weight: 700;
   color: var(--white); display: block;
 }
-.cta-phone-card:hover .cta-phone-number { color: var(--gold); }
+.cta-phone-card:hover .cta-phone-number { color: var(--white); }
 .cta-phone-hrs { font-size: .76rem; color: rgba(255,255,255,.5); margin-top: .25rem; }
 
 /* ─── SOCIAL ──────────────────────────────────────────────── */
