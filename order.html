@@ -305,103 +305,92 @@ input,select,textarea{font-family:inherit;}
 .msec.closed .msec-chevron{transform:rotate(-90deg);}
 .msec.closed .msec-items{display:none;}
 
-/* Item cards */
+/* ── MENU LIST (Jimmy John's / Jersey Mike's horizontal style) ── */
 .msec-items{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
-  gap:1.4rem;padding:.2rem 0 .5rem;
+  display:flex;flex-direction:column;gap:.65rem;padding:.2rem 0 .5rem;
 }
 
-/* Card */
+/* Card — horizontal row */
 .mitem{
-  display:flex;flex-direction:column;
-  background:#fff;border-radius:var(--r2);
+  display:flex;flex-direction:row;align-items:stretch;
+  background:#fff;border-radius:16px;
   border:1.5px solid var(--border);
-  box-shadow:0 2px 8px rgba(0,0,0,.06);
-  overflow:hidden;transition:all .28s cubic-bezier(.22,1,.36,1);cursor:pointer;
+  box-shadow:0 1px 4px rgba(0,0,0,.05);
+  overflow:hidden;transition:all .22s cubic-bezier(.22,1,.36,1);cursor:pointer;
+  min-height:116px;
 }
 .mitem:hover{
-  box-shadow:0 12px 40px rgba(0,0,0,.15);
-  transform:translateY(-6px);
-  border-color:transparent;
+  box-shadow:0 6px 24px rgba(0,0,0,.1);
+  border-color:var(--border-d);
+  transform:translateY(-2px);
 }
-.mitem:active{transform:translateY(-2px);}
+.mitem:active{transform:translateY(0);}
 
-/* card image */
-.mitem-img-wrap{
-  position:relative;height:200px;overflow:hidden;
-  background:linear-gradient(90deg,#e8edf2 25%,#dde3ea 50%,#e8edf2 75%);
-  background-size:200% 100%;
-  animation:shimmer 1.6s infinite;
-  flex-shrink:0;
+/* left: text content */
+.mitem-info{
+  flex:1;padding:14px 16px 12px;
+  display:flex;flex-direction:column;min-width:0;
 }
-@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
-.mitem-img{
-  width:100%;height:100%;object-fit:cover;display:block;
-  transition:transform .5s cubic-bezier(.22,1,.36,1);
-  animation:none;
-}
-.mitem:hover .mitem-img{transform:scale(1.07);}
-.mitem-cat-bar{
-  position:absolute;bottom:0;left:0;right:0;height:4px;
-}
-.mitem-badge-wrap{
-  position:absolute;top:10px;left:10px;
-}
-.mitem-badge-wrap .mbadge{
-  box-shadow:0 2px 8px rgba(0,0,0,.25);
-  font-size:.58rem;padding:.16rem .55rem;
-}
-
-/* card body */
-.mitem-body{flex:1;padding:16px 16px 0;display:flex;flex-direction:column;}
-.mitem-top{margin-bottom:.35rem;}
 .mitem-name{
-  font-weight:700;font-size:1rem;color:var(--dark);line-height:1.3;
-  display:block;font-family:var(--ff-head);letter-spacing:.3px;
+  font-weight:700;font-size:.98rem;color:var(--dark);line-height:1.3;
+  font-family:var(--ff-head);letter-spacing:.2px;margin-bottom:.18rem;
 }
 .mbadge{
-  font-family:var(--ff-head);font-size:.58rem;letter-spacing:.8px;
-  text-transform:uppercase;padding:.14rem .5rem;border-radius:5px;
-  flex-shrink:0;
+  font-family:var(--ff-head);font-size:.56rem;letter-spacing:.8px;
+  text-transform:uppercase;padding:.1rem .42rem;border-radius:4px;
+  flex-shrink:0;display:inline-block;margin-bottom:.3rem;
 }
 .mbadge.pop{background:#fff1f2;color:var(--red);border:1px solid #fecdd3;}
 .mbadge.hot{background:#fff7ed;color:#c2410c;border:1px solid #fed7aa;}
 .mbadge.new{background:#f0fdf4;color:#166534;border:1px solid #bbf7d0;}
 .mitem-desc{
-  font-size:.78rem;color:var(--sub);line-height:1.6;
-  flex:1;margin-bottom:.5rem;
+  font-size:.79rem;color:var(--sub);line-height:1.58;
+  flex:1;margin-bottom:.55rem;
   display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;
   -webkit-box-orient:vertical;overflow:hidden;
 }
-
-/* card footer */
 .mitem-foot{
-  padding:10px 16px 14px;
   display:flex;align-items:center;justify-content:space-between;
-  border-top:1px solid var(--border);flex-shrink:0;margin-top:auto;
-  gap:.5rem;
+  gap:.5rem;margin-top:auto;
 }
 .mitem-price{
-  font-family:var(--ff-head);font-size:1.1rem;font-weight:700;color:var(--dark);
+  font-family:var(--ff-head);font-size:1.05rem;font-weight:700;color:var(--dark);
   line-height:1;
 }
 .mitem-price small{
-  display:block;font-family:var(--ff);font-size:.7rem;
-  color:var(--muted);font-weight:400;margin-top:.12rem;
+  font-family:var(--ff);font-size:.7rem;
+  color:var(--muted);font-weight:400;margin-left:.25rem;
 }
+
+/* right: image thumbnail */
+.mitem-img-wrap{
+  width:128px;flex-shrink:0;position:relative;overflow:hidden;
+  background:linear-gradient(90deg,#e8edf2 25%,#dde3ea 50%,#e8edf2 75%);
+  background-size:200% 100%;animation:shimmer 1.6s infinite;
+}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.mitem-img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .45s cubic-bezier(.22,1,.36,1);animation:none;
+}
+.mitem:hover .mitem-img{transform:scale(1.07);}
+.mitem-cat-bar{
+  position:absolute;top:0;left:0;bottom:0;width:4px;
+}
+.mitem-badge-wrap{display:none;}
+
 .btn-add{
-  width:38px;height:38px;border-radius:50%;
+  width:34px;height:34px;border-radius:50%;
   background:var(--red);color:#fff;
-  font-size:1.5rem;font-weight:400;line-height:1;
+  font-size:1.35rem;font-weight:300;line-height:1;
   display:flex;align-items:center;justify-content:center;
   border:none;flex-shrink:0;
-  box-shadow:0 4px 12px rgba(228,0,43,.4);
+  box-shadow:0 3px 10px rgba(214,43,43,.3);
   transition:all .18s;
 }
-.btn-add:hover{background:var(--red-d);transform:scale(1.1);box-shadow:0 6px 18px rgba(228,0,43,.5);}
-.btn-add:active{transform:scale(.92);}
-.btn-add-icon{font-size:1.5rem;line-height:1;font-weight:300;margin-top:-1px;}
+.btn-add:hover{background:var(--red-d);transform:scale(1.1);box-shadow:0 5px 14px rgba(214,43,43,.4);}
+.btn-add:active{transform:scale(.9);}
+.btn-add-icon{font-size:1.35rem;line-height:1;margin-top:-1px;}
 
 /* ── RIGHT — Cart Panel ──────────────────────────────────────── */
 .right-cart{
@@ -818,14 +807,14 @@ input,select,textarea{font-family:inherit;}
     top:calc(var(--nav-h) + 44px);
   }
 
-  /* card grid */
-  .msec-items{grid-template-columns:1fr 1fr;gap:1rem;}
-  .mitem-img-wrap{height:155px;}
-  .mitem-body{padding:12px 13px 0;}
+  /* card list */
+  .msec-items{gap:.55rem;}
+  .mitem{min-height:104px;}
+  .mitem-img-wrap{width:110px;}
+  .mitem-info{padding:12px 14px 11px;}
   .mitem-name{font-size:.92rem;}
-  .mitem-foot{padding:9px 13px 12px;}
   .mitem-price{font-size:1rem;}
-  .btn-add{width:36px;height:36px;font-size:1.4rem;}
+  .btn-add{width:32px;height:32px;font-size:1.2rem;}
 
   /* cart FAB — big, prominent, fixed bottom */
   .cart-fab{
@@ -862,14 +851,14 @@ input,select,textarea{font-family:inherit;}
   .cm-grid{grid-template-columns:1fr;}
   .conf-meta{grid-template-columns:1fr;}
   .w-locs{grid-template-columns:1fr;}
-  .msec-items{grid-template-columns:1fr 1fr;gap:.8rem;}
-  .mitem-img-wrap{height:145px;}
-  .mitem-body{padding:11px 12px 0;}
-  .mitem-foot{padding:8px 12px 11px;}
+  .msec-items{gap:.5rem;}
+  .mitem{min-height:96px;}
+  .mitem-img-wrap{width:96px;}
+  .mitem-info{padding:11px 12px 10px;}
   .mitem-name{font-size:.88rem;}
   .mitem-desc{font-size:.74rem;}
   .mitem-price{font-size:.95rem;}
-  .btn-add{width:34px;height:34px;font-size:1.3rem;}
+  .btn-add{width:30px;height:30px;font-size:1.1rem;}
   .msec-title{font-size:1.25rem;letter-spacing:.8px;}
   .msec-badge{display:none;}
   .msec-icon-wrap{width:32px;height:32px;font-size:1rem;}
@@ -884,9 +873,9 @@ input,select,textarea{font-family:inherit;}
 
 /* ── Very small phone (≤360px) ── */
 @media(max-width:360px){
-  .msec-items{grid-template-columns:1fr;}
-  .mitem-img-wrap{height:180px;}
-  .mitem-name{font-size:.95rem;}
+  .mitem-img-wrap{width:84px;}
+  .mitem-info{padding:10px 10px 9px;}
+  .mitem-name{font-size:.86rem;}
   .msec-title{font-size:1.15rem;}
 }
 </style>
@@ -1368,20 +1357,20 @@ function buildMenu(){
         :'https://source.unsplash.com/800x500/?'+(it.img||'food+sandwich');
       var fallbackSrc='https://source.unsplash.com/800x500/?'+(it.img&&!it.img.startsWith('images/')?it.img:'food+sandwich');
       row.innerHTML=
-        '<div class="mitem-img-wrap">'
+        '<div class="mitem-info">'
+          +'<div class="mitem-name">'+esc(it.name)+'</div>'
+          +(badge?badge:'')
+          +'<div class="mitem-desc">'+esc(it.desc)+'</div>'
+          +'<div class="mitem-foot">'
+            +'<div class="mitem-price">'+priceStr+(it.half?'<small>/ '+fmt(it.whole)+' whole</small>':'')+'</div>'
+            +'<button type="button" class="btn-add" onclick="event.stopPropagation();openCust('+it.id+')" aria-label="Add '+esc(it.name)+'">'
+              +'<span class="btn-add-icon">+</span>'
+            +'</button>'
+          +'</div>'
+        +'</div>'
+        +'<div class="mitem-img-wrap">'
           +'<img class="mitem-img" src="'+imgSrc+'" alt="'+esc(it.name)+'" onerror="this.onerror=null;this.src=\''+fallbackSrc+'\'">'
           +'<div class="mitem-cat-bar" style="background:'+cat.color+'"></div>'
-          +(badge?'<div class="mitem-badge-wrap">'+badge+'</div>':'')
-        +'</div>'
-        +'<div class="mitem-body">'
-          +'<div class="mitem-top"><span class="mitem-name">'+esc(it.name)+'</span></div>'
-          +'<div class="mitem-desc">'+esc(it.desc)+'</div>'
-        +'</div>'
-        +'<div class="mitem-foot">'
-          +'<div class="mitem-price">'+priceStr+priceSub+'</div>'
-          +'<button type="button" class="btn-add" onclick="event.stopPropagation();openCust('+it.id+')" aria-label="Add '+esc(it.name)+'">'
-            +'<span class="btn-add-icon">+</span>'
-          +'</button>'
         +'</div>';
       row.onclick=function(){openCust(it.id);};
       list.appendChild(row);
