@@ -595,7 +595,7 @@ img{max-width:100%;display:block;}
         <span>Estimated ready time: <strong>20 – 30 minutes</strong></span>
       </div>
 
-      <button class="btn-start" onclick="startOrder()">Start Your Order &#8594;</button>
+      <button type="button" class="btn-start" onclick="startOrder()">Start Your Order &#8594;</button>
     </div>
   </div>
 </div>
@@ -868,20 +868,36 @@ var custItem = null;
 // WELCOME
 // ============================================================
 function startOrder() {
-  var locVal = document.querySelector('input[name="wloc"]:checked').value;
-  var typeVal = document.querySelector('input[name="wtype"]:checked').value;
-  var whenVal = document.querySelector('input[name="wwhen"]:checked').value;
+  // Hide overlay first so it closes even if anything below fails
+  var overlay = document.getElementById('welcomeOverlay');
+  if (overlay) { overlay.style.display = 'none'; }
+  document.body.style.overflow = '';
 
-  var locText = locVal === 'Potomac'
-    ? 'Potomac St — 635 S. Potomac St, Hagerstown MD'
-    : 'Marshall St — 1301 Marshall St, Hagerstown MD';
-  document.getElementById('hdrLocation').textContent = locText;
-  document.getElementById('hdrMode').textContent = typeVal + ' · ' + whenVal + ' · Est. 20–30 min';
+  try {
+    var locEl   = document.querySelector('input[name="wloc"]:checked');
+    var typeEl  = document.querySelector('input[name="wtype"]:checked');
+    var whenEl  = document.querySelector('input[name="wwhen"]:checked');
+    var locVal  = locEl  ? locEl.value  : 'Potomac';
+    var typeVal = typeEl ? typeEl.value : 'Carry Out';
+    var whenVal = whenEl ? whenEl.value : 'Now';
 
-  document.getElementById('cartLocation').value = locVal;
-  document.querySelector('input[name="otype"][value="' + typeVal + '"]').checked = true;
+    var locText = locVal === 'Potomac'
+      ? 'Potomac St — 635 S. Potomac St, Hagerstown MD'
+      : 'Marshall St — 1301 Marshall St, Hagerstown MD';
 
-  document.getElementById('welcomeOverlay').style.display = 'none';
+    var hdrLoc  = document.getElementById('hdrLocation');
+    var hdrMode = document.getElementById('hdrMode');
+    if (hdrLoc)  hdrLoc.textContent  = locText;
+    if (hdrMode) hdrMode.textContent = typeVal + ' · ' + whenVal + ' · Est. 20–30 min';
+
+    var cartLocEl = document.getElementById('cartLocation');
+    if (cartLocEl) cartLocEl.value = locVal;
+
+    var otypeEl = document.querySelector('input[name="otype"][value="' + typeVal + '"]');
+    if (otypeEl) otypeEl.checked = true;
+  } catch(e) {
+    // overlay is already closed; order defaults are pre-set in HTML
+  }
 }
 
 // ============================================================
