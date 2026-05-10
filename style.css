@@ -75,8 +75,9 @@ button { cursor:pointer; font-family:inherit; border:none; background:none; }
 }
 .nav-logo {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: .55rem;
+  gap: .15rem;
   flex-shrink: 0;
 }
 .nav-logo-img {
@@ -86,14 +87,16 @@ button { cursor:pointer; font-family:inherit; border:none; background:none; }
 }
 .nav-logo-since {
   font-family: var(--ff-h);
-  font-size: .6rem;
-  letter-spacing: 2.5px;
+  font-size: .5rem;
+  letter-spacing: 3px;
   text-transform: uppercase;
   color: var(--mid);
   font-weight: 500;
-  border-left: 1.5px solid var(--border);
-  padding-left: .6rem;
   line-height: 1;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  padding-top: .2rem;
+  width: 100%;
 }
 .nav-logo-name {
   font-family: var(--ff-h);
