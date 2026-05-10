@@ -1019,73 +1019,98 @@ var CATS=[
   {name:'Desserts',       icon:'🍰',color:'#be185d'}
 ];
 
+/* ── IMAGE PATHS ─────────────────────────────────────────────────
+   Real Hartle's photos used where available; Unsplash keyword
+   fallback for items with no matching photo.
+   coldSub  = actual Hartle's cold sub (deli meats, peppers, provolone)
+   hotSub   = actual Hartle's steak & cheese (split, melted cheese)
+   clubSand = actual Hartle's club sandwich (toasted white, fries & chili)
+   ryeSand  = actual Hartle's rye sandwich (dark bread, tuna/reuben style)
+   chefSal  = actual Hartle's chef salad (grilled chicken, eggs, tomato)
+   drinkFdg = actual Hartle's drink coolers photo
+─────────────────────────────────────────────────────────────── */
+var _coldSub  = 'images/menu/phily_cheasteak_image.png';
+var _hotSub   = 'images/menu/phily_cheasktake_2.png';
+var _clubSand = 'images/menu/sandwich.png';
+var _ryeSand  = 'images/menu/sandwich_2.png';
+var _chefSal  = 'images/menu/bread_salad.png';
+var _drinks   = 'images/WhatsApp Image 2026-04-06 at 6.05.01 PM (1).jpeg';
+
 var ITEMS=[
-  {id:1, img:'cold+cut+sub+deli+hoagie',      cat:'Cold Subs',type:'sub', name:'Regular Cold Cut',    desc:'Ham, salami & bologna with your choice of cheese, fresh toppings & oil & vinegar',                   half:9.60, whole:15.55},
-  {id:2, img:'italian+hoagie+sub+sandwich',   cat:'Cold Subs',type:'sub', name:'Italian Cold Cut',    desc:'Capicola, salami, pepperoni & provolone piled high with fresh veggies & oil & vinegar',              half:10.50,whole:17.05,badge:'pop'},
-  {id:3, img:'ham+cheese+sub+sandwich',       cat:'Cold Subs',type:'sub', name:'Ham with Cheese',     desc:"Hartle's 95% fat-free ham with white American, lettuce & tomato",                                   half:9.60, whole:15.55},
-  {id:4, img:'turkey+sub+sandwich',           cat:'Cold Subs',type:'sub', name:'Turkey with Cheese',  desc:'Oven-roasted turkey breast with Swiss, lettuce, tomato & dressing',                                 half:10.20,whole:16.85},
-  {id:5, img:'roast+beef+sandwich',           cat:'Cold Subs',type:'sub', name:'Roast Beef with Cheese',desc:'Thinly sliced slow-roasted beef with cheddar, horseradish mayo, lettuce & tomato',                half:9.90, whole:16.05},
-  {id:6, img:'deli+combo+sub+meats',          cat:'Cold Subs',type:'sub', name:'Combo — Cold Cut & Ham',desc:'Cold cut meats with smoked ham, provolone & all the fresh fixings',                               half:10.05,whole:16.70,badge:'pop'},
-  {id:7, img:'club+sandwich+turkey+bacon',    cat:'Cold Subs',type:'sub', name:'Club',                desc:'Triple-decker turkey, ham, crispy bacon & Swiss with lettuce, tomato & mayo',                       half:10.25,whole:16.90},
-  {id:8, img:'blt+bacon+lettuce+tomato',      cat:'Cold Subs',type:'sub', name:'BLT',                 desc:'Thick-cut crispy bacon, fresh lettuce, ripe tomato & creamy mayo on a toasted roll',                half:10.05,whole:16.30},
-  {id:9, img:'tuna+salad+sandwich',           cat:'Cold Subs',type:'sub', name:'Chicken or Tuna Salad',desc:'Creamy homemade chicken or tuna salad with fresh lettuce & tomato',                               half:10.05,whole:16.25},
-  {id:10,img:'egg+salad+sandwich',            cat:'Cold Subs',type:'sub', name:'Egg Salad',           desc:'Creamy homemade egg salad made fresh daily, served with crisp lettuce',                            half:9.60, whole:15.55},
-  {id:11,img:'vegetable+sub+sandwich+healthy',cat:'Cold Subs',type:'sub', name:'Veggie or Cheese',    desc:'Roasted peppers, cucumbers, black olives, mushrooms & provolone with lettuce & tomato',            half:9.60, whole:15.55},
-  {id:12,img:'philly+cheesesteak+peppers',    cat:'Hot Subs', type:'sub', name:'Steak & Cheese',      desc:'Chopped Philly-style steak grilled with peppers & onions, topped with melted provolone on a toasted roll',half:10.50,whole:17.05,badge:'hot'},
-  {id:13,img:'cheeseburger+american+cheese',  cat:'Hot Subs', type:'sub', name:'Cheeseburger Sub',    desc:'Juicy fresh beef patty with melted American, lettuce, tomato, pickles & condiments',                half:10.50,whole:17.05,badge:'pop'},
-  {id:14,img:'grilled+chicken+sandwich',      cat:'Hot Subs', type:'sub', name:'Grilled Chicken',     desc:'Marinated chicken breast grilled fresh with lettuce, tomato & honey mustard',                      half:12.30,whole:16.45},
-  {id:15,img:'crispy+fried+chicken+sandwich', cat:'Hot Subs', type:'sub', name:'Fried Chicken',       desc:'Golden crispy fried chicken breast with your choice of toppings',                                  half:12.30,whole:16.45},
-  {id:16,img:'meatball+sub+marinara+cheese',  cat:'Hot Subs', type:'sub', name:'Meatball with Cheese',desc:'House-made meatballs simmered in marinara, smothered with melted provolone',                       half:9.60, whole:15.55},
-  {id:17,img:'hot+beef+sub+sandwich',         cat:'Hot Subs', type:'sub', name:'Steamer with Cheese', desc:'Tender steamed beef with melted American cheese on a soft fresh-baked roll',                       half:9.60, whole:15.55},
-  {id:18,img:'pastrami+sandwich+rye+mustard', cat:'Hot Subs', type:'sub', name:'Pastrami',            desc:'Thinly sliced seasoned pastrami with Swiss & spicy brown mustard on a toasted roll',               half:10.50,whole:17.05},
+  /* ── COLD SUBS (real Hartle's cold sub photo) ── */
+  {id:1, img:_coldSub, cat:'Cold Subs',type:'sub', name:'Regular Cold Cut',    desc:'Ham, salami & bologna with your choice of cheese, fresh toppings & oil & vinegar',                   half:9.60, whole:15.55},
+  {id:2, img:_coldSub, cat:'Cold Subs',type:'sub', name:'Italian Cold Cut',    desc:'Capicola, salami, pepperoni & provolone piled high with fresh veggies & oil & vinegar',              half:10.50,whole:17.05,badge:'pop'},
+  {id:3, img:_coldSub, cat:'Cold Subs',type:'sub', name:'Ham with Cheese',     desc:"Hartle's 95% fat-free ham with white American, lettuce & tomato",                                   half:9.60, whole:15.55},
+  {id:4, img:_coldSub, cat:'Cold Subs',type:'sub', name:'Turkey with Cheese',  desc:'Oven-roasted turkey breast with Swiss, lettuce, tomato & dressing',                                 half:10.20,whole:16.85},
+  {id:5, img:_coldSub, cat:'Cold Subs',type:'sub', name:'Roast Beef with Cheese',desc:'Thinly sliced slow-roasted beef with cheddar, horseradish mayo, lettuce & tomato',                half:9.90, whole:16.05},
+  {id:6, img:_coldSub, cat:'Cold Subs',type:'sub', name:'Combo — Cold Cut & Ham',desc:'Cold cut meats with smoked ham, provolone & all the fresh fixings',                               half:10.05,whole:16.70,badge:'pop'},
+  {id:7, img:_coldSub, cat:'Cold Subs',type:'sub', name:'Club',                desc:'Triple-decker turkey, ham, crispy bacon & Swiss with lettuce, tomato & mayo',                       half:10.25,whole:16.90},
+  {id:8, img:_coldSub, cat:'Cold Subs',type:'sub', name:'BLT',                 desc:'Thick-cut crispy bacon, fresh lettuce, ripe tomato & creamy mayo on a toasted roll',                half:10.05,whole:16.30},
+  {id:9, img:_coldSub, cat:'Cold Subs',type:'sub', name:'Chicken or Tuna Salad',desc:'Creamy homemade chicken or tuna salad with fresh lettuce & tomato',                               half:10.05,whole:16.25},
+  {id:10,img:_coldSub, cat:'Cold Subs',type:'sub', name:'Egg Salad',           desc:'Creamy homemade egg salad made fresh daily, served with crisp lettuce',                            half:9.60, whole:15.55},
+  {id:11,img:_coldSub, cat:'Cold Subs',type:'sub', name:'Veggie or Cheese',    desc:'Roasted peppers, cucumbers, black olives, mushrooms & provolone with lettuce & tomato',            half:9.60, whole:15.55},
+  /* ── HOT SUBS (real Hartle's steak & cheese photo) ── */
+  {id:12,img:_hotSub,  cat:'Hot Subs', type:'sub', name:'Steak & Cheese',      desc:'Chopped Philly-style steak grilled with peppers & onions, topped with melted provolone on a toasted roll',half:10.50,whole:17.05,badge:'hot'},
+  {id:13,img:_hotSub,  cat:'Hot Subs', type:'sub', name:'Cheeseburger Sub',    desc:'Juicy fresh beef patty with melted American, lettuce, tomato, pickles & condiments',                half:10.50,whole:17.05,badge:'pop'},
+  {id:14,img:_hotSub,  cat:'Hot Subs', type:'sub', name:'Grilled Chicken',     desc:'Marinated chicken breast grilled fresh with lettuce, tomato & honey mustard',                      half:12.30,whole:16.45},
+  {id:15,img:_hotSub,  cat:'Hot Subs', type:'sub', name:'Fried Chicken',       desc:'Golden crispy fried chicken breast with your choice of toppings',                                  half:12.30,whole:16.45},
+  {id:16,img:_hotSub,  cat:'Hot Subs', type:'sub', name:'Meatball with Cheese',desc:'House-made meatballs simmered in marinara, smothered with melted provolone',                       half:9.60, whole:15.55},
+  {id:17,img:_hotSub,  cat:'Hot Subs', type:'sub', name:'Steamer with Cheese', desc:'Tender steamed beef with melted American cheese on a soft fresh-baked roll',                       half:9.60, whole:15.55},
+  {id:18,img:_hotSub,  cat:'Hot Subs', type:'sub', name:'Pastrami',            desc:'Thinly sliced seasoned pastrami with Swiss & spicy brown mustard on a toasted roll',               half:10.50,whole:17.05},
+  /* ── SANDWICHES ── */
   {id:19,img:'hot+dog+bun+mustard',           cat:'Sandwiches',type:'simple',name:'Hot Dog',          desc:'All-beef hot dog on a steamed bun with your choice of condiments',                                  half:null, whole:4.00},
-  {id:20,img:'beef+sandwich+bread',           cat:'Sandwiches',type:'simple',name:'Steamer',          desc:'Tender steamed beef on white, wheat, or marble rye bread',                                         half:null, whole:6.65},
-  {id:21,img:'turkey+cheese+sandwich+bread',  cat:'Sandwiches',type:'simple',name:'Turkey with Cheese',desc:'Sliced oven-roasted turkey with Swiss on your choice of bread',                                   half:null, whole:7.65},
-  {id:22,img:'cold+cut+deli+sandwich',        cat:'Sandwiches',type:'simple',name:'Cold Cut',         desc:'Classic cold cuts on your bread of choice with all the fresh fixings',                             half:null, whole:7.45},
-  {id:23,img:'roast+beef+cheese+bread',       cat:'Sandwiches',type:'simple',name:'Roast Beef with Cheese',desc:'Thinly sliced roast beef with cheddar on toasted bread',                                      half:null, whole:7.80},
-  {id:24,img:'tuna+salad+sandwich+lettuce',   cat:'Sandwiches',type:'simple',name:'Chicken or Tuna Salad',desc:'Homemade chicken or tuna salad on toasted bread with lettuce & tomato',                        half:null, whole:7.80},
-  {id:25,img:'blt+bacon+tomato+bread',        cat:'Sandwiches',type:'simple',name:'BLT',              desc:'Crispy bacon, fresh lettuce & ripe tomato with mayo on toasted bread',                             half:null, whole:7.85},
-  {id:26,img:'egg+salad+bread+sandwich',      cat:'Sandwiches',type:'simple',name:'Egg Salad',        desc:'Creamy homemade egg salad on white or wheat bread',                                                half:null, whole:7.35},
-  {id:27,img:'club+sandwich+triple+decker',   cat:'Sandwiches',type:'simple',name:'Club',             desc:'Triple-decker turkey, ham, crispy bacon, Swiss, lettuce, tomato & mayo',                          half:null, whole:8.65,badge:'pop'},
-  {id:28,img:'peanut+butter+jelly+sandwich',  cat:'Sandwiches',type:'simple',name:'Peanut Butter & Jelly',desc:'Classic peanut butter & grape jelly on soft white or wheat bread',                             half:null, whole:3.75},
-  {id:29,img:'pastrami+rye+bread+deli',       cat:'Sandwiches',type:'simple',name:'Pastrami',         desc:'Thinly sliced pastrami with Swiss & spicy brown mustard on marble rye',                            half:null, whole:8.65},
-  {id:30,img:'reuben+corned+beef+sauerkraut', cat:'Sandwiches',type:'simple',name:'Reuben',           desc:'Corned beef, Swiss, tangy sauerkraut & Thousand Island on grilled marble rye',                    half:null, whole:8.65,badge:'pop'},
-  {id:31,img:'deli+beef+ham+turkey+roll',     cat:'Flying Saucers',type:'simple',name:'Beef, Ham or Turkey',desc:'Your choice on a toasted 5" sesame seed roll',                                              half:null, whole:9.50,badge:'pop'},
-  {id:32,img:'chicken+salad+roll+sesame',     cat:'Flying Saucers',type:'simple',name:'Chicken or Tuna Salad',desc:'Homemade salad on a toasted sesame seed roll with lettuce & tomato',                      half:null, whole:9.50},
-  {id:33,img:'cold+cut+roll+sesame+bread',    cat:'Flying Saucers',type:'simple',name:'Cold Cut or Veggie',desc:'Classic cold cuts or roasted veggies on a sesame seed roll with provolone',                  half:null, whole:8.90},
-  {id:34,img:'grilled+chicken+roll+sesame',   cat:'Flying Saucers',type:'simple',name:'Grilled or Fried Chicken',desc:'Fresh grilled or golden-fried chicken on a sesame seed roll',                          half:null, whole:9.50},
-  {id:35,img:'cheeseburger+steak+roll+bun',   cat:'Flying Saucers',type:'simple',name:'Cheeseburger or Steak',desc:'Juicy beef patty or Philly-style steak with melted cheese on a sesame seed roll',          half:null, whole:9.50,badge:'hot'},
-  {id:36,img:'garden+salad+fresh+bowl',       cat:'Wraps & Salads',type:'simple',name:'Garden Salad',  desc:'Fresh-cut lettuce, tomato, onion, cucumber & American with your choice of dressing',             half:null, whole:8.65},
-  {id:37,img:'chef+salad+bowl+eggs',          cat:'Wraps & Salads',type:'simple',name:'Chef Salad',    desc:'Ham, turkey, Swiss, cheddar & hard-boiled egg over lettuce, tomato, onion & cucumber',           half:null, whole:9.75,badge:'pop'},
-  {id:38,img:'turkey+ham+wrap+tortilla',      cat:'Wraps & Salads',type:'wrap',  name:'Turkey or Ham Wrap',desc:'Turkey or ham with cheese, lettuce, tomato & dressing in a flour tortilla',                  half:null, whole:9.15},
-  {id:39,img:'club+wrap+tortilla+bacon',      cat:'Wraps & Salads',type:'wrap',  name:'Club Wrap',     desc:'Turkey, ham, bacon, Swiss, lettuce, tomato & mayo in a soft flour tortilla',                     half:null, whole:9.15},
-  {id:40,img:'steak+cheese+wrap+philly',      cat:'Wraps & Salads',type:'wrap',  name:'Steak & Cheese Wrap',desc:'Philly-style grilled steak with melted cheese, peppers & onions in a warm tortilla',        half:null, whole:9.45,badge:'hot'},
-  {id:41,img:'grilled+chicken+wrap+lettuce',  cat:'Wraps & Salads',type:'wrap',  name:'Grilled or Fried Chicken Wrap',desc:'Fresh chicken with your choice of veggies, cheese & sauce in a soft flour tortilla',half:null,whole:9.25},
-  {id:42,img:'tuna+chicken+salad+wrap',       cat:'Wraps & Salads',type:'wrap',  name:'Chicken or Tuna Salad Wrap',desc:'Homemade chicken or tuna salad with lettuce & tomato in a soft tortilla',            half:null, whole:9.25},
-  {id:43,img:'french+fries+crispy+seasoned',  cat:'Snacks & Sides',type:'simple',name:'French Fries',  desc:'Thick-cut coated fries, seasoned & served piping hot',                                           half:null, whole:5.40,badge:'pop'},
-  {id:44,img:'mozzarella+cheese+sticks+fried',cat:'Snacks & Sides',type:'simple',name:'Cheese Sticks', desc:'5 golden-fried mozzarella sticks with house marinara dipping sauce',                             half:null, whole:8.05},
-  {id:45,img:'chicken+tenders+fingers+golden',cat:'Snacks & Sides',type:'simple',name:'Chicken Fingers',desc:'Crispy golden chicken tenders with your choice of dipping sauce',                               half:null, whole:7.45},
-  {id:46,img:'onion+rings+fried+crispy',      cat:'Snacks & Sides',type:'simple',name:'Onion Rings',   desc:'Thick-cut rings, battered & fried golden, with dipping sauce',                                  half:null, whole:7.40},
-  {id:47,img:'macaroni+salad+bowl+creamy',    cat:'Snacks & Sides',type:'simple',name:'Macaroni Salad',desc:'Creamy homemade macaroni salad — a classic comfort side',                                        half:null, whole:4.70},
-  {id:48,img:'deviled+eggs+platter',          cat:'Snacks & Sides',type:'simple',name:'Deviled Eggs',  desc:"Classic deviled eggs made in-house fresh daily — a Hartle's staple",                            half:null, whole:3.65},
-  {id:49,img:'pickled+beet+eggs+purple',      cat:'Snacks & Sides',type:'simple',name:'Beet Eggs',     desc:'Pennsylvania Dutch-style pickled beet eggs — a beloved local tradition',                         half:null, whole:4.15,badge:'new'},
-  {id:50,img:'fried+pickles+dill+crispy',     cat:'Snacks & Sides',type:'simple',name:'Fried Pickles', desc:'Crispy breaded dill pickle slices — tangy, crunchy & addictive',                                half:null, whole:6.45},
-  {id:51,img:'chili+bowl+hearty+beans',       cat:'Snacks & Sides',type:'simple',name:'Homemade Chili',desc:'Hearty house-made chili with beans & our secret spice blend',                                   half:null, whole:5.70},
-  {id:52,img:'soup+bowl+homemade+warm',       cat:'Snacks & Sides',type:'simple',name:'Soup of the Day',desc:"Chef's daily soup — ask for today's selection. Served with crackers",                           half:null, whole:5.70},
-  {id:53,img:'chicken+wings+buffalo+sauce',   cat:'Snacks & Sides',type:'wings', name:'Chicken Wings (6 pc)',desc:'Large meaty wings fried crispy — choose your sauce',                                        half:null, whole:10.95,badge:'hot'},
-  {id:54,img:'chicken+wings+plate+crispy',    cat:'Snacks & Sides',type:'wings', name:'Chicken Wings (12 pc)',desc:'Large meaty wings fried crispy — choose your sauce',                                       half:null, whole:19.95},
-  {id:55,img:'chicken+nuggets+golden+crispy', cat:'Snacks & Sides',type:'simple',name:'Chicken Nuggets',desc:'All-white meat chicken chunks, breaded & fried golden — with Ranch, BBQ, or Honey Mustard',     half:null, whole:7.95,badge:'new'},
-  {id:56,img:'fountain+soda+cup+drink',       cat:'Drinks & Extras',type:'drink',name:'Fountain Drink',desc:'Pepsi, Diet Pepsi, Mountain Dew, Lemonade, Iced Tea',                                             half:null, whole:2.00,badge:'pop'},
-  {id:57,img:'water+bottle+refreshing',       cat:'Drinks & Extras',type:'simple',name:'Bottled Water',desc:'Refreshing 16oz chilled bottled water',                                                           half:null, whole:1.50},
-  {id:58,img:'soda+bottle+cold+pepsi',        cat:'Drinks & Extras',type:'simple',name:'Bottled Soda', desc:'20oz chilled soda — Pepsi, Diet Pepsi, Mountain Dew & seasonal selections',                      half:null, whole:2.00},
-  {id:59,img:'sports+drink+bottle+colorful',  cat:'Drinks & Extras',type:'simple',name:'Gatorade',     desc:"Assorted flavors — ask about today's selection",                                                  half:null, whole:2.50},
-  {id:60,img:'glass+milk+cold+white',         cat:'Drinks & Extras',type:'simple',name:'Milk',         desc:'8oz white or chocolate milk',                                                                     half:null, whole:1.25},
-  {id:61,img:'juice+box+apple+fruit',         cat:'Drinks & Extras',type:'simple',name:'Juice Box',    desc:'Apple, fruit punch, or grape',                                                                    half:null, whole:1.25},
-  {id:62,img:'potato+chips+bag+snack',        cat:'Drinks & Extras',type:'simple',name:'Bag of Chips', desc:"Lay's Original, BBQ, Sour Cream & Onion, or Salt & Vinegar",                                     half:null, whole:1.50},
-  {id:63,img:'chocolate+chip+cookie+baked',   cat:'Drinks & Extras',type:'simple',name:'Cookie',       desc:'Freshly baked chocolate chip or sugar cookie — baked in-house daily',                            half:null, whole:1.25},
-  {id:64,img:'funnel+cake+powdered+sugar',    cat:'Desserts',type:'simple',name:'Funnel Cake Fries',   desc:'Golden funnel cake sticks with powdered sugar — a carnival classic',                              half:null, whole:5.75,badge:'pop'},
-  {id:65,img:'lemon+pie+slice+creamy',        cat:'Desserts',type:'simple',name:'Lemon Pie',           desc:"Tangy, creamy homemade lemon pie with a buttery crust — a Hartle's classic",                     half:null, whole:5.25},
-  {id:66,img:'coconut+cream+pie+dessert',     cat:'Desserts',type:'simple',name:'Coconut Cream Pie',   desc:'Rich, silky coconut cream pie made from scratch every morning',                                  half:null, whole:5.25}
+  {id:20,img:_clubSand,                        cat:'Sandwiches',type:'simple',name:'Steamer',          desc:'Tender steamed beef on white, wheat, or marble rye bread',                                         half:null, whole:6.65},
+  {id:21,img:_clubSand,                        cat:'Sandwiches',type:'simple',name:'Turkey with Cheese',desc:'Sliced oven-roasted turkey with Swiss on your choice of bread',                                   half:null, whole:7.65},
+  {id:22,img:_coldSub,                         cat:'Sandwiches',type:'simple',name:'Cold Cut',         desc:'Classic cold cuts on your bread of choice with all the fresh fixings',                             half:null, whole:7.45},
+  {id:23,img:_clubSand,                        cat:'Sandwiches',type:'simple',name:'Roast Beef with Cheese',desc:'Thinly sliced roast beef with cheddar on toasted bread',                                      half:null, whole:7.80},
+  {id:24,img:_ryeSand,                         cat:'Sandwiches',type:'simple',name:'Chicken or Tuna Salad',desc:'Homemade chicken or tuna salad on toasted bread with lettuce & tomato',                        half:null, whole:7.80},
+  {id:25,img:_clubSand,                        cat:'Sandwiches',type:'simple',name:'BLT',              desc:'Crispy bacon, fresh lettuce & ripe tomato with mayo on toasted bread',                             half:null, whole:7.85},
+  {id:26,img:_ryeSand,                         cat:'Sandwiches',type:'simple',name:'Egg Salad',        desc:'Creamy homemade egg salad on white or wheat bread',                                                half:null, whole:7.35},
+  {id:27,img:_clubSand,                        cat:'Sandwiches',type:'simple',name:'Club',             desc:'Triple-decker turkey, ham, crispy bacon, Swiss, lettuce, tomato & mayo',                          half:null, whole:8.65,badge:'pop'},
+  {id:28,img:'peanut+butter+jelly+sandwich',   cat:'Sandwiches',type:'simple',name:'Peanut Butter & Jelly',desc:'Classic peanut butter & grape jelly on soft white or wheat bread',                             half:null, whole:3.75},
+  {id:29,img:_ryeSand,                         cat:'Sandwiches',type:'simple',name:'Pastrami',         desc:'Thinly sliced pastrami with Swiss & spicy brown mustard on marble rye',                            half:null, whole:8.65},
+  {id:30,img:_ryeSand,                         cat:'Sandwiches',type:'simple',name:'Reuben',           desc:'Corned beef, Swiss, tangy sauerkraut & Thousand Island on grilled marble rye',                    half:null, whole:8.65,badge:'pop'},
+  /* ── FLYING SAUCERS (cold sub photo — closest match to a deli roll) ── */
+  {id:31,img:_coldSub, cat:'Flying Saucers',type:'simple',name:'Beef, Ham or Turkey',desc:'Your choice on a toasted 5" sesame seed roll',                                              half:null, whole:9.50,badge:'pop'},
+  {id:32,img:_ryeSand, cat:'Flying Saucers',type:'simple',name:'Chicken or Tuna Salad',desc:'Homemade salad on a toasted sesame seed roll with lettuce & tomato',                      half:null, whole:9.50},
+  {id:33,img:_coldSub, cat:'Flying Saucers',type:'simple',name:'Cold Cut or Veggie',desc:'Classic cold cuts or roasted veggies on a sesame seed roll with provolone',                  half:null, whole:8.90},
+  {id:34,img:_hotSub,  cat:'Flying Saucers',type:'simple',name:'Grilled or Fried Chicken',desc:'Fresh grilled or golden-fried chicken on a sesame seed roll',                          half:null, whole:9.50},
+  {id:35,img:_hotSub,  cat:'Flying Saucers',type:'simple',name:'Cheeseburger or Steak',desc:'Juicy beef patty or Philly-style steak with melted cheese on a sesame seed roll',          half:null, whole:9.50,badge:'hot'},
+  /* ── WRAPS & SALADS (real Hartle's chef salad photo) ── */
+  {id:36,img:_chefSal, cat:'Wraps & Salads',type:'simple',name:'Garden Salad',  desc:'Fresh-cut lettuce, tomato, onion, cucumber & American with your choice of dressing',             half:null, whole:8.65},
+  {id:37,img:_chefSal, cat:'Wraps & Salads',type:'simple',name:'Chef Salad',    desc:'Ham, turkey, Swiss, cheddar & hard-boiled egg over lettuce, tomato, onion & cucumber',           half:null, whole:9.75,badge:'pop'},
+  {id:38,img:'turkey+ham+wrap+tortilla',       cat:'Wraps & Salads',type:'wrap',  name:'Turkey or Ham Wrap',desc:'Turkey or ham with cheese, lettuce, tomato & dressing in a flour tortilla',                  half:null, whole:9.15},
+  {id:39,img:'club+wrap+tortilla+bacon',       cat:'Wraps & Salads',type:'wrap',  name:'Club Wrap',     desc:'Turkey, ham, bacon, Swiss, lettuce, tomato & mayo in a soft flour tortilla',                     half:null, whole:9.15},
+  {id:40,img:'steak+cheese+wrap+philly',       cat:'Wraps & Salads',type:'wrap',  name:'Steak & Cheese Wrap',desc:'Philly-style grilled steak with melted cheese, peppers & onions in a warm tortilla',        half:null, whole:9.45,badge:'hot'},
+  {id:41,img:'grilled+chicken+wrap+lettuce',   cat:'Wraps & Salads',type:'wrap',  name:'Grilled or Fried Chicken Wrap',desc:'Fresh chicken with your choice of veggies, cheese & sauce in a soft flour tortilla',half:null,whole:9.25},
+  {id:42,img:'tuna+chicken+salad+wrap',        cat:'Wraps & Salads',type:'wrap',  name:'Chicken or Tuna Salad Wrap',desc:'Homemade chicken or tuna salad with lettuce & tomato in a soft tortilla',            half:null, whole:9.25},
+  /* ── SNACKS & SIDES ── */
+  {id:43,img:'french+fries+crispy+seasoned',   cat:'Snacks & Sides',type:'simple',name:'French Fries',  desc:'Thick-cut coated fries, seasoned & served piping hot',                                           half:null, whole:5.40,badge:'pop'},
+  {id:44,img:'mozzarella+cheese+sticks+fried', cat:'Snacks & Sides',type:'simple',name:'Cheese Sticks', desc:'5 golden-fried mozzarella sticks with house marinara dipping sauce',                             half:null, whole:8.05},
+  {id:45,img:'chicken+tenders+fingers+golden', cat:'Snacks & Sides',type:'simple',name:'Chicken Fingers',desc:'Crispy golden chicken tenders with your choice of dipping sauce',                               half:null, whole:7.45},
+  {id:46,img:'onion+rings+fried+crispy',       cat:'Snacks & Sides',type:'simple',name:'Onion Rings',   desc:'Thick-cut rings, battered & fried golden, with dipping sauce',                                  half:null, whole:7.40},
+  {id:47,img:'macaroni+salad+bowl+creamy',     cat:'Snacks & Sides',type:'simple',name:'Macaroni Salad',desc:'Creamy homemade macaroni salad — a classic comfort side',                                        half:null, whole:4.70},
+  {id:48,img:'deviled+eggs+platter',           cat:'Snacks & Sides',type:'simple',name:'Deviled Eggs',  desc:"Classic deviled eggs made in-house fresh daily — a Hartle's staple",                            half:null, whole:3.65},
+  {id:49,img:'pickled+beet+eggs+purple',       cat:'Snacks & Sides',type:'simple',name:'Beet Eggs',     desc:'Pennsylvania Dutch-style pickled beet eggs — a beloved local tradition',                         half:null, whole:4.15,badge:'new'},
+  {id:50,img:'fried+pickles+dill+crispy',      cat:'Snacks & Sides',type:'simple',name:'Fried Pickles', desc:'Crispy breaded dill pickle slices — tangy, crunchy & addictive',                                half:null, whole:6.45},
+  {id:51,img:'chili+bowl+hearty+beans',        cat:'Snacks & Sides',type:'simple',name:'Homemade Chili',desc:'Hearty house-made chili with beans & our secret spice blend',                                   half:null, whole:5.70},
+  {id:52,img:'soup+bowl+homemade+warm',        cat:'Snacks & Sides',type:'simple',name:'Soup of the Day',desc:"Chef's daily soup — ask for today's selection. Served with crackers",                           half:null, whole:5.70},
+  {id:53,img:'chicken+wings+buffalo+sauce',    cat:'Snacks & Sides',type:'wings', name:'Chicken Wings (6 pc)',desc:'Large meaty wings fried crispy — choose your sauce',                                        half:null, whole:10.95,badge:'hot'},
+  {id:54,img:'chicken+wings+plate+crispy',     cat:'Snacks & Sides',type:'wings', name:'Chicken Wings (12 pc)',desc:'Large meaty wings fried crispy — choose your sauce',                                       half:null, whole:19.95},
+  {id:55,img:'chicken+nuggets+golden+crispy',  cat:'Snacks & Sides',type:'simple',name:'Chicken Nuggets',desc:'All-white meat chicken chunks, breaded & fried golden — with Ranch, BBQ, or Honey Mustard',     half:null, whole:7.95,badge:'new'},
+  /* ── DRINKS & EXTRAS (real Hartle's drink cooler photo) ── */
+  {id:56,img:_drinks,  cat:'Drinks & Extras',type:'drink', name:'Fountain Drink',desc:'Pepsi, Diet Pepsi, Mountain Dew, Lemonade, Iced Tea',                                             half:null, whole:2.00,badge:'pop'},
+  {id:57,img:_drinks,  cat:'Drinks & Extras',type:'simple',name:'Bottled Water', desc:'Refreshing 16oz chilled bottled water',                                                           half:null, whole:1.50},
+  {id:58,img:_drinks,  cat:'Drinks & Extras',type:'simple',name:'Bottled Soda',  desc:'20oz chilled soda — Pepsi, Diet Pepsi, Mountain Dew & seasonal selections',                      half:null, whole:2.00},
+  {id:59,img:_drinks,  cat:'Drinks & Extras',type:'simple',name:'Gatorade',      desc:"Assorted flavors — ask about today's selection",                                                  half:null, whole:2.50},
+  {id:60,img:_drinks,  cat:'Drinks & Extras',type:'simple',name:'Milk',          desc:'8oz white or chocolate milk',                                                                     half:null, whole:1.25},
+  {id:61,img:_drinks,  cat:'Drinks & Extras',type:'simple',name:'Juice Box',     desc:'Apple, fruit punch, or grape',                                                                    half:null, whole:1.25},
+  {id:62,img:'potato+chips+bag+snack',         cat:'Drinks & Extras',type:'simple',name:'Bag of Chips', desc:"Lay's Original, BBQ, Sour Cream & Onion, or Salt & Vinegar",                                     half:null, whole:1.50},
+  {id:63,img:'chocolate+chip+cookie+baked',    cat:'Drinks & Extras',type:'simple',name:'Cookie',       desc:'Freshly baked chocolate chip or sugar cookie — baked in-house daily',                            half:null, whole:1.25},
+  /* ── DESSERTS ── */
+  {id:64,img:'funnel+cake+powdered+sugar',     cat:'Desserts',type:'simple',name:'Funnel Cake Fries',   desc:'Golden funnel cake sticks with powdered sugar — a carnival classic',                              half:null, whole:5.75,badge:'pop'},
+  {id:65,img:'lemon+pie+slice+creamy',         cat:'Desserts',type:'simple',name:'Lemon Pie',           desc:"Tangy, creamy homemade lemon pie with a buttery crust — a Hartle's classic",                     half:null, whole:5.25},
+  {id:66,img:'coconut+cream+pie+dessert',      cat:'Desserts',type:'simple',name:'Coconut Cream Pie',   desc:'Rich, silky coconut cream pie made from scratch every morning',                                  half:null, whole:5.25}
 ];
 
 var WING_SAUCES=['Buffalo','BBQ','Honey BBQ','Garlic Parmesan','Old Bay','Plain / Naked'];
@@ -1202,7 +1227,9 @@ function buildMenu(){
       row.className='mitem';
       row.setAttribute('data-id',it.id);
       row.setAttribute('data-name',it.name.toLowerCase());
-      var imgSrc='https://source.unsplash.com/800x500/?'+(it.img||'food+sandwich');
+      var imgSrc=it.img&&it.img.startsWith('images/')
+        ?it.img
+        :'https://source.unsplash.com/800x500/?'+(it.img||'food+sandwich');
       row.innerHTML=
         '<div class="mitem-img-wrap">'
           +'<img class="mitem-img" src="'+imgSrc+'" alt="'+esc(it.name)+'" loading="lazy">'
