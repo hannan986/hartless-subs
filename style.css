@@ -57,11 +57,12 @@ button { cursor:pointer; font-family:inherit; border:none; background:none; }
    NAVBAR (Black — JJ style)
    ============================================================ */
 .navbar {
-  background: var(--black);
+  background: #ffffff;
   position: sticky;
   top: 0;
   z-index: 500;
-  box-shadow: 0 2px 0 rgba(255,255,255,.04);
+  border-bottom: 1px solid #e8e8e8;
+  box-shadow: 0 1px 8px rgba(0,0,0,.06);
 }
 .nav-inner {
   max-width: 1200px;
@@ -81,18 +82,29 @@ button { cursor:pointer; font-family:inherit; border:none; background:none; }
 .nav-logo-img {
   height: 38px;
   width: auto;
-  filter: brightness(0) invert(1);
   object-fit: contain;
+}
+.nav-logo-since {
+  font-family: var(--ff-h);
+  font-size: .6rem;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--mid);
+  font-weight: 500;
+  border-left: 1.5px solid var(--border);
+  padding-left: .6rem;
+  line-height: 1;
 }
 .nav-logo-name {
   font-family: var(--ff-h);
   font-size: 1.3rem;
   font-weight: 700;
-  color: var(--white);
+  color: var(--black);
   letter-spacing: 2px;
   text-transform: uppercase;
   line-height: 1.0;
 }
+.nav-logo-name span { color: var(--red); }
 .nav-logo-name small {
   display: block;
   font-size: .52rem;
@@ -101,6 +113,7 @@ button { cursor:pointer; font-family:inherit; border:none; background:none; }
   opacity: .45;
   margin-top: .18rem;
   text-transform: uppercase;
+  color: var(--black);
 }
 .nav-links {
   display: flex;
@@ -115,13 +128,13 @@ button { cursor:pointer; font-family:inherit; border:none; background:none; }
   font-weight: 600;
   letter-spacing: 1.2px;
   text-transform: uppercase;
-  color: rgba(255,255,255,.6);
+  color: var(--mid);
   padding: .45rem .9rem;
   border-radius: var(--r);
   transition: all var(--ease);
 }
 .nav-links a:hover,
-.nav-links a.active { color: var(--white); background: rgba(255,255,255,.08); }
+.nav-links a.active { color: var(--black); background: rgba(0,0,0,.05); }
 .nav-order {
   background: var(--red);
   color: var(--white) !important;
@@ -141,7 +154,7 @@ button { cursor:pointer; font-family:inherit; border:none; background:none; }
 .hamburger {
   display: none;
   font-size: 1.5rem;
-  color: var(--white);
+  color: var(--black);
   cursor: pointer;
   padding: .3rem;
   line-height: 1;
@@ -155,15 +168,17 @@ button { cursor:pointer; font-family:inherit; border:none; background:none; }
     position: absolute;
     top: 70px;
     left: 0; right: 0;
-    background: var(--black2);
-    padding: 1.2rem 2rem 1.8rem;
-    gap: .5rem;
-    box-shadow: 0 12px 30px rgba(0,0,0,.5);
+    background: #fff;
+    padding: 1rem 1.5rem 1.5rem;
+    gap: .3rem;
+    border-top: 2px solid var(--red);
+    box-shadow: 0 12px 30px rgba(0,0,0,.12);
     z-index: 498;
   }
-  .nav-links a { font-size: 1rem; padding: .5rem 0; }
+  .nav-links a { font-size: .95rem; padding: .65rem .5rem; color: var(--text); border-bottom: 1px solid var(--border); }
+  .nav-links a:last-of-type { border-bottom: none; }
   .menu-toggle:checked ~ .nav-links { display: flex; }
-  .nav-order { align-self: flex-start; }
+  .nav-order { align-self: stretch; text-align: center; margin-top: .4rem; }
 }
 
 /* ============================================================
