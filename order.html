@@ -118,6 +118,28 @@ input,select,textarea{font-family:inherit;}
 }
 .w-btn:hover{background:var(--red-d);box-shadow:0 8px 24px rgba(228,0,43,.45);}
 .w-btn:active{transform:scale(.98);}
+/* scheduled time picker */
+.w-time-row{
+  display:none;margin-top:.9rem;
+  background:var(--bg);border-radius:10px;padding:.75rem 1rem;
+  border:2px solid var(--border);transition:border-color .2s;
+}
+.w-time-row.visible{display:flex;align-items:center;gap:.75rem;}
+.w-time-row.error{border-color:var(--red);background:#fff5f5;}
+.w-time-row label{
+  font-family:var(--ff-head);font-size:.72rem;letter-spacing:1.8px;
+  text-transform:uppercase;color:var(--muted);white-space:nowrap;flex-shrink:0;
+}
+.w-time-input{
+  flex:1;border:none;background:transparent;
+  font-family:var(--ff-head);font-size:1rem;font-weight:700;
+  color:var(--ink);outline:none;cursor:pointer;
+}
+.w-time-err{
+  font-size:.75rem;color:var(--red);font-weight:600;
+  margin-top:.5rem;display:none;
+}
+.w-time-err.visible{display:block;}
 
 /* ── TOP NAV ─────────────────────────────────────────────────── */
 .tnav{
@@ -922,6 +944,11 @@ input,select,textarea{font-family:inherit;}
           <input type="radio" name="wwhen" id="wSched" value="Later Today"/>
           <label class="w-pill" for="wSched">📅 Later Today</label>
         </div>
+        <div class="w-time-row" id="wTimeRow">
+          <label for="wTimeInput">🕐 Pick-up time</label>
+          <input type="time" id="wTimeInput" class="w-time-input"/>
+        </div>
+        <div class="w-time-err" id="wTimeErr">Please select a pickup time to continue.</div>
       </div>
       <button type="button" class="w-btn" id="btnStart">Start My Order →</button>
     </div>
@@ -940,7 +967,7 @@ input,select,textarea{font-family:inherit;}
         <span class="tnav-loc-sep">·</span>
         <span id="navType">Carry Out</span>
         <span class="tnav-loc-sep">·</span>
-        <span>20–30 min</span>
+        <span id="navWhen">20–30 min</span>
         <span class="tnav-edit">✎</span>
       </button>
     </div>
@@ -1262,14 +1289,32 @@ function pickLoc(card){
   card.classList.add('sel');
 }
 function startOrder(){
+  var wh=document.querySelector('input[name="wwhen"]:checked');
+  var isLater = wh && wh.value==='Later Today';
+  var timeVal = ($$('wTimeInput')||{}).value||'';
+  var timeErr = $$('wTimeErr');
+  var timeRow = $$('wTimeRow');
+  if(isLater && !timeVal){
+    if(timeRow) timeRow.classList.add('error');
+    if(timeErr) timeErr.classList.add('visible');
+    return;
+  }
+  if(timeRow) timeRow.classList.remove('error');
+  if(timeErr) timeErr.classList.remove('visible');
   $$('wOverlay').classList.add('gone');
   document.body.style.overflow='';
   var lc=document.querySelector('.w-loc.sel');
   var tp=document.querySelector('input[name="wtype"]:checked');
-  var wh=document.querySelector('input[name="wwhen"]:checked');
   O.loc  = lc?lc.getAttribute('data-loc'):'Potomac';
   O.type = tp?tp.value:'Carry Out';
-  O.when = wh?wh.value:'ASAP';
+  if(isLater){
+    var t=timeVal.split(':');
+    var h=parseInt(t[0],10),m=t[1],ampm=h>=12?'PM':'AM';
+    h=h%12||12;
+    O.when='Later Today — '+h+':'+m+' '+ampm;
+  } else {
+    O.when='ASAP';
+  }
   syncUI();
 }
 function changeOrder(){
@@ -1281,6 +1326,9 @@ function syncUI(){
   function set(id,v){var e=document.getElementById(id);if(e)e.textContent=v;}
   set('navLoc',ln); set('navType',O.type);
   set('obLoc',ln);  set('obType',O.type);
+  var whenLabel=O.when==='ASAP'?'20–30 min':O.when;
+  var navWhen=document.getElementById('navWhen');
+  if(navWhen) navWhen.textContent=whenLabel;
   var sel=$$('rcLoc'); if(sel)sel.value=O.loc;
   var r=document.querySelector('input[name="rctype"][value="'+O.type+'"]'); if(r)r.checked=true;
 }
@@ -1628,6 +1676,19 @@ function closeSucc(){$$('succOverlay').classList.remove('open');document.body.st
 document.addEventListener('DOMContentLoaded',function(){
   buildMenu();
   $$('btnStart').addEventListener('click',startOrder);
+  document.querySelectorAll('input[name="wwhen"]').forEach(function(r){
+    r.addEventListener('change',function(){
+      var row=$$('wTimeRow'), err=$$('wTimeErr');
+      if(this.value==='Later Today'){
+        row.classList.add('visible'); row.classList.remove('error');
+        err.classList.remove('visible');
+      } else {
+        row.classList.remove('visible','error');
+        err.classList.remove('visible');
+        $$('wTimeInput').value='';
+      }
+    });
+  });
   $$('custOverlay').addEventListener('click',function(e){if(e.target===this)closeCust();});
   $$('confOverlay').addEventListener('click',function(e){if(e.target===this)closeConf();});
   $$('succOverlay').addEventListener('click',function(e){if(e.target===this)closeSucc();});
