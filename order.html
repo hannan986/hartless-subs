@@ -964,6 +964,7 @@ input,select,textarea{font-family:inherit;}
         <div class="w-time-err" id="wTimeErr">Please select a pickup time to continue.</div>
       </div>
       <button type="button" class="w-btn" id="btnStart">Start My Order →</button>
+      <p class="w-toast-note">🔒 You'll be taken to our secure Toast ordering system in a new tab.</p>
     </div>
   </div>
 </div>
@@ -1303,6 +1304,10 @@ function pickLoc(card){
   document.querySelectorAll('.w-loc').forEach(function(c){c.classList.remove('sel');});
   card.classList.add('sel');
 }
+var TOAST_URLS={
+  Potomac:'https://www.toasttab.com/local/order/hartles-subs-s-potomac-st-635-s-potomac-st',
+  Marshall:'https://www.toasttab.com/local/order/hartles-subs-marshall-st-1301-marshall-st'
+};
 function startOrder(){
   var wh=document.querySelector('input[name="wwhen"]:checked');
   var isLater=wh&&wh.value==='Later Today';
@@ -1315,20 +1320,9 @@ function startOrder(){
   }
   if(timeRow)timeRow.classList.remove('error');
   if(timeErr)timeErr.classList.remove('visible');
-  $$('wOverlay').classList.add('gone');
-  document.body.style.overflow='';
   var lc=document.querySelector('.w-loc.sel');
-  var tp=document.querySelector('input[name="wtype"]:checked');
-  O.loc=lc?lc.getAttribute('data-loc'):'Potomac';
-  O.type=tp?tp.value:'Carry Out';
-  if(isLater){
-    var t=timeVal.split(':'),h=parseInt(t[0],10),m=t[1],ampm=h>=12?'PM':'AM';
-    h=h%12||12;
-    O.when='Later Today — '+h+':'+m+' '+ampm;
-  } else {
-    O.when='ASAP';
-  }
-  syncUI();
+  var loc=lc?lc.getAttribute('data-loc'):'Potomac';
+  window.open(TOAST_URLS[loc]||TOAST_URLS.Potomac,'_blank','noopener,noreferrer');
 }
 function changeOrder(){
   $$('wOverlay').classList.remove('gone');
