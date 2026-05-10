@@ -146,8 +146,10 @@
 
 /* ─── BRAND STRIP ─────────────────────────────────────────────── */
 .brand-strip {
-  background: var(--dark);
+  background: #f5f7fa;
   padding: 4rem 2rem;
+  border-top: 1px solid #e8eaed;
+  border-bottom: 1px solid #e8eaed;
 }
 .brand-strip-inner {
   max-width: 1200px; margin: 0 auto;
@@ -156,28 +158,28 @@
 .brand-pillar {
   display: flex; align-items: flex-start; gap: 1.2rem;
   padding: 1.8rem 2.5rem;
-  border-right: 1px solid rgba(255,255,255,.07);
+  border-right: 1px solid #e0e3e8;
   transition: background .3s;
 }
 .brand-pillar:last-child { border-right: none; }
-.brand-pillar:hover { background: rgba(255,255,255,.03); }
+.brand-pillar:hover { background: rgba(214,43,43,.04); }
 .bp-icon-wrap {
   width: 52px; height: 52px; border-radius: 12px;
-  background: rgba(228,0,43,.2); border: 1px solid rgba(228,0,43,.3);
+  background: rgba(228,0,43,.1); border: 1px solid rgba(228,0,43,.2);
   display: flex; align-items: center; justify-content: center;
   font-size: 1.6rem; flex-shrink: 0;
   transition: background .3s;
 }
-.brand-pillar:hover .bp-icon-wrap { background: rgba(228,0,43,.35); }
+.brand-pillar:hover .bp-icon-wrap { background: rgba(228,0,43,.2); }
 .bp-text h3 {
   font-family: var(--ff-h);
   font-size: 1rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
-  color: var(--white); margin-bottom: .35rem;
+  color: var(--black); margin-bottom: .35rem;
 }
-.bp-text p { font-size: .85rem; color: rgba(255,255,255,.5); line-height: 1.65; }
+.bp-text p { font-size: .85rem; color: #6b7280; line-height: 1.65; }
 @media (max-width: 720px) {
   .brand-strip-inner { grid-template-columns: 1fr; }
-  .brand-pillar { border-right: none; border-bottom: 1px solid rgba(255,255,255,.07); padding: 1.3rem 1.5rem; }
+  .brand-pillar { border-right: none; border-bottom: 1px solid #e0e3e8; padding: 1.3rem 1.5rem; }
   .brand-pillar:last-child { border-bottom: none; }
 }
 
@@ -343,7 +345,8 @@
 
 /* ─── FRESHNESS PROMISE ─────────────────────────────────────── */
 .promise-section {
-  background: var(--dark); padding: 7rem 2rem;
+  background: #f8f9fb; padding: 7rem 2rem;
+  border-top: 1px solid #e8eaed;
 }
 .promise-inner {
   max-width: 1200px; margin: 0 auto;
@@ -353,28 +356,28 @@
 .promise-img-block { position: relative; }
 .promise-img-main {
   border-radius: var(--r12); overflow: hidden;
-  box-shadow: 0 24px 70px rgba(0,0,0,.5);
+  box-shadow: 0 24px 70px rgba(0,0,0,.12);
 }
 .promise-img-main img { width: 100%; height: 400px; object-fit: cover; display: block; }
 .promise-img-accent {
   position: absolute; bottom: -1.5rem; right: -1.5rem;
   width: 55%; border-radius: var(--r12); overflow: hidden;
-  border: 4px solid var(--dark);
-  box-shadow: 0 12px 40px rgba(0,0,0,.5);
+  border: 4px solid #f8f9fb;
+  box-shadow: 0 12px 40px rgba(0,0,0,.12);
 }
 .promise-img-accent img { width: 100%; height: 180px; object-fit: cover; display: block; }
 @media (max-width: 580px) { .promise-img-accent { display: none; } }
-.promise-text .sec-eyebrow { color: var(--gold); }
-.promise-text .sec-title { color: var(--white); }
-.promise-text .sec-sub { color: rgba(255,255,255,.6); }
+.promise-text .sec-eyebrow { color: var(--red); }
+.promise-text .sec-title { color: var(--black); }
+.promise-text .sec-sub { color: #6b7280; }
 .promise-list { margin-top: 2rem; display: flex; flex-direction: column; gap: .9rem; }
 .prom-item {
   display: flex; align-items: flex-start; gap: 1rem;
-  background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.07);
+  background: #ffffff; border: 1px solid #e0e3e8;
   border-radius: var(--r6); padding: 1rem 1.2rem;
-  transition: background .3s;
+  transition: background .3s, border-color .3s;
 }
-.prom-item:hover { background: rgba(228,0,43,.15); border-color: rgba(228,0,43,.25); }
+.prom-item:hover { background: #fff5f5; border-color: rgba(214,43,43,.25); }
 .prom-check {
   width: 24px; height: 24px; border-radius: 50%;
   background: var(--red); color: var(--white);
@@ -383,17 +386,17 @@
 }
 .prom-item-text strong {
   font-family: var(--ff-h); font-size: .9rem; letter-spacing: .5px;
-  color: var(--white); display: block; margin-bottom: .2rem;
+  color: var(--black); display: block; margin-bottom: .2rem;
 }
-.prom-item-text span { font-size: .82rem; color: rgba(255,255,255,.5); line-height: 1.5; }
+.prom-item-text span { font-size: .82rem; color: #6b7280; line-height: 1.5; }
 .promise-cta { margin-top: 2.5rem; display: flex; gap: 1rem; flex-wrap: wrap; }
 
 /* ─── VIDEO SECTION ─────────────────────────────────────────── */
-.video-section { background: #0d0d0d; padding: 7rem 2rem; }
+.video-section { background: #ffffff; padding: 7rem 2rem; border-top: 1px solid #e8eaed; }
 .video-inner { max-width: 1050px; margin: 0 auto; }
 .video-wrap {
   border-radius: var(--r12); overflow: hidden;
-  box-shadow: 0 20px 80px rgba(0,0,0,.6);
+  box-shadow: 0 20px 60px rgba(0,0,0,.12);
   background: #000; aspect-ratio: 16/9; margin-top: 2.5rem;
 }
 .video-wrap video { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -519,8 +522,8 @@
 .cta-phone-hrs { font-size: .76rem; color: rgba(255,255,255,.5); margin-top: .25rem; }
 
 /* ─── SOCIAL ──────────────────────────────────────────────── */
-.social-section { background: var(--dark); padding: 5.5rem 2rem; text-align: center; }
-.social-section .sec-sub { color: rgba(255,255,255,.5); margin-bottom: 2rem; }
+.social-section { background: #f5f7fa; padding: 5.5rem 2rem; text-align: center; border-top: 1px solid #e8eaed; }
+.social-section .sec-sub { color: #6b7280; margin-bottom: 2rem; }
 .social-row { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
 
 /* ─── COUNTER ANIMATION ──────────────────────────────────── */
@@ -896,9 +899,9 @@
 <section class="video-section">
   <div class="video-inner reveal">
     <div class="sec-hdr center">
-      <span class="sec-eyebrow" style="color:var(--gold);">See It For Yourself</span>
-      <h2 class="sec-title wh">Watch Us Make It</h2>
-      <p class="sec-sub wh">Every sub made fresh to order, right in front of you. No prep, no shortcuts.</p>
+      <span class="sec-eyebrow">See It For Yourself</span>
+      <h2 class="sec-title">Watch Us Make It</h2>
+      <p class="sec-sub">Every sub made fresh to order, right in front of you. No prep, no shortcuts.</p>
     </div>
     <div class="video-wrap">
       <video controls preload="metadata" poster="images/WhatsApp Image 2026-04-06 at 6.05.01 PM (5).jpeg">
@@ -1014,8 +1017,8 @@
 <section class="social-section">
   <div class="wrap">
     <div class="sec-hdr center reveal" style="margin-bottom:1rem;">
-      <span class="sec-eyebrow" style="color:var(--gold);">Stay in the Loop</span>
-      <h2 class="sec-title wh">Follow Hartle's</h2>
+      <span class="sec-eyebrow">Stay in the Loop</span>
+      <h2 class="sec-title">Follow Hartle's</h2>
     </div>
     <p class="sec-sub">Get daily specials, behind-the-scenes, and exclusive deals — follow us on social!</p>
     <div class="social-row reveal">
