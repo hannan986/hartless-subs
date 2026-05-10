@@ -35,7 +35,7 @@ input,select,textarea{font-family:inherit;}
   position:fixed;inset:0;z-index:9999;
   display:flex;align-items:center;justify-content:center;
   padding:1rem;overflow-y:auto;
-  background:linear-gradient(135deg,rgba(5,8,20,.97) 0%,rgba(20,5,10,.96) 100%);
+  background:linear-gradient(135deg,rgba(245,247,250,.98) 0%,rgba(255,255,255,.97) 100%);
   backdrop-filter:blur(20px);
 }
 #wOverlay.gone{display:none !important;}
@@ -43,33 +43,39 @@ input,select,textarea{font-family:inherit;}
 .wcard{
   width:100%;max-width:500px;
   background:var(--surface);border-radius:var(--r2);
-  overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,.7);
+  overflow:hidden;
+  box-shadow:0 8px 32px rgba(0,0,0,.1),0 2px 8px rgba(0,0,0,.06);
+  border:1px solid var(--border);
   animation:wIn .36s cubic-bezier(.22,1,.36,1);
 }
-@keyframes wIn{from{opacity:0;transform:translateY(32px) scale(.97);}to{opacity:1;transform:translateY(0) scale(1);}}
+@keyframes wIn{from{opacity:0;transform:translateY(24px) scale(.97);}to{opacity:1;transform:translateY(0) scale(1);}}
 
 .wcard-hero{
-  background:linear-gradient(135deg,#b82020 0%,var(--red) 60%,#e03535 100%);
-  padding:2.2rem 2rem 1.8rem;
+  background:linear-gradient(135deg,#fff5f5 0%,#ffe8e8 100%);
+  padding:2rem 2rem 1.6rem;
+  border-bottom:2px solid #ffd4d4;
   position:relative;overflow:hidden;
 }
 .wcard-hero::before{
-  content:'';position:absolute;right:-50px;bottom:-50px;
-  width:200px;height:200px;border-radius:50%;
-  background:rgba(255,255,255,.05);pointer-events:none;
-}
-.wcard-hero::after{
-  content:'';position:absolute;right:20px;top:-60px;
-  width:120px;height:120px;border-radius:50%;
-  background:rgba(255,255,255,.06);pointer-events:none;
+  content:'';position:absolute;right:-40px;bottom:-40px;
+  width:160px;height:160px;border-radius:50%;
+  background:rgba(214,43,43,.06);pointer-events:none;
 }
 .wcard-logo{
   font-family:var(--ff-head);font-size:2.1rem;font-weight:700;
-  color:#fff;letter-spacing:3px;line-height:1;position:relative;z-index:1;
+  color:var(--ink);letter-spacing:3px;line-height:1;position:relative;z-index:1;
   text-transform:uppercase;
 }
-.wcard-logo span{color:#fbbf24;}
-.wcard-meta{font-size:.8rem;color:rgba(255,255,255,.6);margin-top:.5rem;position:relative;z-index:1;letter-spacing:.5px;}
+.wcard-logo span{color:var(--red);}
+.wcard-meta{font-size:.8rem;color:var(--sub);margin-top:.5rem;position:relative;z-index:1;letter-spacing:.5px;}
+/* back link in popup */
+.wcard-back{
+  display:inline-flex;align-items:center;gap:.35rem;
+  font-size:.75rem;color:var(--sub);margin-top:.9rem;
+  position:relative;z-index:1;transition:color .15s;
+  text-decoration:none;letter-spacing:.3px;
+}
+.wcard-back:hover{color:var(--red);}
 
 .wcard-body{padding:1.8rem 2rem 2.2rem;}
 .w-field{margin-bottom:1.4rem;}
@@ -910,6 +916,7 @@ input,select,textarea{font-family:inherit;}
     <div class="wcard-hero">
       <div class="wcard-logo">HARTLE'S <span>SUBS</span></div>
       <div class="wcard-meta">Order Online · Hagerstown, Maryland · Est. 1972</div>
+      <a href="index.html" class="wcard-back">← Back to Home</a>
     </div>
     <div class="wcard-body">
       <div class="w-field">
