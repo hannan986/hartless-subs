@@ -87,16 +87,15 @@ button { cursor:pointer; font-family:inherit; border:none; background:none; }
 }
 .nav-logo-since {
   font-family: var(--ff-h);
-  font-size: .5rem;
-  letter-spacing: 3px;
+  font-size: .52rem;
+  letter-spacing: 3.5px;
   text-transform: uppercase;
-  color: var(--mid);
-  font-weight: 500;
+  color: var(--red);
+  font-weight: 700;
   line-height: 1;
   text-align: center;
-  border-top: 1px solid var(--border);
-  padding-top: .2rem;
   width: 100%;
+  margin-top: -.05rem;
 }
 .nav-logo-name {
   font-family: var(--ff-h);
