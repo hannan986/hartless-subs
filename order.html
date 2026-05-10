@@ -317,11 +317,16 @@ input,select,textarea{font-family:inherit;}
 /* card image */
 .mitem-img-wrap{
   position:relative;height:180px;overflow:hidden;
-  background:linear-gradient(135deg,#f5f0e8,#ede8dd);flex-shrink:0;
+  background:linear-gradient(90deg,#f0ece4 25%,#e8e3da 50%,#f0ece4 75%);
+  background-size:200% 100%;
+  animation:shimmer 1.6s infinite;
+  flex-shrink:0;
 }
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 .mitem-img{
   width:100%;height:100%;object-fit:cover;display:block;
   transition:transform .5s cubic-bezier(.22,1,.36,1);
+  animation:none;
 }
 .mitem:hover .mitem-img{transform:scale(1.08);}
 .mitem-cat-bar{
@@ -1230,9 +1235,10 @@ function buildMenu(){
       var imgSrc=it.img&&it.img.startsWith('images/')
         ?it.img
         :'https://source.unsplash.com/800x500/?'+(it.img||'food+sandwich');
+      var fallbackSrc='https://source.unsplash.com/800x500/?'+(it.img&&!it.img.startsWith('images/')?it.img:'food+sandwich');
       row.innerHTML=
         '<div class="mitem-img-wrap">'
-          +'<img class="mitem-img" src="'+imgSrc+'" alt="'+esc(it.name)+'" loading="lazy">'
+          +'<img class="mitem-img" src="'+imgSrc+'" alt="'+esc(it.name)+'" onerror="this.onerror=null;this.src=\''+fallbackSrc+'\'">'
           +'<div class="mitem-cat-bar" style="background:'+cat.color+'"></div>'
           +(badge?'<div class="mitem-badge-wrap">'+badge+'</div>':'')
         +'</div>'
