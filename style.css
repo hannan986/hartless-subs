@@ -709,3 +709,201 @@ button { cursor:pointer; font-family:inherit; border:none; background:none; }
 .reveal-left.visible { opacity: 1; transform: none; }
 .reveal-right { opacity: 0; transform: translateX(32px); transition: opacity .55s ease, transform .55s ease; }
 .reveal-right.visible { opacity: 1; transform: none; }
+
+/* ============================================================
+   COMPREHENSIVE MOBILE RESPONSIVE — ALL PAGES
+   ============================================================ */
+
+/* ── Global spacing reduction ── */
+@media (max-width: 768px) {
+  .wrap { padding: 0 1.1rem; }
+  .sec-hdr { margin-bottom: 2rem; }
+}
+@media (max-width: 480px) {
+  .wrap { padding: 0 .9rem; }
+}
+
+/* ── Announce bar — stack cleanly on phone ── */
+@media (max-width: 600px) {
+  .announce-bar {
+    flex-wrap: wrap;
+    gap: .4rem .8rem;
+    padding: .5rem 1rem;
+    font-size: .62rem;
+    justify-content: center;
+  }
+  .announce-bar .ab-sep { display: none; }
+}
+@media (max-width: 400px) {
+  .announce-bar span { font-size: .58rem; letter-spacing: 1px; }
+}
+
+/* ── Navbar ── */
+@media (max-width: 820px) {
+  .nav-inner { padding: 0 1rem; height: 60px; gap: .75rem; }
+  .nav-logo-name { font-size: 1.1rem; letter-spacing: 1.5px; }
+  .nav-logo-name small { display: none; }
+  /* Smooth dropdown slide */
+  .nav-links {
+    top: 60px;
+    padding: 1rem 1.2rem 1.5rem;
+    border-top: 2px solid var(--red);
+    z-index: 999;
+  }
+  .nav-links a { font-size: .92rem; padding: .65rem .5rem; border-bottom: 1px solid rgba(255,255,255,.05); }
+  .nav-links a:last-child { border-bottom: none; }
+  .nav-order {
+    margin-top: .4rem;
+    text-align: center;
+    width: 100%;
+    padding: .75rem;
+    border-radius: 6px;
+  }
+  .hamburger { font-size: 1.4rem; padding: .4rem; }
+}
+
+/* ── Page hero (menu & contact inner pages) ── */
+@media (max-width: 768px) {
+  .page-hero { padding: 3.5rem 1.2rem 3rem; }
+  .page-hero h1 { font-size: clamp(2rem, 8vw, 3rem); letter-spacing: 1px; }
+  .page-hero p { font-size: .9rem; }
+}
+@media (max-width: 480px) {
+  .page-hero { padding: 2.5rem 1rem 2rem; }
+}
+
+/* ── Homepage hero ── */
+@media (max-width: 768px) {
+  .hero-content { padding: 1.5rem 1rem; }
+  .hero-eyebrow { font-size: .62rem; letter-spacing: 3px; padding: .28rem .8rem; }
+  .hero-tagline { font-size: .95rem; margin-bottom: 1.8rem; }
+  .hero-btns { gap: .75rem; }
+  .hero-btns .btn { padding: .78rem 1.6rem; font-size: .85rem; }
+  .hero-trust { gap: 1.5rem 2rem; bottom: 1.5rem; padding: 0 1rem; }
+  .hero-trust-num { font-size: 1.3rem; }
+  .hero-trust-label { font-size: .55rem; letter-spacing: 1.5px; }
+}
+@media (max-width: 480px) {
+  .hero-trust { display: none; } /* hide trust bar — overlaps on very small screens */
+  .hero-btns { flex-direction: column; align-items: center; }
+  .hero-btns .btn { width: 100%; max-width: 280px; text-align: center; }
+}
+
+/* ── Homepage section padding ── */
+@media (max-width: 768px) {
+  .featured-section { padding: 4rem 1.2rem; }
+  .sig-banner { padding: 4rem 1.2rem; }
+  .order-ways-section { padding: 4rem 1.2rem; }
+  .promise-section { padding: 4rem 1.2rem; }
+  .video-section { padding: 3.5rem 1.2rem; }
+  .gallery-section { padding: 4rem 1.2rem; }
+  .testimonials-section { padding: 4rem 1.2rem; }
+  .cta-banner { padding: 4rem 1.2rem; }
+  .social-section { padding: 3.5rem 1.2rem; }
+  .brand-strip { padding: 3rem 1.2rem; }
+}
+
+/* ── Signature / stats banner ── */
+@media (max-width: 600px) {
+  .sig-headline { letter-spacing: 1px; }
+  .sig-body { font-size: .95rem; }
+  .sig-stats { gap: 1.5rem 2.5rem; margin-top: 2rem; padding-top: 2rem; }
+  .sig-stat-num { font-size: 2.2rem; }
+  .sig-stat-label { font-size: .6rem; }
+}
+
+/* ── CTA banner phone cards ── */
+@media (max-width: 600px) {
+  .cta-phones { flex-direction: column; align-items: center; gap: 1rem; }
+  .cta-phone-card { min-width: 0; width: 100%; max-width: 300px; padding: 1.2rem 1.4rem; }
+  .cta-phone-number { font-size: 1.6rem; }
+  .cta-headline { letter-spacing: 1px; }
+  .cta-sub { font-size: .95rem; }
+}
+
+/* ── Promise section ── */
+@media (max-width: 860px) {
+  .promise-inner { gap: 2.5rem; }
+  .promise-img-main img { height: 280px; }
+}
+@media (max-width: 600px) {
+  .promise-img-main img { height: 220px; }
+  .promise-cta { flex-direction: column; }
+  .promise-cta .btn { text-align: center; }
+}
+
+/* ── Rating bar ── */
+@media (max-width: 600px) {
+  .testi-rating-bar { flex-direction: column; text-align: center; padding: 1.4rem 1.2rem; }
+  .trb-left { justify-content: center; }
+  .testi-card { padding: 1.5rem; }
+}
+
+/* ── Buttons on mobile ── */
+@media (max-width: 480px) {
+  .btn { padding: .78rem 1.6rem; font-size: .88rem; letter-spacing: 1px; }
+  .btn-lg { font-size: .92rem; padding: .85rem 1.8rem; }
+}
+
+/* ── Footer ── */
+@media (max-width: 768px) {
+  .footer-body { padding: 3rem 1.2rem 2rem; }
+  .ftr-desc { font-size: .82rem; }
+}
+@media (max-width: 520px) {
+  .footer-bar { padding: 1rem 1rem; }
+  .footer-bar-inner { font-size: .7rem; flex-direction: column; text-align: center; gap: .4rem; }
+}
+
+/* ── MENU PAGE ─────────────────────────────────── */
+@media (max-width: 820px) {
+  .menu-cat-tabs-bar { top: 60px; } /* match reduced nav height */
+  .menu-section { scroll-margin-top: 120px; }
+}
+@media (max-width: 600px) {
+  .menu-content { padding: 1.2rem .9rem 4rem; }
+  .menu-cat-tabs-inner { padding: 0 .5rem; }
+  .menu-tab { font-size: .7rem; padding: .85rem .7rem; letter-spacing: .8px; }
+  .mp-strip { padding: 1.2rem 1rem 1.5rem; border-radius: 6px; }
+  .mp-strip-title { font-size: 1rem; }
+  .menu-sec-banner-content { padding: 1rem 1.2rem; }
+  .menu-sec-banner-text h2 { font-size: 1.35rem; letter-spacing: 1.5px; }
+  .menu-item-row { padding: .85rem 1rem; gap: .4rem; }
+  .mir-name { font-size: .88rem; }
+  .mir-desc { font-size: .78rem; }
+  .mir-price { font-size: .88rem; }
+  .menu-call-inner { padding: .75rem 1rem; }
+  .menu-call-text p:first-child { font-size: .88rem; }
+  .menu-call-btns { gap: .4rem; }
+  .menu-call-btn { padding: .45rem .85rem; font-size: .72rem; }
+  .drinks-note { padding: .55rem 1rem; }
+  .menu-sec-note { padding: .55rem 1rem; }
+}
+
+/* ── CONTACT PAGE ──────────────────────────────── */
+@media (max-width: 768px) {
+  .contact-wrap { padding: 2.5rem 1.2rem 4rem; }
+}
+@media (max-width: 600px) {
+  .contact-wrap { padding: 1.8rem .9rem 3rem; }
+  .loc-card-hdr { padding: 1.2rem 1.2rem; }
+  .loc-card-hdr h2 { font-size: 1.2rem; letter-spacing: 1px; }
+  .loc-body { padding: 1.2rem; }
+  .loc-row { gap: .65rem; margin-bottom: .9rem; }
+  .loc-row-val { font-size: .86rem; }
+  .loc-row-val a { font-size: 1.05rem; }
+  .loc-map iframe { height: 200px; }
+  .loc-card-actions { flex-direction: column; gap: .5rem; }
+  .loc-action-btn { width: 100%; justify-content: center; padding: .7rem 1rem; }
+  .contact-order-cta { padding: 3rem 1rem; }
+}
+
+/* ── SOCIAL BUTTONS on mobile ── */
+@media (max-width: 480px) {
+  .social-row { gap: .65rem; }
+  .social-btn { padding: .6rem 1.1rem; font-size: .8rem; }
+}
+
+/* ── Prevent horizontal overflow everywhere ── */
+body { overflow-x: hidden; }
+img, video, iframe { max-width: 100%; }
