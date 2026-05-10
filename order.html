@@ -964,9 +964,6 @@ input,select,textarea{font-family:inherit;}
         <div class="w-time-err" id="wTimeErr">Please select a pickup time to continue.</div>
       </div>
       <button type="button" class="w-btn" id="btnStart">Start My Order →</button>
-      <p class="w-toast-note">
-        🔒 You'll be taken to our secure Toast ordering system in a new tab.
-      </p>
     </div>
   </div>
 </div>
@@ -1058,6 +1055,8 @@ input,select,textarea{font-family:inherit;}
       </div>
       <label class="rc-lbl">Your Name</label>
       <input type="text" class="rc-input" id="rcName" placeholder="Name for your order"/>
+      <label class="rc-lbl">Phone Number</label>
+      <input type="tel" class="rc-input" id="rcPhone" placeholder="e.g. 301-555-1234"/>
     </div>
     <div class="rc-items" id="rcItems">
       <div class="rc-empty">
@@ -1154,8 +1153,8 @@ input,select,textarea{font-family:inherit;}
     <div class="succ-ring">✓</div>
     <div class="succ-title">Order Placed!</div>
     <div class="succ-msg" id="succMsg">
-      Thank you! Your order has been received.<br/>
-      Please call us to confirm your pickup time.
+      Your order has been sent to the restaurant!<br/>
+      We'll have it ready for you soon.
     </div>
     <div class="succ-phone-box">
       <p>Questions? Call your location:</p>
@@ -1304,27 +1303,32 @@ function pickLoc(card){
   document.querySelectorAll('.w-loc').forEach(function(c){c.classList.remove('sel');});
   card.classList.add('sel');
 }
-var TOAST_URLS={
-  Potomac:'https://www.toasttab.com/local/order/hartles-subs-s-potomac-st-635-s-potomac-st',
-  Marshall:'https://www.toasttab.com/local/order/hartles-subs-marshall-st-1301-marshall-st'
-};
 function startOrder(){
   var wh=document.querySelector('input[name="wwhen"]:checked');
-  var isLater = wh && wh.value==='Later Today';
-  var timeVal = ($$('wTimeInput')||{}).value||'';
-  var timeErr = $$('wTimeErr');
-  var timeRow = $$('wTimeRow');
-  if(isLater && !timeVal){
-    if(timeRow) timeRow.classList.add('error');
-    if(timeErr) timeErr.classList.add('visible');
+  var isLater=wh&&wh.value==='Later Today';
+  var timeVal=($$('wTimeInput')||{}).value||'';
+  var timeErr=$$('wTimeErr'), timeRow=$$('wTimeRow');
+  if(isLater&&!timeVal){
+    if(timeRow)timeRow.classList.add('error');
+    if(timeErr)timeErr.classList.add('visible');
     return;
   }
-  if(timeRow) timeRow.classList.remove('error');
-  if(timeErr) timeErr.classList.remove('visible');
+  if(timeRow)timeRow.classList.remove('error');
+  if(timeErr)timeErr.classList.remove('visible');
+  $$('wOverlay').classList.add('gone');
+  document.body.style.overflow='';
   var lc=document.querySelector('.w-loc.sel');
-  var loc=lc?lc.getAttribute('data-loc'):'Potomac';
-  var url=TOAST_URLS[loc]||TOAST_URLS.Potomac;
-  window.open(url,'_blank','noopener,noreferrer');
+  var tp=document.querySelector('input[name="wtype"]:checked');
+  O.loc=lc?lc.getAttribute('data-loc'):'Potomac';
+  O.type=tp?tp.value:'Carry Out';
+  if(isLater){
+    var t=timeVal.split(':'),h=parseInt(t[0],10),m=t[1],ampm=h>=12?'PM':'AM';
+    h=h%12||12;
+    O.when='Later Today — '+h+':'+m+' '+ampm;
+  } else {
+    O.when='ASAP';
+  }
+  syncUI();
 }
 function changeOrder(){
   $$('wOverlay').classList.remove('gone');
@@ -1651,7 +1655,8 @@ function bumpBadge(){
 function openConf(){
   if(cart.length===0)return;
   var locTxt=O.loc==='Potomac'?'Potomac St — 635 S. Potomac St':'Marshall St — 1301 Marshall St';
-  var nm=$$('rcName');var nameVal=nm?nm.value.trim():'';
+  var nameVal=($$('rcName')||{}).value||''; nameVal=nameVal.trim();
+  var phoneVal=($$('rcPhone')||{}).value||''; phoneVal=phoneVal.trim();
   var sub=tSub();
   var iH=cart.map(function(c){
     return'<div class="conf-row">'
@@ -1665,19 +1670,84 @@ function openConf(){
   $$('confMeta').innerHTML=
     '<div class="conf-meta-box"><div class="conf-meta-lbl">Location</div><div class="conf-meta-val">'+esc(locTxt)+'</div></div>'
     +'<div class="conf-meta-box"><div class="conf-meta-lbl">Order Type</div><div class="conf-meta-val">'+esc(O.type)+'</div></div>'
+    +'<div class="conf-meta-box"><div class="conf-meta-lbl">Pickup</div><div class="conf-meta-val">'+esc(O.when)+'</div></div>'
     +(nameVal?'<div class="conf-meta-box"><div class="conf-meta-lbl">Name</div><div class="conf-meta-val">'+esc(nameVal)+'</div></div>':'')
-    +'<div class="conf-meta-box"><div class="conf-meta-lbl">Est. Ready</div><div class="conf-meta-val">20 – 30 min</div></div>';
+    +(phoneVal?'<div class="conf-meta-box"><div class="conf-meta-lbl">Phone</div><div class="conf-meta-val">'+esc(phoneVal)+'</div></div>':'');
   $$('confTotal').textContent=fmt(sub);
   $$('confOverlay').classList.add('open');
   document.body.style.overflow='hidden';
 }
 function closeConf(){$$('confOverlay').classList.remove('open');document.body.style.overflow='';}
 function placeOrder(){
-  var ph=O.loc==='Potomac'?'301.739.5473':'301.739.5483';
-  $$('succPhone').innerHTML='<a href="tel:+1'+ph.replace(/\./g,'')+'">'+ph+'</a>';
-  closeConf();
-  $$('succOverlay').classList.add('open');
-  cart=[]; renderCart();
+  var locPhone=O.loc==='Potomac'?'301.739.5473':'301.739.5483';
+  var locTxt=O.loc==='Potomac'?'Potomac St — 635 S. Potomac St, Hagerstown MD':'Marshall St — 1301 Marshall St, Hagerstown MD';
+  var nameVal=($$('rcName')||{}).value||''; nameVal=nameVal.trim();
+  var phoneVal=($$('rcPhone')||{}).value||''; phoneVal=phoneVal.trim();
+  var noteVal=($$('rcNote')||{}).value||''; noteVal=noteVal.trim();
+  var sub=tSub();
+  var now=new Date();
+  var timeStr=now.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',hour12:true});
+  var dateStr=now.toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+
+  var lines=[
+    '========================================',
+    '   NEW ORDER — HARTLE\'S SUBS',
+    '========================================',
+    '',
+    'LOCATION : '+locTxt,
+    'ORDER TYPE: '+O.type,
+    'PICKUP    : '+O.when,
+    (nameVal ?'NAME      : '+nameVal :''),
+    (phoneVal?'PHONE     : '+phoneVal:''),
+    '',
+    'ORDER ITEMS:',
+    '----------------------------------------'
+  ];
+  cart.forEach(function(c){
+    lines.push('x'+c.qty+'  '+c.name+' — '+fmt(c.qty*c.up));
+    if(c.mods.length) lines.push('     Mods: '+c.mods.join(', '));
+    if(c.note)        lines.push('     Note: '+c.note);
+  });
+  lines.push('----------------------------------------');
+  lines.push('TOTAL: '+fmt(sub));
+  lines.push('========================================');
+  if(noteVal){ lines.push(''); lines.push('SPECIAL INSTRUCTIONS:'); lines.push(noteVal); }
+  lines.push('');
+  lines.push('Order placed: '+timeStr+' — '+dateStr);
+
+  var orderText=lines.filter(function(l){return l!==false&&l!=='';}).join('\n');
+
+  var btn=document.querySelector('.btn-place');
+  if(btn){btn.textContent='Sending…';btn.disabled=true;}
+
+  fetch('https://api.web3forms.com/submit',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({
+      access_key:'YOUR_WEB3FORMS_KEY',
+      subject:'🧾 New Order — Hartle\'s Subs ('+O.loc+' St) — '+fmt(sub),
+      from_name:"Hartle's Subs Online Order",
+      message:orderText,
+      botcheck:false
+    })
+  })
+  .then(function(r){return r.json();})
+  .then(function(data){
+    if(btn){btn.textContent='Place Order ✓';btn.disabled=false;}
+    if(data.success){
+      $$('succPhone').innerHTML='<a href="tel:+1'+locPhone.replace(/\./g,'')+'">'+locPhone+'</a>';
+      closeConf();
+      $$('succOverlay').classList.add('open');
+      document.body.style.overflow='hidden';
+      cart=[];renderCart();
+    } else {
+      alert('Could not send your order. Please call us at '+locPhone);
+    }
+  })
+  .catch(function(){
+    if(btn){btn.textContent='Place Order ✓';btn.disabled=false;}
+    alert('Connection error. Please call us at '+locPhone);
+  });
 }
 function closeSucc(){$$('succOverlay').classList.remove('open');document.body.style.overflow='';}
 
