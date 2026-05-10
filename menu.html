@@ -49,6 +49,7 @@
     <button class="menu-tab" onclick="scrollToSec('flying-saucers',this)">Flying Saucers</button>
     <button class="menu-tab" onclick="scrollToSec('wraps-salads',this)">Wraps &amp; Salads</button>
     <button class="menu-tab" onclick="scrollToSec('snacks-sides',this)">Snacks &amp; Sides</button>
+    <button class="menu-tab" onclick="scrollToSec('drinks',this)">Drinks &amp; Extras</button>
     <button class="menu-tab" onclick="scrollToSec('desserts',this)">Desserts</button>
   </div>
 </div>
@@ -82,6 +83,131 @@
   </div>
 
   <!-- ================================================================
+       MOST POPULAR STRIP
+       ================================================================ -->
+  <div class="mp-strip">
+    <div class="mp-strip-hdr">
+      <div class="mp-strip-title">&#9733; Most <span>Popular</span></div>
+      <div class="mp-strip-sub">Customer favorites — order with confidence</div>
+    </div>
+    <div class="mp-cards">
+      <a class="mp-card" href="#cold-subs" onclick="scrollToSec('cold-subs',document.querySelectorAll('.menu-tab')[0]);return false;">
+        <div class="mp-card-num">#1 Pick</div>
+        <div class="mp-card-name">Italian Cold Cut</div>
+        <div class="mp-card-cat">Cold Subs</div>
+        <div class="mp-card-price">from $10.50</div>
+      </a>
+      <a class="mp-card" href="#hot-subs" onclick="scrollToSec('hot-subs',document.querySelectorAll('.menu-tab')[1]);return false;">
+        <div class="mp-card-num">#1 Hot Sub</div>
+        <div class="mp-card-name">Steak &amp; Cheese</div>
+        <div class="mp-card-cat">Hot Subs</div>
+        <div class="mp-card-price">from $10.50</div>
+      </a>
+      <a class="mp-card" href="#sandwiches" onclick="scrollToSec('sandwiches',document.querySelectorAll('.menu-tab')[2]);return false;">
+        <div class="mp-card-num">Local Favorite</div>
+        <div class="mp-card-name">Reuben</div>
+        <div class="mp-card-cat">Sandwiches</div>
+        <div class="mp-card-price">$8.65</div>
+      </a>
+      <a class="mp-card" href="#wraps-salads" onclick="scrollToSec('wraps-salads',document.querySelectorAll('.menu-tab')[4]);return false;">
+        <div class="mp-card-num">Top Wrap</div>
+        <div class="mp-card-name">Club Wrap</div>
+        <div class="mp-card-cat">Wraps &amp; Salads</div>
+        <div class="mp-card-price">$9.15</div>
+      </a>
+      <a class="mp-card" href="#snacks-sides" onclick="scrollToSec('snacks-sides',document.querySelectorAll('.menu-tab')[5]);return false;">
+        <div class="mp-card-num">Must Try</div>
+        <div class="mp-card-name">Chicken Wings</div>
+        <div class="mp-card-cat">Snacks &amp; Sides</div>
+        <div class="mp-card-price">from $10.95</div>
+      </a>
+      <a class="mp-card" href="#desserts" onclick="scrollToSec('desserts',document.querySelectorAll('.menu-tab')[7]);return false;">
+        <div class="mp-card-num">Fan Favorite</div>
+        <div class="mp-card-name">Funnel Cake Fries</div>
+        <div class="mp-card-cat">Desserts</div>
+        <div class="mp-card-price">$5.75</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ================================================================
+       CUSTOMIZE YOUR WAY — TOPPINGS GUIDE
+       ================================================================ -->
+  <div class="customize-panel" id="customize-guide">
+    <div class="cust-banner" onclick="toggleCustomize()">
+      <div class="cust-banner-left">
+        <div class="cust-banner-icon-l">&#9881;&#65039;</div>
+        <div class="cust-banner-text">
+          <h3>Customize Your Order</h3>
+          <p>Bread choices, toppings, cheese upgrades &amp; dressings — all at a glance</p>
+        </div>
+      </div>
+      <div class="cust-toggle-icon">+</div>
+    </div>
+    <div class="cust-body">
+      <p class="cust-intro">Everything on our menu is made to order, your way. All toppings below are included at no extra charge unless marked with an upgrade price. Simply tell us what you want — or don't want — and we'll build it fresh.</p>
+      <div class="cust-grid">
+        <div>
+          <div class="cust-col-title">&#127838; Bread Options</div>
+          <div class="cust-tags">
+            <span class="cust-tag grn">12" White Roll</span>
+            <span class="cust-tag grn">12" Wheat Roll</span>
+            <span class="cust-tag grn">5" Sesame Roll</span>
+            <span class="cust-tag grn">White Bread</span>
+            <span class="cust-tag grn">Wheat Bread</span>
+            <span class="cust-tag grn">Marble Rye</span>
+            <span class="cust-tag grn">Flour Tortilla</span>
+          </div>
+        </div>
+        <div>
+          <div class="cust-col-title">&#129367; Toppings (Included)</div>
+          <div class="cust-tags">
+            <span class="cust-tag">Lettuce</span>
+            <span class="cust-tag">Tomato</span>
+            <span class="cust-tag">Onion</span>
+            <span class="cust-tag">Green Peppers</span>
+            <span class="cust-tag">Hot Peppers</span>
+            <span class="cust-tag">Pickles</span>
+            <span class="cust-tag">Black Olives</span>
+            <span class="cust-tag">Mushrooms</span>
+            <span class="cust-tag">Banana Peppers</span>
+            <span class="cust-tag">Cucumbers</span>
+            <span class="cust-tag">Oil &amp; Vinegar</span>
+          </div>
+        </div>
+        <div>
+          <div class="cust-col-title">&#129472; Cheese Choices</div>
+          <div class="cust-tags">
+            <span class="cust-tag grn">American</span>
+            <span class="cust-tag grn">Provolone</span>
+            <span class="cust-tag grn">Swiss</span>
+            <span class="cust-tag grn">Cheddar</span>
+            <span class="cust-tag gld">Pepper Jack +$0.45</span>
+            <span class="cust-tag gld">Extra Cheese +$0.45</span>
+            <span class="cust-tag gld">Bacon Add-On +$0.99</span>
+          </div>
+        </div>
+        <div>
+          <div class="cust-col-title">&#127859; Sauces &amp; Dressings</div>
+          <div class="cust-tags">
+            <span class="cust-tag">Mayo</span>
+            <span class="cust-tag">Yellow Mustard</span>
+            <span class="cust-tag">Spicy Brown Mustard</span>
+            <span class="cust-tag">Ranch</span>
+            <span class="cust-tag">Honey Mustard</span>
+            <span class="cust-tag">Italian Dressing</span>
+            <span class="cust-tag">Hot Sauce</span>
+            <span class="cust-tag">Ketchup</span>
+            <span class="cust-tag">Horseradish Mayo</span>
+            <span class="cust-tag">Thousand Island</span>
+          </div>
+        </div>
+      </div>
+      <p class="cust-note">&#9432; All subs come standard with lettuce, tomato &amp; onion unless you tell us otherwise. Calories and allergen info available upon request. Prices may vary by location. Upgrade add-ons apply per half-sub.</p>
+    </div>
+  </div>
+
+  <!-- ================================================================
        COLD SUBS
        ================================================================ -->
   <div class="menu-section" id="cold-subs">
@@ -112,7 +238,7 @@
       <div class="menu-item-row">
         <div class="mir-info">
           <div class="mir-name">Ham w/ Cheese</div>
-          <div class="mir-desc">Thinly sliced smoked ham with creamy American cheese, crisp lettuce, fresh tomato on our signature roll</div>
+          <div class="mir-desc">Hartle's select 95% fat-free ham, sliced just the way you like, with white American cheese, crisp lettuce, and fresh tomato on our signature roll</div>
         </div>
         <div class="mir-price">Half $9.60 / Whole $15.55</div>
       </div>
@@ -193,7 +319,7 @@
       <div class="menu-item-row">
         <div class="mir-info">
           <div class="mir-name">Steak &amp; Cheese <span class="mir-badge hot">#1 Hot Sub</span></div>
-          <div class="mir-desc">Thinly sliced Philly-style steak, grilled peppers &amp; onions, smothered in melted provolone on a toasted roll</div>
+          <div class="mir-desc">Chopped Philly-style steak grilled fresh with peppers &amp; onions, topped with our special seasoning, smothered in melted provolone on a toasted roll</div>
         </div>
         <div class="mir-price">Half $10.50 / Whole $17.05</div>
       </div>
@@ -420,14 +546,14 @@
       <div class="menu-item-row">
         <div class="mir-info">
           <div class="mir-name">Garden Salad</div>
-          <div class="mir-desc">Mixed greens, cucumber, tomato, red onion, croutons, and your choice of dressing</div>
+          <div class="mir-desc">Fresh-cut lettuce, tomato, onion, cucumber, and American cheese — comes with your choice of dressing</div>
         </div>
         <div class="mir-price">$8.65</div>
       </div>
       <div class="menu-item-row">
         <div class="mir-info">
           <div class="mir-name">Chef Salad <span class="mir-badge pop">Popular</span></div>
-          <div class="mir-desc">Ham, turkey, Swiss, cheddar, hard-boiled egg, fresh veggies over mixed greens with your choice of dressing</div>
+          <div class="mir-desc">Ham, turkey, Swiss, cheddar, and a hard-boiled egg over a bed of lettuce, tomato, onion, cucumber, and American cheese — served with your choice of dressing</div>
         </div>
         <div class="mir-price">$9.75</div>
       </div>
@@ -478,7 +604,7 @@
         <div class="menu-sec-banner-text">
           <h2>Snacks &amp; Sides</h2>
           <p>Perfect to go alongside your sub</p>
-          <span class="menu-sec-item-count">10 items</span>
+          <span class="menu-sec-item-count">12 items</span>
         </div>
       </div>
     </div>
@@ -486,14 +612,14 @@
       <div class="menu-item-row">
         <div class="mir-info">
           <div class="mir-name">French Fries <span class="mir-badge pop">Popular</span></div>
-          <div class="mir-desc">Golden crispy fries, lightly salted and served hot — the perfect side</div>
+          <div class="mir-desc">Generous portion of thick-cut specially coated fries, seasoned and served piping hot — the perfect side</div>
         </div>
         <div class="mir-price">$5.40</div>
       </div>
       <div class="menu-item-row">
         <div class="mir-info">
           <div class="mir-name">Cheese Sticks</div>
-          <div class="mir-desc">Breaded mozzarella sticks, fried golden, with marinara dipping sauce</div>
+          <div class="mir-desc">5 golden-fried mozzarella cheese sticks served with our house marinara dipping sauce</div>
         </div>
         <div class="mir-price">$8.05</div>
       </div>
@@ -507,7 +633,7 @@
       <div class="menu-item-row">
         <div class="mir-info">
           <div class="mir-name">Onion Rings</div>
-          <div class="mir-desc">Beer-battered golden onion rings, fried to a perfect crisp</div>
+          <div class="mir-desc">Generous portion of thick-cut rings, battered and fried golden, served with our own signature dipping sauce</div>
         </div>
         <div class="mir-price">$7.40</div>
       </div>
@@ -553,7 +679,103 @@
         </div>
         <div class="mir-price">$5.70</div>
       </div>
+      <div class="menu-item-row">
+        <div class="mir-info">
+          <div class="mir-name">Chicken Wings <span class="mir-badge hot">New</span></div>
+          <div class="mir-desc">Our chicken wings are large and meaty — generously portioned and fried to a perfect crisp. Choose your sauce below.</div>
+          <div class="mir-sauces">
+            <span class="mir-sauce-tag">Buffalo</span>
+            <span class="mir-sauce-tag">BBQ</span>
+            <span class="mir-sauce-tag">Honey BBQ</span>
+            <span class="mir-sauce-tag">Garlic Parmesan</span>
+            <span class="mir-sauce-tag">Old Bay</span>
+            <span class="mir-sauce-tag">Plain / Naked</span>
+          </div>
+        </div>
+        <div class="mir-price">6 pc $10.95<small>12 pc $19.95</small></div>
+      </div>
+      <div class="menu-item-row">
+        <div class="mir-info">
+          <div class="mir-name">Chicken Nuggets <span class="mir-badge new">White Meat</span></div>
+          <div class="mir-desc">All-white meat chicken chunks, breaded and fried golden — served with your choice of dipping sauce (Ranch, BBQ, or Honey Mustard)</div>
+        </div>
+        <div class="mir-price">$7.95</div>
+      </div>
     </div>
+  </div>
+
+  <!-- ================================================================
+       DRINKS & EXTRAS
+       ================================================================ -->
+  <div class="menu-section" id="drinks">
+    <div class="menu-sec-banner" style="background:linear-gradient(135deg,#1a4a6b 0%,#2471a3 60%,#1a6b8a 100%);">
+      <div class="menu-sec-banner-content">
+        <div class="menu-sec-banner-text">
+          <h2>Drinks &amp; Extras</h2>
+          <p>Cold drinks, chips &amp; more to complete your meal</p>
+          <span class="menu-sec-item-count">8 items</span>
+        </div>
+      </div>
+    </div>
+    <div class="menu-items-list">
+      <div class="menu-item-row">
+        <div class="mir-info">
+          <div class="mir-name">Fountain Drink <span class="mir-badge pop">Most Ordered</span></div>
+          <div class="mir-desc">Pepsi, Diet Pepsi, Mountain Dew, Sierra Mist, Lemonade, Iced Tea — free refills on dine-in orders</div>
+        </div>
+        <div class="mir-price">Sm $1.50<small>Med $2.00 / Lg $2.50</small></div>
+      </div>
+      <div class="menu-item-row">
+        <div class="mir-info">
+          <div class="mir-name">Bottled Water</div>
+          <div class="mir-desc">Refreshing 16oz chilled bottled water</div>
+        </div>
+        <div class="mir-price">$1.50</div>
+      </div>
+      <div class="menu-item-row">
+        <div class="mir-info">
+          <div class="mir-name">Bottled Soda</div>
+          <div class="mir-desc">20oz chilled bottled soda — Pepsi, Diet Pepsi, Mountain Dew, and seasonal selections</div>
+        </div>
+        <div class="mir-price">$2.00</div>
+      </div>
+      <div class="menu-item-row">
+        <div class="mir-info">
+          <div class="mir-name">Gatorade / Sports Drink</div>
+          <div class="mir-desc">Assorted flavors — ask about today's selection</div>
+        </div>
+        <div class="mir-price">$2.50</div>
+      </div>
+      <div class="menu-item-row">
+        <div class="mir-info">
+          <div class="mir-name">Milk</div>
+          <div class="mir-desc">8oz white or chocolate milk — great with kids' meals</div>
+        </div>
+        <div class="mir-price">$1.25</div>
+      </div>
+      <div class="menu-item-row">
+        <div class="mir-info">
+          <div class="mir-name">Juice Box</div>
+          <div class="mir-desc">Apple, fruit punch, or grape — perfect for the little ones</div>
+        </div>
+        <div class="mir-price">$1.25</div>
+      </div>
+      <div class="menu-item-row">
+        <div class="mir-info">
+          <div class="mir-name">Bag of Chips</div>
+          <div class="mir-desc">Lay's Original, BBQ, Sour Cream &amp; Onion, Salt &amp; Vinegar, or Baked — ask for today's selection</div>
+        </div>
+        <div class="mir-price">$1.50</div>
+      </div>
+      <div class="menu-item-row">
+        <div class="mir-info">
+          <div class="mir-name">Cookie</div>
+          <div class="mir-desc">Freshly baked chocolate chip or sugar cookie — baked in-house daily</div>
+        </div>
+        <div class="mir-price">$1.25</div>
+      </div>
+    </div>
+    <div class="drinks-note">&#9432; Fountain drink flavors vary by location. Ask your cashier for today's full selection.</div>
   </div>
 
   <!-- ================================================================
@@ -573,7 +795,7 @@
       <div class="menu-item-row">
         <div class="mir-info">
           <div class="mir-name">Funnel Cake Fries <span class="mir-badge pop">Fan Favorite</span></div>
-          <div class="mir-desc">Crispy funnel cake cut into golden fries, dusted with powdered sugar — a fairground classic</div>
+          <div class="mir-desc">Carnival funnel cake, only easier to eat — sticks of golden funnel cake covered with powdered sugar. A fairground classic in every bite</div>
         </div>
         <div class="mir-price">$5.75</div>
       </div>
@@ -695,12 +917,16 @@ function scrollToSec(id, btn) {
   var top = el.getBoundingClientRect().top + window.scrollY - 150;
   window.scrollTo({ top: top, behavior: 'smooth' });
   document.querySelectorAll('.menu-tab').forEach(function(t) { t.classList.remove('active'); });
-  btn.classList.add('active');
+  if (btn) btn.classList.add('active');
+}
+
+function toggleCustomize() {
+  document.getElementById('customize-guide').classList.toggle('open');
 }
 
 window.addEventListener('DOMContentLoaded', function() {
   if (!window.IntersectionObserver) return;
-  var secIds = ['cold-subs','hot-subs','sandwiches','flying-saucers','wraps-salads','snacks-sides','desserts'];
+  var secIds = ['cold-subs','hot-subs','sandwiches','flying-saucers','wraps-salads','snacks-sides','drinks','desserts'];
   var tabs = document.querySelectorAll('.menu-tab');
   var observer = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {

@@ -3,53 +3,91 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Locations — Hartle's Subs, Hagerstown MD</title>
+<title>Locations &mdash; Hartle's Subs, Hagerstown MD</title>
 <meta name="description" content="Two Hartle's Subs locations in Hagerstown, MD. Potomac Street and Marshall Street. View hours, phone numbers, and directions."/>
 <link rel="stylesheet" href="style.css"/>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet"/>
 <style>
-/* ===== CONTACT PAGE EXTRA STYLES ===== */
-.hours-table { width: 100%; border-collapse: collapse; font-size: .88rem; }
-.hours-table tr { border-bottom: 1px solid var(--border); }
-.hours-table tr:last-child { border-bottom: none; }
-.hours-table td { padding: .55rem 0; color: var(--dark); }
-.hours-table td:first-child { color: var(--mid); width: 55%; }
-.hours-table td:last-child { font-weight: 600; color: var(--dark); text-align: right; }
-.hours-table tr.today td { color: var(--red); font-weight: 700; }
-.hours-table tr.today td:first-child { color: var(--red); }
+.announce-bar{background:#1c1c1c;color:rgba(255,255,255,.78);font-family:var(--ff-h);font-size:.72rem;letter-spacing:2px;text-transform:uppercase;text-align:center;padding:.55rem 1rem;display:flex;align-items:center;justify-content:center;gap:2rem;overflow:hidden;}
+.announce-bar strong{color:var(--gold);}
+.announce-bar .ab-sep{color:rgba(255,255,255,.2);}
+.announce-bar a{color:var(--gold);transition:opacity .2s;}
+.announce-bar a:hover{opacity:.75;}
+@media(max-width:600px){.announce-bar{font-size:.65rem;gap:1rem;}}
 
-.contact-order-cta {
-  background: var(--red);
-  border-radius: var(--r12);
-  padding: 2.5rem 2rem;
-  text-align: center;
-  margin-top: 3rem;
-  color: var(--white);
+.hours-table{width:100%;border-collapse:collapse;font-size:.88rem;}
+.hours-table tr{border-bottom:1px solid var(--border);}
+.hours-table tr:last-child{border-bottom:none;}
+.hours-table td{padding:.6rem 0;color:var(--dark);}
+.hours-table td:first-child{color:var(--mid);width:55%;}
+.hours-table td:last-child{font-weight:600;color:var(--dark);text-align:right;}
+.hours-table tr.today td{color:var(--red);font-weight:700;}
+.hours-table tr.today td:first-child{color:var(--red);}
+
+.contact-order-cta{
+  background:var(--red);border-radius:var(--r12);
+  padding:3rem 2rem;text-align:center;margin-top:3rem;color:var(--white);
+  position:relative;overflow:hidden;
 }
-.contact-order-cta h3 {
-  font-family: var(--ff-h);
-  font-size: 1.6rem;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  margin-bottom: .5rem;
+.contact-order-cta::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(-45deg,transparent,transparent 30px,rgba(0,0,0,.05) 30px,rgba(0,0,0,.05) 31px);
+  pointer-events:none;
 }
-.contact-order-cta p {
-  font-size: .95rem;
-  opacity: .85;
-  margin-bottom: 1.5rem;
+.contact-order-cta h3{
+  font-family:var(--ff-h);font-size:1.8rem;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;margin-bottom:.5rem;position:relative;
 }
-.cta-btn-row {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
+.contact-order-cta p{font-size:.95rem;opacity:.82;margin-bottom:1.8rem;position:relative;}
+.cta-btn-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;position:relative;}
+
+/* Reveal animations */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-left{opacity:0;transform:translateX(-30px);transition:opacity .6s ease,transform .6s ease;}
+.reveal-left.visible{opacity:1;transform:translateX(0);}
+.delay-1{transition-delay:.1s;}
+.delay-2{transition-delay:.2s;}
+
+/* Loc cards enhanced */
+.loc-open-badge{
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-family:var(--ff-h);font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;
+  padding:.2rem .7rem;border-radius:20px;margin-top:.5rem;
 }
+.loc-open-badge.open{background:rgba(255,255,255,.2);color:rgba(255,255,255,.9);}
+.loc-open-badge .dot{width:6px;height:6px;border-radius:50%;background:#4caf50;animation:blink 1.5s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
+
+.loc-card-actions{
+  display:flex;gap:.7rem;padding:1.2rem 1.7rem;
+  border-top:1px solid var(--border);
+  background:var(--light);
+  flex-wrap:wrap;
+}
+.loc-action-btn{
+  flex:1;text-align:center;
+  font-family:var(--ff-h);font-size:.8rem;letter-spacing:.8px;text-transform:uppercase;
+  padding:.65rem .8rem;border-radius:var(--r3);
+  transition:all .25s;border:1.5px solid var(--border);
+  color:var(--dark);background:var(--white);
+  white-space:nowrap;
+}
+.loc-action-btn:hover{background:var(--red);color:var(--white);border-color:var(--red);}
+.loc-action-btn.primary{background:var(--red);color:var(--white);border-color:var(--red);}
+.loc-action-btn.primary:hover{background:var(--red-dk);border-color:var(--red-dk);}
 </style>
 </head>
 <body>
 
-<!-- ===== NAVBAR ===== -->
+<!-- ANNOUNCEMENT BAR -->
+<div class="announce-bar">
+  <span>&#128336; Mon&ndash;Sat 10am&ndash;8pm <span class="ab-sep">|</span> Sun 11am&ndash;7pm</span>
+  <span class="ab-sep">&bull;</span>
+  <span><strong>Now accepting online orders</strong> &mdash; <a href="order.html">Order Now &rarr;</a></span>
+</div>
+
+<!-- NAVBAR -->
 <header class="navbar">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">
@@ -68,127 +106,129 @@
   </div>
 </header>
 
-<!-- ===== PAGE HERO ===== -->
+<!-- PAGE HERO -->
 <div class="page-hero">
   <div class="page-hero-texture"></div>
   <div class="page-hero-content">
     <span class="page-eyebrow">Two Locations in Hagerstown, MD</span>
     <h1>Find Us</h1>
-    <p>Visit us in person — dine in, take out, or call ahead for pickup.</p>
+    <p>Visit us in person &mdash; dine in, take out, or call ahead for pickup.</p>
   </div>
 </div>
 
-<!-- ===== LOCATIONS ===== -->
+<!-- LOCATIONS -->
 <div class="contact-wrap">
   <div class="locations-grid">
 
     <!-- LOCATION 1 -->
-    <div class="loc-card">
+    <div class="loc-card reveal delay-1">
       <div class="loc-card-hdr">
         <h2>Potomac Street</h2>
         <p>635 S. Potomac St, Hagerstown, MD 21740</p>
+        <span class="loc-open-badge open"><span class="dot"></span> Open Today</span>
       </div>
       <div class="loc-body">
-
         <div class="loc-row">
-          <div class="loc-row-icon">📍</div>
+          <div class="loc-row-icon">&#128205;</div>
           <div>
             <span class="loc-row-label">Address</span>
             <p class="loc-row-val">635 S. Potomac Street<br/>Hagerstown, MD 21740</p>
           </div>
         </div>
-
         <div class="loc-row">
-          <div class="loc-row-icon">📞</div>
+          <div class="loc-row-icon">&#128222;</div>
           <div>
             <span class="loc-row-label">Phone</span>
             <p class="loc-row-val"><a href="tel:3017395473">301.739.5473</a></p>
           </div>
         </div>
-
         <div class="loc-row">
-          <div class="loc-row-icon">🕐</div>
+          <div class="loc-row-icon">&#128336;</div>
           <div style="flex:1;">
             <span class="loc-row-label">Hours</span>
             <table class="hours-table">
-              <tr><td>Monday – Saturday</td><td>10:00am – 8:00pm</td></tr>
-              <tr><td>Sunday</td><td>11:00am – 7:00pm</td></tr>
+              <tr id="ptr-mf"><td>Monday &ndash; Saturday</td><td>10:00am &ndash; 8:00pm</td></tr>
+              <tr id="ptr-su"><td>Sunday</td><td>11:00am &ndash; 7:00pm</td></tr>
             </table>
           </div>
         </div>
-
         <div class="loc-row">
-          <div class="loc-row-icon">📲</div>
+          <div class="loc-row-icon">&#128242;</div>
           <div>
-            <span class="loc-row-label">Follow &amp; Order</span>
+            <span class="loc-row-label">Follow &amp; Connect</span>
             <div class="loc-soc-row">
-              <a href="#" class="loc-soc-btn fb">📘 Facebook</a>
-              <a href="#" class="loc-soc-btn ta">⭐ TripAdvisor</a>
+              <a href="#" class="loc-soc-btn fb">&#128152; Facebook</a>
+              <a href="#" class="loc-soc-btn ta">&#11088; TripAdvisor</a>
             </div>
           </div>
         </div>
-
+      </div>
+      <div class="loc-card-actions">
+        <a href="tel:3017395473" class="loc-action-btn">&#128222; Call</a>
+        <a href="https://maps.google.com/?q=635+S+Potomac+St+Hagerstown+MD" target="_blank" rel="noopener" class="loc-action-btn">&#128506; Directions</a>
+        <a href="order.html" class="loc-action-btn primary">&#128722; Order Now</a>
       </div>
       <div class="loc-map">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3076.5!2d-77.7200!3d39.6417!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c9e3000000001%3A0x0!2s635+S+Potomac+St%2C+Hagerstown%2C+MD+21740!5e0!3m2!1sen!2sus!4v1"
-          width="100%" height="240" style="border:0;" allowfullscreen="" loading="lazy"
+          width="100%" height="260" style="border:0;" allowfullscreen="" loading="lazy"
           referrerpolicy="no-referrer-when-downgrade">
         </iframe>
       </div>
     </div>
 
     <!-- LOCATION 2 -->
-    <div class="loc-card">
+    <div class="loc-card reveal delay-2">
       <div class="loc-card-hdr">
         <h2>Marshall Street</h2>
         <p>1301 Marshall St, Hagerstown, MD 21740</p>
+        <span class="loc-open-badge open"><span class="dot"></span> Open Today</span>
       </div>
       <div class="loc-body">
-
         <div class="loc-row">
-          <div class="loc-row-icon">📍</div>
+          <div class="loc-row-icon">&#128205;</div>
           <div>
             <span class="loc-row-label">Address</span>
             <p class="loc-row-val">1301 Marshall Street<br/>Hagerstown, MD 21740</p>
           </div>
         </div>
-
         <div class="loc-row">
-          <div class="loc-row-icon">📞</div>
+          <div class="loc-row-icon">&#128222;</div>
           <div>
             <span class="loc-row-label">Phone</span>
             <p class="loc-row-val"><a href="tel:3017395483">301.739.5483</a></p>
           </div>
         </div>
-
         <div class="loc-row">
-          <div class="loc-row-icon">🕐</div>
+          <div class="loc-row-icon">&#128336;</div>
           <div style="flex:1;">
             <span class="loc-row-label">Hours</span>
             <table class="hours-table">
-              <tr><td>Monday – Saturday</td><td>10:00am – 8:00pm</td></tr>
-              <tr><td>Sunday</td><td>11:00am – 7:00pm</td></tr>
+              <tr id="mst-mf"><td>Monday &ndash; Saturday</td><td>10:00am &ndash; 8:00pm</td></tr>
+              <tr id="mst-su"><td>Sunday</td><td>11:00am &ndash; 7:00pm</td></tr>
             </table>
           </div>
         </div>
-
         <div class="loc-row">
-          <div class="loc-row-icon">📲</div>
+          <div class="loc-row-icon">&#128242;</div>
           <div>
-            <span class="loc-row-label">Follow &amp; Order</span>
+            <span class="loc-row-label">Follow &amp; Connect</span>
             <div class="loc-soc-row">
-              <a href="#" class="loc-soc-btn fb">📘 Facebook</a>
-              <a href="#" class="loc-soc-btn ta">⭐ TripAdvisor</a>
+              <a href="#" class="loc-soc-btn fb">&#128152; Facebook</a>
+              <a href="#" class="loc-soc-btn ta">&#11088; TripAdvisor</a>
             </div>
           </div>
         </div>
-
+      </div>
+      <div class="loc-card-actions">
+        <a href="tel:3017395483" class="loc-action-btn">&#128222; Call</a>
+        <a href="https://maps.google.com/?q=1301+Marshall+St+Hagerstown+MD" target="_blank" rel="noopener" class="loc-action-btn">&#128506; Directions</a>
+        <a href="order.html" class="loc-action-btn primary">&#128722; Order Now</a>
       </div>
       <div class="loc-map">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3076.5!2d-77.7100!3d39.6500!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c9e3000000002%3A0x0!2s1301+Marshall+St%2C+Hagerstown%2C+MD+21740!5e0!3m2!1sen!2sus!4v1"
-          width="100%" height="240" style="border:0;" allowfullscreen="" loading="lazy"
+          width="100%" height="260" style="border:0;" allowfullscreen="" loading="lazy"
           referrerpolicy="no-referrer-when-downgrade">
         </iframe>
       </div>
@@ -197,26 +237,26 @@
   </div>
 
   <!-- ORDER CTA -->
-  <div class="contact-order-cta">
+  <div class="contact-order-cta reveal">
     <h3>Ready to Order?</h3>
     <p>Place your order online for pickup, or give us a call and we'll have it ready when you arrive.</p>
     <div class="cta-btn-row">
-      <a href="order.html" class="btn btn-white btn-lg">Order Online</a>
-      <button onclick="showCallPopup()" class="btn btn-outline-white btn-lg">Call to Order</button>
+      <a href="order.html" class="btn btn-white btn-lg">&#128722; Order Online</a>
+      <button onclick="showCallPopup()" class="btn btn-outline-white btn-lg">&#128222; Call to Order</button>
     </div>
   </div>
 
 </div>
 
-<!-- ===== FOOTER ===== -->
+<!-- FOOTER -->
 <footer class="footer">
   <div class="footer-body">
     <div>
       <div class="ftr-logo">Hartle's <span>Subs</span></div>
       <p class="ftr-desc">Hagerstown's home for handmade subs since 1985. Fresh ingredients, made-to-order, your way every time.</p>
       <div class="ftr-socials">
-        <a href="#" title="Facebook">📘</a>
-        <a href="#" title="Instagram">📸</a>
+        <a href="#" title="Facebook">&#128152;</a>
+        <a href="#" title="Instagram">&#128248;</a>
       </div>
     </div>
     <div>
@@ -226,6 +266,7 @@
         <li><a href="menu.html">Menu</a></li>
         <li><a href="order.html">Order Online</a></li>
         <li><a href="contact.html">Locations</a></li>
+        <li><a href="#" onclick="showCallPopup();return false;">Call to Order</a></li>
       </ul>
     </div>
     <div>
@@ -242,8 +283,8 @@
     <div>
       <div class="ftr-col-title">Hours</div>
       <div class="ftr-hrs">
-        <div class="ftr-hrs-row"><span>Mon – Sat</span><span>10am – 8pm</span></div>
-        <div class="ftr-hrs-row"><span>Sunday</span><span>11am – 7pm</span></div>
+        <div class="ftr-hrs-row"><span>Monday &ndash; Saturday</span><span>10am &ndash; 8pm</span></div>
+        <div class="ftr-hrs-row"><span>Sunday</span><span>11am &ndash; 7pm</span></div>
       </div>
     </div>
   </div>
@@ -255,39 +296,60 @@
   </div>
 </footer>
 
-<!-- ===== CALL MODAL ===== -->
+<!-- CALL MODAL -->
 <div id="callModal">
   <div class="call-card">
-    <button class="call-close" onclick="hideCallPopup()">✕</button>
-    <div class="call-icon">🥖</div>
+    <button class="call-close" onclick="hideCallPopup()">&#10005;</button>
+    <div class="call-icon">&#129366;</div>
     <div class="call-title">Call to Order</div>
-    <p class="call-sub">Browse our menu, then give us a call and we'll have your order ready in about 20–30 minutes!</p>
+    <p class="call-sub">Browse our menu, then give us a call and we'll have your order ready in about 20&ndash;30 minutes!</p>
     <div class="call-loc">
-      <div class="call-loc-name">📍 Potomac Street</div>
+      <div class="call-loc-name">&#128205; Potomac Street</div>
       <a href="tel:3017395473" class="call-loc-phone">301.739.5473</a>
-      <div class="call-loc-hrs">Mon–Sat 10am–8pm &nbsp;|&nbsp; Sun 11am–7pm</div>
+      <div class="call-loc-hrs">Mon&ndash;Sat 10am&ndash;8pm &nbsp;|&nbsp; Sun 11am&ndash;7pm</div>
     </div>
     <div class="call-loc">
-      <div class="call-loc-name">📍 Marshall Street</div>
+      <div class="call-loc-name">&#128205; Marshall Street</div>
       <a href="tel:3017395483" class="call-loc-phone">301.739.5483</a>
-      <div class="call-loc-hrs">Mon–Sat 10am–8pm &nbsp;|&nbsp; Sun 11am–7pm</div>
+      <div class="call-loc-hrs">Mon&ndash;Sat 10am&ndash;8pm &nbsp;|&nbsp; Sun 11am&ndash;7pm</div>
     </div>
-    <a href="menu.html" class="call-view-menu">View Full Menu 🍽️</a>
+    <a href="menu.html" class="call-view-menu">View Full Menu &#127869;&#65039;</a>
   </div>
 </div>
 
 <script>
-function showCallPopup() {
+function showCallPopup(){
   document.getElementById('callModal').classList.add('open');
-  document.body.style.overflow = 'hidden';
+  document.body.style.overflow='hidden';
 }
-function hideCallPopup() {
+function hideCallPopup(){
   document.getElementById('callModal').classList.remove('open');
-  document.body.style.overflow = '';
+  document.body.style.overflow='';
 }
-document.getElementById('callModal').addEventListener('click', function(e) {
-  if (e.target === this) hideCallPopup();
+document.getElementById('callModal').addEventListener('click',function(e){
+  if(e.target===this) hideCallPopup();
 });
+
+// Highlight today's row
+(function(){
+  var day = new Date().getDay(); // 0=Sun
+  var isSun = day === 0;
+  ['ptr-mf','mst-mf'].forEach(function(id){
+    if(!isSun){ var el=document.getElementById(id); if(el) el.classList.add('today'); }
+  });
+  ['ptr-su','mst-su'].forEach(function(id){
+    if(isSun){ var el=document.getElementById(id); if(el) el.classList.add('today'); }
+  });
+})();
+
+// Scroll reveal
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+  },{threshold:0.1});
+  els.forEach(function(el){ io.observe(el); });
+})();
 </script>
 </body>
 </html>
