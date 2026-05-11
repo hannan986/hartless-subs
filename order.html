@@ -949,16 +949,7 @@ input,select,textarea{font-family:inherit;}
           <label class="w-pill" for="wDI">🍽️ Dine In</label>
         </div>
       </div>
-      <div class="w-field">
-        <span class="w-lbl">⏰ When</span>
-        <div class="w-pills">
-          <input type="radio" name="wwhen" id="wNow" value="ASAP" checked/>
-          <label class="w-pill" for="wNow">⚡ ASAP</label>
-          <input type="radio" name="wwhen" id="wSched" value="Later Today"/>
-          <label class="w-pill" for="wSched">📅 Later Today</label>
-        </div>
-        
-      </div>
+      
       <button type="button" class="w-btn" id="btnStart">Start My Order →</button>
       <p class="w-toast-note">🔒 You'll be taken to our secure Toast ordering system in a new tab.</p>
     </div>
@@ -1808,15 +1799,12 @@ document.addEventListener('DOMContentLoaded',function(){
   document.querySelectorAll('input[name="wwhen"]').forEach(function(r){
     r.addEventListener('change',function(){
       var row=$$('wTimeRow'), err=$$('wTimeErr');
-      if(this.value==='Later Today'){
-        row.classList.add('visible'); row.classList.remove('error');
-        err.classList.remove('visible');
-      } else {
+      
         row.classList.remove('visible','error');
         err.classList.remove('visible');
         $$('wTimeInput').value='';
       }
-    });
+    );
   });
   $$('custOverlay').addEventListener('click',function(e){if(e.target===this)closeCust();});
   $$('confOverlay').addEventListener('click',function(e){if(e.target===this)closeConf();});
