@@ -8,46 +8,162 @@
 <link rel="stylesheet" href="style.css"/>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet"/>
 <style>
-/* Menu Page Redesign */
-.menu-items-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;}
-.mic{padding:1.15rem 1.6rem;border-bottom:1px solid #f0f0f0;border-right:1px solid #f0f0f0;display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;transition:background .18s;cursor:default;}
-.mic:nth-child(2n){border-right:none;}
-.mic:hover{background:#fafafa;}
-.mic-left{flex:1;min-width:0;}
-.mic-name{font-weight:700;font-size:.95rem;color:var(--black);margin-bottom:.22rem;display:flex;align-items:center;gap:.45rem;flex-wrap:wrap;}
-.mic-desc{font-size:.8rem;color:var(--mid);line-height:1.5;}
-.mic-price{font-family:var(--ff-h);font-size:1.05rem;font-weight:700;color:var(--red);white-space:nowrap;flex-shrink:0;}
-.mic.wide{grid-column:1/-1;}
-.mic-sauces{display:flex;flex-wrap:wrap;gap:.25rem;margin-top:.45rem;}
-.msec-grad-hdr{display:flex;align-items:center;gap:1.2rem;padding:1.4rem 2rem;color:#fff;position:relative;overflow:hidden;}
-.msec-grad-hdr::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 30px,rgba(255,255,255,.03) 30px,rgba(255,255,255,.03) 31px);pointer-events:none;}
-.msec-grad-icon{font-size:2.2rem;line-height:1;flex-shrink:0;position:relative;z-index:1;}
-.msec-grad-text{position:relative;z-index:1;flex:1;}
-.msec-grad-text h2{font-family:var(--ff-h);font-size:1.75rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#fff;line-height:1;}
-.msec-grad-text p{font-size:.8rem;color:rgba(255,255,255,.72);margin-top:.3rem;}
-.msec-grad-count{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:4px;font-family:var(--ff-h);font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;padding:.28rem .75rem;color:rgba(255,255,255,.9);flex-shrink:0;position:relative;z-index:1;}
-.fab-order{position:fixed;bottom:1.8rem;right:1.8rem;background:var(--red);color:#fff;font-family:var(--ff-h);font-size:.8rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:.88rem 1.7rem;border-radius:50px;box-shadow:0 8px 24px rgba(228,0,43,.4);z-index:400;cursor:pointer;border:none;opacity:0;transform:translateY(12px);transition:all .28s ease;display:flex;align-items:center;gap:.5rem;text-decoration:none;}
-.fab-order.vis{opacity:1;transform:translateY(0);}
-.fab-order:hover{background:var(--red-dk);transform:translateY(-2px);box-shadow:0 12px 28px rgba(228,0,43,.5);}
-.menu-hero-ctas{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:1.8rem;}
-.mp-strip-w{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:1.6rem 2rem 2rem;margin-bottom:1.5rem;box-shadow:var(--shadow-sm);}
-.mp-card-w{background:var(--off);border:1.5px solid var(--border);border-left:4px solid var(--red);border-radius:var(--r);padding:.9rem .85rem;display:flex;flex-direction:column;gap:.3rem;transition:all .18s;cursor:pointer;text-decoration:none;}
-.mp-card-w:hover{background:#fff;border-color:var(--red);transform:translateY(-2px);box-shadow:var(--shadow-md);}
-.mp-card-w .mp-card-num{color:var(--red);}
-.mp-card-w .mp-card-name{color:var(--black);}
-.mp-card-w .mp-card-cat{color:var(--mid);}
-.mp-card-w .mp-card-price{color:var(--red);}
-.since-badge{display:inline-block;background:var(--red);color:#fff;font-family:var(--ff-h);font-size:.62rem;letter-spacing:2px;text-transform:uppercase;padding:.32rem .8rem;border-radius:20px;margin-bottom:.6rem;}
-@media(max-width:600px){
-  .menu-items-grid{grid-template-columns:1fr;}
-  .mic{border-right:none!important;}
-  .mic.wide{grid-column:auto;}
-  .msec-grad-hdr{padding:1rem 1.2rem;gap:.8rem;}
-  .msec-grad-icon{font-size:1.6rem;}
-  .msec-grad-text h2{font-size:1.35rem;letter-spacing:1.5px;}
-  .msec-grad-count{display:none;}
-  .fab-order{bottom:1rem;right:1rem;font-size:.75rem;padding:.75rem 1.3rem;}
-  .menu-hero-ctas{gap:.6rem;}
+/* ─── PAGE SHELL ────────────────────────────────────────── */
+body{background:#f7f7f7;}
+
+/* ─── HERO ──────────────────────────────────────────────── */
+.mn-hero{
+  background:#111;
+  padding:3.5rem 1.5rem 3rem;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.mn-hero::before{
+  content:'';position:absolute;inset:0;
+  background:url('images/menu/phily_cheasteak_image.png') center/cover no-repeat;
+  opacity:.18;
+}
+.mn-hero-inner{position:relative;z-index:1;}
+.mn-hero-eyebrow{
+  display:inline-block;font-family:var(--ff-h);font-size:.65rem;
+  letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.55);
+  border:1px solid rgba(255,255,255,.18);padding:.3rem 1rem;border-radius:20px;
+  margin-bottom:.9rem;
+}
+.mn-hero h1{
+  font-family:var(--ff-h);font-size:clamp(2.2rem,7vw,3.5rem);
+  font-weight:700;letter-spacing:4px;text-transform:uppercase;
+  color:#fff;line-height:1;margin-bottom:.6rem;
+}
+.mn-hero p{color:rgba(255,255,255,.55);font-size:.9rem;margin-bottom:1.4rem;}
+.mn-hero-btns{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;}
+
+/* ─── STICKY CATEGORY NAV ───────────────────────────────── */
+.cat-nav{
+  position:sticky;top:60px;z-index:300;
+  background:#fff;border-bottom:1px solid #e5e7eb;
+  box-shadow:0 2px 10px rgba(0,0,0,.07);
+}
+.cat-nav-inner{
+  display:flex;overflow-x:auto;scrollbar-width:none;
+  gap:0;max-width:1200px;margin:0 auto;padding:0 1rem;
+}
+.cat-nav-inner::-webkit-scrollbar{display:none;}
+.cat-tab{
+  background:none;border:none;border-bottom:3px solid transparent;
+  font-family:var(--ff-h);font-size:.75rem;font-weight:700;
+  letter-spacing:1.2px;text-transform:uppercase;
+  color:#6b7280;padding:.95rem 1.1rem;white-space:nowrap;
+  cursor:pointer;transition:color .18s,border-color .18s;
+  margin-bottom:-1px;flex-shrink:0;
+}
+.cat-tab:hover{color:#111827;}
+.cat-tab.active{color:#E4002B;border-bottom-color:#E4002B;}
+
+/* ─── MAIN CONTENT ──────────────────────────────────────── */
+.mn-wrap{max-width:1200px;margin:0 auto;padding:0 1.5rem 4rem;}
+
+/* ─── SECTION ───────────────────────────────────────────── */
+.mn-section{padding:2.5rem 0;}
+.mn-section+.mn-section{border-top:1px solid #e5e7eb;}
+.mn-sec-hdr{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:1.5rem;}
+.mn-sec-title{
+  font-family:var(--ff-h);font-size:1.45rem;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;color:#111827;
+  display:flex;align-items:center;gap:.6rem;
+}
+.mn-sec-title span{font-size:1.6rem;line-height:1;}
+.mn-sec-sub{font-size:.8rem;color:#9ca3af;margin-top:.15rem;}
+.mn-sec-count{font-family:var(--ff-h);font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;color:#9ca3af;}
+
+/* ─── CARD GRID ─────────────────────────────────────────── */
+.mn-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1.25rem;
+}
+@media(max-width:960px){.mn-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:500px){.mn-grid{grid-template-columns:1fr 1fr;gap:.75rem;}}
+
+/* ─── CARD ──────────────────────────────────────────────── */
+.mc{
+  background:#fff;border-radius:12px;overflow:hidden;
+  border:1px solid #e5e7eb;
+  box-shadow:0 1px 3px rgba(0,0,0,.06),0 4px 12px rgba(0,0,0,.04);
+  display:flex;flex-direction:column;
+  transition:transform .22s ease,box-shadow .22s ease;
+  cursor:default;
+}
+.mc:hover{
+  transform:translateY(-4px);
+  box-shadow:0 8px 30px rgba(0,0,0,.13);
+}
+
+/* Image area */
+.mc-img{
+  aspect-ratio:16/10;
+  background-size:cover;background-position:center;
+  position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.mc-img.has-photo::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(160deg,rgba(0,0,0,.04) 0%,rgba(0,0,0,.22) 100%);
+}
+.mc-grad{background-size:100% 100%;}
+.mc-big-emoji{font-size:3rem;filter:drop-shadow(0 2px 8px rgba(0,0,0,.25));line-height:1;}
+.mc-badge{
+  position:absolute;top:.55rem;left:.55rem;z-index:2;
+  font-family:var(--ff-h);font-size:.57rem;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;
+  padding:.22rem .6rem;border-radius:4px;color:#fff;
+}
+.mc-badge.pop{background:#E4002B;}
+.mc-badge.hot{background:#dc6803;}
+.mc-badge.new{background:#059669;}
+
+/* Card body */
+.mc-body{padding:.85rem 1rem 1rem;flex:1;display:flex;flex-direction:column;}
+.mc-name{font-weight:700;font-size:.92rem;color:#111827;line-height:1.35;margin-bottom:.3rem;}
+.mc-desc{font-size:.76rem;color:#6b7280;line-height:1.55;flex:1;}
+.mc-footer{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:.75rem;padding-top:.6rem;border-top:1px solid #f3f4f6;
+}
+.mc-price{
+  font-family:var(--ff-h);font-size:1.1rem;font-weight:700;color:#E4002B;
+}
+.mc-sauces{display:flex;flex-wrap:wrap;gap:.25rem;margin-top:.4rem;}
+.mc-sauce{
+  background:#f3f4f6;color:#374151;font-size:.62rem;font-weight:600;
+  padding:.15rem .4rem;border-radius:3px;
+}
+
+/* Order CTA (bottom) */
+.mn-cta{
+  background:#111827;border-radius:14px;padding:2.5rem 2rem;
+  text-align:center;margin-top:2rem;
+}
+.mn-cta-eyebrow{font-family:var(--ff-h);font-size:.65rem;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.4);display:block;margin-bottom:.5rem;}
+.mn-cta h3{font-family:var(--ff-h);font-size:1.7rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;margin-bottom:.4rem;}
+.mn-cta p{color:rgba(255,255,255,.5);font-size:.88rem;margin-bottom:1.4rem;}
+.mn-cta-btns{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;}
+
+/* Mobile card tweaks */
+@media(max-width:500px){
+  .mc-img{aspect-ratio:4/3;}
+  .mc-big-emoji{font-size:2.2rem;}
+  .mc-body{padding:.7rem .75rem .85rem;}
+  .mc-name{font-size:.84rem;}
+  .mc-desc{font-size:.72rem;}
+  .mc-price{font-size:.95rem;}
+  .mn-hero{padding:2.5rem 1rem 2rem;}
+  .mn-wrap{padding:0 .75rem 3rem;}
+  .mn-sec-hdr{margin-bottom:1rem;}
+}
+@media(max-width:360px){
+  .mn-grid{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -73,411 +189,1459 @@
 </header>
 
 <!-- HERO -->
-<div class="page-hero" style="background-image:url('images/menu/phily_cheasteak_image.png');background-size:cover;background-position:center;">
-  <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(100,15,8,.92) 0%,rgba(192,57,43,.82) 100%);"></div>
-  <div class="page-hero-texture"></div>
-  <div class="page-hero-content" style="position:relative;z-index:1;text-align:center;">
-    <span class="since-badge">&#10051; Since 1955 &#10051;</span>
-    <h1 style="font-size:clamp(2.4rem,8vw,4.2rem);margin-bottom:.6rem;">Our Menu</h1>
-    <p style="font-size:1.05rem;margin-bottom:0;">Fresh ingredients, handmade to order — your way, every time.</p>
-    <div class="menu-hero-ctas">
-      <a href="order.html" class="btn btn-red btn-lg">🛒 Order Online</a>
-      <button onclick="showCallPopup()" class="btn btn-outline-white btn-lg">📞 Call to Order</button>
+<div class="mn-hero">
+  <div class="mn-hero-inner">
+    <span class="mn-hero-eyebrow">&#10051; Hagerstown, MD Since 1955 &#10051;</span>
+    <h1>Our Menu</h1>
+    <p>Fresh ingredients, handmade to order — your way, every time.</p>
+    <div class="mn-hero-btns">
+      <a href="order.html" class="btn btn-red btn-lg">Order Online</a>
+      <button onclick="showCallPopup()" class="btn btn-outline-white btn-lg">Call to Order</button>
     </div>
   </div>
 </div>
 
-<!-- STICKY TABS -->
-<div class="menu-cat-tabs-bar">
-  <div class="menu-cat-tabs-inner">
-    <button class="menu-tab active" onclick="scrollToSec('cold-subs',this)">🥖 Cold Subs</button>
-    <button class="menu-tab" onclick="scrollToSec('hot-subs',this)">🔥 Hot Subs</button>
-    <button class="menu-tab" onclick="scrollToSec('sandwiches',this)">🥪 Sandwiches</button>
-    <button class="menu-tab" onclick="scrollToSec('steamers',this)">🫕 Steamers</button>
-    <button class="menu-tab" onclick="scrollToSec('flying-saucers',this)">🛸 Flying Saucers</button>
-    <button class="menu-tab" onclick="scrollToSec('wings',this)">🍗 Wings</button>
-    <button class="menu-tab" onclick="scrollToSec('wraps',this)">🌯 Wraps</button>
-    <button class="menu-tab" onclick="scrollToSec('salads',this)">🥗 Salads</button>
-    <button class="menu-tab" onclick="scrollToSec('snacks-sides',this)">🍟 Snacks</button>
-    <button class="menu-tab" onclick="scrollToSec('desserts',this)">🍰 Desserts</button>
-    <button class="menu-tab" onclick="scrollToSec('drinks',this)">🥤 Drinks</button>
-    <button class="menu-tab" onclick="scrollToSec('misc-items',this)">🛒 Misc</button>
+<!-- STICKY CATEGORY NAV -->
+<div class="cat-nav">
+  <div class="cat-nav-inner">
+    <button class="cat-tab active" onclick="scrollTo2('cold-subs',this)">🥖 Cold Subs</button>
+    <button class="cat-tab" onclick="scrollTo2('hot-subs',this)">🔥 Hot Subs</button>
+    <button class="cat-tab" onclick="scrollTo2('sandwiches',this)">🥪 Sandwiches</button>
+    <button class="cat-tab" onclick="scrollTo2('steamers',this)">🫕 Steamers</button>
+    <button class="cat-tab" onclick="scrollTo2('flying-saucers',this)">🛸 Flying Saucers</button>
+    <button class="cat-tab" onclick="scrollTo2('wings',this)">🍗 Wings</button>
+    <button class="cat-tab" onclick="scrollTo2('wraps',this)">🌯 Wraps</button>
+    <button class="cat-tab" onclick="scrollTo2('salads',this)">🥗 Salads</button>
+    <button class="cat-tab" onclick="scrollTo2('snacks-sides',this)">🍟 Snacks</button>
+    <button class="cat-tab" onclick="scrollTo2('desserts',this)">🍰 Desserts</button>
+    <button class="cat-tab" onclick="scrollTo2('drinks',this)">🥤 Drinks</button>
+    <button class="cat-tab" onclick="scrollTo2('misc-items',this)">🛒 Misc</button>
   </div>
 </div>
 
-<!-- CALL BANNER -->
-<div class="menu-call-bar">
-  <div class="menu-call-inner">
-    <div class="menu-call-text">
-      <p>Ready to order? Call ahead and we'll have it ready!</p>
-      <p class="sub">Browse below, then call your nearest location or order online.</p>
+<!-- MENU CONTENT -->
+<div class="mn-wrap">
+
+<!-- ═══════════════════════════════════════════════════════
+     COLD SUBS
+═══════════════════════════════════════════════════════ -->
+<div class="mn-section" id="cold-subs">
+  <div class="mn-sec-hdr">
+    <div>
+      <div class="mn-sec-title"><span>🥖</span> Cold Subs</div>
+      <div class="mn-sec-sub">Choice of toppings &amp; dressings — your way</div>
     </div>
-    <div class="menu-call-btns">
-      <a href="tel:3017395473" class="menu-call-btn">📞 Potomac St — 301.739.5473</a>
-      <a href="tel:3017395483" class="menu-call-btn">📞 Marshall St — 301.739.5483</a>
-      <a href="order.html" class="menu-call-btn" style="background:var(--dark);">🛒 Order Online</a>
+    <div class="mn-sec-count">16 items</div>
+  </div>
+  <div class="mn-grid">
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/sandwich.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Cold Cut Sub</div>
+        <div class="mc-desc">Hartle's Select Bologna, Salami and American Cheese, generously sliced and specially seasoned.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Cold Cut Sub">$12.80</div></div>
+      </div>
     </div>
-  </div>
-</div>
 
-<!-- CONTENT -->
-<div class="menu-page-bg">
-<div class="menu-content">
-
-<!-- PHOTO STRIP -->
-<div class="menu-photo-strip">
-  <div class="mps-item"><img src="images/menu/sandwich.png" alt="Cold Cut Sub"/></div>
-  <div class="mps-item"><img src="images/menu/phily_cheasteak_image.png" alt="Philly Cheesesteak"/></div>
-  <div class="mps-item"><img src="images/menu/sandwich_2.png" alt="Sub Sandwich"/></div>
-  <div class="mps-item"><img src="images/menu/phily_cheasktake_2.png" alt="Steak Sub"/></div>
-  <div class="mps-item"><img src="images/menu/bread_salad.png" alt="Salad"/></div>
-</div>
-
-<!-- MOST POPULAR -->
-<div class="mp-strip-w">
-  <div class="mp-strip-hdr">
-    <div class="mp-strip-title">&#9733; Most <span>Popular</span></div>
-    <div class="mp-strip-sub">Customer favorites — order with confidence</div>
-  </div>
-  <div class="mp-cards">
-    <a class="mp-card-w" href="#cold-subs" onclick="scrollToSec('cold-subs',document.querySelectorAll('.menu-tab')[0]);return false;">
-      <div class="mp-card-num">#1 Pick</div>
-      <div class="mp-card-name">Italian Cold Cut</div>
-      <div class="mp-card-cat">Cold Subs</div>
-      <div class="mp-card-price">$14.30</div>
-    </a>
-    <a class="mp-card-w" href="#hot-subs" onclick="scrollToSec('hot-subs',document.querySelectorAll('.menu-tab')[1]);return false;">
-      <div class="mp-card-num">#1 Hot</div>
-      <div class="mp-card-name">Steak & Cheese</div>
-      <div class="mp-card-cat">Hot Subs</div>
-      <div class="mp-card-price">$14.30</div>
-    </a>
-    <a class="mp-card-w" href="#sandwiches" onclick="scrollToSec('sandwiches',document.querySelectorAll('.menu-tab')[2]);return false;">
-      <div class="mp-card-num">Favorite</div>
-      <div class="mp-card-name">Reuben</div>
-      <div class="mp-card-cat">Sandwiches</div>
-      <div class="mp-card-price">$7.90</div>
-    </a>
-    <a class="mp-card-w" href="#wraps" onclick="scrollToSec('wraps',document.querySelectorAll('.menu-tab')[6]);return false;">
-      <div class="mp-card-num">Top Wrap</div>
-      <div class="mp-card-name">Club Wrap</div>
-      <div class="mp-card-cat">Wraps</div>
-      <div class="mp-card-price">$8.40</div>
-    </a>
-    <a class="mp-card-w" href="#wings" onclick="scrollToSec('wings',document.querySelectorAll('.menu-tab')[5]);return false;">
-      <div class="mp-card-num">Best Seller</div>
-      <div class="mp-card-name">8 Pc Wings</div>
-      <div class="mp-card-cat">Wings</div>
-      <div class="mp-card-price">$10.99</div>
-    </a>
-    <a class="mp-card-w" href="#desserts" onclick="scrollToSec('desserts',document.querySelectorAll('.menu-tab')[9]);return false;">
-      <div class="mp-card-num">Must Try</div>
-      <div class="mp-card-name">Funnel Cake Fries</div>
-      <div class="mp-card-cat">Desserts</div>
-      <div class="mp-card-price">$5.50</div>
-    </a>
-  </div>
-</div>
-
-<!-- COLD SUBS -->
-<div class="menu-section" id="cold-subs">
-  <div class="msec-grad-hdr" style="background:linear-gradient(135deg,#1e5f9e 0%,#2d7abf 100%);">
-    <div class="msec-grad-icon">🥖</div>
-    <div class="msec-grad-text">
-      <h2>Cold Subs</h2>
-      <p>Choice of toppings & dressings included — your way</p>
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/sandwich.png')">
+        <span class="mc-badge pop">Popular</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Italian Cold Cut Sub</div>
+        <div class="mc-desc">Thinly sliced Capicola Ham, Hard Salami, Peppered Ham, Provolone Cheese, and Italian Dressing.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Italian Cold Cut Sub">$14.30</div></div>
+      </div>
     </div>
-    <div class="msec-grad-count">16 items</div>
-  </div>
-  <div class="menu-items-grid">
-    <div class="mic"><div class="mic-left"><div class="mic-name">Cold Cut Sub</div><div class="mic-desc">Hartle's Select Bologna, Salami and American Cheese, generously sliced and specially seasoned.</div></div><div class="mic-price">$12.80</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Italian Cold Cut Sub <span class="mir-badge pop">Popular</span></div><div class="mic-desc">Thinly sliced Capicola Ham, Hard Salami, Peppered Ham, Provolone Cheese, and Italian Dressing.</div></div><div class="mic-price">$14.30</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Ham w/ Cheese Sub</div><div class="mic-desc">Hartle's select 95% fat free ham sliced just the way you like with white American cheese.</div></div><div class="mic-price">$12.80</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Turkey w/ Cheese Sub</div><div class="mic-desc">Hartle's smoked turkey breast sliced fresh in our stores daily.</div></div><div class="mic-price">$12.90</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Roast Beef w/ Cheese Sub</div><div class="mic-desc">Hartle's select oven-roasted beef Top Round thinly sliced, served piled high under white American cheese.</div></div><div class="mic-price">$13.30</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Combo Sub <span class="mir-badge pop">Popular</span></div><div class="mic-desc">Hartle's cold cut combined with Hartle's ham and cheese. What a combination.</div></div><div class="mic-price">$13.55</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Club Sub</div><div class="mic-desc">Turkey, ham & crispy bacon piled high with lettuce, tomato & mayo on a fresh-baked roll.</div></div><div class="mic-price">$13.75</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">BLT Sub</div><div class="mic-desc">Crispy bacon, crisp lettuce, and sliced red tomatoes on a fresh-baked roll.</div></div><div class="mic-price">$13.55</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Chicken Salad Sub</div><div class="mic-desc">Creamy homemade chicken salad with fresh lettuce & tomato.</div></div><div class="mic-price">$13.50</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Tuna Salad Sub</div><div class="mic-desc">Creamy homemade tuna salad with fresh lettuce & tomato.</div></div><div class="mic-price">$13.50</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Egg Salad Sub</div><div class="mic-desc">Creamy homemade egg salad made fresh daily.</div></div><div class="mic-price">$12.80</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Veggie Sub</div><div class="mic-desc">Choose from our list of toppings and condiments to create your own veggie sub just the way you like it.</div></div><div class="mic-price">$12.80</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Cheese Sub</div><div class="mic-desc">Your choice of cheese on a fresh-baked roll with your favorite toppings.</div></div><div class="mic-price">$12.80</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Pastrami Sub</div><div class="mic-desc">Thinly sliced seasoned pastrami with Swiss & spicy brown mustard on a toasted roll.</div></div><div class="mic-price">$14.05</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Bologna Sub</div><div class="mic-desc">Classic bologna sliced fresh with your choice of cheese and toppings.</div></div><div class="mic-price">$12.80</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Salami Sub</div><div class="mic-desc">Thinly sliced salami with provolone and fresh veggies on a toasted roll.</div></div><div class="mic-price">$12.80</div></div>
-  </div>
-</div>
 
-<!-- HOT SUBS -->
-<div class="menu-section" id="hot-subs">
-  <div class="msec-grad-hdr" style="background:linear-gradient(135deg,#E4002B 0%,#c20020 100%);">
-    <div class="msec-grad-icon">🔥</div>
-    <div class="msec-grad-text">
-      <h2>Hot Subs</h2>
-      <p>Freshly grilled & served on a toasted roll</p>
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/sandwich_2.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Ham w/ Cheese Sub</div>
+        <div class="mc-desc">Hartle's select 95% fat free ham sliced just the way you like with white American cheese.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Ham w/ Cheese Sub">$12.80</div></div>
+      </div>
     </div>
-    <div class="msec-grad-count">8 items</div>
-  </div>
-  <div class="menu-items-grid">
-    <div class="mic"><div class="mic-left"><div class="mic-name">Steak & Cheese Sub <span class="mir-badge hot">🔥 Hot</span></div><div class="mic-desc">Chopped Steak & Provolone Cheese topped with special seasoning.</div></div><div class="mic-price">$14.30</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Cheeseburger Sub <span class="mir-badge pop">Popular</span></div><div class="mic-desc">Quarter Pound Hamburger Patties and American Cheese on a toasted roll.</div></div><div class="mic-price">$14.30</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Hamburger Sub</div><div class="mic-desc">Fresh beef patty on a toasted roll with your choice of toppings.</div></div><div class="mic-price">$14.30</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Grilled Chicken Sub</div><div class="mic-desc">Marinated chicken breast grilled fresh with lettuce, tomato & honey mustard.</div></div><div class="mic-price">$13.95</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Fried Chicken Sub</div><div class="mic-desc">Hartle's select white meat chicken breast fried to a golden brown, served just the way you like it.</div></div><div class="mic-price">$13.65</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Meatball Sub</div><div class="mic-desc">Hartle's Italian meatballs combined with our special sauce on provolone cheese. Extra napkins may be required.</div></div><div class="mic-price">$12.80</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Steamer w/ Cheese Sub</div><div class="mic-desc">Hartle's steamer prepared fresh daily from specially seasoned ground beef, onion, and ketchup, generously portioned with white American cheese.</div></div><div class="mic-price">$12.80</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Hot Pastrami Sub <span class="mir-badge hot">🔥 Hot</span></div><div class="mic-desc">Hot pastrami with melted Swiss & spicy brown mustard on a toasted roll.</div></div><div class="mic-price">$14.30</div></div>
-  </div>
-</div>
 
-<!-- SANDWICHES -->
-<div class="menu-section" id="sandwiches">
-  <div class="msec-grad-hdr" style="background:linear-gradient(135deg,#256025 0%,#1a8a1a 100%);">
-    <div class="msec-grad-icon">🥪</div>
-    <div class="msec-grad-text">
-      <h2>Sandwiches</h2>
-      <p>White, Wheat, or Marble Rye — your choice</p>
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/sandwich_2.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Turkey w/ Cheese Sub</div>
+        <div class="mc-desc">Hartle's smoked turkey breast sliced fresh in our stores daily.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Turkey w/ Cheese Sub">$12.90</div></div>
+      </div>
     </div>
-    <div class="msec-grad-count">15 items</div>
-  </div>
-  <div class="menu-items-grid">
-    <div class="mic"><div class="mic-left"><div class="mic-name">Hot Dog</div><div class="mic-desc">All beef hot dog on a potato roll.</div></div><div class="mic-price">$3.75</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Steamer Sandwich</div><div class="mic-desc">Hartle's steamer prepared fresh daily from specially seasoned ground beef, onion, and ketchup. Served on a potato roll.</div></div><div class="mic-price">$5.90</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Turkey w/ Cheese</div><div class="mic-desc">Hartle's oven roasted turkey breast sliced just the way you like with white American cheese.</div></div><div class="mic-price">$6.90</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Ham w/ Cheese</div><div class="mic-desc">Hartle's select 95% fat-free ham sliced just the way you like with white American cheese.</div></div><div class="mic-price">$6.80</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Cold Cut</div><div class="mic-desc">Classic cold cuts on your bread of choice with all the fresh fixings.</div></div><div class="mic-price">$6.70</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Roast Beef w/ Cheese</div><div class="mic-desc">Hartle's select oven roasted beef Top Round thinly sliced under white American cheese.</div></div><div class="mic-price">$7.05</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Chicken Salad Sandwich</div><div class="mic-desc">Homemade chicken salad on toasted bread with lettuce & tomato.</div></div><div class="mic-price">$7.05</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Tuna Salad Sandwich</div><div class="mic-desc">Homemade tuna salad on toasted bread with lettuce & tomato.</div></div><div class="mic-price">$7.05</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Steamer Dog</div><div class="mic-desc">All beef hot dog on a potato roll covered with Hartle's Steamer.</div></div><div class="mic-price">$6.00</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">BLT Sandwich</div><div class="mic-desc">Crispy bacon, crisp lettuce, and sliced red tomatoes.</div></div><div class="mic-price">$7.10</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Egg Salad Sandwich</div><div class="mic-desc">Creamy homemade egg salad on white or wheat bread.</div></div><div class="mic-price">$6.40</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Club Sandwich <span class="mir-badge pop">Popular</span></div><div class="mic-desc">Hartle's thinly sliced ham, oven roasted turkey, and crispy bacon on 3 slices of toasted bread.</div></div><div class="mic-price">$7.90</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Peanut Butter & Jelly</div><div class="mic-desc">Your choice of Grape or Strawberry with Creamy Peanut Butter.</div></div><div class="mic-price">$3.50</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Hot Pastrami Sandwich</div><div class="mic-desc">Hot pastrami with melted Swiss & spicy brown mustard.</div></div><div class="mic-price">$7.90</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Reuben <span class="mir-badge pop">Popular</span></div><div class="mic-desc">Marble Rye bread, Pastrami, Swiss, Sauerkraut and Thousand Island Dressing.</div></div><div class="mic-price">$7.90</div></div>
-  </div>
-</div>
 
-<!-- STEAMERS -->
-<div class="menu-section" id="steamers">
-  <div class="msec-grad-hdr" style="background:linear-gradient(135deg,#7c3aed 0%,#6425c5 100%);">
-    <div class="msec-grad-icon">🫕</div>
-    <div class="msec-grad-text">
-      <h2>Steamers</h2>
-      <p>Hartle's signature steamed beef — fresh daily</p>
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/sandwich.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Roast Beef w/ Cheese Sub</div>
+        <div class="mc-desc">Hartle's select oven-roasted beef Top Round thinly sliced, served piled high under white American cheese.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Roast Beef w/ Cheese Sub">$13.30</div></div>
+      </div>
     </div>
-    <div class="msec-grad-count">2 items</div>
-  </div>
-  <div class="menu-items-grid">
-    <div class="mic"><div class="mic-left"><div class="mic-name">Bowl Steamer <span class="mir-badge pop">Popular</span></div><div class="mic-desc">Hartle's steamer in a bowl — freshly prepared seasoned ground beef, onion, and ketchup. A Hartle's classic.</div></div><div class="mic-price">$7.50</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Quart Steamer</div><div class="mic-desc">A full quart of Hartle's house steamer — great for the whole family.</div></div><div class="mic-price">$18.50</div></div>
-  </div>
-</div>
 
-<!-- FLYING SAUCERS -->
-<div class="menu-section" id="flying-saucers">
-  <div class="msec-grad-hdr" style="background:linear-gradient(135deg,#6b21a8 0%,#5b1a98 100%);">
-    <div class="msec-grad-icon">🛸</div>
-    <div class="msec-grad-text">
-      <h2>Flying Saucers</h2>
-      <p>Served on a toasted 5" sesame seed roll</p>
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/sandwich.png')">
+        <span class="mc-badge pop">Popular</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Combo Sub</div>
+        <div class="mc-desc">Hartle's cold cut combined with Hartle's ham and cheese. What a combination.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Combo Sub">$13.55</div></div>
+      </div>
     </div>
-    <div class="msec-grad-count">11 items</div>
-  </div>
-  <div class="menu-items-grid">
-    <div class="mic"><div class="mic-left"><div class="mic-name">Beef Flying Saucer <span class="mir-badge pop">Popular</span></div><div class="mic-desc">Seasoned beef on a round sesame seed roll with your choice of toppings.</div></div><div class="mic-price">$8.75</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Ham Flying Saucer</div><div class="mic-desc">Hartle's select ham on a round sesame seed roll.</div></div><div class="mic-price">$8.75</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Turkey Flying Saucer</div><div class="mic-desc">Hartle's smoked turkey on a round sesame seed roll.</div></div><div class="mic-price">$8.75</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Chicken Salad Flying Saucer</div><div class="mic-desc">Homemade chicken salad on a round sesame seed roll.</div></div><div class="mic-price">$8.75</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Tuna Salad Flying Saucer</div><div class="mic-desc">Homemade tuna salad on a round sesame seed roll.</div></div><div class="mic-price">$8.75</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Cold Cut Flying Saucer</div><div class="mic-desc">Classic cold cuts on a round sesame seed roll.</div></div><div class="mic-price">$8.15</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Veggie Flying Saucer</div><div class="mic-desc">Fresh veggies with your choice of cheese on a round sesame seed roll.</div></div><div class="mic-price">$8.15</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Grilled Chicken Flying Saucer</div><div class="mic-desc">Marinated grilled chicken on a round sesame seed roll.</div></div><div class="mic-price">$8.75</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Fried Chicken Flying Saucer</div><div class="mic-desc">Golden crispy fried chicken on a round sesame seed roll.</div></div><div class="mic-price">$8.75</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Cheeseburger Flying Saucer</div><div class="mic-desc">Juicy beef patty with melted cheese on a round sesame seed roll.</div></div><div class="mic-price">$8.75</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Steak Flying Saucer <span class="mir-badge hot">🔥</span></div><div class="mic-desc">Philly-style chopped steak with melted cheese on a round sesame seed roll.</div></div><div class="mic-price">$8.75</div></div>
-  </div>
-</div>
 
-<!-- WINGS -->
-<div class="menu-section" id="wings">
-  <div class="msec-grad-hdr" style="background:linear-gradient(135deg,#dc6803 0%,#c25500 100%);">
-    <div class="msec-grad-icon">🍗</div>
-    <div class="msec-grad-text">
-      <h2>Wings</h2>
-      <p>Fried crispy — choose your sauce</p>
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/sandwich_2.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Club Sub</div>
+        <div class="mc-desc">Turkey, ham &amp; crispy bacon piled high with lettuce, tomato &amp; mayo on a fresh-baked roll.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Club Sub">$13.75</div></div>
+      </div>
     </div>
-    <div class="msec-grad-count">2 sizes</div>
-  </div>
-  <div class="menu-items-grid">
-    <div class="mic wide"><div class="mic-left"><div class="mic-name">5 Piece Wings</div><div class="mic-desc">5 large meaty wings fried crispy — choose your sauce</div><div class="mic-sauces"><span class="mir-sauce-tag">Buffalo</span><span class="mir-sauce-tag">BBQ</span><span class="mir-sauce-tag">Honey BBQ</span><span class="mir-sauce-tag">Garlic Parmesan</span><span class="mir-sauce-tag">Old Bay</span><span class="mir-sauce-tag">Plain</span></div></div><div class="mic-price">$8.99</div></div>
-    <div class="mic wide"><div class="mic-left"><div class="mic-name">8 Piece Wings <span class="mir-badge pop">Popular</span></div><div class="mic-desc">8 large meaty wings fried crispy — choose your sauce</div><div class="mic-sauces"><span class="mir-sauce-tag">Buffalo</span><span class="mir-sauce-tag">BBQ</span><span class="mir-sauce-tag">Honey BBQ</span><span class="mir-sauce-tag">Garlic Parmesan</span><span class="mir-sauce-tag">Old Bay</span><span class="mir-sauce-tag">Plain</span></div></div><div class="mic-price">$10.99</div></div>
-  </div>
-</div>
 
-<!-- WRAPS -->
-<div class="menu-section" id="wraps">
-  <div class="msec-grad-hdr" style="background:linear-gradient(135deg,#0f766e 0%,#0e6b5e 100%);">
-    <div class="msec-grad-icon">🌯</div>
-    <div class="msec-grad-text">
-      <h2>Wraps</h2>
-      <p>Soft flour tortillas with fresh fillings</p>
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/sandwich.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">BLT Sub</div>
+        <div class="mc-desc">Crispy bacon, crisp lettuce, and sliced red tomatoes on a fresh-baked roll.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="BLT Sub">$13.55</div></div>
+      </div>
     </div>
-    <div class="msec-grad-count">11 items</div>
-  </div>
-  <div class="menu-items-grid">
-    <div class="mic"><div class="mic-left"><div class="mic-name">Turkey Wrap</div><div class="mic-desc">Oven-roasted turkey with cheese, lettuce, tomato & dressing in a flour tortilla.</div></div><div class="mic-price">$8.40</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Ham Wrap</div><div class="mic-desc">Hartle's select ham with cheese & fresh toppings in a flour tortilla.</div></div><div class="mic-price">$8.40</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Club Wrap <span class="mir-badge pop">Popular</span></div><div class="mic-desc">Turkey, ham, bacon, Swiss, lettuce, tomato & mayo in a soft flour tortilla.</div></div><div class="mic-price">$8.40</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Steak & Cheese Wrap <span class="mir-badge hot">🔥</span></div><div class="mic-desc">Philly-style grilled steak with melted cheese, peppers & onions in a warm tortilla.</div></div><div class="mic-price">$8.70</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Grilled Chicken Wrap</div><div class="mic-desc">Fresh grilled chicken with veggies, cheese & sauce in a soft flour tortilla.</div></div><div class="mic-price">$8.40</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Fried Chicken Wrap</div><div class="mic-desc">Golden fried chicken with your choice of veggies & sauce in a soft flour tortilla.</div></div><div class="mic-price">$8.40</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Chicken Salad Wrap</div><div class="mic-desc">Homemade chicken salad with lettuce & tomato in a soft tortilla.</div></div><div class="mic-price">$8.50</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Tuna Salad Wrap</div><div class="mic-desc">Homemade tuna salad with lettuce & tomato in a soft tortilla.</div></div><div class="mic-price">$8.50</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Veggie Wrap</div><div class="mic-desc">Fresh veggies with provolone in a soft flour tortilla.</div></div><div class="mic-price">$7.90</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Cold Cut Wrap</div><div class="mic-desc">Classic cold cuts with cheese & fresh toppings in a flour tortilla.</div></div><div class="mic-price">$8.40</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Italian Wrap <span class="mir-badge pop">Popular</span></div><div class="mic-desc">Capicola, salami, pepperoni & provolone in a flour tortilla.</div></div><div class="mic-price">$8.70</div></div>
-  </div>
-</div>
 
-<!-- SALADS -->
-<div class="menu-section" id="salads">
-  <div class="msec-grad-hdr" style="background:linear-gradient(135deg,#166534 0%,#0f5228 100%);">
-    <div class="msec-grad-icon">🥗</div>
-    <div class="msec-grad-text">
-      <h2>Salads</h2>
-      <p>Fresh & crisp — lighter options with big flavor</p>
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/sandwich_2.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Chicken Salad Sub</div>
+        <div class="mc-desc">Creamy homemade chicken salad with fresh lettuce &amp; tomato.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Chicken Salad Sub">$13.50</div></div>
+      </div>
     </div>
-    <div class="msec-grad-count">11 items</div>
-  </div>
-  <div class="menu-items-grid">
-    <div class="mic"><div class="mic-left"><div class="mic-name">Garden Salad</div><div class="mic-desc">Lettuce, tomato, onion, cucumber and American Cheese with your choice of dressing.</div></div><div class="mic-price">$7.90</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Chef Salad <span class="mir-badge pop">Popular</span></div><div class="mic-desc">All the salads come with lettuce, tomato, onion, cucumber and American Cheese. Feel free to add toppings!</div></div><div class="mic-price">$9.00</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Chicken Salad</div><div class="mic-desc">Homemade chicken salad served over a bed of crisp lettuce.</div></div><div class="mic-price">$8.50</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Tuna Salad</div><div class="mic-desc">Homemade tuna salad served over a bed of crisp lettuce.</div></div><div class="mic-price">$8.50</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Grilled Chicken Salad</div><div class="mic-desc">Marinated grilled chicken breast over fresh lettuce with your choice of dressing.</div></div><div class="mic-price">$8.40</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Fried Chicken Salad</div><div class="mic-desc">All the salads come with lettuce, tomato, onion, cucumber and American Cheese.</div></div><div class="mic-price">$8.40</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Steak Salad <span class="mir-badge hot">🔥</span></div><div class="mic-desc">Philly-style steak over crisp greens with fresh veggies & dressing.</div></div><div class="mic-price">$8.70</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Side Salad</div><div class="mic-desc">Small garden salad — perfect as a side dish.</div></div><div class="mic-price">$6.25</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Egg Salad</div><div class="mic-desc">Creamy homemade egg salad.</div></div><div class="mic-price">$7.30</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Turkey Salad</div><div class="mic-desc">Sliced turkey over fresh lettuce with your choice of toppings & dressing.</div></div><div class="mic-price">$8.40</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Ham Salad</div><div class="mic-desc">Sliced ham over fresh lettuce with your choice of toppings & dressing.</div></div><div class="mic-price">$8.40</div></div>
-  </div>
-</div>
 
-<!-- SNACKS & SIDES -->
-<div class="menu-section" id="snacks-sides">
-  <div class="msec-grad-hdr" style="background:linear-gradient(135deg,#c2590a 0%,#a84a00 100%);">
-    <div class="msec-grad-icon">🍟</div>
-    <div class="msec-grad-text">
-      <h2>Snacks & Sides</h2>
-      <p>Perfect to go alongside your sub</p>
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/sandwich.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Tuna Salad Sub</div>
+        <div class="mc-desc">Creamy homemade tuna salad with fresh lettuce &amp; tomato.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Tuna Salad Sub">$13.50</div></div>
+      </div>
     </div>
-    <div class="msec-grad-count">13 items</div>
-  </div>
-  <div class="menu-items-grid">
-    <div class="mic"><div class="mic-left"><div class="mic-name">French Fries <span class="mir-badge pop">Popular</span></div><div class="mic-desc">Thick-cut fries, seasoned & served piping hot.</div></div><div class="mic-price">$4.90</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Cheese Sticks</div><div class="mic-desc">Golden-fried mozzarella sticks with marinara dipping sauce.</div></div><div class="mic-price">$7.80</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Chicken Tenders</div><div class="mic-desc">Crispy golden chicken tenders with your choice of dipping sauce.</div></div><div class="mic-price">$6.70</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Onion Rings</div><div class="mic-desc">Thick-cut rings, battered & fried golden, with dipping sauce.</div></div><div class="mic-price">$6.90</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Fried Pickles</div><div class="mic-desc">Crispy breaded dill pickle slices — tangy, crunchy & addictive.</div></div><div class="mic-price">$6.20</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Homemade Chili</div><div class="mic-desc">Hearty house-made chili with beans & Hartle's secret spice blend.</div></div><div class="mic-price">$5.45</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Soup of the Day</div><div class="mic-desc">Chef's daily soup — ask for today's selection.</div></div><div class="mic-price">$5.45</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Macaroni Salad</div><div class="mic-desc">Creamy homemade macaroni salad — a classic comfort side.</div></div><div class="mic-price">$3.45</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Beet Eggs <span class="mir-badge new">✨ New</span></div><div class="mic-desc">Pennsylvania Dutch-style pickled beet eggs — a beloved local tradition.</div></div><div class="mic-price">$3.90</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Deviled Eggs</div><div class="mic-desc">Classic deviled eggs made in-house fresh daily — a Hartle's staple.</div></div><div class="mic-price">$3.40</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Cheese Tray</div><div class="mic-desc">Assorted cheese selection — perfect for sharing.</div></div><div class="mic-price">$4.60</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Hot Sausage</div><div class="mic-desc">Grilled hot sausage — a classic snack.</div></div><div class="mic-price">$1.25</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Pickle</div><div class="mic-desc">A whole crispy dill pickle.</div></div><div class="mic-price">$1.25</div></div>
-  </div>
-</div>
 
-<!-- DESSERTS -->
-<div class="menu-section" id="desserts">
-  <div class="msec-grad-hdr" style="background:linear-gradient(135deg,#be185d 0%,#9d1050 100%);">
-    <div class="msec-grad-icon">🍰</div>
-    <div class="msec-grad-text">
-      <h2>Desserts</h2>
-      <p>Homemade fresh daily — end on a sweet note</p>
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/sandwich_2.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Egg Salad Sub</div>
+        <div class="mc-desc">Creamy homemade egg salad made fresh daily.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Egg Salad Sub">$12.80</div></div>
+      </div>
     </div>
-    <div class="msec-grad-count">8 items</div>
-  </div>
-  <div class="menu-items-grid">
-    <div class="mic"><div class="mic-left"><div class="mic-name">Funnel Cake Fries <span class="mir-badge pop">Popular</span></div><div class="mic-desc">Golden funnel cake sticks with powdered sugar — a carnival classic.</div></div><div class="mic-price">$5.50</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Lemon Meringue Pie</div><div class="mic-desc">Tangy, creamy homemade lemon meringue pie — a Hartle's classic.</div></div><div class="mic-price">$4.80</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Coconut Cream Pie</div><div class="mic-desc">Rich, silky coconut cream pie made from scratch every morning.</div></div><div class="mic-price">$4.80</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Chocolate Meringue</div><div class="mic-desc">Classic homemade chocolate meringue pie with a light fluffy top.</div></div><div class="mic-price">$4.80</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Homemade Brownies</div><div class="mic-desc">Rich, fudgy homemade brownies baked fresh daily.</div></div><div class="mic-price">$1.50</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Pudding Cup</div><div class="mic-desc">Creamy homemade pudding cup.</div></div><div class="mic-price">$2.49</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Little Debbie</div><div class="mic-desc">Assorted Little Debbie snack cakes.</div></div><div class="mic-price">$1.00</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Dessert $1.79</div><div class="mic-desc">Assorted sweet dessert item.</div></div><div class="mic-price">$1.79</div></div>
-  </div>
-</div>
 
-<!-- DRINKS -->
-<div class="menu-section" id="drinks">
-  <div class="msec-grad-hdr" style="background:linear-gradient(135deg,#1e40af 0%,#1830a0 100%);">
-    <div class="msec-grad-icon">🥤</div>
-    <div class="msec-grad-text">
-      <h2>Drinks</h2>
-      <p>Cold drinks, energy & more</p>
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/bread_salad.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Veggie Sub</div>
+        <div class="mc-desc">Choose from our list of toppings and condiments to create your own veggie sub just the way you like it.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Veggie Sub">$12.80</div></div>
+      </div>
     </div>
-    <div class="msec-grad-count">15 items</div>
-  </div>
-  <div class="menu-items-grid">
-    <div class="mic"><div class="mic-left"><div class="mic-name">Small Fountain Soda</div><div class="mic-desc">Pepsi, Diet Pepsi, Mountain Dew, Lemonade, Iced Tea.</div></div><div class="mic-price">$2.85</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Medium Fountain Soda <span class="mir-badge pop">Popular</span></div><div class="mic-desc">Pepsi, Diet Pepsi, Mountain Dew, Lemonade, Iced Tea.</div></div><div class="mic-price">$3.05</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Large Fountain Soda</div><div class="mic-desc">Pepsi, Diet Pepsi, Mountain Dew, Lemonade, Iced Tea.</div></div><div class="mic-price">$3.45</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Monster</div><div class="mic-desc">Monster Energy Drink — assorted flavors.</div></div><div class="mic-price">$4.49</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Red Bull</div><div class="mic-desc">Red Bull Energy Drink.</div></div><div class="mic-price">$4.49</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Starbucks Coffee</div><div class="mic-desc">Bottled Starbucks coffee — chilled.</div></div><div class="mic-price">$4.99</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Dunkin Coffee</div><div class="mic-desc">Bottled Dunkin coffee — chilled.</div></div><div class="mic-price">$4.99</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">20oz Bottle Soda</div><div class="mic-desc">20oz chilled soda — Pepsi, Diet Pepsi, Mountain Dew & seasonal selections.</div></div><div class="mic-price">$2.89</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Gatorade Bottle</div><div class="mic-desc">Assorted flavors.</div></div><div class="mic-price">$2.49</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Powerade Bottle</div><div class="mic-desc">Assorted flavors.</div></div><div class="mic-price">$2.49</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">2 Ltr Bottle</div><div class="mic-desc">2 liter bottle soda — great for sharing.</div></div><div class="mic-price">$4.49</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Water Bottle</div><div class="mic-desc">Refreshing chilled bottled water.</div></div><div class="mic-price">$1.89</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Small Ice Cup</div><div class="mic-desc">Cup of ice.</div></div><div class="mic-price">$0.50</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Medium Ice Cup</div><div class="mic-desc">Cup of ice.</div></div><div class="mic-price">$0.70</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Large Ice Cup</div><div class="mic-desc">Cup of ice.</div></div><div class="mic-price">$0.90</div></div>
-  </div>
-</div>
 
-<!-- MISC ITEMS -->
-<div class="menu-section" id="misc-items">
-  <div class="msec-grad-hdr" style="background:linear-gradient(135deg,#374151 0%,#2d3540 100%);">
-    <div class="msec-grad-icon">🛒</div>
-    <div class="msec-grad-text">
-      <h2>Misc. Items</h2>
-      <p>Everything else you need</p>
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/sandwich.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Cheese Sub</div>
+        <div class="mc-desc">Your choice of cheese on a fresh-baked roll with your favorite toppings.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Cheese Sub">$12.80</div></div>
+      </div>
     </div>
-    <div class="msec-grad-count">6 items</div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/sandwich_2.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Pastrami Sub</div>
+        <div class="mc-desc">Thinly sliced seasoned pastrami with Swiss &amp; spicy brown mustard on a toasted roll.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Pastrami Sub">$14.05</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/sandwich.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Bologna Sub</div>
+        <div class="mc-desc">Classic bologna sliced fresh with your choice of cheese and toppings.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Bologna Sub">$12.80</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/sandwich_2.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Salami Sub</div>
+        <div class="mc-desc">Thinly sliced salami with provolone and fresh veggies on a toasted roll.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Salami Sub">$12.80</div></div>
+      </div>
+    </div>
+
+  </div><!-- /mn-grid -->
+</div><!-- /cold-subs -->
+
+
+<!-- ═══════════════════════════════════════════════════════
+     HOT SUBS
+═══════════════════════════════════════════════════════ -->
+<div class="mn-section" id="hot-subs">
+  <div class="mn-sec-hdr">
+    <div>
+      <div class="mn-sec-title"><span>🔥</span> Hot Subs</div>
+      <div class="mn-sec-sub">Freshly grilled &amp; served on a toasted roll</div>
+    </div>
+    <div class="mn-sec-count">8 items</div>
   </div>
-  <div class="menu-items-grid">
-    <div class="mic"><div class="mic-left"><div class="mic-name">Medium Chip Bag</div><div class="mic-desc">Assorted chip flavors.</div></div><div class="mic-price">$2.89</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Large Chip Bag</div><div class="mic-desc">Assorted chip flavors.</div></div><div class="mic-price">$4.89</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Roll of Bread</div><div class="mic-desc">Fresh-baked individual roll.</div></div><div class="mic-price">$1.85</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Bag of Ice</div><div class="mic-desc">Full bag of ice.</div></div><div class="mic-price">$2.50</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Jar Hot Relish <span class="mir-badge new">✨ New</span></div><div class="mic-desc">Hartle's signature hot relish — take a jar home!</div></div><div class="mic-price">$4.09</div></div>
-    <div class="mic"><div class="mic-left"><div class="mic-name">Pack of Rolls</div><div class="mic-desc">Pack of fresh-baked rolls.</div></div><div class="mic-price">$6.00</div></div>
+  <div class="mn-grid">
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/phily_cheasteak_image.png')">
+        <span class="mc-badge hot">🔥 Hot</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Steak &amp; Cheese Sub</div>
+        <div class="mc-desc">Chopped Steak &amp; Provolone Cheese topped with special seasoning.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Steak & Cheese Sub">$14.30</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/phily_cheasktake_2.png')">
+        <span class="mc-badge pop">Popular</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Cheeseburger Sub</div>
+        <div class="mc-desc">Quarter Pound Hamburger Patties and American Cheese on a toasted roll.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Cheeseburger Sub">$14.30</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/phily_cheasktake_2.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Hamburger Sub</div>
+        <div class="mc-desc">Fresh beef patty on a toasted roll with your choice of toppings.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Hamburger Sub">$14.30</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/phily_cheasteak_image.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Grilled Chicken Sub</div>
+        <div class="mc-desc">Marinated chicken breast grilled fresh with lettuce, tomato &amp; honey mustard.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Grilled Chicken Sub">$13.95</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/phily_cheasktake_2.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Fried Chicken Sub</div>
+        <div class="mc-desc">Hartle's select white meat chicken breast fried to a golden brown, served just the way you like it.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Fried Chicken Sub">$13.65</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/phily_cheasteak_image.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Meatball Sub</div>
+        <div class="mc-desc">Hartle's Italian meatballs combined with our special sauce on provolone cheese. Extra napkins may be required.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Meatball Sub">$12.80</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/phily_cheasktake_2.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Steamer w/ Cheese Sub</div>
+        <div class="mc-desc">Hartle's steamer prepared fresh daily from specially seasoned ground beef, onion, and ketchup, generously portioned with white American cheese.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Steamer w/ Cheese Sub">$12.80</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/phily_cheasteak_image.png')">
+        <span class="mc-badge hot">🔥 Hot</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Hot Pastrami Sub</div>
+        <div class="mc-desc">Hot pastrami with melted Swiss &amp; spicy brown mustard on a toasted roll.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Hot Pastrami Sub">$14.30</div></div>
+      </div>
+    </div>
+
   </div>
-</div>
+</div><!-- /hot-subs -->
+
+
+<!-- ═══════════════════════════════════════════════════════
+     SANDWICHES
+═══════════════════════════════════════════════════════ -->
+<div class="mn-section" id="sandwiches">
+  <div class="mn-sec-hdr">
+    <div>
+      <div class="mn-sec-title"><span>🥪</span> Sandwiches</div>
+      <div class="mn-sec-sub">White, Wheat, or Marble Rye — your choice</div>
+    </div>
+    <div class="mn-sec-count">15 items</div>
+  </div>
+  <div class="mn-grid">
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#374151,#4b5563)">
+        <span class="mc-big-emoji">🌭</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Hot Dog</div>
+        <div class="mc-desc">All beef hot dog on a potato roll.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Hot Dog">$3.75</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#7c3aed,#6425c5)">
+        <span class="mc-big-emoji">🥩</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Steamer Sandwich</div>
+        <div class="mc-desc">Hartle's steamer prepared fresh daily from specially seasoned ground beef, onion, and ketchup. Served on a potato roll.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Steamer Sandwich">$5.90</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/sandwich_2.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Turkey w/ Cheese</div>
+        <div class="mc-desc">Hartle's oven roasted turkey breast sliced just the way you like with white American cheese.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Turkey w/ Cheese">$6.90</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/sandwich.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Ham w/ Cheese</div>
+        <div class="mc-desc">Hartle's select 95% fat-free ham sliced just the way you like with white American cheese.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Ham w/ Cheese">$6.80</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/sandwich_2.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Cold Cut</div>
+        <div class="mc-desc">Classic cold cuts on your bread of choice with all the fresh fixings.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Cold Cut">$6.70</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/sandwich.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Roast Beef w/ Cheese</div>
+        <div class="mc-desc">Hartle's select oven roasted beef Top Round thinly sliced under white American cheese.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Roast Beef w/ Cheese">$7.05</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/sandwich_2.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Chicken Salad Sandwich</div>
+        <div class="mc-desc">Homemade chicken salad on toasted bread with lettuce &amp; tomato.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Chicken Salad Sandwich">$7.05</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/sandwich.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Tuna Salad Sandwich</div>
+        <div class="mc-desc">Homemade tuna salad on toasted bread with lettuce &amp; tomato.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Tuna Salad Sandwich">$7.05</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#7c3aed,#6425c5)">
+        <span class="mc-big-emoji">🌭</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Steamer Dog</div>
+        <div class="mc-desc">All beef hot dog on a potato roll covered with Hartle's Steamer.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Steamer Dog">$6.00</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/sandwich_2.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">BLT Sandwich</div>
+        <div class="mc-desc">Crispy bacon, crisp lettuce, and sliced red tomatoes.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="BLT Sandwich">$7.10</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/sandwich.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Egg Salad Sandwich</div>
+        <div class="mc-desc">Creamy homemade egg salad on white or wheat bread.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Egg Salad Sandwich">$6.40</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/sandwich_2.png')">
+        <span class="mc-badge pop">Popular</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Club Sandwich</div>
+        <div class="mc-desc">Hartle's thinly sliced ham, oven roasted turkey, and crispy bacon on 3 slices of toasted bread.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Club Sandwich">$7.90</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#b45309,#92400e)">
+        <span class="mc-big-emoji">🥜</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Peanut Butter &amp; Jelly</div>
+        <div class="mc-desc">Your choice of Grape or Strawberry with Creamy Peanut Butter.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Peanut Butter & Jelly">$3.50</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/sandwich.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Hot Pastrami Sandwich</div>
+        <div class="mc-desc">Hot pastrami with melted Swiss &amp; spicy brown mustard.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Hot Pastrami Sandwich">$7.90</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/sandwich_2.png')">
+        <span class="mc-badge pop">Popular</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Reuben</div>
+        <div class="mc-desc">Marble Rye bread, Pastrami, Swiss, Sauerkraut and Thousand Island Dressing.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Reuben">$7.90</div></div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /sandwiches -->
+
+
+<!-- ═══════════════════════════════════════════════════════
+     STEAMERS
+═══════════════════════════════════════════════════════ -->
+<div class="mn-section" id="steamers">
+  <div class="mn-sec-hdr">
+    <div>
+      <div class="mn-sec-title"><span>🫕</span> Steamers</div>
+      <div class="mn-sec-sub">Hartle's signature steamed beef — fresh daily</div>
+    </div>
+    <div class="mn-sec-count">2 items</div>
+  </div>
+  <div class="mn-grid">
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#7c3aed,#5b21b6)">
+        <span class="mc-big-emoji">🫕</span>
+        <span class="mc-badge pop">Popular</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Bowl Steamer</div>
+        <div class="mc-desc">Hartle's steamer in a bowl — freshly prepared seasoned ground beef, onion, and ketchup. A Hartle's classic.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Bowl Steamer">$7.50</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#6d28d9,#4c1d95)">
+        <span class="mc-big-emoji">🍲</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Quart Steamer</div>
+        <div class="mc-desc">A full quart of Hartle's house steamer — great for the whole family.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Quart Steamer">$18.50</div></div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /steamers -->
+
+
+<!-- ═══════════════════════════════════════════════════════
+     FLYING SAUCERS
+═══════════════════════════════════════════════════════ -->
+<div class="mn-section" id="flying-saucers">
+  <div class="mn-sec-hdr">
+    <div>
+      <div class="mn-sec-title"><span>🛸</span> Flying Saucers</div>
+      <div class="mn-sec-sub">Served on a toasted 5&quot; sesame seed roll</div>
+    </div>
+    <div class="mn-sec-count">11 items</div>
+  </div>
+  <div class="mn-grid">
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/phily_cheasktake_2.png')">
+        <span class="mc-badge pop">Popular</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Beef Flying Saucer</div>
+        <div class="mc-desc">Seasoned beef on a round sesame seed roll with your choice of toppings.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Beef Flying Saucer">$8.75</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/sandwich.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Ham Flying Saucer</div>
+        <div class="mc-desc">Hartle's select ham on a round sesame seed roll.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Ham Flying Saucer">$8.75</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/sandwich_2.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Turkey Flying Saucer</div>
+        <div class="mc-desc">Hartle's smoked turkey on a round sesame seed roll.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Turkey Flying Saucer">$8.75</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/sandwich.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Chicken Salad Flying Saucer</div>
+        <div class="mc-desc">Homemade chicken salad on a round sesame seed roll.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Chicken Salad Flying Saucer">$8.75</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/sandwich_2.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Tuna Salad Flying Saucer</div>
+        <div class="mc-desc">Homemade tuna salad on a round sesame seed roll.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Tuna Salad Flying Saucer">$8.75</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/sandwich.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Cold Cut Flying Saucer</div>
+        <div class="mc-desc">Classic cold cuts on a round sesame seed roll.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Cold Cut Flying Saucer">$8.15</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/bread_salad.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Veggie Flying Saucer</div>
+        <div class="mc-desc">Fresh veggies with your choice of cheese on a round sesame seed roll.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Veggie Flying Saucer">$8.15</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/phily_cheasktake_2.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Grilled Chicken Flying Saucer</div>
+        <div class="mc-desc">Marinated grilled chicken on a round sesame seed roll.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Grilled Chicken Flying Saucer">$8.75</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/phily_cheasteak_image.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Fried Chicken Flying Saucer</div>
+        <div class="mc-desc">Golden crispy fried chicken on a round sesame seed roll.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Fried Chicken Flying Saucer">$8.75</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/phily_cheasktake_2.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Cheeseburger Flying Saucer</div>
+        <div class="mc-desc">Juicy beef patty with melted cheese on a round sesame seed roll.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Cheeseburger Flying Saucer">$8.75</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/phily_cheasteak_image.png')">
+        <span class="mc-badge hot">🔥</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Steak Flying Saucer</div>
+        <div class="mc-desc">Philly-style chopped steak with melted cheese on a round sesame seed roll.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Steak Flying Saucer">$8.75</div></div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /flying-saucers -->
+
+
+<!-- ═══════════════════════════════════════════════════════
+     WINGS
+═══════════════════════════════════════════════════════ -->
+<div class="mn-section" id="wings">
+  <div class="mn-sec-hdr">
+    <div>
+      <div class="mn-sec-title"><span>🍗</span> Wings</div>
+      <div class="mn-sec-sub">Fried crispy — choose your sauce</div>
+    </div>
+    <div class="mn-sec-count">2 sizes</div>
+  </div>
+  <div class="mn-grid">
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#dc6803,#c25500)">
+        <span class="mc-big-emoji">🍗</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">5 Piece Wings</div>
+        <div class="mc-desc">5 large meaty wings fried crispy — choose your sauce.</div>
+        <div class="mc-sauces">
+          <span class="mc-sauce">Buffalo</span><span class="mc-sauce">BBQ</span><span class="mc-sauce">Honey BBQ</span><span class="mc-sauce">Garlic Parm</span><span class="mc-sauce">Old Bay</span><span class="mc-sauce">Plain</span>
+        </div>
+        <div class="mc-footer"><div class="mc-price" data-item="5 Piece Wings">$8.99</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#ea580c,#c2410c)">
+        <span class="mc-big-emoji">🍗</span>
+        <span class="mc-badge pop">Popular</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">8 Piece Wings</div>
+        <div class="mc-desc">8 large meaty wings fried crispy — choose your sauce.</div>
+        <div class="mc-sauces">
+          <span class="mc-sauce">Buffalo</span><span class="mc-sauce">BBQ</span><span class="mc-sauce">Honey BBQ</span><span class="mc-sauce">Garlic Parm</span><span class="mc-sauce">Old Bay</span><span class="mc-sauce">Plain</span>
+        </div>
+        <div class="mc-footer"><div class="mc-price" data-item="8 Piece Wings">$10.99</div></div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /wings -->
+
+
+<!-- ═══════════════════════════════════════════════════════
+     WRAPS
+═══════════════════════════════════════════════════════ -->
+<div class="mn-section" id="wraps">
+  <div class="mn-sec-hdr">
+    <div>
+      <div class="mn-sec-title"><span>🌯</span> Wraps</div>
+      <div class="mn-sec-sub">Soft flour tortillas with fresh fillings</div>
+    </div>
+    <div class="mn-sec-count">11 items</div>
+  </div>
+  <div class="mn-grid">
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/sandwich_2.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Turkey Wrap</div>
+        <div class="mc-desc">Oven-roasted turkey with cheese, lettuce, tomato &amp; dressing in a flour tortilla.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Turkey Wrap">$8.40</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/sandwich.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Ham Wrap</div>
+        <div class="mc-desc">Hartle's select ham with cheese &amp; fresh toppings in a flour tortilla.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Ham Wrap">$8.40</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/sandwich_2.png')">
+        <span class="mc-badge pop">Popular</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Club Wrap</div>
+        <div class="mc-desc">Turkey, ham, bacon, Swiss, lettuce, tomato &amp; mayo in a soft flour tortilla.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Club Wrap">$8.40</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/phily_cheasteak_image.png')">
+        <span class="mc-badge hot">🔥</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Steak &amp; Cheese Wrap</div>
+        <div class="mc-desc">Philly-style grilled steak with melted cheese, peppers &amp; onions in a warm tortilla.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Steak & Cheese Wrap">$8.70</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/phily_cheasktake_2.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Grilled Chicken Wrap</div>
+        <div class="mc-desc">Fresh grilled chicken with veggies, cheese &amp; sauce in a soft flour tortilla.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Grilled Chicken Wrap">$8.40</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/sandwich.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Fried Chicken Wrap</div>
+        <div class="mc-desc">Golden fried chicken with your choice of veggies &amp; sauce in a soft flour tortilla.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Fried Chicken Wrap">$8.40</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/sandwich_2.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Chicken Salad Wrap</div>
+        <div class="mc-desc">Homemade chicken salad with lettuce &amp; tomato in a soft tortilla.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Chicken Salad Wrap">$8.50</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/sandwich.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Tuna Salad Wrap</div>
+        <div class="mc-desc">Homemade tuna salad with lettuce &amp; tomato in a soft tortilla.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Tuna Salad Wrap">$8.50</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/bread_salad.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Veggie Wrap</div>
+        <div class="mc-desc">Fresh veggies with provolone in a soft flour tortilla.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Veggie Wrap">$7.90</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/sandwich_2.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Cold Cut Wrap</div>
+        <div class="mc-desc">Classic cold cuts with cheese &amp; fresh toppings in a flour tortilla.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Cold Cut Wrap">$8.40</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/sandwich.png')">
+        <span class="mc-badge pop">Popular</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Italian Wrap</div>
+        <div class="mc-desc">Capicola, salami, pepperoni &amp; provolone in a flour tortilla.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Italian Wrap">$8.70</div></div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /wraps -->
+
+
+<!-- ═══════════════════════════════════════════════════════
+     SALADS
+═══════════════════════════════════════════════════════ -->
+<div class="mn-section" id="salads">
+  <div class="mn-sec-hdr">
+    <div>
+      <div class="mn-sec-title"><span>🥗</span> Salads</div>
+      <div class="mn-sec-sub">Fresh &amp; crisp — lighter options with big flavor</div>
+    </div>
+    <div class="mn-sec-count">11 items</div>
+  </div>
+  <div class="mn-grid">
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/bread_salad.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Garden Salad</div>
+        <div class="mc-desc">Lettuce, tomato, onion, cucumber and American Cheese with your choice of dressing.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Garden Salad">$7.90</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/bread_salad.png')">
+        <span class="mc-badge pop">Popular</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Chef Salad</div>
+        <div class="mc-desc">Lettuce, tomato, onion, cucumber and American Cheese with your choice of meat &amp; dressing.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Chef Salad">$9.00</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/bread_salad.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Chicken Salad</div>
+        <div class="mc-desc">Homemade chicken salad served over a bed of crisp lettuce.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Chicken Salad">$8.50</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/bread_salad.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Tuna Salad</div>
+        <div class="mc-desc">Homemade tuna salad served over a bed of crisp lettuce.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Tuna Salad">$8.50</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/bread_salad.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Grilled Chicken Salad</div>
+        <div class="mc-desc">Marinated grilled chicken breast over fresh lettuce with your choice of dressing.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Grilled Chicken Salad">$8.40</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/bread_salad.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Fried Chicken Salad</div>
+        <div class="mc-desc">Crispy fried chicken over lettuce, tomato, onion, cucumber and American Cheese.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Fried Chicken Salad">$8.40</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/phily_cheasteak_image.png')">
+        <span class="mc-badge hot">🔥</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Steak Salad</div>
+        <div class="mc-desc">Philly-style steak over crisp greens with fresh veggies &amp; dressing.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Steak Salad">$8.70</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/bread_salad.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Side Salad</div>
+        <div class="mc-desc">Small garden salad — perfect as a side dish.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Side Salad">$6.25</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/bread_salad.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Egg Salad</div>
+        <div class="mc-desc">Creamy homemade egg salad over fresh greens.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Egg Salad">$7.30</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/bread_salad.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Turkey Salad</div>
+        <div class="mc-desc">Sliced turkey over fresh lettuce with your choice of toppings &amp; dressing.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Turkey Salad">$8.40</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img has-photo" style="background-image:url('images/menu/bread_salad.png')"></div>
+      <div class="mc-body">
+        <div class="mc-name">Ham Salad</div>
+        <div class="mc-desc">Sliced ham over fresh lettuce with your choice of toppings &amp; dressing.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Ham Salad">$8.40</div></div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /salads -->
+
+
+<!-- ═══════════════════════════════════════════════════════
+     SNACKS & SIDES
+═══════════════════════════════════════════════════════ -->
+<div class="mn-section" id="snacks-sides">
+  <div class="mn-sec-hdr">
+    <div>
+      <div class="mn-sec-title"><span>🍟</span> Snacks &amp; Sides</div>
+      <div class="mn-sec-sub">Perfect to go alongside your sub</div>
+    </div>
+    <div class="mn-sec-count">13 items</div>
+  </div>
+  <div class="mn-grid">
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#d97706,#b45309)">
+        <span class="mc-big-emoji">🍟</span>
+        <span class="mc-badge pop">Popular</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">French Fries</div>
+        <div class="mc-desc">Thick-cut fries, seasoned &amp; served piping hot.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="French Fries">$4.90</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#c2590a,#a84a00)">
+        <span class="mc-big-emoji">🧀</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Cheese Sticks</div>
+        <div class="mc-desc">Golden-fried mozzarella sticks with marinara dipping sauce.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Cheese Sticks">$7.80</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#ea580c,#c2410c)">
+        <span class="mc-big-emoji">🍗</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Chicken Tenders</div>
+        <div class="mc-desc">Crispy golden chicken tenders with your choice of dipping sauce.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Chicken Tenders">$6.70</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#d97706,#92400e)">
+        <span class="mc-big-emoji">🧅</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Onion Rings</div>
+        <div class="mc-desc">Thick-cut rings, battered &amp; fried golden, with dipping sauce.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Onion Rings">$6.90</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#16a34a,#15803d)">
+        <span class="mc-big-emoji">🥒</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Fried Pickles</div>
+        <div class="mc-desc">Crispy breaded dill pickle slices — tangy, crunchy &amp; addictive.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Fried Pickles">$6.20</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#E4002B,#c20024)">
+        <span class="mc-big-emoji">🍲</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Homemade Chili</div>
+        <div class="mc-desc">Hearty house-made chili with beans &amp; Hartle's secret spice blend.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Homemade Chili">$5.45</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#0891b2,#0e7490)">
+        <span class="mc-big-emoji">🥣</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Soup of the Day</div>
+        <div class="mc-desc">Chef's daily soup — ask for today's selection.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Soup of the Day">$5.45</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#65a30d,#4d7c0f)">
+        <span class="mc-big-emoji">🥗</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Macaroni Salad</div>
+        <div class="mc-desc">Creamy homemade macaroni salad — a classic comfort side.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Macaroni Salad">$3.45</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#9333ea,#7e22ce)">
+        <span class="mc-big-emoji">🥚</span>
+        <span class="mc-badge new">New</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Beet Eggs</div>
+        <div class="mc-desc">Pennsylvania Dutch-style pickled beet eggs — a beloved local tradition.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Beet Eggs">$3.90</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#f59e0b,#d97706)">
+        <span class="mc-big-emoji">🥚</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Deviled Eggs</div>
+        <div class="mc-desc">Classic deviled eggs made in-house fresh daily — a Hartle's staple.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Deviled Eggs">$3.40</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#f97316,#ea580c)">
+        <span class="mc-big-emoji">🧀</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Cheese Tray</div>
+        <div class="mc-desc">Assorted cheese selection — perfect for sharing.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Cheese Tray">$4.60</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#374151,#1f2937)">
+        <span class="mc-big-emoji">🌭</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Hot Sausage</div>
+        <div class="mc-desc">Grilled hot sausage — a classic snack.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Hot Sausage">$1.25</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#16a34a,#166534)">
+        <span class="mc-big-emoji">🥒</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Pickle</div>
+        <div class="mc-desc">A whole crispy dill pickle.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Pickle">$1.25</div></div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /snacks-sides -->
+
+
+<!-- ═══════════════════════════════════════════════════════
+     DESSERTS
+═══════════════════════════════════════════════════════ -->
+<div class="mn-section" id="desserts">
+  <div class="mn-sec-hdr">
+    <div>
+      <div class="mn-sec-title"><span>🍰</span> Desserts</div>
+      <div class="mn-sec-sub">Homemade fresh daily — end on a sweet note</div>
+    </div>
+    <div class="mn-sec-count">8 items</div>
+  </div>
+  <div class="mn-grid">
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#be185d,#9d1050)">
+        <span class="mc-big-emoji">🍩</span>
+        <span class="mc-badge pop">Popular</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Funnel Cake Fries</div>
+        <div class="mc-desc">Golden funnel cake sticks with powdered sugar — a carnival classic.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Funnel Cake Fries">$5.50</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#d97706,#b45309)">
+        <span class="mc-big-emoji">🍋</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Lemon Meringue Pie</div>
+        <div class="mc-desc">Tangy, creamy homemade lemon meringue pie — a Hartle's classic.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Lemon Meringue Pie">$4.80</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#0891b2,#0e7490)">
+        <span class="mc-big-emoji">🥥</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Coconut Cream Pie</div>
+        <div class="mc-desc">Rich, silky coconut cream pie made from scratch every morning.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Coconut Cream Pie">$4.80</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#7c2d12,#6b21a8)">
+        <span class="mc-big-emoji">🍫</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Chocolate Meringue</div>
+        <div class="mc-desc">Classic homemade chocolate meringue pie with a light fluffy top.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Chocolate Meringue">$4.80</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#92400e,#78350f)">
+        <span class="mc-big-emoji">🍫</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Homemade Brownies</div>
+        <div class="mc-desc">Rich, fudgy homemade brownies baked fresh daily.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Homemade Brownies">$1.50</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#ec4899,#db2777)">
+        <span class="mc-big-emoji">🍮</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Pudding Cup</div>
+        <div class="mc-desc">Creamy homemade pudding cup.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Pudding Cup">$2.49</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#be185d,#9d1050)">
+        <span class="mc-big-emoji">🎂</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Little Debbie</div>
+        <div class="mc-desc">Assorted Little Debbie snack cakes.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Little Debbie">$1.00</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#f472b6,#ec4899)">
+        <span class="mc-big-emoji">🍬</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Dessert</div>
+        <div class="mc-desc">Assorted sweet dessert item.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Dessert $1.79">$1.79</div></div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /desserts -->
+
+
+<!-- ═══════════════════════════════════════════════════════
+     DRINKS
+═══════════════════════════════════════════════════════ -->
+<div class="mn-section" id="drinks">
+  <div class="mn-sec-hdr">
+    <div>
+      <div class="mn-sec-title"><span>🥤</span> Drinks</div>
+      <div class="mn-sec-sub">Cold drinks, energy &amp; more</div>
+    </div>
+    <div class="mn-sec-count">15 items</div>
+  </div>
+  <div class="mn-grid">
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#1d4ed8,#1e40af)">
+        <span class="mc-big-emoji">🥤</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Small Fountain Soda</div>
+        <div class="mc-desc">Pepsi, Diet Pepsi, Mountain Dew, Lemonade, Iced Tea.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Small Fountain Soda">$2.85</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#2563eb,#1d4ed8)">
+        <span class="mc-big-emoji">🥤</span>
+        <span class="mc-badge pop">Popular</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Medium Fountain Soda</div>
+        <div class="mc-desc">Pepsi, Diet Pepsi, Mountain Dew, Lemonade, Iced Tea.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Medium Fountain Soda">$3.05</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#1e40af,#1e3a8a)">
+        <span class="mc-big-emoji">🥤</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Large Fountain Soda</div>
+        <div class="mc-desc">Pepsi, Diet Pepsi, Mountain Dew, Lemonade, Iced Tea.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Large Fountain Soda">$3.45</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#16a34a,#15803d)">
+        <span class="mc-big-emoji">⚡</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Monster</div>
+        <div class="mc-desc">Monster Energy Drink — assorted flavors.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Monster">$4.49</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#1d4ed8,#3730a3)">
+        <span class="mc-big-emoji">🐂</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Red Bull</div>
+        <div class="mc-desc">Red Bull Energy Drink.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Red Bull">$4.49</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#374151,#1f2937)">
+        <span class="mc-big-emoji">☕</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Starbucks Coffee</div>
+        <div class="mc-desc">Bottled Starbucks coffee — chilled.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Starbucks Coffee">$4.99</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#f97316,#ea580c)">
+        <span class="mc-big-emoji">☕</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Dunkin Coffee</div>
+        <div class="mc-desc">Bottled Dunkin coffee — chilled.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Dunkin Coffee">$4.99</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#0f172a,#1e293b)">
+        <span class="mc-big-emoji">🥤</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">20oz Bottle Soda</div>
+        <div class="mc-desc">Pepsi, Diet Pepsi, Mountain Dew &amp; seasonal selections.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="20oz Bottle Soda">$2.89</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#0284c7,#0369a1)">
+        <span class="mc-big-emoji">🍶</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Gatorade Bottle</div>
+        <div class="mc-desc">Assorted flavors.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Gatorade Bottle">$2.49</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#7c3aed,#6d28d9)">
+        <span class="mc-big-emoji">🍶</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Powerade Bottle</div>
+        <div class="mc-desc">Assorted flavors.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Powerade Bottle">$2.49</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#0f766e,#0d9488)">
+        <span class="mc-big-emoji">🍾</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">2 Ltr Bottle</div>
+        <div class="mc-desc">2 liter bottle soda — great for sharing.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="2 Ltr Bottle">$4.49</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#38bdf8,#0ea5e9)">
+        <span class="mc-big-emoji">💧</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Water Bottle</div>
+        <div class="mc-desc">Refreshing chilled bottled water.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Water Bottle">$1.89</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#bae6fd,#7dd3fc)">
+        <span class="mc-big-emoji">🧊</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Small Ice Cup</div>
+        <div class="mc-desc">Cup of ice.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Small Ice Cup">$0.50</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#7dd3fc,#38bdf8)">
+        <span class="mc-big-emoji">🧊</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Medium Ice Cup</div>
+        <div class="mc-desc">Cup of ice.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Medium Ice Cup">$0.70</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#38bdf8,#0284c7)">
+        <span class="mc-big-emoji">🧊</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Large Ice Cup</div>
+        <div class="mc-desc">Cup of ice.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Large Ice Cup">$0.90</div></div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /drinks -->
+
+
+<!-- ═══════════════════════════════════════════════════════
+     MISC ITEMS
+═══════════════════════════════════════════════════════ -->
+<div class="mn-section" id="misc-items">
+  <div class="mn-sec-hdr">
+    <div>
+      <div class="mn-sec-title"><span>🛒</span> Misc. Items</div>
+      <div class="mn-sec-sub">Everything else you need</div>
+    </div>
+    <div class="mn-sec-count">6 items</div>
+  </div>
+  <div class="mn-grid">
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#374151,#4b5563)">
+        <span class="mc-big-emoji">🥔</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Medium Chip Bag</div>
+        <div class="mc-desc">Assorted chip flavors.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Medium Chip Bag">$2.89</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#1f2937,#374151)">
+        <span class="mc-big-emoji">🥔</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Large Chip Bag</div>
+        <div class="mc-desc">Assorted chip flavors.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Large Chip Bag">$4.89</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#d97706,#b45309)">
+        <span class="mc-big-emoji">🥖</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Roll of Bread</div>
+        <div class="mc-desc">Fresh-baked individual roll.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Roll of Bread">$1.85</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#38bdf8,#0ea5e9)">
+        <span class="mc-big-emoji">🧊</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Bag of Ice</div>
+        <div class="mc-desc">Full bag of ice.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Bag of Ice">$2.50</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#E4002B,#c20024)">
+        <span class="mc-big-emoji">🫙</span>
+        <span class="mc-badge new">New</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Jar Hot Relish</div>
+        <div class="mc-desc">Hartle's signature hot relish — take a jar home!</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Jar Hot Relish">$4.09</div></div>
+      </div>
+    </div>
+
+    <div class="mc">
+      <div class="mc-img mc-grad" style="background:linear-gradient(135deg,#ca8a04,#a16207)">
+        <span class="mc-big-emoji">🥖</span>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">Pack of Rolls</div>
+        <div class="mc-desc">Pack of fresh-baked rolls.</div>
+        <div class="mc-footer"><div class="mc-price" data-item="Pack of Rolls">$6.00</div></div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /misc-items -->
+
 
 <!-- ORDER CTA -->
-<div style="background:var(--dark);border-radius:var(--r12);padding:2.5rem 2rem;text-align:center;margin-top:2rem;">
-  <span style="font-family:var(--ff-h);font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.5rem;">Ready?</span>
-  <h3 style="font-family:var(--ff-h);font-size:1.8rem;letter-spacing:1.5px;text-transform:uppercase;color:#fff;margin-bottom:.5rem;">Order It Your Way</h3>
-  <p style="color:rgba(255,255,255,.6);font-size:.95rem;margin-bottom:1.5rem;">Place your order online for easy pickup, or call us and we'll have it ready when you arrive.</p>
-  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
-    <a href="order.html" class="btn btn-red btn-lg">🛒 Order Online</a>
-    <button onclick="showCallPopup()" class="btn btn-outline-white btn-lg">📞 Call to Order</button>
+<div class="mn-cta">
+  <span class="mn-cta-eyebrow">Ready to eat?</span>
+  <h3>Order It Your Way</h3>
+  <p>Place your order online for easy pickup, or call us and we'll have it ready when you arrive.</p>
+  <div class="mn-cta-btns">
+    <a href="order.html" class="btn btn-red btn-lg">Order Online</a>
+    <button onclick="showCallPopup()" class="btn btn-outline-white btn-lg">Call to Order</button>
   </div>
 </div>
 
-</div>
-</div>
+</div><!-- /mn-wrap -->
+
 
 <!-- FOOTER -->
 <footer class="footer">
@@ -547,7 +1711,7 @@
   </div>
 </div>
 
-<!-- FLOATING ORDER BUTTON -->
+<!-- Floating Order Button -->
 <button class="fab-order" id="fabOrder" onclick="window.location.href='order.html'">
   🛒 Order Now
 </button>
@@ -557,39 +1721,43 @@ function showCallPopup(){document.getElementById('callModal').classList.add('ope
 function hideCallPopup(){document.getElementById('callModal').classList.remove('open');document.body.style.overflow='';}
 document.getElementById('callModal').addEventListener('click',function(e){if(e.target===this)hideCallPopup();});
 
-function scrollToSec(id,btn){
-  var el=document.getElementById(id);
-  if(!el)return;
-  var top=el.getBoundingClientRect().top+window.scrollY-150;
-  window.scrollTo({top:top,behavior:'smooth'});
-  document.querySelectorAll('.menu-tab').forEach(function(t){t.classList.remove('active');});
-  if(btn)btn.classList.add('active');
-}
-
-var fabOrder=document.getElementById('fabOrder');
+var fabOrder = document.getElementById('fabOrder');
 window.addEventListener('scroll',function(){
-  if(window.scrollY>300){fabOrder.classList.add('vis');}else{fabOrder.classList.remove('vis');}
+  fabOrder.classList.toggle('vis', window.scrollY > 300);
 });
 
+// Category tab scrolling
+function scrollTo2(id, btn){
+  var el = document.getElementById(id);
+  if(!el) return;
+  var offset = 120;
+  var top = el.getBoundingClientRect().top + window.scrollY - offset;
+  window.scrollTo({top: top, behavior: 'smooth'});
+  document.querySelectorAll('.cat-tab').forEach(function(t){t.classList.remove('active');});
+  if(btn) btn.classList.add('active');
+}
+
+// Auto-highlight tab on scroll
 if(window.IntersectionObserver){
-  var tabs=document.querySelectorAll('.menu-tab');
-  var secIds=['cold-subs','hot-subs','sandwiches','steamers','flying-saucers','wings','wraps','salads','snacks-sides','desserts','drinks','misc-items'];
-  var observer=new IntersectionObserver(function(entries){
+  var tabs = document.querySelectorAll('.cat-tab');
+  var secIds = ['cold-subs','hot-subs','sandwiches','steamers','flying-saucers','wings','wraps','salads','snacks-sides','desserts','drinks','misc-items'];
+  var io = new IntersectionObserver(function(entries){
     entries.forEach(function(entry){
       if(entry.isIntersecting){
-        var idx=secIds.indexOf(entry.target.id);
-        if(idx!==-1){
+        var idx = secIds.indexOf(entry.target.id);
+        if(idx !== -1){
           tabs.forEach(function(t){t.classList.remove('active');});
           tabs[idx].classList.add('active');
           tabs[idx].scrollIntoView({block:'nearest',inline:'center'});
         }
       }
     });
-  },{rootMargin:'-145px 0px -50% 0px'});
-  secIds.forEach(function(id){var el=document.getElementById(id);if(el)observer.observe(el);});
+  },{rootMargin:'-120px 0px -50% 0px'});
+  secIds.forEach(function(id){var el=document.getElementById(id);if(el)io.observe(el);});
 }
 </script>
-<!-- Firebase — load live prices -->
+
+<!-- Firebase — live prices -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 <script src="firebase-config.js"></script>
@@ -601,14 +1769,9 @@ if(window.IntersectionObserver){
     db.collection('menuItems').get().then(function(snap){
       var map = {};
       snap.forEach(function(doc){ var d=doc.data(); if(d.name && d.price!==undefined) map[d.name]=d.price; });
-      document.querySelectorAll('.mic').forEach(function(mic){
-        var nameEl  = mic.querySelector('.mic-name');
-        var priceEl = mic.querySelector('.mic-price');
-        if(!nameEl || !priceEl) return;
-        var name = '';
-        nameEl.childNodes.forEach(function(n){ if(n.nodeType===3) name+=n.textContent; });
-        name = name.trim();
-        if(map[name] !== undefined) priceEl.textContent = '$'+parseFloat(map[name]).toFixed(2);
+      document.querySelectorAll('.mc-price[data-item]').forEach(function(el){
+        var name = el.getAttribute('data-item');
+        if(map[name] !== undefined) el.textContent = '$'+parseFloat(map[name]).toFixed(2);
       });
     }).catch(function(){});
   } catch(e){}
