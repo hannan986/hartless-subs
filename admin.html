@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Admin — Hartle's Subs</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f3f4f6;color:#111827;min-height:100vh;}
+
+/* ─── LOGIN ─────────────────────────────────────────────── */
+#loginScreen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1f2937 0%,#374151 100%);}
+.login-card{background:#fff;border-radius:16px;padding:2.5rem;width:100%;max-width:400px;box-shadow:0 20px 60px rgba(0,0,0,.25);}
+.login-logo{text-align:center;margin-bottom:1.5rem;}
+.login-logo-text{font-size:1.6rem;font-weight:800;letter-spacing:1px;color:#111827;}
+.login-logo-text span{color:#E4002B;}
+.login-logo-sub{font-size:.75rem;letter-spacing:2px;text-transform:uppercase;color:#9ca3af;margin-top:.2rem;}
+.login-title{font-size:1.15rem;font-weight:700;margin-bottom:.3rem;}
+.login-sub{color:#6b7280;font-size:.875rem;margin-bottom:1.75rem;}
+.form-group{margin-bottom:1.1rem;}
+.form-group label{display:block;font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#374151;margin-bottom:.4rem;}
+.form-group input{width:100%;padding:.7rem 1rem;border:1.5px solid #d1d5db;border-radius:8px;font-size:.95rem;outline:none;transition:border .2s,box-shadow .2s;background:#fff;}
+.form-group input:focus{border-color:#E4002B;box-shadow:0 0 0 3px rgba(228,0,43,.12);}
+.btn-primary{width:100%;background:#E4002B;color:#fff;border:none;border-radius:8px;padding:.8rem;font-size:1rem;font-weight:700;cursor:pointer;transition:background .2s;margin-top:.3rem;}
+.btn-primary:hover{background:#c20024;}
+.btn-primary:disabled{opacity:.55;cursor:not-allowed;}
+.error-msg{color:#dc2626;font-size:.84rem;margin-top:.8rem;text-align:center;min-height:1.2em;}
+
+/* ─── SETUP WARNING ─────────────────────────────────────── */
+#setupWarning{display:none;min-height:100vh;align-items:center;justify-content:center;background:#f3f4f6;padding:2rem;}
+.setup-card{background:#fff;border-radius:16px;padding:2.5rem;max-width:560px;width:100%;box-shadow:0 8px 40px rgba(0,0,0,.1);}
+.setup-card h2{font-size:1.3rem;font-weight:800;margin-bottom:.75rem;color:#111827;}
+.setup-card p{font-size:.9rem;color:#6b7280;line-height:1.7;margin-bottom:1rem;}
+.setup-card code{background:#f3f4f6;padding:.15rem .45rem;border-radius:4px;font-size:.82rem;font-family:'Courier New',monospace;color:#374151;}
+.setup-card ol{margin-left:1.2rem;font-size:.9rem;color:#374151;line-height:2;}
+.setup-card a{color:#E4002B;font-weight:600;}
+
+/* ─── ADMIN PANEL ───────────────────────────────────────── */
+#adminPanel{display:none;min-height:100vh;flex-direction:column;}
+.admin-header{background:#1f2937;color:#fff;padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.2);}
+.admin-logo-text{font-size:1rem;font-weight:800;letter-spacing:.5px;}
+.admin-logo-text span{color:#E4002B;}
+.admin-user-email{font-size:.78rem;color:rgba(255,255,255,.5);margin-top:.15rem;}
+.btn-logout{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.85);padding:.45rem 1rem;border-radius:6px;cursor:pointer;font-size:.82rem;transition:background .2s;}
+.btn-logout:hover{background:rgba(255,255,255,.2);}
+
+.tab-bar{background:#fff;border-bottom:2px solid #e5e7eb;display:flex;padding:0 1.5rem;}
+.tab-btn{padding:.9rem 1.4rem;font-size:.88rem;font-weight:700;color:#6b7280;border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s;text-transform:uppercase;letter-spacing:.05em;}
+.tab-btn.active{color:#E4002B;border-bottom-color:#E4002B;}
+
+.admin-content{max-width:1120px;margin:0 auto;padding:1.5rem;}
+
+/* ─── STATUS ────────────────────────────────────────────── */
+.status-bar{padding:.75rem 1rem;border-radius:8px;margin-bottom:1.5rem;font-size:.875rem;display:flex;align-items:center;gap:.6rem;font-weight:600;}
+.status-bar.ok{background:#d1fae5;border:1px solid #6ee7b7;color:#065f46;}
+.status-bar.loading{background:#fef3c7;border:1px solid #fcd34d;color:#92400e;}
+.status-bar.error{background:#fee2e2;border:1px solid #fca5a5;color:#991b1b;}
+
+/* ─── CATEGORY FILTER ───────────────────────────────────── */
+.cat-filter{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.25rem;}
+.cat-btn{padding:.42rem .9rem;border:1.5px solid #d1d5db;border-radius:20px;font-size:.8rem;font-weight:700;background:#fff;cursor:pointer;transition:all .18s;white-space:nowrap;color:#374151;}
+.cat-btn.active,.cat-btn:hover{background:#E4002B;border-color:#E4002B;color:#fff;}
+
+/* ─── ITEMS TABLE ───────────────────────────────────────── */
+.items-table{background:#fff;border-radius:10px;border:1px solid #e5e7eb;overflow:hidden;margin-bottom:5rem;}
+.items-table-hdr{display:grid;grid-template-columns:1fr 110px 110px 80px;padding:.7rem 1.2rem;background:#f9fafb;border-bottom:1px solid #e5e7eb;font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:#9ca3af;}
+.item-row{display:grid;grid-template-columns:1fr 110px 110px 80px;padding:.85rem 1.2rem;border-bottom:1px solid #f3f4f6;align-items:center;transition:background .15s;}
+.item-row:last-child{border-bottom:none;}
+.item-row:hover{background:#fafafa;}
+.item-row.changed{background:#fffbeb;}
+.item-name{font-size:.88rem;font-weight:700;color:#111827;}
+.item-cat{font-size:.72rem;color:#9ca3af;margin-top:.1rem;}
+.item-default{font-size:.88rem;color:#6b7280;}
+.price-input{width:88px;padding:.42rem .6rem;border:1.5px solid #d1d5db;border-radius:6px;font-size:.9rem;font-weight:700;color:#E4002B;outline:none;transition:border .2s;background:#fff;}
+.price-input:focus{border-color:#E4002B;box-shadow:0 0 0 2px rgba(228,0,43,.1);}
+.price-input.changed{border-color:#f59e0b;background:#fffbeb;}
+.save-row-btn{padding:.38rem .75rem;border:1.5px solid #E4002B;color:#E4002B;background:none;border-radius:6px;font-size:.78rem;font-weight:700;cursor:pointer;transition:all .18s;opacity:0;pointer-events:none;}
+.item-row.changed .save-row-btn{opacity:1;pointer-events:auto;}
+.save-row-btn:hover{background:#E4002B;color:#fff;}
+
+/* ─── SAVE BAR ──────────────────────────────────────────── */
+.save-all-bar{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #e5e7eb;padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;box-shadow:0 -4px 20px rgba(0,0,0,.08);z-index:50;}
+.changed-count{font-size:.875rem;color:#6b7280;}
+.changed-count strong{color:#111827;font-size:1rem;}
+.btn-save-all{background:#E4002B;color:#fff;border:none;border-radius:8px;padding:.75rem 2.2rem;font-size:.95rem;font-weight:700;cursor:pointer;transition:background .2s;}
+.btn-save-all:hover{background:#c20024;}
+.btn-save-all:disabled{opacity:.5;cursor:not-allowed;}
+
+/* ─── IMAGES TAB ────────────────────────────────────────── */
+.section-intro{margin-bottom:1.5rem;}
+.section-intro h2{font-size:1.1rem;font-weight:800;margin-bottom:.3rem;}
+.section-intro p{font-size:.875rem;color:#6b7280;line-height:1.6;}
+.img-section-title{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#9ca3af;margin:1.5rem 0 .75rem;}
+.images-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1.25rem;margin-bottom:2rem;}
+.img-slot{background:#fff;border-radius:10px;border:1px solid #e5e7eb;overflow:hidden;transition:box-shadow .2s;}
+.img-slot:hover{box-shadow:0 4px 20px rgba(0,0,0,.1);}
+.img-slot-preview{aspect-ratio:16/10;background:#f3f4f6;position:relative;overflow:hidden;}
+.img-slot-preview img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s;}
+.img-slot:hover .img-slot-preview img{transform:scale(1.03);}
+.custom-badge{position:absolute;top:.5rem;right:.5rem;background:#059669;color:#fff;font-size:.62rem;font-weight:800;padding:.2rem .55rem;border-radius:4px;letter-spacing:.05em;text-transform:uppercase;}
+.img-slot-body{padding:.9rem;}
+.img-slot-label{font-size:.84rem;font-weight:700;color:#111827;margin-bottom:.15rem;}
+.img-slot-desc{font-size:.75rem;color:#9ca3af;margin-bottom:.75rem;line-height:1.4;}
+.btn-upload{width:100%;padding:.55rem;border:2px dashed #d1d5db;background:none;border-radius:6px;color:#6b7280;font-size:.82rem;font-weight:700;cursor:pointer;transition:all .2s;}
+.btn-upload:hover{border-color:#E4002B;color:#E4002B;background:#fff5f5;}
+.btn-remove{width:100%;padding:.45rem;background:none;border:1px solid #e5e7eb;border-radius:6px;color:#9ca3af;font-size:.78rem;cursor:pointer;margin-top:.4rem;transition:all .2s;}
+.btn-remove:hover{border-color:#dc2626;color:#dc2626;}
+.upload-progress{height:3px;background:#e5e7eb;border-radius:2px;margin-top:.5rem;overflow:hidden;display:none;}
+.upload-progress-bar{height:100%;background:#E4002B;transition:width .2s;border-radius:2px;}
+
+/* ─── TOAST ─────────────────────────────────────────────── */
+.toast{position:fixed;bottom:5.5rem;left:50%;transform:translateX(-50%);color:#fff;padding:.75rem 1.75rem;border-radius:8px;font-size:.88rem;font-weight:700;z-index:9999;box-shadow:0 4px 24px rgba(0,0,0,.2);opacity:0;transition:opacity .25s;pointer-events:none;}
+.toast.show{opacity:1;}
+
+/* ─── RESPONSIVE ─────────────────────────────────────────── */
+@media(max-width:640px){
+  .items-table-hdr{grid-template-columns:1fr 90px 80px}
+  .item-row{grid-template-columns:1fr 90px 80px}
+  .items-table-hdr>*:last-child,.item-row>*:last-child{display:none}
+  .admin-content{padding:1rem}
+  .tab-btn{padding:.75rem .9rem;font-size:.78rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- SETUP WARNING (shown when firebase-config.js not filled in) -->
+<div id="setupWarning">
+  <div class="setup-card">
+    <h2>⚙️ Firebase Not Configured</h2>
+    <p>You need to set up your Firebase project before using the admin panel. Open <code>firebase-config.js</code> and replace the placeholder values, or follow the steps in <code>FIREBASE_SETUP.md</code>.</p>
+    <ol>
+      <li>Go to <a href="https://console.firebase.google.com" target="_blank">console.firebase.google.com</a></li>
+      <li>Create a project → Add a Web App → copy the config</li>
+      <li>Paste it into <code>firebase-config.js</code></li>
+      <li>Enable Authentication → Email/Password</li>
+      <li>Create your admin user in Authentication → Users</li>
+      <li>Enable Firestore Database and Storage</li>
+      <li>Set Security Rules (see <code>FIREBASE_SETUP.md</code>)</li>
+    </ol>
+    <p style="margin-top:1rem;">Then refresh this page.</p>
+  </div>
+</div>
+
+<!-- LOGIN SCREEN -->
+<div id="loginScreen" style="display:none">
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="login-logo-text">Hartle's <span>Subs</span></div>
+      <div class="login-logo-sub">Admin Panel</div>
+    </div>
+    <div class="login-title">Sign In</div>
+    <div class="login-sub">Enter your admin credentials to manage the menu.</div>
+    <form id="loginForm">
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="emailInput" placeholder="admin@hartlessubs.com" autocomplete="email" required/>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="passInput" placeholder="••••••••" autocomplete="current-password" required/>
+      </div>
+      <button type="submit" class="btn-primary" id="loginBtn">Sign In</button>
+      <div class="error-msg" id="loginError"></div>
+    </form>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="adminPanel">
+  <div class="admin-header">
+    <div>
+      <div class="admin-logo-text">Hartle's <span>Subs</span> Admin</div>
+      <div class="admin-user-email" id="adminUserEmail"></div>
+    </div>
+    <button class="btn-logout" onclick="doLogout()">Sign Out</button>
+  </div>
+
+  <div class="tab-bar">
+    <button class="tab-btn active" id="tabPricesBtn" onclick="switchTab('prices')">Menu Prices</button>
+    <button class="tab-btn" id="tabImagesBtn" onclick="switchTab('images')">Gallery Images</button>
+  </div>
+
+  <!-- PRICES TAB -->
+  <div id="pricesTab">
+    <div class="admin-content">
+      <div id="statusBar" class="status-bar loading">⏳ Loading menu data from Firebase...</div>
+      <div class="cat-filter" id="catFilter"></div>
+      <div class="items-table">
+        <div class="items-table-hdr">
+          <div>Item Name</div>
+          <div>Default</div>
+          <div>Set Price</div>
+          <div>Action</div>
+        </div>
+        <div id="itemsList"></div>
+      </div>
+    </div>
+    <div class="save-all-bar">
+      <div class="changed-count"><strong id="changedCountNum">0</strong> unsaved changes</div>
+      <button class="btn-save-all" id="saveAllBtn" onclick="saveAll()" disabled>Save All Changes</button>
+    </div>
+  </div>
+
+  <!-- IMAGES TAB -->
+  <div id="imagesTab" style="display:none">
+    <div class="admin-content">
+      <div class="section-intro">
+        <h2>Gallery &amp; Featured Images</h2>
+        <p>Upload images to replace the photo strip on the Menu page and the featured food cards on the Home page. Max file size: 5 MB. JPG or PNG recommended.</p>
+      </div>
+      <div class="img-section-title">Menu Page — Photo Strip (5 images)</div>
+      <div class="images-grid" id="stripGrid"></div>
+      <div class="img-section-title">Home Page — Featured Cards (3 images)</div>
+      <div class="images-grid" id="featGrid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast notification -->
+<div class="toast" id="toast"></div>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script>
+// ─── MENU DATA ────────────────────────────────────────────────────────────────
+const MENU = [
+{cat:'Cold Subs',emoji:'🥖',items:[
+  {name:'Cold Cut Sub',price:12.80},
+  {name:'Italian Cold Cut Sub',price:14.30},
+  {name:'Ham w/ Cheese Sub',price:12.80},
+  {name:'Turkey w/ Cheese Sub',price:12.90},
+  {name:'Roast Beef w/ Cheese Sub',price:13.30},
+  {name:'Combo Sub',price:13.55},
+  {name:'Club Sub',price:13.75},
+  {name:'BLT Sub',price:13.55},
+  {name:'Chicken Salad Sub',price:13.50},
+  {name:'Tuna Salad Sub',price:13.50},
+  {name:'Egg Salad Sub',price:12.80},
+  {name:'Veggie Sub',price:12.80},
+  {name:'Cheese Sub',price:12.80},
+  {name:'Pastrami Sub',price:14.05},
+  {name:'Bologna Sub',price:12.80},
+  {name:'Salami Sub',price:12.80}
+]},
+{cat:'Hot Subs',emoji:'🔥',items:[
+  {name:'Steak & Cheese Sub',price:14.30},
+  {name:'Cheeseburger Sub',price:14.30},
+  {name:'Hamburger Sub',price:14.30},
+  {name:'Grilled Chicken Sub',price:13.95},
+  {name:'Fried Chicken Sub',price:13.65},
+  {name:'Meatball Sub',price:12.80},
+  {name:'Steamer w/ Cheese Sub',price:12.80},
+  {name:'Hot Pastrami Sub',price:14.30}
+]},
+{cat:'Sandwiches',emoji:'🥪',items:[
+  {name:'Hot Dog',price:3.75},
+  {name:'Steamer Sandwich',price:5.90},
+  {name:'Turkey w/ Cheese',price:6.90},
+  {name:'Ham w/ Cheese',price:6.80},
+  {name:'Cold Cut',price:6.70},
+  {name:'Roast Beef w/ Cheese',price:7.05},
+  {name:'Chicken Salad Sandwich',price:7.05},
+  {name:'Tuna Salad Sandwich',price:7.05},
+  {name:'Steamer Dog',price:6.00},
+  {name:'BLT Sandwich',price:7.10},
+  {name:'Egg Salad Sandwich',price:6.40},
+  {name:'Club Sandwich',price:7.90},
+  {name:'Peanut Butter & Jelly',price:3.50},
+  {name:'Hot Pastrami Sandwich',price:7.90},
+  {name:'Reuben',price:7.90}
+]},
+{cat:'Steamers',emoji:'🫕',items:[
+  {name:'Bowl Steamer',price:7.50},
+  {name:'Quart Steamer',price:18.50}
+]},
+{cat:'Flying Saucers',emoji:'🛸',items:[
+  {name:'Beef Flying Saucer',price:8.75},
+  {name:'Ham Flying Saucer',price:8.75},
+  {name:'Turkey Flying Saucer',price:8.75},
+  {name:'Chicken Salad Flying Saucer',price:8.75},
+  {name:'Tuna Salad Flying Saucer',price:8.75},
+  {name:'Cold Cut Flying Saucer',price:8.15},
+  {name:'Veggie Flying Saucer',price:8.15},
+  {name:'Grilled Chicken Flying Saucer',price:8.75},
+  {name:'Fried Chicken Flying Saucer',price:8.75},
+  {name:'Cheeseburger Flying Saucer',price:8.75},
+  {name:'Steak Flying Saucer',price:8.75}
+]},
+{cat:'Wings',emoji:'🍗',items:[
+  {name:'5 Piece Wings',price:8.99},
+  {name:'8 Piece Wings',price:10.99}
+]},
+{cat:'Wraps',emoji:'🌯',items:[
+  {name:'Turkey Wrap',price:8.40},
+  {name:'Ham Wrap',price:8.40},
+  {name:'Club Wrap',price:8.40},
+  {name:'Steak & Cheese Wrap',price:8.70},
+  {name:'Grilled Chicken Wrap',price:8.40},
+  {name:'Fried Chicken Wrap',price:8.40},
+  {name:'Chicken Salad Wrap',price:8.50},
+  {name:'Tuna Salad Wrap',price:8.50},
+  {name:'Veggie Wrap',price:7.90},
+  {name:'Cold Cut Wrap',price:8.40},
+  {name:'Italian Wrap',price:8.70}
+]},
+{cat:'Salads',emoji:'🥗',items:[
+  {name:'Garden Salad',price:7.90},
+  {name:'Chef Salad',price:9.00},
+  {name:'Chicken Salad',price:8.50},
+  {name:'Tuna Salad',price:8.50},
+  {name:'Grilled Chicken Salad',price:8.40},
+  {name:'Fried Chicken Salad',price:8.40},
+  {name:'Steak Salad',price:8.70},
+  {name:'Side Salad',price:6.25},
+  {name:'Egg Salad',price:7.30},
+  {name:'Turkey Salad',price:8.40},
+  {name:'Ham Salad',price:8.40}
+]},
+{cat:'Snacks & Sides',emoji:'🍟',items:[
+  {name:'French Fries',price:4.90},
+  {name:'Cheese Sticks',price:7.80},
+  {name:'Chicken Tenders',price:6.70},
+  {name:'Onion Rings',price:6.90},
+  {name:'Fried Pickles',price:6.20},
+  {name:'Homemade Chili',price:5.45},
+  {name:'Soup of the Day',price:5.45},
+  {name:'Macaroni Salad',price:3.45},
+  {name:'Beet Eggs',price:3.90},
+  {name:'Deviled Eggs',price:3.40},
+  {name:'Cheese Tray',price:4.60},
+  {name:'Hot Sausage',price:1.25},
+  {name:'Pickle',price:1.25}
+]},
+{cat:'Desserts',emoji:'🍰',items:[
+  {name:'Funnel Cake Fries',price:5.50},
+  {name:'Lemon Meringue Pie',price:4.80},
+  {name:'Coconut Cream Pie',price:4.80},
+  {name:'Chocolate Meringue',price:4.80},
+  {name:'Homemade Brownies',price:1.50},
+  {name:'Pudding Cup',price:2.49},
+  {name:'Little Debbie',price:1.00},
+  {name:'Dessert $1.79',price:1.79}
+]},
+{cat:'Drinks',emoji:'🥤',items:[
+  {name:'Small Fountain Soda',price:2.85},
+  {name:'Medium Fountain Soda',price:3.05},
+  {name:'Large Fountain Soda',price:3.45},
+  {name:'Monster',price:4.49},
+  {name:'Red Bull',price:4.49},
+  {name:'Starbucks Coffee',price:4.99},
+  {name:'Dunkin Coffee',price:4.99},
+  {name:'20oz Bottle Soda',price:2.89},
+  {name:'Gatorade Bottle',price:2.49},
+  {name:'Powerade Bottle',price:2.49},
+  {name:'2 Ltr Bottle',price:4.49},
+  {name:'Water Bottle',price:1.89},
+  {name:'Small Ice Cup',price:0.50},
+  {name:'Medium Ice Cup',price:0.70},
+  {name:'Large Ice Cup',price:0.90}
+]},
+{cat:'Misc Items',emoji:'🛒',items:[
+  {name:'Medium Chip Bag',price:2.89},
+  {name:'Large Chip Bag',price:4.89},
+  {name:'Roll of Bread',price:1.85},
+  {name:'Bag of Ice',price:2.50},
+  {name:'Jar Hot Relish',price:4.09},
+  {name:'Pack of Rolls',price:6.00}
+]}
+];
+
+// ─── GALLERY SLOTS ────────────────────────────────────────────────────────────
+const STRIP_SLOTS = [
+  {key:'menuStrip1',label:'Strip Image 1',desc:'Cold Cut Sub slot',defaultSrc:'images/menu/sandwich.png'},
+  {key:'menuStrip2',label:'Strip Image 2',desc:'Philly Cheesesteak slot',defaultSrc:'images/menu/phily_cheasteak_image.png'},
+  {key:'menuStrip3',label:'Strip Image 3',desc:'Sub Sandwich slot',defaultSrc:'images/menu/sandwich_2.png'},
+  {key:'menuStrip4',label:'Strip Image 4',desc:'Steak Sub slot',defaultSrc:'images/menu/phily_cheasktake_2.png'},
+  {key:'menuStrip5',label:'Strip Image 5',desc:'Salad/bread slot',defaultSrc:'images/menu/bread_salad.png'},
+];
+const FEAT_SLOTS = [
+  {key:'featCard1',label:'Featured Card 1',desc:'Philly Cheesesteak (home page)',defaultSrc:'images/menu/phily_cheasteak_image.png'},
+  {key:'featCard2',label:'Featured Card 2',desc:'Italian Cold Cut (home page)',defaultSrc:'images/menu/sandwich.png'},
+  {key:'featCard3',label:'Featured Card 3',desc:'Steak & Cheese (home page)',defaultSrc:'images/menu/phily_cheasktake_2.png'},
+];
+
+// ─── STATE ────────────────────────────────────────────────────────────────────
+var db, auth, storage;
+var currentCat = 'All';
+var fbPrices   = {};   // prices loaded from Firestore
+var localChanges = {}; // unsaved edits
+var galleryData  = {}; // image URLs from Firestore
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+(function(){
+  var cfg = window.FIREBASE_CONFIG;
+  if(!cfg || cfg.projectId === 'YOUR_PROJECT_ID'){
+    document.getElementById('setupWarning').style.display = 'flex';
+    return;
+  }
+
+  var app = firebase.apps.length ? firebase.apps[0] : firebase.initializeApp(cfg);
+  auth    = firebase.auth(app);
+  db      = firebase.firestore(app);
+  storage = firebase.storage(app);
+
+  auth.onAuthStateChanged(function(user){
+    if(user){
+      document.getElementById('loginScreen').style.display  = 'none';
+      document.getElementById('adminPanel').style.display   = 'flex';
+      document.getElementById('adminUserEmail').textContent = user.email;
+      loadData();
+    } else {
+      document.getElementById('loginScreen').style.display = 'flex';
+      document.getElementById('adminPanel').style.display  = 'none';
+    }
+  });
+})();
+
+// ─── AUTH ─────────────────────────────────────────────────────────────────────
+document.getElementById('loginForm').onsubmit = function(e){
+  e.preventDefault();
+  var email = document.getElementById('emailInput').value.trim();
+  var pass  = document.getElementById('passInput').value;
+  var btn   = document.getElementById('loginBtn');
+  var err   = document.getElementById('loginError');
+  btn.disabled = true;
+  btn.textContent = 'Signing in…';
+  err.textContent = '';
+  auth.signInWithEmailAndPassword(email, pass).catch(function(e){
+    err.textContent = 'Invalid email or password. Please try again.';
+    btn.disabled = false;
+    btn.textContent = 'Sign In';
+  });
+};
+
+function doLogout(){
+  if(!confirm('Sign out of the admin panel?')) return;
+  auth.signOut();
+}
+
+// ─── TABS ─────────────────────────────────────────────────────────────────────
+function switchTab(tab){
+  var isPrices = tab === 'prices';
+  document.getElementById('pricesTab').style.display = isPrices ? 'block' : 'none';
+  document.getElementById('imagesTab').style.display = isPrices ? 'none'  : 'block';
+  document.getElementById('tabPricesBtn').classList.toggle('active', isPrices);
+  document.getElementById('tabImagesBtn').classList.toggle('active', !isPrices);
+}
+
+// ─── LOAD DATA ────────────────────────────────────────────────────────────────
+function loadData(){
+  setStatus('loading','Loading menu data from Firebase…');
+  var pricePromise = db.collection('menuItems').get().then(function(snap){
+    snap.forEach(function(doc){
+      var d = doc.data();
+      if(d.name && d.price !== undefined) fbPrices[d.name] = d.price;
+    });
+    setStatus('ok', '✅ Connected. ' + snap.size + ' items in Firebase. Default prices shown for unset items.');
+  }).catch(function(){
+    setStatus('error','⚠️ Could not load Firebase data. Check your firebase-config.js and Firestore rules.');
+  });
+
+  db.collection('settings').doc('gallery').get().then(function(doc){
+    if(doc.exists) galleryData = doc.data() || {};
+  }).catch(function(){}).finally(function(){
+    renderImages();
+  });
+
+  pricePromise.finally(function(){ renderPrices(); });
+}
+
+// ─── RENDER PRICES ────────────────────────────────────────────────────────────
+function renderPrices(){
+  var allCats = ['All'].concat(MENU.map(function(g){ return g.cat; }));
+  document.getElementById('catFilter').innerHTML = allCats.map(function(c){
+    var label = c === 'All' ? 'All Categories' : c;
+    return '<button class="cat-btn'+(c===currentCat?' active':'')+'" onclick="filterCat(\''+esc(c)+'\'">'+label+'</button>';
+  }).join('');
+
+  var html = '';
+  MENU.forEach(function(group){
+    if(currentCat !== 'All' && currentCat !== group.cat) return;
+    group.items.forEach(function(item){
+      var fbPrice   = fbPrices[item.name] !== undefined ? fbPrices[item.name] : null;
+      var displayed = localChanges[item.name] !== undefined
+        ? localChanges[item.name]
+        : (fbPrice !== null ? fbPrice : item.price);
+      var isChanged = localChanges[item.name] !== undefined;
+      var eid = 'i-'+slugify(item.name);
+      html += '<div class="item-row'+(isChanged?' changed':'')+'" id="row-'+eid+'">'
+        +'<div><div class="item-name">'+escHtml(item.name)+'</div><div class="item-cat">'+group.emoji+' '+group.cat+(fbPrice!==null?' · <span style="color:#059669">Firebase: $'+fbPrice.toFixed(2)+'</span>':'')+'</div></div>'
+        +'<div class="item-default">$'+item.price.toFixed(2)+'</div>'
+        +'<input type="number" min="0" step="0.01" class="price-input'+(isChanged?' changed':'')+'" id="inp-'+eid+'" value="'+parseFloat(displayed).toFixed(2)+'"'
+        +' onchange="onPriceChange(\''+escHtml(item.name)+'\',this.value)" oninput="onPriceChange(\''+escHtml(item.name)+'\',this.value)"/>'
+        +'<button class="save-row-btn" onclick="saveOne(\''+escHtml(item.name)+'\',this)">Save</button>'
+        +'</div>';
+    });
+  });
+  document.getElementById('itemsList').innerHTML = html;
+  updateChangedCount();
+}
+
+function filterCat(cat){
+  currentCat = cat;
+  renderPrices();
+}
+
+function onPriceChange(name, val){
+  var num = parseFloat(val);
+  if(isNaN(num) || num < 0) return;
+  localChanges[name] = num;
+  var eid = 'i-'+slugify(name);
+  var row = document.getElementById('row-'+eid);
+  var inp = document.getElementById('inp-'+eid);
+  if(row) row.classList.add('changed');
+  if(inp) inp.classList.add('changed');
+  updateChangedCount();
+}
+
+function updateChangedCount(){
+  var n = Object.keys(localChanges).length;
+  document.getElementById('changedCountNum').textContent = n;
+  document.getElementById('saveAllBtn').disabled = n === 0;
+}
+
+function saveOne(name, btn){
+  var price = localChanges[name];
+  if(price === undefined) return;
+  btn.textContent = '…';
+  btn.disabled = true;
+  db.collection('menuItems').doc(firestoreId(name))
+    .set({name: name, price: price}, {merge: true})
+    .then(function(){
+      fbPrices[name] = price;
+      delete localChanges[name];
+      renderPrices();
+      toast('Saved: '+name);
+    })
+    .catch(function(e){
+      toast('Error: '+e.message, true);
+      btn.textContent = 'Save';
+      btn.disabled = false;
+    });
+}
+
+function saveAll(){
+  var names = Object.keys(localChanges);
+  if(!names.length) return;
+  var btn = document.getElementById('saveAllBtn');
+  btn.textContent = 'Saving…';
+  btn.disabled = true;
+  var batch = db.batch();
+  names.forEach(function(name){
+    var ref = db.collection('menuItems').doc(firestoreId(name));
+    batch.set(ref, {name: name, price: localChanges[name]}, {merge: true});
+  });
+  batch.commit().then(function(){
+    names.forEach(function(n){ fbPrices[n] = localChanges[n]; delete localChanges[n]; });
+    renderPrices();
+    toast(names.length + ' item'+(names.length>1?'s':'')+' saved!');
+    btn.textContent = 'Save All Changes';
+  }).catch(function(e){
+    toast('Error: '+e.message, true);
+    btn.textContent = 'Save All Changes';
+    btn.disabled = false;
+  });
+}
+
+// ─── RENDER IMAGES ────────────────────────────────────────────────────────────
+function renderImages(){
+  renderSlotGrid('stripGrid', STRIP_SLOTS);
+  renderSlotGrid('featGrid',  FEAT_SLOTS);
+}
+
+function renderSlotGrid(gridId, slots){
+  document.getElementById(gridId).innerHTML = slots.map(function(slot){
+    var url = galleryData[slot.key] || '';
+    var imgSrc = url || slot.defaultSrc;
+    var isCustom = !!url;
+    return '<div class="img-slot" id="slot-'+slot.key+'">'
+      +'<div class="img-slot-preview">'
+      +'<img id="simg-'+slot.key+'" src="'+imgSrc+'" alt="'+slot.label+'" onerror="this.src=\''+slot.defaultSrc+'\'"/>'
+      +(isCustom?'<div class="custom-badge">Custom</div>':'')
+      +'</div>'
+      +'<div class="img-slot-body">'
+      +'<div class="img-slot-label">'+slot.label+'</div>'
+      +'<div class="img-slot-desc">'+slot.desc+'</div>'
+      +'<input type="file" id="file-'+slot.key+'" accept="image/jpeg,image/png,image/webp" style="display:none" onchange="uploadImg(\''+slot.key+'\',\''+slot.defaultSrc+'\',this)"/>'
+      +'<button class="btn-upload" onclick="document.getElementById(\'file-'+slot.key+'\').click()">📷 Upload Image</button>'
+      +(isCustom?'<button class="btn-remove" onclick="removeImg(\''+slot.key+'\')">✕ Remove Custom</button>':'')
+      +'<div class="upload-progress" id="prog-'+slot.key+'"><div class="upload-progress-bar" id="progbar-'+slot.key+'" style="width:0%"></div></div>'
+      +'</div></div>';
+  }).join('');
+}
+
+function uploadImg(key, defaultSrc, input){
+  if(!input.files[0]) return;
+  var file = input.files[0];
+  if(file.size > 5*1024*1024){ toast('File too large. Max 5 MB.', true); return; }
+  var ext = (file.name.split('.').pop()||'jpg').toLowerCase();
+  var ref  = storage.ref('gallery/'+key+'.'+ext);
+  var prog = document.getElementById('prog-'+key);
+  var bar  = document.getElementById('progbar-'+key);
+  prog.style.display = 'block';
+  var task = ref.put(file);
+  task.on('state_changed',
+    function(snap){ bar.style.width = Math.round(snap.bytesTransferred/snap.totalBytes*100)+'%'; },
+    function(e){ toast('Upload failed: '+e.message, true); prog.style.display='none'; },
+    function(){
+      ref.getDownloadURL().then(function(url){
+        galleryData[key] = url;
+        db.collection('settings').doc('gallery').set(galleryData, {merge:true}).then(function(){
+          toast('Image uploaded!');
+          prog.style.display = 'none';
+          renderImages();
+        }).catch(function(e){ toast('Saved image but Firestore error: '+e.message, true); });
+      });
+    }
+  );
+}
+
+function removeImg(key){
+  if(!confirm('Remove custom image for this slot? It will revert to the default.')) return;
+  delete galleryData[key];
+  db.collection('settings').doc('gallery').set(galleryData).then(function(){
+    toast('Custom image removed');
+    renderImages();
+  }).catch(function(e){ toast('Error: '+e.message, true); });
+}
+
+// ─── STATUS / TOAST ───────────────────────────────────────────────────────────
+function setStatus(type, msg){
+  var bar = document.getElementById('statusBar');
+  bar.className = 'status-bar ' + type;
+  bar.textContent = msg;
+}
+
+var toastTimer;
+function toast(msg, isError){
+  var el = document.getElementById('toast');
+  el.textContent = msg;
+  el.style.background = isError ? '#dc2626' : '#059669';
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){ el.classList.remove('show'); }, 3200);
+}
+
+// ─── HELPERS ─────────────────────────────────────────────────────────────────
+function slugify(s){ return s.toLowerCase().replace(/[^a-z0-9]/g,'-'); }
+function firestoreId(s){ return s.toLowerCase().replace(/[^a-z0-9]/g,'-').replace(/-+/g,'-').replace(/^-|-$/g,''); }
+function escHtml(s){ return s.replace(/&/g,'&amp;').replace(/'/g,'&#39;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function esc(s){ return s.replace(/'/g,"\\'"); }
+</script>
+</body>
+</html>
