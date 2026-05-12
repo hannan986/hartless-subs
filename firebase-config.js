@@ -1,14 +1,8 @@
-// ─────────────────────────────────────────────────────────────────────────────
-// HARTLE'S SUBS — Firebase Configuration
-// Replace every value below with your actual Firebase project settings.
-// Get these from: Firebase Console → Project Settings → Your Apps → Web App
-// See FIREBASE_SETUP.md for step-by-step instructions.
-// ─────────────────────────────────────────────────────────────────────────────
 window.FIREBASE_CONFIG = {
-  apiKey:            "YOUR_API_KEY",
-  authDomain:        "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId:         "YOUR_PROJECT_ID",
-  storageBucket:     "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId:             "YOUR_APP_ID"
+  apiKey:            "AIzaSyAOq20gtCQ6uMHoWbA26yYRc10XOMCq91M",
+  authDomain:        "hartles-subs.firebaseapp.com",
+  projectId:         "hartles-subs",
+  storageBucket:     "hartles-subs.firebasestorage.app",
+  messagingSenderId: "850275288815",
+  appId:             "1:850275288815:web:07e403d1c02bcef66dbd1a"
 };

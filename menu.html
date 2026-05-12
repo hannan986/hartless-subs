@@ -591,19 +591,15 @@ if(window.IntersectionObserver){
 </script>
 <script src="admin.js"></script>
 
-<!-- Firebase — load live prices and gallery images -->
+<!-- Firebase — load live prices -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 <script src="firebase-config.js"></script>
 <script>
 (function(){
-  var cfg = window.FIREBASE_CONFIG;
-  if(!cfg || cfg.projectId === 'YOUR_PROJECT_ID') return;
   try {
-    var app = firebase.apps.length ? firebase.apps[0] : firebase.initializeApp(cfg);
+    var app = firebase.apps.length ? firebase.apps[0] : firebase.initializeApp(window.FIREBASE_CONFIG);
     var db  = firebase.firestore(app);
-
-    // Override prices from Firestore
     db.collection('menuItems').get().then(function(snap){
       var map = {};
       snap.forEach(function(doc){ var d=doc.data(); if(d.name && d.price!==undefined) map[d.name]=d.price; });
@@ -611,21 +607,10 @@ if(window.IntersectionObserver){
         var nameEl  = mic.querySelector('.mic-name');
         var priceEl = mic.querySelector('.mic-price');
         if(!nameEl || !priceEl) return;
-        // Extract text only (ignore badge spans)
         var name = '';
         nameEl.childNodes.forEach(function(n){ if(n.nodeType===3) name+=n.textContent; });
         name = name.trim();
         if(map[name] !== undefined) priceEl.textContent = '$'+parseFloat(map[name]).toFixed(2);
-      });
-    }).catch(function(){});
-
-    // Override photo strip images from Firestore
-    db.collection('settings').doc('gallery').get().then(function(doc){
-      if(!doc.exists) return;
-      var d = doc.data();
-      var strips = document.querySelectorAll('.mps-item img');
-      ['menuStrip1','menuStrip2','menuStrip3','menuStrip4','menuStrip5'].forEach(function(key,i){
-        if(d[key] && strips[i]) strips[i].src = d[key];
       });
     }).catch(function(){});
   } catch(e){}

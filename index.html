@@ -1156,27 +1156,5 @@ if(vid){ vid.addEventListener('canplay', function(){ document.getElementById('he
 })();
 </script>
 
-<!-- Firebase — update featured card images from admin -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-<script src="firebase-config.js"></script>
-<script>
-(function(){
-  var cfg = window.FIREBASE_CONFIG;
-  if(!cfg || cfg.projectId === 'YOUR_PROJECT_ID') return;
-  try {
-    var app = firebase.apps.length ? firebase.apps[0] : firebase.initializeApp(cfg);
-    var db  = firebase.firestore(app);
-    db.collection('settings').doc('gallery').get().then(function(doc){
-      if(!doc.exists) return;
-      var d = doc.data();
-      var cards = document.querySelectorAll('.feat-card-img img');
-      ['featCard1','featCard2','featCard3'].forEach(function(key,i){
-        if(d[key] && cards[i]) cards[i].src = d[key];
-      });
-    }).catch(function(){});
-  } catch(e){}
-})();
-</script>
 </body>
 </html>

@@ -19,21 +19,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .login-sub{color:#6b7280;font-size:.875rem;margin-bottom:1.75rem;}
 .form-group{margin-bottom:1.1rem;}
 .form-group label{display:block;font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#374151;margin-bottom:.4rem;}
-.form-group input{width:100%;padding:.7rem 1rem;border:1.5px solid #d1d5db;border-radius:8px;font-size:.95rem;outline:none;transition:border .2s,box-shadow .2s;background:#fff;}
+.form-group input{width:100%;padding:.7rem 1rem;border:1.5px solid #d1d5db;border-radius:8px;font-size:.95rem;outline:none;transition:border .2s,box-shadow .2s;}
 .form-group input:focus{border-color:#E4002B;box-shadow:0 0 0 3px rgba(228,0,43,.12);}
 .btn-primary{width:100%;background:#E4002B;color:#fff;border:none;border-radius:8px;padding:.8rem;font-size:1rem;font-weight:700;cursor:pointer;transition:background .2s;margin-top:.3rem;}
 .btn-primary:hover{background:#c20024;}
 .btn-primary:disabled{opacity:.55;cursor:not-allowed;}
 .error-msg{color:#dc2626;font-size:.84rem;margin-top:.8rem;text-align:center;min-height:1.2em;}
-
-/* ─── SETUP WARNING ─────────────────────────────────────── */
-#setupWarning{display:none;min-height:100vh;align-items:center;justify-content:center;background:#f3f4f6;padding:2rem;}
-.setup-card{background:#fff;border-radius:16px;padding:2.5rem;max-width:560px;width:100%;box-shadow:0 8px 40px rgba(0,0,0,.1);}
-.setup-card h2{font-size:1.3rem;font-weight:800;margin-bottom:.75rem;color:#111827;}
-.setup-card p{font-size:.9rem;color:#6b7280;line-height:1.7;margin-bottom:1rem;}
-.setup-card code{background:#f3f4f6;padding:.15rem .45rem;border-radius:4px;font-size:.82rem;font-family:'Courier New',monospace;color:#374151;}
-.setup-card ol{margin-left:1.2rem;font-size:.9rem;color:#374151;line-height:2;}
-.setup-card a{color:#E4002B;font-weight:600;}
 
 /* ─── ADMIN PANEL ───────────────────────────────────────── */
 #adminPanel{display:none;min-height:100vh;flex-direction:column;}
@@ -44,11 +35,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .btn-logout{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.85);padding:.45rem 1rem;border-radius:6px;cursor:pointer;font-size:.82rem;transition:background .2s;}
 .btn-logout:hover{background:rgba(255,255,255,.2);}
 
-.tab-bar{background:#fff;border-bottom:2px solid #e5e7eb;display:flex;padding:0 1.5rem;}
-.tab-btn{padding:.9rem 1.4rem;font-size:.88rem;font-weight:700;color:#6b7280;border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s;text-transform:uppercase;letter-spacing:.05em;}
-.tab-btn.active{color:#E4002B;border-bottom-color:#E4002B;}
-
-.admin-content{max-width:1120px;margin:0 auto;padding:1.5rem;}
+.admin-content{max-width:1000px;margin:0 auto;padding:1.5rem;}
 
 /* ─── STATUS ────────────────────────────────────────────── */
 .status-bar{padding:.75rem 1rem;border-radius:8px;margin-bottom:1.5rem;font-size:.875rem;display:flex;align-items:center;gap:.6rem;font-weight:600;}
@@ -70,6 +57,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .item-row.changed{background:#fffbeb;}
 .item-name{font-size:.88rem;font-weight:700;color:#111827;}
 .item-cat{font-size:.72rem;color:#9ca3af;margin-top:.1rem;}
+.item-firebase{font-size:.72rem;color:#059669;margin-top:.1rem;}
 .item-default{font-size:.88rem;color:#6b7280;}
 .price-input{width:88px;padding:.42rem .6rem;border:1.5px solid #d1d5db;border-radius:6px;font-size:.9rem;font-weight:700;color:#E4002B;outline:none;transition:border .2s;background:#fff;}
 .price-input:focus{border-color:#E4002B;box-shadow:0 0 0 2px rgba(228,0,43,.1);}
@@ -86,71 +74,29 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .btn-save-all:hover{background:#c20024;}
 .btn-save-all:disabled{opacity:.5;cursor:not-allowed;}
 
-/* ─── IMAGES TAB ────────────────────────────────────────── */
-.section-intro{margin-bottom:1.5rem;}
-.section-intro h2{font-size:1.1rem;font-weight:800;margin-bottom:.3rem;}
-.section-intro p{font-size:.875rem;color:#6b7280;line-height:1.6;}
-.img-section-title{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#9ca3af;margin:1.5rem 0 .75rem;}
-.images-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1.25rem;margin-bottom:2rem;}
-.img-slot{background:#fff;border-radius:10px;border:1px solid #e5e7eb;overflow:hidden;transition:box-shadow .2s;}
-.img-slot:hover{box-shadow:0 4px 20px rgba(0,0,0,.1);}
-.img-slot-preview{aspect-ratio:16/10;background:#f3f4f6;position:relative;overflow:hidden;}
-.img-slot-preview img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s;}
-.img-slot:hover .img-slot-preview img{transform:scale(1.03);}
-.custom-badge{position:absolute;top:.5rem;right:.5rem;background:#059669;color:#fff;font-size:.62rem;font-weight:800;padding:.2rem .55rem;border-radius:4px;letter-spacing:.05em;text-transform:uppercase;}
-.img-slot-body{padding:.9rem;}
-.img-slot-label{font-size:.84rem;font-weight:700;color:#111827;margin-bottom:.15rem;}
-.img-slot-desc{font-size:.75rem;color:#9ca3af;margin-bottom:.75rem;line-height:1.4;}
-.btn-upload{width:100%;padding:.55rem;border:2px dashed #d1d5db;background:none;border-radius:6px;color:#6b7280;font-size:.82rem;font-weight:700;cursor:pointer;transition:all .2s;}
-.btn-upload:hover{border-color:#E4002B;color:#E4002B;background:#fff5f5;}
-.btn-remove{width:100%;padding:.45rem;background:none;border:1px solid #e5e7eb;border-radius:6px;color:#9ca3af;font-size:.78rem;cursor:pointer;margin-top:.4rem;transition:all .2s;}
-.btn-remove:hover{border-color:#dc2626;color:#dc2626;}
-.upload-progress{height:3px;background:#e5e7eb;border-radius:2px;margin-top:.5rem;overflow:hidden;display:none;}
-.upload-progress-bar{height:100%;background:#E4002B;transition:width .2s;border-radius:2px;}
-
 /* ─── TOAST ─────────────────────────────────────────────── */
-.toast{position:fixed;bottom:5.5rem;left:50%;transform:translateX(-50%);color:#fff;padding:.75rem 1.75rem;border-radius:8px;font-size:.88rem;font-weight:700;z-index:9999;box-shadow:0 4px 24px rgba(0,0,0,.2);opacity:0;transition:opacity .25s;pointer-events:none;}
+.toast{position:fixed;bottom:5.5rem;left:50%;transform:translateX(-50%);color:#fff;padding:.75rem 1.75rem;border-radius:8px;font-size:.88rem;font-weight:700;z-index:9999;box-shadow:0 4px 24px rgba(0,0,0,.2);opacity:0;transition:opacity .25s;pointer-events:none;white-space:nowrap;}
 .toast.show{opacity:1;}
 
-/* ─── RESPONSIVE ─────────────────────────────────────────── */
-@media(max-width:640px){
-  .items-table-hdr{grid-template-columns:1fr 90px 80px}
-  .item-row{grid-template-columns:1fr 90px 80px}
-  .items-table-hdr>*:last-child,.item-row>*:last-child{display:none}
-  .admin-content{padding:1rem}
-  .tab-btn{padding:.75rem .9rem;font-size:.78rem;}
+@media(max-width:600px){
+  .items-table-hdr{grid-template-columns:1fr 90px 80px;}
+  .item-row{grid-template-columns:1fr 90px 80px;}
+  .items-table-hdr>*:last-child,.item-row>*:last-child{display:none;}
+  .admin-content{padding:1rem;}
 }
 </style>
 </head>
 <body>
 
-<!-- SETUP WARNING (shown when firebase-config.js not filled in) -->
-<div id="setupWarning">
-  <div class="setup-card">
-    <h2>⚙️ Firebase Not Configured</h2>
-    <p>You need to set up your Firebase project before using the admin panel. Open <code>firebase-config.js</code> and replace the placeholder values, or follow the steps in <code>FIREBASE_SETUP.md</code>.</p>
-    <ol>
-      <li>Go to <a href="https://console.firebase.google.com" target="_blank">console.firebase.google.com</a></li>
-      <li>Create a project → Add a Web App → copy the config</li>
-      <li>Paste it into <code>firebase-config.js</code></li>
-      <li>Enable Authentication → Email/Password</li>
-      <li>Create your admin user in Authentication → Users</li>
-      <li>Enable Firestore Database and Storage</li>
-      <li>Set Security Rules (see <code>FIREBASE_SETUP.md</code>)</li>
-    </ol>
-    <p style="margin-top:1rem;">Then refresh this page.</p>
-  </div>
-</div>
-
-<!-- LOGIN SCREEN -->
-<div id="loginScreen" style="display:none">
+<!-- LOGIN -->
+<div id="loginScreen">
   <div class="login-card">
     <div class="login-logo">
       <div class="login-logo-text">Hartle's <span>Subs</span></div>
       <div class="login-logo-sub">Admin Panel</div>
     </div>
     <div class="login-title">Sign In</div>
-    <div class="login-sub">Enter your admin credentials to manage the menu.</div>
+    <div class="login-sub">Enter your admin credentials to manage menu prices.</div>
     <form id="loginForm">
       <div class="form-group">
         <label>Email</label>
@@ -170,64 +116,39 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 <div id="adminPanel">
   <div class="admin-header">
     <div>
-      <div class="admin-logo-text">Hartle's <span>Subs</span> Admin</div>
+      <div class="admin-logo-text">Hartle's <span>Subs</span> — Menu Prices</div>
       <div class="admin-user-email" id="adminUserEmail"></div>
     </div>
     <button class="btn-logout" onclick="doLogout()">Sign Out</button>
   </div>
 
-  <div class="tab-bar">
-    <button class="tab-btn active" id="tabPricesBtn" onclick="switchTab('prices')">Menu Prices</button>
-    <button class="tab-btn" id="tabImagesBtn" onclick="switchTab('images')">Gallery Images</button>
-  </div>
-
-  <!-- PRICES TAB -->
-  <div id="pricesTab">
-    <div class="admin-content">
-      <div id="statusBar" class="status-bar loading">⏳ Loading menu data from Firebase...</div>
-      <div class="cat-filter" id="catFilter"></div>
-      <div class="items-table">
-        <div class="items-table-hdr">
-          <div>Item Name</div>
-          <div>Default</div>
-          <div>Set Price</div>
-          <div>Action</div>
-        </div>
-        <div id="itemsList"></div>
+  <div class="admin-content">
+    <div id="statusBar" class="status-bar loading">⏳ Loading menu data…</div>
+    <div class="cat-filter" id="catFilter"></div>
+    <div class="items-table">
+      <div class="items-table-hdr">
+        <div>Item Name</div>
+        <div>Default $</div>
+        <div>Set Price</div>
+        <div>Action</div>
       </div>
-    </div>
-    <div class="save-all-bar">
-      <div class="changed-count"><strong id="changedCountNum">0</strong> unsaved changes</div>
-      <button class="btn-save-all" id="saveAllBtn" onclick="saveAll()" disabled>Save All Changes</button>
+      <div id="itemsList"></div>
     </div>
   </div>
 
-  <!-- IMAGES TAB -->
-  <div id="imagesTab" style="display:none">
-    <div class="admin-content">
-      <div class="section-intro">
-        <h2>Gallery &amp; Featured Images</h2>
-        <p>Upload images to replace the photo strip on the Menu page and the featured food cards on the Home page. Max file size: 5 MB. JPG or PNG recommended.</p>
-      </div>
-      <div class="img-section-title">Menu Page — Photo Strip (5 images)</div>
-      <div class="images-grid" id="stripGrid"></div>
-      <div class="img-section-title">Home Page — Featured Cards (3 images)</div>
-      <div class="images-grid" id="featGrid"></div>
-    </div>
+  <div class="save-all-bar">
+    <div class="changed-count"><strong id="changedCountNum">0</strong> unsaved changes</div>
+    <button class="btn-save-all" id="saveAllBtn" onclick="saveAll()" disabled>Save All Changes</button>
   </div>
 </div>
 
-<!-- Toast notification -->
 <div class="toast" id="toast"></div>
 
-<!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
 <script src="firebase-config.js"></script>
 <script>
-// ─── MENU DATA ────────────────────────────────────────────────────────────────
 const MENU = [
 {cat:'Cold Subs',emoji:'🥖',items:[
   {name:'Cold Cut Sub',price:12.80},
@@ -373,155 +294,113 @@ const MENU = [
 ]}
 ];
 
-// ─── GALLERY SLOTS ────────────────────────────────────────────────────────────
-const STRIP_SLOTS = [
-  {key:'menuStrip1',label:'Strip Image 1',desc:'Cold Cut Sub slot',defaultSrc:'images/menu/sandwich.png'},
-  {key:'menuStrip2',label:'Strip Image 2',desc:'Philly Cheesesteak slot',defaultSrc:'images/menu/phily_cheasteak_image.png'},
-  {key:'menuStrip3',label:'Strip Image 3',desc:'Sub Sandwich slot',defaultSrc:'images/menu/sandwich_2.png'},
-  {key:'menuStrip4',label:'Strip Image 4',desc:'Steak Sub slot',defaultSrc:'images/menu/phily_cheasktake_2.png'},
-  {key:'menuStrip5',label:'Strip Image 5',desc:'Salad/bread slot',defaultSrc:'images/menu/bread_salad.png'},
-];
-const FEAT_SLOTS = [
-  {key:'featCard1',label:'Featured Card 1',desc:'Philly Cheesesteak (home page)',defaultSrc:'images/menu/phily_cheasteak_image.png'},
-  {key:'featCard2',label:'Featured Card 2',desc:'Italian Cold Cut (home page)',defaultSrc:'images/menu/sandwich.png'},
-  {key:'featCard3',label:'Featured Card 3',desc:'Steak & Cheese (home page)',defaultSrc:'images/menu/phily_cheasktake_2.png'},
-];
+var db, auth;
+var currentCat  = 'All';
+var fbPrices    = {};
+var localChanges= {};
 
-// ─── STATE ────────────────────────────────────────────────────────────────────
-var db, auth, storage;
-var currentCat = 'All';
-var fbPrices   = {};   // prices loaded from Firestore
-var localChanges = {}; // unsaved edits
-var galleryData  = {}; // image URLs from Firestore
+// Init Firebase
+var app = firebase.apps.length ? firebase.apps[0] : firebase.initializeApp(window.FIREBASE_CONFIG);
+auth = firebase.auth(app);
+db   = firebase.firestore(app);
 
-// ─── INIT ─────────────────────────────────────────────────────────────────────
-(function(){
-  var cfg = window.FIREBASE_CONFIG;
-  if(!cfg || cfg.projectId === 'YOUR_PROJECT_ID'){
-    document.getElementById('setupWarning').style.display = 'flex';
-    return;
+auth.onAuthStateChanged(function(user){
+  if(user){
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('adminPanel').style.display  = 'flex';
+    document.getElementById('adminUserEmail').textContent = user.email;
+    loadPrices();
+  } else {
+    document.getElementById('loginScreen').style.display = 'flex';
+    document.getElementById('adminPanel').style.display  = 'none';
   }
+});
 
-  var app = firebase.apps.length ? firebase.apps[0] : firebase.initializeApp(cfg);
-  auth    = firebase.auth(app);
-  db      = firebase.firestore(app);
-  storage = firebase.storage(app);
-
-  auth.onAuthStateChanged(function(user){
-    if(user){
-      document.getElementById('loginScreen').style.display  = 'none';
-      document.getElementById('adminPanel').style.display   = 'flex';
-      document.getElementById('adminUserEmail').textContent = user.email;
-      loadData();
-    } else {
-      document.getElementById('loginScreen').style.display = 'flex';
-      document.getElementById('adminPanel').style.display  = 'none';
-    }
-  });
-})();
-
-// ─── AUTH ─────────────────────────────────────────────────────────────────────
 document.getElementById('loginForm').onsubmit = function(e){
   e.preventDefault();
-  var email = document.getElementById('emailInput').value.trim();
-  var pass  = document.getElementById('passInput').value;
-  var btn   = document.getElementById('loginBtn');
-  var err   = document.getElementById('loginError');
-  btn.disabled = true;
-  btn.textContent = 'Signing in…';
-  err.textContent = '';
-  auth.signInWithEmailAndPassword(email, pass).catch(function(e){
-    err.textContent = 'Invalid email or password. Please try again.';
-    btn.disabled = false;
-    btn.textContent = 'Sign In';
+  var btn = document.getElementById('loginBtn');
+  var err = document.getElementById('loginError');
+  btn.disabled = true; btn.textContent = 'Signing in…'; err.textContent = '';
+  auth.signInWithEmailAndPassword(
+    document.getElementById('emailInput').value.trim(),
+    document.getElementById('passInput').value
+  ).catch(function(){
+    err.textContent = 'Invalid email or password.';
+    btn.disabled = false; btn.textContent = 'Sign In';
   });
 };
 
 function doLogout(){
-  if(!confirm('Sign out of the admin panel?')) return;
-  auth.signOut();
+  if(confirm('Sign out?')) auth.signOut();
 }
 
-// ─── TABS ─────────────────────────────────────────────────────────────────────
-function switchTab(tab){
-  var isPrices = tab === 'prices';
-  document.getElementById('pricesTab').style.display = isPrices ? 'block' : 'none';
-  document.getElementById('imagesTab').style.display = isPrices ? 'none'  : 'block';
-  document.getElementById('tabPricesBtn').classList.toggle('active', isPrices);
-  document.getElementById('tabImagesBtn').classList.toggle('active', !isPrices);
-}
-
-// ─── LOAD DATA ────────────────────────────────────────────────────────────────
-function loadData(){
-  setStatus('loading','Loading menu data from Firebase…');
-  var pricePromise = db.collection('menuItems').get().then(function(snap){
+function loadPrices(){
+  setStatus('loading','⏳ Loading prices from Firebase…');
+  db.collection('menuItems').get().then(function(snap){
     snap.forEach(function(doc){
       var d = doc.data();
       if(d.name && d.price !== undefined) fbPrices[d.name] = d.price;
     });
-    setStatus('ok', '✅ Connected. ' + snap.size + ' items in Firebase. Default prices shown for unset items.');
-  }).catch(function(){
-    setStatus('error','⚠️ Could not load Firebase data. Check your firebase-config.js and Firestore rules.');
+    setStatus('ok','✅ Connected — '+snap.size+' items in Firebase. Default prices shown for anything not yet saved.');
+    renderPrices();
+  }).catch(function(e){
+    setStatus('error','⚠️ Firebase error: '+e.message);
+    renderPrices();
   });
-
-  db.collection('settings').doc('gallery').get().then(function(doc){
-    if(doc.exists) galleryData = doc.data() || {};
-  }).catch(function(){}).finally(function(){
-    renderImages();
-  });
-
-  pricePromise.finally(function(){ renderPrices(); });
 }
 
-// ─── RENDER PRICES ────────────────────────────────────────────────────────────
 function renderPrices(){
-  var allCats = ['All'].concat(MENU.map(function(g){ return g.cat; }));
+  // Category buttons
+  var allCats = ['All'].concat(MENU.map(function(g){return g.cat;}));
   document.getElementById('catFilter').innerHTML = allCats.map(function(c){
-    var label = c === 'All' ? 'All Categories' : c;
-    return '<button class="cat-btn'+(c===currentCat?' active':'')+'" onclick="filterCat(\''+esc(c)+'\'">'+label+'</button>';
+    return '<button class="cat-btn'+(c===currentCat?' active':'')+'" onclick="filterCat(\''+c.replace(/'/g,"\\'")+'\')">'+(c==='All'?'All Categories':c)+'</button>';
   }).join('');
 
+  // Items
   var html = '';
   MENU.forEach(function(group){
     if(currentCat !== 'All' && currentCat !== group.cat) return;
     group.items.forEach(function(item){
-      var fbPrice   = fbPrices[item.name] !== undefined ? fbPrices[item.name] : null;
-      var displayed = localChanges[item.name] !== undefined
+      var fbPrice  = fbPrices[item.name] !== undefined ? fbPrices[item.name] : null;
+      var showVal  = localChanges[item.name] !== undefined
         ? localChanges[item.name]
         : (fbPrice !== null ? fbPrice : item.price);
       var isChanged = localChanges[item.name] !== undefined;
-      var eid = 'i-'+slugify(item.name);
+      var eid = slugify(item.name);
       html += '<div class="item-row'+(isChanged?' changed':'')+'" id="row-'+eid+'">'
-        +'<div><div class="item-name">'+escHtml(item.name)+'</div><div class="item-cat">'+group.emoji+' '+group.cat+(fbPrice!==null?' · <span style="color:#059669">Firebase: $'+fbPrice.toFixed(2)+'</span>':'')+'</div></div>'
+        +'<div>'
+        +'<div class="item-name">'+escHtml(item.name)+'</div>'
+        +'<div class="item-cat">'+group.emoji+' '+group.cat+'</div>'
+        +(fbPrice!==null?'<div class="item-firebase">Firebase: $'+fbPrice.toFixed(2)+'</div>':'')
+        +'</div>'
         +'<div class="item-default">$'+item.price.toFixed(2)+'</div>'
-        +'<input type="number" min="0" step="0.01" class="price-input'+(isChanged?' changed':'')+'" id="inp-'+eid+'" value="'+parseFloat(displayed).toFixed(2)+'"'
-        +' onchange="onPriceChange(\''+escHtml(item.name)+'\',this.value)" oninput="onPriceChange(\''+escHtml(item.name)+'\',this.value)"/>'
-        +'<button class="save-row-btn" onclick="saveOne(\''+escHtml(item.name)+'\',this)">Save</button>'
+        +'<input type="number" min="0" step="0.01" class="price-input'+(isChanged?' changed':'')+'"'
+        +' id="inp-'+eid+'" value="'+parseFloat(showVal).toFixed(2)+'"'
+        +' onchange="onChange(\''+escAttr(item.name)+'\',this.value)"'
+        +' oninput="onChange(\''+escAttr(item.name)+'\',this.value)"/>'
+        +'<button class="save-row-btn" onclick="saveOne(\''+escAttr(item.name)+'\',this)">Save</button>'
         +'</div>';
     });
   });
   document.getElementById('itemsList').innerHTML = html;
-  updateChangedCount();
+  updateCount();
 }
 
-function filterCat(cat){
-  currentCat = cat;
-  renderPrices();
-}
+function filterCat(cat){ currentCat = cat; renderPrices(); }
 
-function onPriceChange(name, val){
-  var num = parseFloat(val);
-  if(isNaN(num) || num < 0) return;
-  localChanges[name] = num;
-  var eid = 'i-'+slugify(name);
+function onChange(name, val){
+  var n = parseFloat(val);
+  if(isNaN(n) || n < 0) return;
+  localChanges[name] = n;
+  var eid = slugify(name);
   var row = document.getElementById('row-'+eid);
   var inp = document.getElementById('inp-'+eid);
   if(row) row.classList.add('changed');
   if(inp) inp.classList.add('changed');
-  updateChangedCount();
+  updateCount();
 }
 
-function updateChangedCount(){
+function updateCount(){
   var n = Object.keys(localChanges).length;
   document.getElementById('changedCountNum').textContent = n;
   document.getElementById('saveAllBtn').disabled = n === 0;
@@ -530,8 +409,7 @@ function updateChangedCount(){
 function saveOne(name, btn){
   var price = localChanges[name];
   if(price === undefined) return;
-  btn.textContent = '…';
-  btn.disabled = true;
+  btn.textContent = '…'; btn.disabled = true;
   db.collection('menuItems').doc(firestoreId(name))
     .set({name: name, price: price}, {merge: true})
     .then(function(){
@@ -542,8 +420,7 @@ function saveOne(name, btn){
     })
     .catch(function(e){
       toast('Error: '+e.message, true);
-      btn.textContent = 'Save';
-      btn.disabled = false;
+      btn.textContent = 'Save'; btn.disabled = false;
     });
 }
 
@@ -551,109 +428,46 @@ function saveAll(){
   var names = Object.keys(localChanges);
   if(!names.length) return;
   var btn = document.getElementById('saveAllBtn');
-  btn.textContent = 'Saving…';
-  btn.disabled = true;
+  btn.textContent = 'Saving…'; btn.disabled = true;
   var batch = db.batch();
   names.forEach(function(name){
-    var ref = db.collection('menuItems').doc(firestoreId(name));
-    batch.set(ref, {name: name, price: localChanges[name]}, {merge: true});
+    batch.set(
+      db.collection('menuItems').doc(firestoreId(name)),
+      {name: name, price: localChanges[name]},
+      {merge: true}
+    );
   });
   batch.commit().then(function(){
     names.forEach(function(n){ fbPrices[n] = localChanges[n]; delete localChanges[n]; });
     renderPrices();
-    toast(names.length + ' item'+(names.length>1?'s':'')+' saved!');
+    toast(names.length+' item'+(names.length>1?'s':'')+' saved!');
     btn.textContent = 'Save All Changes';
   }).catch(function(e){
     toast('Error: '+e.message, true);
-    btn.textContent = 'Save All Changes';
-    btn.disabled = false;
+    btn.textContent = 'Save All Changes'; btn.disabled = false;
   });
 }
 
-// ─── RENDER IMAGES ────────────────────────────────────────────────────────────
-function renderImages(){
-  renderSlotGrid('stripGrid', STRIP_SLOTS);
-  renderSlotGrid('featGrid',  FEAT_SLOTS);
-}
-
-function renderSlotGrid(gridId, slots){
-  document.getElementById(gridId).innerHTML = slots.map(function(slot){
-    var url = galleryData[slot.key] || '';
-    var imgSrc = url || slot.defaultSrc;
-    var isCustom = !!url;
-    return '<div class="img-slot" id="slot-'+slot.key+'">'
-      +'<div class="img-slot-preview">'
-      +'<img id="simg-'+slot.key+'" src="'+imgSrc+'" alt="'+slot.label+'" onerror="this.src=\''+slot.defaultSrc+'\'"/>'
-      +(isCustom?'<div class="custom-badge">Custom</div>':'')
-      +'</div>'
-      +'<div class="img-slot-body">'
-      +'<div class="img-slot-label">'+slot.label+'</div>'
-      +'<div class="img-slot-desc">'+slot.desc+'</div>'
-      +'<input type="file" id="file-'+slot.key+'" accept="image/jpeg,image/png,image/webp" style="display:none" onchange="uploadImg(\''+slot.key+'\',\''+slot.defaultSrc+'\',this)"/>'
-      +'<button class="btn-upload" onclick="document.getElementById(\'file-'+slot.key+'\').click()">📷 Upload Image</button>'
-      +(isCustom?'<button class="btn-remove" onclick="removeImg(\''+slot.key+'\')">✕ Remove Custom</button>':'')
-      +'<div class="upload-progress" id="prog-'+slot.key+'"><div class="upload-progress-bar" id="progbar-'+slot.key+'" style="width:0%"></div></div>'
-      +'</div></div>';
-  }).join('');
-}
-
-function uploadImg(key, defaultSrc, input){
-  if(!input.files[0]) return;
-  var file = input.files[0];
-  if(file.size > 5*1024*1024){ toast('File too large. Max 5 MB.', true); return; }
-  var ext = (file.name.split('.').pop()||'jpg').toLowerCase();
-  var ref  = storage.ref('gallery/'+key+'.'+ext);
-  var prog = document.getElementById('prog-'+key);
-  var bar  = document.getElementById('progbar-'+key);
-  prog.style.display = 'block';
-  var task = ref.put(file);
-  task.on('state_changed',
-    function(snap){ bar.style.width = Math.round(snap.bytesTransferred/snap.totalBytes*100)+'%'; },
-    function(e){ toast('Upload failed: '+e.message, true); prog.style.display='none'; },
-    function(){
-      ref.getDownloadURL().then(function(url){
-        galleryData[key] = url;
-        db.collection('settings').doc('gallery').set(galleryData, {merge:true}).then(function(){
-          toast('Image uploaded!');
-          prog.style.display = 'none';
-          renderImages();
-        }).catch(function(e){ toast('Saved image but Firestore error: '+e.message, true); });
-      });
-    }
-  );
-}
-
-function removeImg(key){
-  if(!confirm('Remove custom image for this slot? It will revert to the default.')) return;
-  delete galleryData[key];
-  db.collection('settings').doc('gallery').set(galleryData).then(function(){
-    toast('Custom image removed');
-    renderImages();
-  }).catch(function(e){ toast('Error: '+e.message, true); });
-}
-
-// ─── STATUS / TOAST ───────────────────────────────────────────────────────────
 function setStatus(type, msg){
   var bar = document.getElementById('statusBar');
-  bar.className = 'status-bar ' + type;
+  bar.className = 'status-bar '+type;
   bar.textContent = msg;
 }
 
-var toastTimer;
+var _tt;
 function toast(msg, isError){
   var el = document.getElementById('toast');
   el.textContent = msg;
   el.style.background = isError ? '#dc2626' : '#059669';
   el.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(function(){ el.classList.remove('show'); }, 3200);
+  clearTimeout(_tt);
+  _tt = setTimeout(function(){ el.classList.remove('show'); }, 3000);
 }
 
-// ─── HELPERS ─────────────────────────────────────────────────────────────────
 function slugify(s){ return s.toLowerCase().replace(/[^a-z0-9]/g,'-'); }
 function firestoreId(s){ return s.toLowerCase().replace(/[^a-z0-9]/g,'-').replace(/-+/g,'-').replace(/^-|-$/g,''); }
-function escHtml(s){ return s.replace(/&/g,'&amp;').replace(/'/g,'&#39;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-function esc(s){ return s.replace(/'/g,"\\'"); }
+function escHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function escAttr(s){ return s.replace(/'/g,"\\'").replace(/"/g,'&quot;'); }
 </script>
 </body>
 </html>
