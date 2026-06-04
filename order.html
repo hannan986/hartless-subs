@@ -282,7 +282,10 @@ function pickLoc(card) {
 }
 
 function logClick(location, orderType) {
-  if (!db) return { then: function(fn) { fn(); return { catch: function(f){} }; } };
+  if (!db) {
+    console.error('[Hartles] Firebase db not initialized — click not logged.');
+    return Promise.reject(new Error('db not initialized'));
+  }
   return db.collection('orderClicks').add({
     location: location,
     orderType: orderType,
@@ -313,7 +316,16 @@ document.getElementById('btnStart').addEventListener('click', function() {
     btn.textContent = 'Start My Order →';
   }
 
-  logClick(location, orderType).then(doRedirect, doRedirect);
+  logClick(location, orderType).then(
+    function() {
+      console.log('[Hartles] Click logged — location:', location, 'type:', orderType);
+      doRedirect();
+    },
+    function(err) {
+      console.error('[Hartles] Click log FAILED:', err.message, '— check Firestore security rules for orderClicks collection');
+      doRedirect(); // still redirect even if logging fails
+    }
+  );
 });
 </script>
 </body>
