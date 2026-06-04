@@ -35,6 +35,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .btn-logout{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.85);padding:.45rem 1rem;border-radius:6px;cursor:pointer;font-size:.82rem;transition:background .2s;}
 .btn-logout:hover{background:rgba(255,255,255,.2);}
 
+/* ─── TAB NAV ───────────────────────────────────────────── */
+.admin-tab-nav{background:#111827;display:flex;gap:0;border-bottom:2px solid #374151;padding:0 1.5rem;}
+.atab{
+  background:none;border:none;color:rgba(255,255,255,.5);
+  font-size:.85rem;font-weight:700;letter-spacing:.5px;
+  padding:.85rem 1.25rem;cursor:pointer;transition:all .18s;
+  border-bottom:3px solid transparent;margin-bottom:-2px;
+  text-transform:uppercase;
+}
+.atab:hover{color:rgba(255,255,255,.8);}
+.atab.active{color:#fff;border-bottom-color:#E4002B;}
+
+/* ─── TAB PANELS ────────────────────────────────────────── */
+.apanel{display:none;}
+.apanel.active{display:block;}
+
+/* ─── ADMIN CONTENT ─────────────────────────────────────── */
 .admin-content{max-width:1000px;margin:0 auto;padding:1.5rem;}
 
 /* ─── STATUS ────────────────────────────────────────────── */
@@ -68,27 +85,198 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 
 /* ─── SAVE BAR ──────────────────────────────────────────── */
 .save-all-bar{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #e5e7eb;padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;box-shadow:0 -4px 20px rgba(0,0,0,.08);z-index:50;}
+.save-all-bar.hidden{display:none;}
 .changed-count{font-size:.875rem;color:#6b7280;}
 .changed-count strong{color:#111827;font-size:1rem;}
 .btn-save-all{background:#E4002B;color:#fff;border:none;border-radius:8px;padding:.75rem 2.2rem;font-size:.95rem;font-weight:700;cursor:pointer;transition:background .2s;}
 .btn-save-all:hover{background:#c20024;}
 .btn-save-all:disabled{opacity:.5;cursor:not-allowed;}
 
-/* ─── TOAST ─────────────────────────────────────────────── */
-.toast{position:fixed;bottom:5.5rem;left:50%;transform:translateX(-50%);color:#fff;padding:.75rem 1.75rem;border-radius:8px;font-size:.88rem;font-weight:700;z-index:9999;box-shadow:0 4px 24px rgba(0,0,0,.2);opacity:0;transition:opacity .25s;pointer-events:none;white-space:nowrap;}
-.toast.show{opacity:1;}
+/* ─── TOAST NOTIFICATION ────────────────────────────────── */
+.toast-notif{position:fixed;bottom:5.5rem;left:50%;transform:translateX(-50%);color:#fff;padding:.75rem 1.75rem;border-radius:8px;font-size:.88rem;font-weight:700;z-index:9999;box-shadow:0 4px 24px rgba(0,0,0,.2);opacity:0;transition:opacity .25s;pointer-events:none;white-space:nowrap;}
+.toast-notif.show{opacity:1;}
 
+/* ─── COMMISSION DASHBOARD ──────────────────────────────── */
+.dash-content{max-width:1100px;margin:0 auto;padding:1.5rem;}
+
+.dash-section-title{
+  font-size:1rem;font-weight:800;color:#111827;letter-spacing:.3px;
+  margin-bottom:1rem;padding-bottom:.5rem;border-bottom:2px solid #e5e7eb;
+  display:flex;align-items:center;gap:.5rem;
+}
+
+/* Date range filter */
+.range-filter{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem;}
+.range-btn{
+  padding:.4rem .9rem;border:1.5px solid #d1d5db;border-radius:20px;
+  font-size:.8rem;font-weight:700;background:#fff;cursor:pointer;
+  transition:all .18s;color:#374151;
+}
+.range-btn.active{background:#E4002B;border-color:#E4002B;color:#fff;}
+.range-btn:hover:not(.active){background:#f9fafb;}
+.custom-range-row{
+  display:none;align-items:center;gap:.5rem;flex-wrap:wrap;
+  background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;
+  padding:.5rem .85rem;
+}
+.custom-range-row.visible{display:flex;}
+.custom-range-row label{font-size:.78rem;font-weight:700;color:#6b7280;}
+.custom-range-row input[type="date"]{
+  padding:.35rem .6rem;border:1.5px solid #d1d5db;border-radius:6px;
+  font-size:.82rem;outline:none;
+}
+.custom-range-row input[type="date"]:focus{border-color:#E4002B;}
+.btn-apply{
+  background:#E4002B;color:#fff;border:none;border-radius:6px;
+  padding:.38rem .85rem;font-size:.8rem;font-weight:700;cursor:pointer;
+}
+
+.period-lbl{font-size:.82rem;color:#6b7280;margin-left:auto;}
+
+/* Stats grid */
+.stats-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+  gap:1rem;margin-bottom:1.5rem;
+}
+.stat-card{
+  background:#fff;border-radius:10px;border:1px solid #e5e7eb;
+  padding:1rem 1.2rem;
+}
+.stat-value{font-size:2rem;font-weight:800;color:#E4002B;line-height:1;}
+.stat-label{font-size:.75rem;color:#6b7280;margin-top:.3rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;}
+
+/* Breakdown bars */
+.breakdown-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;}
+.breakdown-card{background:#fff;border-radius:10px;border:1px solid #e5e7eb;padding:1.1rem 1.2rem;}
+.bc-title{font-size:.78rem;font-weight:800;color:#6b7280;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.85rem;}
+.bar-row{margin-bottom:.7rem;}
+.bar-lbl-row{display:flex;justify-content:space-between;font-size:.8rem;margin-bottom:.28rem;}
+.bar-lbl{font-weight:700;color:#111827;}
+.bar-val{color:#6b7280;}
+.bar-track{background:#f3f4f6;border-radius:99px;height:10px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:99px;background:#E4002B;transition:width .5s ease;}
+.bar-fill.blue{background:#3b82f6;}
+
+/* Daily chart */
+.chart-card{background:#fff;border-radius:10px;border:1px solid #e5e7eb;padding:1.1rem 1.2rem;margin-bottom:1.5rem;}
+.chart-title{font-size:.78rem;font-weight:800;color:#6b7280;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.85rem;}
+#dailyChart svg{width:100%;display:block;}
+.chart-empty{text-align:center;padding:2rem;color:#9ca3af;font-size:.85rem;}
+.chart-status{font-size:.8rem;color:#9ca3af;font-style:italic;}
+
+/* Dash status */
+.dash-status{padding:.6rem 1rem;border-radius:8px;margin-bottom:1rem;font-size:.82rem;font-weight:600;display:none;}
+.dash-status.loading{display:flex;align-items:center;gap:.5rem;background:#fef3c7;border:1px solid #fcd34d;color:#92400e;}
+.dash-status.error{display:flex;align-items:center;gap:.5rem;background:#fee2e2;border:1px solid #fca5a5;color:#991b1b;}
+
+/* Revenue calculator */
+.rev-card{background:#fff;border-radius:10px;border:1px solid #e5e7eb;padding:1.2rem 1.4rem;margin-bottom:1.5rem;}
+.rev-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;}
+.rev-group label{display:block;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#374151;margin-bottom:.4rem;}
+.rev-group input{
+  width:100%;padding:.6rem .85rem;border:1.5px solid #d1d5db;border-radius:8px;
+  font-size:1.05rem;font-weight:700;color:#111827;outline:none;transition:border .2s;
+}
+.rev-group input:focus{border-color:#E4002B;box-shadow:0 0 0 2px rgba(228,0,43,.1);}
+.comm-table{width:100%;border-collapse:collapse;margin-bottom:1rem;}
+.comm-table th{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:#9ca3af;padding:.5rem .7rem;text-align:left;border-bottom:1.5px solid #e5e7eb;}
+.comm-table td{padding:.6rem .7rem;font-size:.88rem;border-bottom:1px solid #f3f4f6;}
+.comm-table tr.grand td{font-weight:800;font-size:.95rem;color:#E4002B;border-top:2px solid #e5e7eb;border-bottom:none;}
+.comm-table td:last-child{font-weight:700;color:#059669;text-align:right;}
+.comm-table tr.grand td:last-child{color:#E4002B;}
+.rev-period-row{display:flex;gap:.75rem;margin-bottom:.85rem;}
+.rev-period-row select{
+  padding:.5rem .7rem;border:1.5px solid #d1d5db;border-radius:8px;
+  font-size:.88rem;outline:none;cursor:pointer;background:#fff;
+}
+.rev-period-row select:focus{border-color:#E4002B;}
+.btn-save-rev{
+  background:#E4002B;color:#fff;border:none;border-radius:8px;
+  padding:.7rem 1.8rem;font-size:.9rem;font-weight:700;cursor:pointer;transition:background .2s;
+}
+.btn-save-rev:hover{background:#c20024;}
+.btn-save-rev:disabled{opacity:.5;cursor:not-allowed;}
+
+/* Revenue history table */
+.rev-history{background:#fff;border-radius:10px;border:1px solid #e5e7eb;overflow:hidden;margin-bottom:1.5rem;}
+.rh-hdr{display:grid;grid-template-columns:1.2fr 1fr 1fr 1.2fr 1fr;padding:.65rem 1.1rem;background:#f9fafb;border-bottom:1px solid #e5e7eb;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:#9ca3af;}
+.rh-row{display:grid;grid-template-columns:1.2fr 1fr 1fr 1.2fr 1fr;padding:.8rem 1.1rem;border-bottom:1px solid #f3f4f6;font-size:.84rem;align-items:center;}
+.rh-row:last-child{border-bottom:none;}
+.rh-row:hover{background:#fafafa;}
+.rh-period{font-weight:700;color:#111827;}
+.rh-comm{font-weight:700;color:#E4002B;}
+.rh-empty{padding:2rem;text-align:center;color:#9ca3af;font-size:.85rem;}
+
+/* Invoice */
+.inv-card{background:#fff;border-radius:10px;border:1px solid #e5e7eb;padding:1.2rem 1.4rem;margin-bottom:2rem;}
+.inv-controls{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1rem;}
+.inv-controls select{
+  padding:.5rem .7rem;border:1.5px solid #d1d5db;border-radius:8px;
+  font-size:.88rem;outline:none;background:#fff;min-width:180px;
+}
+.btn-print{
+  display:flex;align-items:center;gap:.5rem;
+  background:#1f2937;color:#fff;border:none;border-radius:8px;
+  padding:.7rem 1.5rem;font-size:.9rem;font-weight:700;cursor:pointer;
+  transition:background .2s;
+}
+.btn-print:hover{background:#374151;}
+.inv-preview{border:1.5px solid #e5e7eb;border-radius:8px;padding:1.5rem;background:#fafafa;}
+.inv-preview-empty{text-align:center;padding:1.5rem;color:#9ca3af;font-size:.85rem;}
+
+/* ─── PRINT STYLES ──────────────────────────────────────── */
+@media print {
+  body > *:not(#invoicePrintTarget){ display:none !important; }
+  #invoicePrintTarget{display:block !important;position:fixed;inset:0;background:#fff;padding:2cm;z-index:99999;}
+  .inv-print-inner{max-width:680px;margin:0 auto;font-family:Arial,sans-serif;color:#111;}
+  .inv-print-logo{font-size:1.6rem;font-weight:900;letter-spacing:2px;margin-bottom:.2rem;}
+  .inv-print-logo span{color:#E4002B;}
+  .inv-print-sub{font-size:.8rem;color:#666;margin-bottom:1.5rem;}
+  .inv-print-title{font-size:1.2rem;font-weight:700;margin-bottom:1.5rem;border-bottom:2px solid #111;padding-bottom:.5rem;}
+  .inv-meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem 2rem;margin-bottom:1.5rem;font-size:.85rem;}
+  .inv-meta-lbl{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:#666;margin-bottom:.1rem;}
+  .inv-meta-val{font-weight:700;}
+  .inv-table{width:100%;border-collapse:collapse;margin-bottom:1.5rem;font-size:.88rem;}
+  .inv-table th{border-bottom:1.5px solid #111;padding:.4rem;text-align:left;font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;}
+  .inv-table td{padding:.45rem;border-bottom:1px solid #ddd;}
+  .inv-table tfoot td{font-weight:700;font-size:1rem;border-top:2px solid #111;border-bottom:none;color:#E4002B;}
+  .inv-note{font-size:.75rem;color:#666;margin-top:1rem;border-top:1px solid #ddd;padding-top:.75rem;}
+}
+#invoicePrintTarget{display:none;}
+.inv-print-inner{max-width:600px;}
+.inv-print-logo{font-size:1.4rem;font-weight:900;letter-spacing:2px;margin-bottom:.15rem;}
+.inv-print-logo span{color:#E4002B;}
+.inv-print-sub{font-size:.75rem;color:#666;margin-bottom:1.2rem;}
+.inv-print-title{font-size:1.1rem;font-weight:700;margin-bottom:1.2rem;border-bottom:2px solid #111;padding-bottom:.4rem;}
+.inv-meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:.4rem 2rem;margin-bottom:1.2rem;font-size:.82rem;}
+.inv-meta-lbl{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:#6b7280;margin-bottom:.1rem;}
+.inv-meta-val{font-weight:700;}
+.inv-table{width:100%;border-collapse:collapse;margin-bottom:1.2rem;font-size:.84rem;}
+.inv-table th{border-bottom:1.5px solid #111;padding:.38rem;text-align:left;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:#6b7280;}
+.inv-table td{padding:.42rem;border-bottom:1px solid #e5e7eb;}
+.inv-table tfoot td{font-weight:800;font-size:.95rem;border-top:2px solid #111;border-bottom:none;color:#E4002B;padding-top:.6rem;}
+.inv-note{font-size:.72rem;color:#6b7280;margin-top:.85rem;border-top:1px solid #e5e7eb;padding-top:.6rem;}
+
+@media(max-width:768px){
+  .rev-grid{grid-template-columns:1fr;}
+  .breakdown-grid{grid-template-columns:1fr;}
+  .rh-hdr,.rh-row{grid-template-columns:1.2fr 1fr 1fr;}
+  .rh-hdr>*:nth-child(4),.rh-hdr>*:nth-child(5),
+  .rh-row>*:nth-child(4),.rh-row>*:nth-child(5){display:none;}
+  .stats-grid{grid-template-columns:1fr 1fr;}
+}
 @media(max-width:600px){
   .items-table-hdr{grid-template-columns:1fr 90px 80px;}
   .item-row{grid-template-columns:1fr 90px 80px;}
   .items-table-hdr>*:last-child,.item-row>*:last-child{display:none;}
   .admin-content{padding:1rem;}
+  .dash-content{padding:1rem;}
 }
 </style>
 </head>
 <body>
 
-<!-- LOGIN -->
+<!-- ─── LOGIN ─────────────────────────────────────────────────── -->
 <div id="loginScreen">
   <div class="login-card">
     <div class="login-logo">
@@ -96,7 +284,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       <div class="login-logo-sub">Admin Panel</div>
     </div>
     <div class="login-title">Sign In</div>
-    <div class="login-sub">Enter your admin credentials to manage menu prices.</div>
+    <div class="login-sub">Enter your admin credentials to manage menu prices and commissions.</div>
     <form id="loginForm">
       <div class="form-group">
         <label>Email</label>
@@ -112,204 +300,315 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   </div>
 </div>
 
-<!-- ADMIN PANEL -->
+<!-- ─── ADMIN PANEL ───────────────────────────────────────────── -->
 <div id="adminPanel">
   <div class="admin-header">
     <div>
-      <div class="admin-logo-text">Hartle's <span>Subs</span> — Menu Prices</div>
+      <div class="admin-logo-text">Hartle's <span>Subs</span> — Admin</div>
       <div class="admin-user-email" id="adminUserEmail"></div>
     </div>
     <button class="btn-logout" onclick="doLogout()">Sign Out</button>
   </div>
 
-  <div class="admin-content">
-    <div id="statusBar" class="status-bar loading">⏳ Loading menu data…</div>
-    <div class="cat-filter" id="catFilter"></div>
-    <div class="items-table">
-      <div class="items-table-hdr">
-        <div>Item Name</div>
-        <div>Default $</div>
-        <div>Set Price</div>
-        <div>Action</div>
+  <div class="admin-tab-nav">
+    <button class="atab active" id="atab-prices" onclick="showAdminTab('prices')">📋 Menu Prices</button>
+    <button class="atab" id="atab-commission" onclick="showAdminTab('commission')">📊 Commission Dashboard</button>
+  </div>
+
+  <!-- ── TAB: MENU PRICES ─────────────────────────────────────── -->
+  <div id="apanel-prices" class="apanel active">
+    <div class="admin-content">
+      <div id="statusBar" class="status-bar loading">⏳ Loading menu data…</div>
+      <div class="cat-filter" id="catFilter"></div>
+      <div class="items-table">
+        <div class="items-table-hdr">
+          <div>Item Name</div>
+          <div>Default $</div>
+          <div>Set Price</div>
+          <div>Action</div>
+        </div>
+        <div id="itemsList"></div>
       </div>
-      <div id="itemsList"></div>
     </div>
   </div>
 
-  <div class="save-all-bar">
+  <!-- ── TAB: COMMISSION DASHBOARD ───────────────────────────── -->
+  <div id="apanel-commission" class="apanel">
+    <div class="dash-content">
+
+      <!-- A: ORDER CLICK STATS -->
+      <div class="dash-section-title">📊 Order Click Statistics</div>
+
+      <div class="range-filter">
+        <button class="range-btn" data-range="week" onclick="setRange('week')">This Week</button>
+        <button class="range-btn active" data-range="month" onclick="setRange('month')">This Month</button>
+        <button class="range-btn" data-range="lastmonth" onclick="setRange('lastmonth')">Last Month</button>
+        <button class="range-btn" data-range="custom" onclick="setRange('custom')">Custom</button>
+        <span class="period-lbl" id="periodLbl"></span>
+      </div>
+
+      <div class="custom-range-row" id="customRangeRow">
+        <label>From</label>
+        <input type="date" id="customStart"/>
+        <label>To</label>
+        <input type="date" id="customEnd"/>
+        <button class="btn-apply" onclick="applyCustomRange()">Apply</button>
+      </div>
+
+      <div class="dash-status" id="dashStatus"></div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value" id="statTotal">—</div>
+          <div class="stat-label">Total Clicks</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="statPotomac">—</div>
+          <div class="stat-label">Potomac St</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="statMarshall">—</div>
+          <div class="stat-label">Marshall St</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="statCarryOut">—</div>
+          <div class="stat-label">Carry Out</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="statDineIn">—</div>
+          <div class="stat-label">Dine In</div>
+        </div>
+      </div>
+
+      <div class="breakdown-grid">
+        <div class="breakdown-card">
+          <div class="bc-title">By Location</div>
+          <div id="locBars"><div class="chart-status">Loading…</div></div>
+        </div>
+        <div class="breakdown-card">
+          <div class="bc-title">By Order Type</div>
+          <div id="typeBars"><div class="chart-status">Loading…</div></div>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-title">Daily Clicks — <span id="chartPeriodLbl"></span></div>
+        <div id="dailyChart"><div class="chart-empty">No data for this period.</div></div>
+      </div>
+
+      <!-- B: REVENUE & COMMISSION CALCULATOR -->
+      <div class="dash-section-title" style="margin-top:2rem;">💰 Revenue &amp; Commission Calculator</div>
+
+      <div class="rev-card">
+        <div class="rev-period-row">
+          <select id="revMonth">
+            <option value="1">January</option><option value="2">February</option>
+            <option value="3">March</option><option value="4">April</option>
+            <option value="5">May</option><option value="6">June</option>
+            <option value="7">July</option><option value="8">August</option>
+            <option value="9">September</option><option value="10">October</option>
+            <option value="11">November</option><option value="12">December</option>
+          </select>
+          <select id="revYear"></select>
+        </div>
+
+        <div class="rev-grid">
+          <div class="rev-group">
+            <label>Potomac St Revenue ($)</label>
+            <input type="number" id="revPotomac" min="0" step="0.01" placeholder="0.00" oninput="calcCommission()"/>
+          </div>
+          <div class="rev-group">
+            <label>Marshall St Revenue ($)</label>
+            <input type="number" id="revMarshall" min="0" step="0.01" placeholder="0.00" oninput="calcCommission()"/>
+          </div>
+        </div>
+
+        <table class="comm-table">
+          <thead>
+            <tr>
+              <th>Location</th>
+              <th>Revenue</th>
+              <th>Rate</th>
+              <th style="text-align:right">Commission Owed</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Potomac St</td>
+              <td id="commRevP">$0.00</td>
+              <td>10%</td>
+              <td id="commAmtP" style="text-align:right">$0.00</td>
+            </tr>
+            <tr>
+              <td>Marshall St</td>
+              <td id="commRevM">$0.00</td>
+              <td>10%</td>
+              <td id="commAmtM" style="text-align:right">$0.00</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr class="grand">
+              <td>Combined Total</td>
+              <td id="commRevTotal">$0.00</td>
+              <td></td>
+              <td id="commAmtTotal" style="text-align:right">$0.00</td>
+            </tr>
+          </tfoot>
+        </table>
+
+        <button class="btn-save-rev" id="btnSaveRev" onclick="saveRevenueEntry()">💾 Save Revenue Entry</button>
+      </div>
+
+      <div class="dash-section-title">📁 Revenue History</div>
+      <div class="rev-history" id="revHistory">
+        <div class="rh-hdr">
+          <div>Period</div>
+          <div>Potomac Rev</div>
+          <div>Marshall Rev</div>
+          <div>Commission</div>
+          <div>Saved</div>
+        </div>
+        <div id="revHistoryBody"><div class="rh-empty">Loading revenue entries…</div></div>
+      </div>
+
+      <!-- C: INVOICE GENERATOR -->
+      <div class="dash-section-title" style="margin-top:2rem;">🧾 Invoice Generator</div>
+      <div class="inv-card">
+        <p style="font-size:.85rem;color:#6b7280;margin-bottom:1rem;">Select a saved revenue entry to generate a printable invoice for the restaurant owner.</p>
+        <div class="inv-controls">
+          <select id="invoiceSelect">
+            <option value="">— Select a saved period —</option>
+          </select>
+          <button class="btn-print" onclick="printInvoice()">🖨️ Print / Save as PDF</button>
+        </div>
+        <div class="inv-preview" id="invPreview">
+          <div class="inv-preview-empty">Select a period above to preview the invoice.</div>
+        </div>
+      </div>
+
+    </div><!-- /dash-content -->
+  </div><!-- /apanel-commission -->
+
+  <!-- SAVE BAR (Menu Prices tab only) -->
+  <div class="save-all-bar" id="saveAllBar">
     <div class="changed-count"><strong id="changedCountNum">0</strong> unsaved changes</div>
     <button class="btn-save-all" id="saveAllBtn" onclick="saveAll()" disabled>Save All Changes</button>
   </div>
-</div>
 
-<div class="toast" id="toast"></div>
+</div><!-- /adminPanel -->
+
+<div class="toast-notif" id="toast"></div>
+
+<!-- INVOICE PRINT TARGET (hidden, shown only during print) -->
+<div id="invoicePrintTarget"></div>
 
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 <script src="firebase-config.js"></script>
 <script>
+/* ══════════════════════════════════════════════
+   MENU DATA
+══════════════════════════════════════════════ */
 const MENU = [
 {cat:'Cold Subs',emoji:'🥖',items:[
-  {name:'Cold Cut Sub',price:12.80},
-  {name:'Italian Cold Cut Sub',price:14.30},
-  {name:'Ham w/ Cheese Sub',price:12.80},
-  {name:'Turkey w/ Cheese Sub',price:12.90},
-  {name:'Roast Beef w/ Cheese Sub',price:13.30},
-  {name:'Combo Sub',price:13.55},
-  {name:'Club Sub',price:13.75},
-  {name:'BLT Sub',price:13.55},
-  {name:'Chicken Salad Sub',price:13.50},
-  {name:'Tuna Salad Sub',price:13.50},
-  {name:'Egg Salad Sub',price:12.80},
-  {name:'Veggie Sub',price:12.80},
-  {name:'Cheese Sub',price:12.80},
-  {name:'Pastrami Sub',price:14.05},
-  {name:'Bologna Sub',price:12.80},
-  {name:'Salami Sub',price:12.80}
+  {name:'Cold Cut Sub',price:12.80},{name:'Italian Cold Cut Sub',price:14.30},
+  {name:'Ham w/ Cheese Sub',price:12.80},{name:'Turkey w/ Cheese Sub',price:12.90},
+  {name:'Roast Beef w/ Cheese Sub',price:13.30},{name:'Combo Sub',price:13.55},
+  {name:'Club Sub',price:13.75},{name:'BLT Sub',price:13.55},
+  {name:'Chicken Salad Sub',price:13.50},{name:'Tuna Salad Sub',price:13.50},
+  {name:'Egg Salad Sub',price:12.80},{name:'Veggie Sub',price:12.80},
+  {name:'Cheese Sub',price:12.80},{name:'Pastrami Sub',price:14.05},
+  {name:'Bologna Sub',price:12.80},{name:'Salami Sub',price:12.80}
 ]},
 {cat:'Hot Subs',emoji:'🔥',items:[
-  {name:'Steak & Cheese Sub',price:14.30},
-  {name:'Cheeseburger Sub',price:14.30},
-  {name:'Hamburger Sub',price:14.30},
-  {name:'Grilled Chicken Sub',price:13.95},
-  {name:'Fried Chicken Sub',price:13.65},
-  {name:'Meatball Sub',price:12.80},
-  {name:'Steamer w/ Cheese Sub',price:12.80},
-  {name:'Hot Pastrami Sub',price:14.30}
+  {name:'Steak & Cheese Sub',price:14.30},{name:'Cheeseburger Sub',price:14.30},
+  {name:'Hamburger Sub',price:14.30},{name:'Grilled Chicken Sub',price:13.95},
+  {name:'Fried Chicken Sub',price:13.65},{name:'Meatball Sub',price:12.80},
+  {name:'Steamer w/ Cheese Sub',price:12.80},{name:'Hot Pastrami Sub',price:14.30}
 ]},
 {cat:'Sandwiches',emoji:'🥪',items:[
-  {name:'Hot Dog',price:3.75},
-  {name:'Steamer Sandwich',price:5.90},
-  {name:'Turkey w/ Cheese',price:6.90},
-  {name:'Ham w/ Cheese',price:6.80},
-  {name:'Cold Cut',price:6.70},
-  {name:'Roast Beef w/ Cheese',price:7.05},
-  {name:'Chicken Salad Sandwich',price:7.05},
-  {name:'Tuna Salad Sandwich',price:7.05},
-  {name:'Steamer Dog',price:6.00},
-  {name:'BLT Sandwich',price:7.10},
-  {name:'Egg Salad Sandwich',price:6.40},
-  {name:'Club Sandwich',price:7.90},
-  {name:'Peanut Butter & Jelly',price:3.50},
-  {name:'Hot Pastrami Sandwich',price:7.90},
+  {name:'Hot Dog',price:3.75},{name:'Steamer Sandwich',price:5.90},
+  {name:'Turkey w/ Cheese',price:6.90},{name:'Ham w/ Cheese',price:6.80},
+  {name:'Cold Cut',price:6.70},{name:'Roast Beef w/ Cheese',price:7.05},
+  {name:'Chicken Salad Sandwich',price:7.05},{name:'Tuna Salad Sandwich',price:7.05},
+  {name:'Steamer Dog',price:6.00},{name:'BLT Sandwich',price:7.10},
+  {name:'Egg Salad Sandwich',price:6.40},{name:'Club Sandwich',price:7.90},
+  {name:'Peanut Butter & Jelly',price:3.50},{name:'Hot Pastrami Sandwich',price:7.90},
   {name:'Reuben',price:7.90}
 ]},
-{cat:'Steamers',emoji:'🫕',items:[
-  {name:'Bowl Steamer',price:7.50},
-  {name:'Quart Steamer',price:18.50}
-]},
+{cat:'Steamers',emoji:'🫕',items:[{name:'Bowl Steamer',price:7.50},{name:'Quart Steamer',price:18.50}]},
 {cat:'Flying Saucers',emoji:'🛸',items:[
-  {name:'Beef Flying Saucer',price:8.75},
-  {name:'Ham Flying Saucer',price:8.75},
-  {name:'Turkey Flying Saucer',price:8.75},
-  {name:'Chicken Salad Flying Saucer',price:8.75},
-  {name:'Tuna Salad Flying Saucer',price:8.75},
-  {name:'Cold Cut Flying Saucer',price:8.15},
-  {name:'Veggie Flying Saucer',price:8.15},
-  {name:'Grilled Chicken Flying Saucer',price:8.75},
-  {name:'Fried Chicken Flying Saucer',price:8.75},
-  {name:'Cheeseburger Flying Saucer',price:8.75},
+  {name:'Beef Flying Saucer',price:8.75},{name:'Ham Flying Saucer',price:8.75},
+  {name:'Turkey Flying Saucer',price:8.75},{name:'Chicken Salad Flying Saucer',price:8.75},
+  {name:'Tuna Salad Flying Saucer',price:8.75},{name:'Cold Cut Flying Saucer',price:8.15},
+  {name:'Veggie Flying Saucer',price:8.15},{name:'Grilled Chicken Flying Saucer',price:8.75},
+  {name:'Fried Chicken Flying Saucer',price:8.75},{name:'Cheeseburger Flying Saucer',price:8.75},
   {name:'Steak Flying Saucer',price:8.75}
 ]},
-{cat:'Wings',emoji:'🍗',items:[
-  {name:'5 Piece Wings',price:8.99},
-  {name:'8 Piece Wings',price:10.99}
-]},
+{cat:'Wings',emoji:'🍗',items:[{name:'5 Piece Wings',price:8.99},{name:'8 Piece Wings',price:10.99}]},
 {cat:'Wraps',emoji:'🌯',items:[
-  {name:'Turkey Wrap',price:8.40},
-  {name:'Ham Wrap',price:8.40},
-  {name:'Club Wrap',price:8.40},
-  {name:'Steak & Cheese Wrap',price:8.70},
-  {name:'Grilled Chicken Wrap',price:8.40},
-  {name:'Fried Chicken Wrap',price:8.40},
-  {name:'Chicken Salad Wrap',price:8.50},
-  {name:'Tuna Salad Wrap',price:8.50},
-  {name:'Veggie Wrap',price:7.90},
-  {name:'Cold Cut Wrap',price:8.40},
-  {name:'Italian Wrap',price:8.70}
+  {name:'Turkey Wrap',price:8.40},{name:'Ham Wrap',price:8.40},{name:'Club Wrap',price:8.40},
+  {name:'Steak & Cheese Wrap',price:8.70},{name:'Grilled Chicken Wrap',price:8.40},
+  {name:'Fried Chicken Wrap',price:8.40},{name:'Chicken Salad Wrap',price:8.50},
+  {name:'Tuna Salad Wrap',price:8.50},{name:'Veggie Wrap',price:7.90},
+  {name:'Cold Cut Wrap',price:8.40},{name:'Italian Wrap',price:8.70}
 ]},
 {cat:'Salads',emoji:'🥗',items:[
-  {name:'Garden Salad',price:7.90},
-  {name:'Chef Salad',price:9.00},
-  {name:'Chicken Salad',price:8.50},
-  {name:'Tuna Salad',price:8.50},
-  {name:'Grilled Chicken Salad',price:8.40},
-  {name:'Fried Chicken Salad',price:8.40},
-  {name:'Steak Salad',price:8.70},
-  {name:'Side Salad',price:6.25},
-  {name:'Egg Salad',price:7.30},
-  {name:'Turkey Salad',price:8.40},
-  {name:'Ham Salad',price:8.40}
+  {name:'Garden Salad',price:7.90},{name:'Chef Salad',price:9.00},
+  {name:'Chicken Salad',price:8.50},{name:'Tuna Salad',price:8.50},
+  {name:'Grilled Chicken Salad',price:8.40},{name:'Fried Chicken Salad',price:8.40},
+  {name:'Steak Salad',price:8.70},{name:'Side Salad',price:6.25},
+  {name:'Egg Salad',price:7.30},{name:'Turkey Salad',price:8.40},{name:'Ham Salad',price:8.40}
 ]},
 {cat:'Snacks & Sides',emoji:'🍟',items:[
-  {name:'French Fries',price:4.90},
-  {name:'Cheese Sticks',price:7.80},
-  {name:'Chicken Tenders',price:6.70},
-  {name:'Onion Rings',price:6.90},
-  {name:'Fried Pickles',price:6.20},
-  {name:'Homemade Chili',price:5.45},
-  {name:'Soup of the Day',price:5.45},
-  {name:'Macaroni Salad',price:3.45},
-  {name:'Beet Eggs',price:3.90},
-  {name:'Deviled Eggs',price:3.40},
-  {name:'Cheese Tray',price:4.60},
-  {name:'Hot Sausage',price:1.25},
-  {name:'Pickle',price:1.25}
+  {name:'French Fries',price:4.90},{name:'Cheese Sticks',price:7.80},
+  {name:'Chicken Tenders',price:6.70},{name:'Onion Rings',price:6.90},
+  {name:'Fried Pickles',price:6.20},{name:'Homemade Chili',price:5.45},
+  {name:'Soup of the Day',price:5.45},{name:'Macaroni Salad',price:3.45},
+  {name:'Beet Eggs',price:3.90},{name:'Deviled Eggs',price:3.40},
+  {name:'Cheese Tray',price:4.60},{name:'Hot Sausage',price:1.25},{name:'Pickle',price:1.25}
 ]},
 {cat:'Desserts',emoji:'🍰',items:[
-  {name:'Funnel Cake Fries',price:5.50},
-  {name:'Lemon Meringue Pie',price:4.80},
-  {name:'Coconut Cream Pie',price:4.80},
-  {name:'Chocolate Meringue',price:4.80},
-  {name:'Homemade Brownies',price:1.50},
-  {name:'Pudding Cup',price:2.49},
-  {name:'Little Debbie',price:1.00},
-  {name:'Dessert $1.79',price:1.79}
+  {name:'Funnel Cake Fries',price:5.50},{name:'Lemon Meringue Pie',price:4.80},
+  {name:'Coconut Cream Pie',price:4.80},{name:'Chocolate Meringue',price:4.80},
+  {name:'Homemade Brownies',price:1.50},{name:'Pudding Cup',price:2.49},
+  {name:'Little Debbie',price:1.00},{name:'Dessert $1.79',price:1.79}
 ]},
 {cat:'Drinks',emoji:'🥤',items:[
-  {name:'Small Fountain Soda',price:2.85},
-  {name:'Medium Fountain Soda',price:3.05},
-  {name:'Large Fountain Soda',price:3.45},
-  {name:'Monster',price:4.49},
-  {name:'Red Bull',price:4.49},
-  {name:'Starbucks Coffee',price:4.99},
-  {name:'Dunkin Coffee',price:4.99},
-  {name:'20oz Bottle Soda',price:2.89},
-  {name:'Gatorade Bottle',price:2.49},
-  {name:'Powerade Bottle',price:2.49},
-  {name:'2 Ltr Bottle',price:4.49},
-  {name:'Water Bottle',price:1.89},
-  {name:'Small Ice Cup',price:0.50},
-  {name:'Medium Ice Cup',price:0.70},
-  {name:'Large Ice Cup',price:0.90}
+  {name:'Small Fountain Soda',price:2.85},{name:'Medium Fountain Soda',price:3.05},
+  {name:'Large Fountain Soda',price:3.45},{name:'Monster',price:4.49},
+  {name:'Red Bull',price:4.49},{name:'Starbucks Coffee',price:4.99},
+  {name:'Dunkin Coffee',price:4.99},{name:'20oz Bottle Soda',price:2.89},
+  {name:'Gatorade Bottle',price:2.49},{name:'Powerade Bottle',price:2.49},
+  {name:'2 Ltr Bottle',price:4.49},{name:'Water Bottle',price:1.89},
+  {name:'Small Ice Cup',price:0.50},{name:'Medium Ice Cup',price:0.70},{name:'Large Ice Cup',price:0.90}
 ]},
 {cat:'Misc Items',emoji:'🛒',items:[
-  {name:'Medium Chip Bag',price:2.89},
-  {name:'Large Chip Bag',price:4.89},
-  {name:'Roll of Bread',price:1.85},
-  {name:'Bag of Ice',price:2.50},
-  {name:'Jar Hot Relish',price:4.09},
-  {name:'Pack of Rolls',price:6.00}
+  {name:'Medium Chip Bag',price:2.89},{name:'Large Chip Bag',price:4.89},
+  {name:'Roll of Bread',price:1.85},{name:'Bag of Ice',price:2.50},
+  {name:'Jar Hot Relish',price:4.09},{name:'Pack of Rolls',price:6.00}
 ]}
 ];
 
+/* ══════════════════════════════════════════════
+   FIREBASE INIT
+══════════════════════════════════════════════ */
 var db, auth;
-var currentCat  = 'All';
-var fbPrices    = {};
-var localChanges= {};
-
-// Init Firebase
 var app = firebase.apps.length ? firebase.apps[0] : firebase.initializeApp(window.FIREBASE_CONFIG);
 auth = firebase.auth(app);
 db   = firebase.firestore(app);
 
+/* ══════════════════════════════════════════════
+   AUTH
+══════════════════════════════════════════════ */
 auth.onAuthStateChanged(function(user){
   if(user){
     document.getElementById('loginScreen').style.display = 'none';
     document.getElementById('adminPanel').style.display  = 'flex';
     document.getElementById('adminUserEmail').textContent = user.email;
     loadPrices();
+    initDashboard();
   } else {
     document.getElementById('loginScreen').style.display = 'flex';
     document.getElementById('adminPanel').style.display  = 'none';
@@ -334,6 +633,26 @@ function doLogout(){
   if(confirm('Sign out?')) auth.signOut();
 }
 
+/* ══════════════════════════════════════════════
+   TAB SWITCHING
+══════════════════════════════════════════════ */
+function showAdminTab(tab){
+  document.querySelectorAll('.atab').forEach(function(b){ b.classList.remove('active'); });
+  document.querySelectorAll('.apanel').forEach(function(p){ p.classList.remove('active'); });
+  document.getElementById('atab-'+tab).classList.add('active');
+  document.getElementById('apanel-'+tab).classList.add('active');
+  var saveBar = document.getElementById('saveAllBar');
+  saveBar.classList.toggle('hidden', tab !== 'prices');
+  if(tab === 'commission') loadClickStats();
+}
+
+/* ══════════════════════════════════════════════
+   MENU PRICES TAB (unchanged logic)
+══════════════════════════════════════════════ */
+var currentCat   = 'All';
+var fbPrices     = {};
+var localChanges = {};
+
 function loadPrices(){
   setStatus('loading','⏳ Loading prices from Firebase…');
   db.collection('menuItems').get().then(function(snap){
@@ -350,13 +669,11 @@ function loadPrices(){
 }
 
 function renderPrices(){
-  // Category buttons
   var allCats = ['All'].concat(MENU.map(function(g){return g.cat;}));
   document.getElementById('catFilter').innerHTML = allCats.map(function(c){
     return '<button class="cat-btn'+(c===currentCat?' active':'')+'" onclick="filterCat(\''+c.replace(/'/g,"\\'")+'\')">'+(c==='All'?'All Categories':c)+'</button>';
   }).join('');
 
-  // Items
   var html = '';
   MENU.forEach(function(group){
     if(currentCat !== 'All' && currentCat !== group.cat) return;
@@ -416,10 +733,10 @@ function saveOne(name, btn){
       fbPrices[name] = price;
       delete localChanges[name];
       renderPrices();
-      toast('Saved: '+name);
+      showToast('Saved: '+name);
     })
     .catch(function(e){
-      toast('Error: '+e.message, true);
+      showToast('Error: '+e.message, true);
       btn.textContent = 'Save'; btn.disabled = false;
     });
 }
@@ -440,10 +757,10 @@ function saveAll(){
   batch.commit().then(function(){
     names.forEach(function(n){ fbPrices[n] = localChanges[n]; delete localChanges[n]; });
     renderPrices();
-    toast(names.length+' item'+(names.length>1?'s':'')+' saved!');
+    showToast(names.length+' item'+(names.length>1?'s':'')+' saved!');
     btn.textContent = 'Save All Changes';
   }).catch(function(e){
-    toast('Error: '+e.message, true);
+    showToast('Error: '+e.message, true);
     btn.textContent = 'Save All Changes'; btn.disabled = false;
   });
 }
@@ -454,14 +771,330 @@ function setStatus(type, msg){
   bar.textContent = msg;
 }
 
-var _tt;
-function toast(msg, isError){
+/* ══════════════════════════════════════════════
+   COMMISSION DASHBOARD
+══════════════════════════════════════════════ */
+var dashRange = { start: null, end: null, preset: 'month' };
+var MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+function initDashboard(){
+  // Populate year selector
+  var yearSel = document.getElementById('revYear');
+  var now = new Date();
+  for(var y = now.getFullYear(); y >= now.getFullYear() - 3; y--){
+    var o = document.createElement('option');
+    o.value = y; o.textContent = y;
+    yearSel.appendChild(o);
+  }
+  // Set current month/year in revenue form
+  document.getElementById('revMonth').value = now.getMonth() + 1;
+  setRange('month');
+  loadRevenueEntries();
+}
+
+function setRange(preset){
+  dashRange.preset = preset;
+  document.querySelectorAll('.range-btn').forEach(function(b){
+    b.classList.toggle('active', b.dataset.range === preset);
+  });
+  var customRow = document.getElementById('customRangeRow');
+  customRow.classList.toggle('visible', preset === 'custom');
+  if(preset === 'custom') return;
+
+  var now = new Date();
+  var y = now.getFullYear(), m = now.getMonth();
+  if(preset === 'week'){
+    var startOfWeek = new Date(now);
+    startOfWeek.setDate(now.getDate() - now.getDay());
+    startOfWeek.setHours(0,0,0,0);
+    dashRange.start = startOfWeek;
+    dashRange.end = new Date(now); dashRange.end.setHours(23,59,59,999);
+  } else if(preset === 'month'){
+    dashRange.start = new Date(y, m, 1, 0, 0, 0);
+    dashRange.end   = new Date(y, m+1, 0, 23, 59, 59);
+  } else if(preset === 'lastmonth'){
+    dashRange.start = new Date(y, m-1, 1, 0, 0, 0);
+    dashRange.end   = new Date(y, m, 0, 23, 59, 59);
+  }
+  loadClickStats();
+}
+
+function applyCustomRange(){
+  var sv = document.getElementById('customStart').value;
+  var ev = document.getElementById('customEnd').value;
+  if(!sv || !ev){ showToast('Please select both start and end dates.', true); return; }
+  dashRange.start = new Date(sv + 'T00:00:00');
+  dashRange.end   = new Date(ev + 'T23:59:59');
+  loadClickStats();
+}
+
+function formatPeriodLabel(start, end){
+  var opts = {month:'short', day:'numeric'};
+  return start.toLocaleDateString('en-US', opts) + ' – ' + end.toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'});
+}
+
+function loadClickStats(){
+  if(!dashRange.start || !dashRange.end) return;
+  document.getElementById('periodLbl').textContent = formatPeriodLabel(dashRange.start, dashRange.end);
+  document.getElementById('chartPeriodLbl').textContent = formatPeriodLabel(dashRange.start, dashRange.end);
+  setDashStatus('loading', '⏳ Loading click data…');
+
+  var TS = firebase.firestore.Timestamp;
+  db.collection('orderClicks')
+    .where('timestamp', '>=', TS.fromDate(dashRange.start))
+    .where('timestamp', '<=', TS.fromDate(dashRange.end))
+    .get()
+    .then(function(snap){
+      var clicks = [];
+      snap.forEach(function(doc){ clicks.push(doc.data()); });
+      renderClickStats(clicks);
+      setDashStatus('');
+    })
+    .catch(function(e){ setDashStatus('error', '⚠️ ' + e.message); });
+}
+
+function renderClickStats(clicks){
+  var total    = clicks.length;
+  var potomac  = clicks.filter(function(c){ return c.location === 'Potomac'; }).length;
+  var marshall = clicks.filter(function(c){ return c.location === 'Marshall'; }).length;
+  var carryOut = clicks.filter(function(c){ return c.orderType === 'Carry Out'; }).length;
+  var dineIn   = clicks.filter(function(c){ return c.orderType === 'Dine In'; }).length;
+
+  document.getElementById('statTotal').textContent    = total;
+  document.getElementById('statPotomac').textContent  = potomac;
+  document.getElementById('statMarshall').textContent = marshall;
+  document.getElementById('statCarryOut').textContent = carryOut;
+  document.getElementById('statDineIn').textContent   = dineIn;
+
+  // Location bars
+  var maxLoc = Math.max(potomac, marshall, 1);
+  document.getElementById('locBars').innerHTML =
+    barRow('Potomac St', potomac, total, Math.round(potomac/maxLoc*100), 'red') +
+    barRow('Marshall St', marshall, total, Math.round(marshall/maxLoc*100), 'blue');
+
+  // Type bars
+  var maxType = Math.max(carryOut, dineIn, 1);
+  document.getElementById('typeBars').innerHTML =
+    barRow('Carry Out', carryOut, total, Math.round(carryOut/maxType*100), 'red') +
+    barRow('Dine In',   dineIn,   total, Math.round(dineIn/maxType*100),   'blue');
+
+  // Daily chart
+  renderDailyChart(clicks);
+}
+
+function barRow(label, count, total, pct, color){
+  var pctTotal = total > 0 ? Math.round(count/total*100) : 0;
+  return '<div class="bar-row">'
+    +'<div class="bar-lbl-row"><span class="bar-lbl">'+label+'</span><span class="bar-val">'+count+' ('+pctTotal+'%)</span></div>'
+    +'<div class="bar-track"><div class="bar-fill'+(color==='blue'?' blue':'')+'" style="width:'+pct+'%"></div></div>'
+    +'</div>';
+}
+
+function renderDailyChart(clicks){
+  var start = dashRange.start, end = dashRange.end;
+  // Build day list
+  var days = [];
+  var cur = new Date(start); cur.setHours(0,0,0,0);
+  var endDay = new Date(end); endDay.setHours(0,0,0,0);
+  while(cur <= endDay){
+    days.push(cur.toISOString().slice(0,10));
+    cur.setDate(cur.getDate()+1);
+  }
+  if(!days.length){ document.getElementById('dailyChart').innerHTML='<div class="chart-empty">No days in range.</div>'; return; }
+
+  // Count clicks per day
+  var counts = {};
+  clicks.forEach(function(c){
+    if(!c.timestamp) return;
+    var d = c.timestamp.toDate ? c.timestamp.toDate() : new Date(c.timestamp);
+    var key = d.toISOString().slice(0,10);
+    counts[key] = (counts[key]||0) + 1;
+  });
+
+  if(!clicks.length){ document.getElementById('dailyChart').innerHTML='<div class="chart-empty">No clicks recorded in this period.</div>'; return; }
+
+  var maxCount = Math.max(1, Math.max.apply(null, days.map(function(d){ return counts[d]||0; })));
+  var W = 600, H = 180, PAD_B = 22, PAD_TOP = 20;
+  var barCount = days.length;
+  var slot = W / barCount;
+  var barW = Math.max(2, slot - 2);
+
+  var bars = days.map(function(day, i){
+    var n = counts[day]||0;
+    var barH = Math.round((n/maxCount) * (H - PAD_B - PAD_TOP));
+    var x = i * slot + (slot - barW)/2;
+    var y = H - PAD_B - barH;
+    var label = '';
+    if(barCount <= 14 || i % Math.ceil(barCount/14) === 0){
+      var dt = new Date(day+'T12:00:00');
+      label = '<text x="'+(x+barW/2).toFixed(1)+'" y="'+(H-5)+'" text-anchor="middle" font-size="8" fill="#9ca3af">'+(dt.getMonth()+1)+'/'+(dt.getDate())+'</text>';
+    }
+    var countLbl = n > 0 ? '<text x="'+(x+barW/2).toFixed(1)+'" y="'+(y-3)+'" text-anchor="middle" font-size="9" font-weight="700" fill="#374151">'+n+'</text>' : '';
+    return '<rect x="'+x.toFixed(1)+'" y="'+y+'" width="'+barW.toFixed(1)+'" height="'+barH+'" fill="#E4002B" rx="2" opacity="0.85"/>' + countLbl + label;
+  }).join('');
+
+  // Y-axis guide lines
+  var guides = [0.25,0.5,0.75,1].map(function(f){
+    var y = H - PAD_B - Math.round(f * (H - PAD_B - PAD_TOP));
+    var v = Math.round(f * maxCount);
+    return '<line x1="0" y1="'+y+'" x2="'+W+'" y2="'+y+'" stroke="#f3f4f6" stroke-width="1"/>'
+      +'<text x="'+W+'" y="'+(y+3)+'" text-anchor="end" font-size="8" fill="#d1d5db">'+v+'</text>';
+  }).join('');
+
+  document.getElementById('dailyChart').innerHTML =
+    '<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;overflow:visible">'
+    + guides + bars + '</svg>';
+}
+
+function setDashStatus(type, msg){
+  var el = document.getElementById('dashStatus');
+  if(!type){ el.style.display='none'; el.className='dash-status'; return; }
+  el.className = 'dash-status ' + type;
+  el.textContent = msg;
+  el.style.display = '';
+}
+
+/* ══════════════════════════════════════════════
+   REVENUE CALCULATOR
+══════════════════════════════════════════════ */
+function calcCommission(){
+  var p = parseFloat(document.getElementById('revPotomac').value)||0;
+  var m = parseFloat(document.getElementById('revMarshall').value)||0;
+  var total = p + m;
+  var fmt = function(n){ return '$'+n.toFixed(2); };
+  document.getElementById('commRevP').textContent     = fmt(p);
+  document.getElementById('commAmtP').textContent     = fmt(p*0.1);
+  document.getElementById('commRevM').textContent     = fmt(m);
+  document.getElementById('commAmtM').textContent     = fmt(m*0.1);
+  document.getElementById('commRevTotal').textContent = fmt(total);
+  document.getElementById('commAmtTotal').textContent = fmt(total*0.1);
+}
+
+function saveRevenueEntry(){
+  var month = parseInt(document.getElementById('revMonth').value);
+  var year  = parseInt(document.getElementById('revYear').value);
+  var pRev  = parseFloat(document.getElementById('revPotomac').value)||0;
+  var mRev  = parseFloat(document.getElementById('revMarshall').value)||0;
+  if(pRev === 0 && mRev === 0){ showToast('Enter at least one revenue value.', true); return; }
+  var commission = (pRev + mRev) * 0.1;
+  var btn = document.getElementById('btnSaveRev');
+  btn.disabled = true; btn.textContent = 'Saving…';
+  db.collection('revenueEntries').add({
+    month: month,
+    year: year,
+    potomacRevenue: pRev,
+    marshallRevenue: mRev,
+    commission: commission,
+    savedAt: firebase.firestore.FieldValue.serverTimestamp()
+  }).then(function(){
+    showToast('Revenue entry saved!');
+    btn.disabled = false; btn.textContent = '💾 Save Revenue Entry';
+    loadRevenueEntries();
+  }).catch(function(e){
+    showToast('Error: '+e.message, true);
+    btn.disabled = false; btn.textContent = '💾 Save Revenue Entry';
+  });
+}
+
+var revenueEntries = [];
+
+function loadRevenueEntries(){
+  db.collection('revenueEntries').orderBy('savedAt','desc').limit(24).get()
+    .then(function(snap){
+      revenueEntries = [];
+      snap.forEach(function(doc){ revenueEntries.push(Object.assign({id:doc.id}, doc.data())); });
+      renderRevenueHistory();
+      populateInvoiceSelect();
+    }).catch(function(){});
+}
+
+function renderRevenueHistory(){
+  var body = document.getElementById('revHistoryBody');
+  if(!revenueEntries.length){
+    body.innerHTML = '<div class="rh-empty">No revenue entries saved yet.</div>';
+    return;
+  }
+  body.innerHTML = revenueEntries.map(function(e){
+    var savedDate = e.savedAt ? e.savedAt.toDate().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) : '—';
+    return '<div class="rh-row">'
+      +'<div class="rh-period">'+MONTH_NAMES[e.month-1]+' '+e.year+'</div>'
+      +'<div>$'+Number(e.potomacRevenue).toFixed(2)+'</div>'
+      +'<div>$'+Number(e.marshallRevenue).toFixed(2)+'</div>'
+      +'<div class="rh-comm">$'+Number(e.commission).toFixed(2)+'</div>'
+      +'<div>'+savedDate+'</div>'
+      +'</div>';
+  }).join('');
+}
+
+/* ══════════════════════════════════════════════
+   INVOICE GENERATOR
+══════════════════════════════════════════════ */
+function populateInvoiceSelect(){
+  var sel = document.getElementById('invoiceSelect');
+  sel.innerHTML = '<option value="">— Select a saved period —</option>';
+  revenueEntries.forEach(function(e, i){
+    var o = document.createElement('option');
+    o.value = i;
+    o.textContent = MONTH_NAMES[e.month-1] + ' ' + e.year + '  —  $' + Number(e.commission).toFixed(2) + ' commission';
+    sel.appendChild(o);
+  });
+  sel.onchange = function(){ previewInvoice(this.value); };
+}
+
+function previewInvoice(idx){
+  var prev = document.getElementById('invPreview');
+  if(idx === ''){ prev.innerHTML='<div class="inv-preview-empty">Select a period above to preview the invoice.</div>'; return; }
+  var e = revenueEntries[parseInt(idx)];
+  if(!e) return;
+  prev.innerHTML = buildInvoiceHTML(e);
+}
+
+function buildInvoiceHTML(e){
+  var period = MONTH_NAMES[e.month-1] + ' ' + e.year;
+  var today = new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+  return '<div class="inv-print-inner">'
+    +'<div class="inv-print-logo">HARTLE\'S <span>SUBS</span></div>'
+    +'<div class="inv-print-sub">635 S. Potomac St &amp; 1301 Marshall St · Hagerstown, MD · hartlessubs.com</div>'
+    +'<div class="inv-print-title">Website Commission Invoice</div>'
+    +'<div class="inv-meta-grid">'
+      +'<div><div class="inv-meta-lbl">Invoice Period</div><div class="inv-meta-val">'+period+'</div></div>'
+      +'<div><div class="inv-meta-lbl">Date Generated</div><div class="inv-meta-val">'+today+'</div></div>'
+      +'<div><div class="inv-meta-lbl">Commission Rate</div><div class="inv-meta-val">10% of online revenue</div></div>'
+      +'<div><div class="inv-meta-lbl">Developer</div><div class="inv-meta-val">Website Developer</div></div>'
+    +'</div>'
+    +'<table class="inv-table">'
+      +'<thead><tr><th>Location</th><th>Toast Revenue</th><th>Rate</th><th>Commission Owed</th></tr></thead>'
+      +'<tbody>'
+        +'<tr><td>Potomac St (635 S. Potomac)</td><td>$'+Number(e.potomacRevenue).toFixed(2)+'</td><td>10%</td><td>$'+Number(e.potomacRevenue*0.1).toFixed(2)+'</td></tr>'
+        +'<tr><td>Marshall St (1301 Marshall)</td><td>$'+Number(e.marshallRevenue).toFixed(2)+'</td><td>10%</td><td>$'+Number(e.marshallRevenue*0.1).toFixed(2)+'</td></tr>'
+      +'</tbody>'
+      +'<tfoot><tr><td colspan="3">Total Commission Owed</td><td>$'+Number(e.commission).toFixed(2)+'</td></tr></tfoot>'
+    +'</table>'
+    +'<div class="inv-note">This invoice was generated from website referral tracking data (orderClicks collection in Firebase). Revenue figures were manually entered from Toast POS reports for '+period+'. Commission is calculated at 10% of total online revenue driven through hartlessubs.com per the developer agreement.</div>'
+    +'</div>';
+}
+
+function printInvoice(){
+  var sel = document.getElementById('invoiceSelect');
+  if(!sel.value){ showToast('Please select a period first.', true); return; }
+  var e = revenueEntries[parseInt(sel.value)];
+  if(!e) return;
+  var target = document.getElementById('invoicePrintTarget');
+  target.innerHTML = buildInvoiceHTML(e);
+  window.print();
+}
+
+/* ══════════════════════════════════════════════
+   SHARED UTILITIES
+══════════════════════════════════════════════ */
+var _toastTimer;
+function showToast(msg, isError){
   var el = document.getElementById('toast');
   el.textContent = msg;
   el.style.background = isError ? '#dc2626' : '#059669';
   el.classList.add('show');
-  clearTimeout(_tt);
-  _tt = setTimeout(function(){ el.classList.remove('show'); }, 3000);
+  clearTimeout(_toastTimer);
+  _toastTimer = setTimeout(function(){ el.classList.remove('show'); }, 3000);
 }
 
 function slugify(s){ return s.toLowerCase().replace(/[^a-z0-9]/g,'-'); }
