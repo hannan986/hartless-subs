@@ -3,7 +3,9 @@
     "allow": [
       "WebFetch(domain:www.jimmyjohns.com)",
       "WebSearch",
-      "Bash(curl -s https://www.jimmyjohns.com)"
+      "Bash(curl -s https://www.jimmyjohns.com)",
+      "Bash(dir *)",
+      "Bash(git commit -m ' *)"
     ]
   }
 }
