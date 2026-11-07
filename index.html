@@ -670,6 +670,10 @@
 
 <!-- HERO -->
 <section class="hero">
+  <video class="hero-video" autoplay muted loop playsinline poster="images/WhatsApp Image 2026-04-06 at 6.05.01 PM (5).jpeg">
+    <source src="video/hurtless subs.mp4" type="video/mp4"/>
+  </video>
+  <div class="hero-bg-img" id="heroBg"></div>
   <div class="hero-grad"></div>
   <div class="hero-noise"></div>
   <div class="hero-content">
@@ -1097,6 +1101,10 @@ function hideCallPopup(){
 document.getElementById('callModal').addEventListener('click', function(e){
   if(e.target === this) hideCallPopup();
 });
+
+// ── Video fallback ──────────────────────────────────────────
+var vid = document.querySelector('.hero-video');
+if(vid){ vid.addEventListener('canplay', function(){ document.getElementById('heroBg').style.opacity = '0'; }); }
 
 // ── Scroll reveal (IntersectionObserver) ───────────────────
 (function(){
