@@ -199,8 +199,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 
 /* Revenue history table */
 .rev-history{background:#fff;border-radius:10px;border:1px solid #e5e7eb;overflow:hidden;margin-bottom:1.5rem;}
-.rh-hdr{display:grid;grid-template-columns:1.2fr 1fr 1fr 1.2fr 1fr;padding:.65rem 1.1rem;background:#f9fafb;border-bottom:1px solid #e5e7eb;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:#9ca3af;}
-.rh-row{display:grid;grid-template-columns:1.2fr 1fr 1fr 1.2fr 1fr;padding:.8rem 1.1rem;border-bottom:1px solid #f3f4f6;font-size:.84rem;align-items:center;}
+.rh-hdr{display:grid;grid-template-columns:1.2fr 1fr 1.2fr 1fr;padding:.65rem 1.1rem;background:#f9fafb;border-bottom:1px solid #e5e7eb;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:#9ca3af;}
+.rh-row{display:grid;grid-template-columns:1.2fr 1fr 1.2fr 1fr;padding:.8rem 1.1rem;border-bottom:1px solid #f3f4f6;font-size:.84rem;align-items:center;}
 .rh-row:last-child{border-bottom:none;}
 .rh-row:hover{background:#fafafa;}
 .rh-period{font-weight:700;color:#111827;}
@@ -261,8 +261,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   .rev-grid{grid-template-columns:1fr;}
   .breakdown-grid{grid-template-columns:1fr;}
   .rh-hdr,.rh-row{grid-template-columns:1.2fr 1fr 1fr;}
-  .rh-hdr>*:nth-child(4),.rh-hdr>*:nth-child(5),
-  .rh-row>*:nth-child(4),.rh-row>*:nth-child(5){display:none;}
+  .rh-hdr>*:nth-child(4),
+  .rh-row>*:nth-child(4){display:none;}
   .stats-grid{grid-template-columns:1fr 1fr;}
 }
 @media(max-width:600px){
@@ -367,10 +367,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
           <div class="stat-label">Potomac St</div>
         </div>
         <div class="stat-card">
-          <div class="stat-value" id="statMarshall">—</div>
-          <div class="stat-label">Marshall St</div>
-        </div>
-        <div class="stat-card">
           <div class="stat-value" id="statCarryOut">—</div>
           <div class="stat-label">Carry Out</div>
         </div>
@@ -417,10 +413,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
             <label>Potomac St Revenue ($)</label>
             <input type="number" id="revPotomac" min="0" step="0.01" placeholder="0.00" oninput="calcCommission()"/>
           </div>
-          <div class="rev-group">
-            <label>Marshall St Revenue ($)</label>
-            <input type="number" id="revMarshall" min="0" step="0.01" placeholder="0.00" oninput="calcCommission()"/>
-          </div>
         </div>
 
         <table class="comm-table">
@@ -438,12 +430,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
               <td id="commRevP">$0.00</td>
               <td>10%</td>
               <td id="commAmtP" style="text-align:right">$0.00</td>
-            </tr>
-            <tr>
-              <td>Marshall St</td>
-              <td id="commRevM">$0.00</td>
-              <td>10%</td>
-              <td id="commAmtM" style="text-align:right">$0.00</td>
             </tr>
           </tbody>
           <tfoot>
@@ -464,7 +450,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
         <div class="rh-hdr">
           <div>Period</div>
           <div>Potomac Rev</div>
-          <div>Marshall Rev</div>
           <div>Commission</div>
           <div>Saved</div>
         </div>
@@ -856,21 +841,18 @@ function loadClickStats(){
 function renderClickStats(clicks){
   var total    = clicks.length;
   var potomac  = clicks.filter(function(c){ return c.location === 'Potomac'; }).length;
-  var marshall = clicks.filter(function(c){ return c.location === 'Marshall'; }).length;
   var carryOut = clicks.filter(function(c){ return c.orderType === 'Carry Out'; }).length;
   var dineIn   = clicks.filter(function(c){ return c.orderType === 'Dine In'; }).length;
 
   document.getElementById('statTotal').textContent    = total;
   document.getElementById('statPotomac').textContent  = potomac;
-  document.getElementById('statMarshall').textContent = marshall;
   document.getElementById('statCarryOut').textContent = carryOut;
   document.getElementById('statDineIn').textContent   = dineIn;
 
   // Location bars
-  var maxLoc = Math.max(potomac, marshall, 1);
+  var maxLoc = Math.max(potomac, 1);
   document.getElementById('locBars').innerHTML =
-    barRow('Potomac St', potomac, total, Math.round(potomac/maxLoc*100), 'red') +
-    barRow('Marshall St', marshall, total, Math.round(marshall/maxLoc*100), 'blue');
+    barRow('Potomac St', potomac, total, Math.round(potomac/maxLoc*100), 'red');
 
   // Type bars
   var maxType = Math.max(carryOut, dineIn, 1);
@@ -959,13 +941,10 @@ function setDashStatus(type, msg){
 ══════════════════════════════════════════════ */
 function calcCommission(){
   var p = parseFloat(document.getElementById('revPotomac').value)||0;
-  var m = parseFloat(document.getElementById('revMarshall').value)||0;
-  var total = p + m;
+  var total = p;
   var fmt = function(n){ return '$'+n.toFixed(2); };
   document.getElementById('commRevP').textContent     = fmt(p);
   document.getElementById('commAmtP').textContent     = fmt(p*0.1);
-  document.getElementById('commRevM').textContent     = fmt(m);
-  document.getElementById('commAmtM').textContent     = fmt(m*0.1);
   document.getElementById('commRevTotal').textContent = fmt(total);
   document.getElementById('commAmtTotal').textContent = fmt(total*0.1);
 }
@@ -974,16 +953,14 @@ function saveRevenueEntry(){
   var month = parseInt(document.getElementById('revMonth').value);
   var year  = parseInt(document.getElementById('revYear').value);
   var pRev  = parseFloat(document.getElementById('revPotomac').value)||0;
-  var mRev  = parseFloat(document.getElementById('revMarshall').value)||0;
-  if(pRev === 0 && mRev === 0){ showToast('Enter at least one revenue value.', true); return; }
-  var commission = (pRev + mRev) * 0.1;
+  if(pRev === 0){ showToast('Enter a revenue value.', true); return; }
+  var commission = pRev * 0.1;
   var btn = document.getElementById('btnSaveRev');
   btn.disabled = true; btn.textContent = 'Saving…';
   db.collection('revenueEntries').add({
     month: month,
     year: year,
     potomacRevenue: pRev,
-    marshallRevenue: mRev,
     commission: commission,
     savedAt: firebase.firestore.FieldValue.serverTimestamp()
   }).then(function(){
@@ -1019,7 +996,6 @@ function renderRevenueHistory(){
     return '<div class="rh-row">'
       +'<div class="rh-period">'+MONTH_NAMES[e.month-1]+' '+e.year+'</div>'
       +'<div>$'+Number(e.potomacRevenue).toFixed(2)+'</div>'
-      +'<div>$'+Number(e.marshallRevenue).toFixed(2)+'</div>'
       +'<div class="rh-comm">$'+Number(e.commission).toFixed(2)+'</div>'
       +'<div>'+savedDate+'</div>'
       +'</div>';
@@ -1054,7 +1030,7 @@ function buildInvoiceHTML(e){
   var today = new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
   return '<div class="inv-print-inner">'
     +'<div class="inv-print-logo">HARTLE\'S <span>SUBS</span></div>'
-    +'<div class="inv-print-sub">635 S. Potomac St &amp; 1301 Marshall St · Hagerstown, MD · hartlessubs.com</div>'
+    +'<div class="inv-print-sub">635 S. Potomac St · Hagerstown, MD · hartlessubs.com</div>'
     +'<div class="inv-print-title">Website Commission Invoice</div>'
     +'<div class="inv-meta-grid">'
       +'<div><div class="inv-meta-lbl">Invoice Period</div><div class="inv-meta-val">'+period+'</div></div>'
@@ -1066,7 +1042,7 @@ function buildInvoiceHTML(e){
       +'<thead><tr><th>Location</th><th>Toast Revenue</th><th>Rate</th><th>Commission Owed</th></tr></thead>'
       +'<tbody>'
         +'<tr><td>Potomac St (635 S. Potomac)</td><td>$'+Number(e.potomacRevenue).toFixed(2)+'</td><td>10%</td><td>$'+Number(e.potomacRevenue*0.1).toFixed(2)+'</td></tr>'
-        +'<tr><td>Marshall St (1301 Marshall)</td><td>$'+Number(e.marshallRevenue).toFixed(2)+'</td><td>10%</td><td>$'+Number(e.marshallRevenue*0.1).toFixed(2)+'</td></tr>'
+        +(Number(e.marshallRevenue) > 0 ? '<tr><td>Marshall St (former location)</td><td>$'+Number(e.marshallRevenue).toFixed(2)+'</td><td>10%</td><td>$'+Number(e.marshallRevenue*0.1).toFixed(2)+'</td></tr>' : '')
       +'</tbody>'
       +'<tfoot><tr><td colspan="3">Total Commission Owed</td><td>$'+Number(e.commission).toFixed(2)+'</td></tr></tfoot>'
     +'</table>'

@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Locations &mdash; Hartle's Subs, Hagerstown MD</title>
-<meta name="description" content="Two Hartle's Subs locations in Hagerstown, MD. Potomac Street and Marshall Street. View hours, phone numbers, and directions."/>
+<meta name="description" content="Hartle's Subs on Potomac Street in Hagerstown, MD. View hours, phone number, and directions."/>
 <link rel="stylesheet" href="style.css"/>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet"/>
 <style>
@@ -127,7 +127,7 @@
 <div class="page-hero">
   <div class="page-hero-texture"></div>
   <div class="page-hero-content">
-    <span class="page-eyebrow">Two Locations in Hagerstown, MD</span>
+    <span class="page-eyebrow">635 S. Potomac St &middot; Hagerstown, MD</span>
     <h1>Find Us</h1>
     <p>Visit us in person &mdash; dine in, take out, or call ahead for pickup.</p>
   </div>
@@ -194,63 +194,6 @@
       </div>
     </div>
 
-    <!-- LOCATION 2 -->
-    <div class="loc-card reveal delay-2">
-      <div class="loc-card-hdr">
-        <h2>Marshall Street</h2>
-        <p>1301 Marshall St, Hagerstown, MD 21740</p>
-        <span class="loc-open-badge open"><span class="dot"></span> Open Today</span>
-      </div>
-      <div class="loc-body">
-        <div class="loc-row">
-          <div class="loc-row-icon">&#128205;</div>
-          <div>
-            <span class="loc-row-label">Address</span>
-            <p class="loc-row-val">1301 Marshall Street<br/>Hagerstown, MD 21740</p>
-          </div>
-        </div>
-        <div class="loc-row">
-          <div class="loc-row-icon">&#128222;</div>
-          <div>
-            <span class="loc-row-label">Phone</span>
-            <p class="loc-row-val"><a href="tel:3017395483">301.739.5483</a></p>
-          </div>
-        </div>
-        <div class="loc-row">
-          <div class="loc-row-icon">&#128336;</div>
-          <div style="flex:1;">
-            <span class="loc-row-label">Hours</span>
-            <table class="hours-table">
-              <tr id="mst-mf"><td>Monday &ndash; Saturday</td><td>10:00am &ndash; 10:00pm</td></tr>
-              <tr id="mst-su"><td>Sunday</td><td>11:00am &ndash; 9:00pm</td></tr>
-            </table>
-          </div>
-        </div>
-        <div class="loc-row">
-          <div class="loc-row-icon">&#128242;</div>
-          <div>
-            <span class="loc-row-label">Follow &amp; Connect</span>
-            <div class="loc-soc-row">
-              <a href="#" class="loc-soc-btn fb">&#128152; Facebook</a>
-              <a href="#" class="loc-soc-btn ta">&#11088; TripAdvisor</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="loc-card-actions">
-        <a href="tel:3017395483" class="loc-action-btn">&#128222; Call</a>
-        <a href="https://maps.google.com/?q=1301+Marshall+St+Hagerstown+MD" target="_blank" rel="noopener" class="loc-action-btn">&#128506; Directions</a>
-        <a href="order.html" class="loc-action-btn primary">&#128722; Order Now</a>
-      </div>
-      <div class="loc-map">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3076.5!2d-77.7100!3d39.6500!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c9e3000000002%3A0x0!2s1301+Marshall+St%2C+Hagerstown%2C+MD+21740!5e0!3m2!1sen!2sus!4v1"
-          width="100%" height="260" style="border:0;" allowfullscreen="" loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
-      </div>
-    </div>
-
   </div>
 
   <!-- ORDER CTA -->
@@ -292,10 +235,6 @@
         <strong>Potomac Street</strong>
         <p>635 S. Potomac St<br/>Hagerstown, MD 21740<br/><a href="tel:3017395473">301.739.5473</a></p>
       </div>
-      <div class="ftr-loc">
-        <strong>Marshall Street</strong>
-        <p>1301 Marshall St<br/>Hagerstown, MD 21740<br/><a href="tel:3017395483">301.739.5483</a></p>
-      </div>
     </div>
     <div>
       <div class="ftr-col-title">Hours</div>
@@ -325,11 +264,6 @@
       <a href="tel:3017395473" class="call-loc-phone">301.739.5473</a>
       <div class="call-loc-hrs">Mon&ndash;Sat 10am&ndash;10pm &nbsp;|&nbsp; Sun 11am&ndash;9pm</div>
     </div>
-    <div class="call-loc">
-      <div class="call-loc-name">&#128205; Marshall Street</div>
-      <a href="tel:3017395483" class="call-loc-phone">301.739.5483</a>
-      <div class="call-loc-hrs">Mon&ndash;Sat 10am&ndash;10pm &nbsp;|&nbsp; Sun 11am&ndash;9pm</div>
-    </div>
     <a href="menu.html" class="call-view-menu">View Full Menu &#127869;&#65039;</a>
   </div>
 </div>
@@ -351,10 +285,10 @@ document.getElementById('callModal').addEventListener('click',function(e){
 (function(){
   var day = new Date().getDay(); // 0=Sun
   var isSun = day === 0;
-  ['ptr-mf','mst-mf'].forEach(function(id){
+  ['ptr-mf'].forEach(function(id){
     if(!isSun){ var el=document.getElementById(id); if(el) el.classList.add('today'); }
   });
-  ['ptr-su','mst-su'].forEach(function(id){
+  ['ptr-su'].forEach(function(id){
     if(isSun){ var el=document.getElementById(id); if(el) el.classList.add('today'); }
   });
 })();
